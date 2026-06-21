@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Espace Fidélité · Achats</title>
+    <title>Espace Fidélité · Achat de packs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
     <style>
-        /* RESET & BASE */
         *,
         *::before,
         *::after {
@@ -263,102 +262,6 @@
             border-radius: 40px;
         }
 
-        /* CODE SECTION */
-        .code-section {
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: var(--radius-sm);
-            padding: 16px 24px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-top: 8px;
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-        }
-        .code-section .code-label {
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .code-section .code-label i {
-            color: var(--gold-light);
-        }
-        .code-section .code-input-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .code-section .code-input-group input {
-            padding: 10px 18px;
-            border-radius: 60px;
-            border: none;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            min-width: 200px;
-            font-weight: 500;
-            color: var(--primary);
-            outline: none;
-            transition: var(--transition);
-        }
-        .code-section .code-input-group input:focus {
-            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.4);
-        }
-        .code-section .code-input-group .btn-validate {
-            background: var(--gold-gradient);
-            border: none;
-            padding: 10px 28px;
-            border-radius: 60px;
-            font-weight: 700;
-            color: var(--primary);
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 14px;
-        }
-        .code-section .code-input-group .btn-validate:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
-        }
-        .code-section .code-status {
-            font-size: 13px;
-            font-weight: 500;
-            padding: 4px 14px;
-            border-radius: 40px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .code-section .code-status.success {
-            background: #2e7d5e;
-            color: #e6f7ee;
-        }
-        .code-section .code-status.error {
-            background: #a04444;
-            color: #fde8e8;
-        }
-        .code-section #codeActiveArea {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .code-section #codeActiveArea .btn-change {
-            background: transparent;
-            border: 1.5px solid var(--gold);
-            color: var(--gold);
-            padding: 6px 20px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .code-section #codeActiveArea .btn-change:hover {
-            background: var(--gold);
-            color: var(--primary);
-        }
-
         /* GRILLE */
         .spaces-grid {
             display: grid;
@@ -450,7 +353,6 @@
             font-size: 13px;
         }
 
-        /* ÉLÉMENTS DE CONTENU */
         .content-item {
             display: flex;
             align-items: center;
@@ -482,11 +384,6 @@
             font-weight: 500;
             min-width: 80px;
         }
-        .content-item .item-price {
-            font-weight: 700;
-            color: var(--primary);
-            margin-right: 4px;
-        }
         .content-item .item-tag {
             font-size: 10px;
             font-weight: 600;
@@ -497,40 +394,59 @@
             background: rgba(15, 26, 46, 0.04);
             color: var(--text-muted);
         }
-        .content-item .btn-buy {
+
+        /* Bouton d'achat de pack */
+        .pack-purchase {
+            margin-top: 12px;
+            padding: 12px 0 4px;
+            border-top: 1px solid rgba(15, 26, 46, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .pack-purchase .pack-price {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary);
+        }
+        .pack-purchase .btn-buy-pack {
             background: var(--gold-gradient);
             border: none;
-            padding: 4px 16px;
-            border-radius: 40px;
+            padding: 10px 28px;
+            border-radius: 60px;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 15px;
             color: var(--primary);
             cursor: pointer;
             transition: var(--transition);
-            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .content-item .btn-buy:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        .pack-purchase .btn-buy-pack:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
         }
-        .content-item .btn-buy.purchased {
+        .pack-purchase .btn-buy-pack.purchased {
             background: #2e7d5e;
             color: #fff;
             cursor: default;
         }
-        .content-item .btn-buy.purchased:hover {
+        .pack-purchase .btn-buy-pack.purchased:hover {
             transform: none;
             box-shadow: none;
         }
 
-        /* Overlay espace verrouillé */
+        /* Overlay verrouillage */
         .space-card.locked-card .card-body {
-            opacity: 0.5;
+            opacity: 0.6;
             pointer-events: none;
-            filter: grayscale(0.3);
+            filter: grayscale(0.2);
         }
         .space-card.locked-card .card-body::after {
-            content: "Espace verrouillé";
+            content: "Pack non acheté";
             position: absolute;
             inset: 0;
             display: flex;
@@ -539,7 +455,7 @@
             font-weight: 700;
             font-size: 18px;
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(3px);
             border-radius: var(--radius-sm);
             z-index: 5;
@@ -551,7 +467,6 @@
             color: var(--text-muted);
         }
 
-        /* STATUT */
         .space-card .access-status {
             padding: 12px 22px 18px;
             border-top: 1px solid rgba(15, 26, 46, 0.04);
@@ -559,7 +474,6 @@
             font-size: 13px;
             font-weight: 500;
             background: rgba(15, 26, 46, 0.01);
-            transition: var(--transition);
         }
         .space-card .access-status .status-badge {
             display: inline-flex;
@@ -600,7 +514,6 @@
             transform: translateX(3px);
         }
 
-        /* COULEURS PAR TIER */
         .tier-bronze .icon-circle {
             background: #ece7dc;
             color: #a68b5b;
@@ -623,7 +536,7 @@
             color: #8a6d1b;
         }
 
-        /* MODAL */
+        /* MODAL AUTH */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -861,17 +774,6 @@
                 width: 100%;
                 justify-content: center;
             }
-            .code-section {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .code-section .code-input-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .code-section .code-input-group input {
-                min-width: unset;
-            }
             .spaces-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -896,12 +798,13 @@
             .modal {
                 padding: 24px 18px;
             }
-            .content-item {
-                flex-wrap: wrap;
-                gap: 6px;
+            .pack-purchase {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
             }
-            .content-item .btn-buy {
-                margin-left: 0;
+            .pack-purchase .btn-buy-pack {
+                justify-content: center;
             }
         }
         @media (max-width: 440px) {
@@ -935,7 +838,7 @@
                 <div class="brand-icon"><i class="fas fa-crown"></i></div>
                 <div>
                     <h1>Espace Fidélité</h1>
-                    <span>Formations · Publications · Achats packs</span>
+                    <span>Packs · Formations · Publications</span>
                 </div>
             </div>
             <div class="auth-controls" id="authControls">
@@ -960,181 +863,126 @@
                 <div class="avatar" id="userAvatar">M</div>
                 <div class="greeting-text">
                     <h2 id="userName">Bonjour, invité</h2>
-                    <p id="userSub">Connectez-vous et activez votre code</p>
+                    <p id="userSub">Connectez-vous pour acheter vos packs</p>
                 </div>
             </div>
             <div class="plan-badge" id="planBadge">
                 <span class="plan-name">
-                    <i class="fas fa-gem"></i>
-                    <span id="planLabel">--</span>
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="planLabel">Achetez un pack</span>
                 </span>
-                <span class="plan-level" id="planLevel">--</span>
-            </div>
-        </div>
-
-        <!-- ZONE CODE -->
-        <div class="code-section" id="codeSection">
-            <div id="codeInputArea">
-                <span class="code-label"><i class="fas fa-key"></i> Entrez votre code</span>
-                <div class="code-input-group">
-                    <input type="text" id="codeInput" placeholder="BRONZE123, SILVER456, GOLD789" />
-                    <button class="btn-validate" id="btnValidateCode">Valider</button>
-                    <span class="code-status" id="codeStatus"></span>
-                </div>
-            </div>
-            <div id="codeActiveArea" style="display:none;">
-                <span class="code-label">
-                    <i class="fas fa-check-circle" style="color:var(--gold-light);"></i>
-                    Espace actif : <strong id="activeCodeLabel">BRONZE</strong>
-                </span>
-                <button class="btn-change" id="btnChangeCode">Changer</button>
+                <span class="plan-level" id="planLevel"></span>
             </div>
         </div>
 
         <!-- GRILLE -->
         <div class="spaces-grid" id="spacesGrid">
 
-            <!-- CARTE BRONZE -->
+            <!-- PACK BRONZE (10€) -->
             <div class="space-card tier-bronze locked-card" data-tier="bronze" id="cardBronze">
                 <div class="card-header">
                     <div class="space-title">
                         <div class="icon-circle"><i class="fas fa-compass"></i></div>
                         <div>
                             <h3>Découverte</h3>
-                            <span class="sub">Niveau Bronze</span>
+                            <span class="sub">Pack Bronze</span>
                         </div>
                     </div>
                     <span class="lock-icon"><i class="fas fa-lock"></i></span>
                 </div>
                 <div class="card-body">
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations (10€)</div>
-                        <div class="content-item formation-item" data-id="bronze-f1">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">Bases du marketing</span>
-                            <span class="item-price">10€</span>
-                            <button class="btn-buy" data-id="bronze-f1">Acheter</button>
-                            <span class="item-tag">2h</span>
-                        </div>
-                        <div class="content-item formation-item" data-id="bronze-f2">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">Gestion agile</span>
-                            <span class="item-price">10€</span>
-                            <button class="btn-buy" data-id="bronze-f2">Acheter</button>
-                            <span class="item-tag">1h30</span>
-                        </div>
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Bases du marketing</span><span class="item-tag">2h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Gestion agile</span><span class="item-tag">1h30</span></div>
                     </div>
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications (gratuites)</div>
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Guide du débutant</span><span class="item-tag">PDF</span></div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">5 erreurs à éviter</span><span class="item-tag">Article</span></div>
                     </div>
+                    <div class="pack-purchase">
+                        <span class="pack-price">10 €</span>
+                        <button class="btn-buy-pack" data-tier="bronze">Acheter le pack</button>
+                    </div>
                 </div>
                 <div class="access-status">
-                    <span class="status-badge locked" id="statusBronze"><i class="fas fa-lock"></i> Verrouillé</span>
+                    <span class="status-badge locked" id="statusBronze"><i class="fas fa-lock"></i> Pack non acheté</span>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <!-- CARTE SILVER -->
+            <!-- PACK SILVER (20€) -->
             <div class="space-card tier-silver locked-card" data-tier="silver" id="cardSilver">
                 <div class="card-header">
                     <div class="space-title">
                         <div class="icon-circle"><i class="fas fa-briefcase"></i></div>
                         <div>
                             <h3>Professionnel</h3>
-                            <span class="sub">Niveau Silver</span>
+                            <span class="sub">Pack Silver</span>
                         </div>
                     </div>
                     <span class="lock-icon"><i class="fas fa-lock"></i></span>
                 </div>
                 <div class="card-body">
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations (20€)</div>
-                        <div class="content-item formation-item" data-id="silver-f1">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">Stratégie digitale</span>
-                            <span class="item-price">20€</span>
-                            <button class="btn-buy" data-id="silver-f1">Acheter</button>
-                            <span class="item-tag">3h</span>
-                        </div>
-                        <div class="content-item formation-item" data-id="silver-f2">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">Data & analyse</span>
-                            <span class="item-price">20€</span>
-                            <button class="btn-buy" data-id="silver-f2">Acheter</button>
-                            <span class="item-tag">2h30</span>
-                        </div>
-                        <div class="content-item formation-item" data-id="silver-f3">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">Leadership</span>
-                            <span class="item-price">20€</span>
-                            <button class="btn-buy" data-id="silver-f3">Acheter</button>
-                            <span class="item-tag">2h</span>
-                        </div>
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Stratégie digitale</span><span class="item-tag">3h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Data & analyse</span><span class="item-tag">2h30</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Leadership</span><span class="item-tag">2h</span></div>
                     </div>
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications (gratuites)</div>
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Rapport annuel</span><span class="item-tag">PDF</span></div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Étude de cas growth</span><span class="item-tag">Étude</span></div>
                     </div>
+                    <div class="pack-purchase">
+                        <span class="pack-price">20 €</span>
+                        <button class="btn-buy-pack" data-tier="silver">Acheter le pack</button>
+                    </div>
                 </div>
                 <div class="access-status">
-                    <span class="status-badge locked" id="statusSilver"><i class="fas fa-lock"></i> Verrouillé</span>
+                    <span class="status-badge locked" id="statusSilver"><i class="fas fa-lock"></i> Pack non acheté</span>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <!-- CARTE GOLD -->
+            <!-- PACK GOLD (30€) -->
             <div class="space-card tier-gold locked-card" data-tier="gold" id="cardGold">
                 <div class="card-header">
                     <div class="space-title">
                         <div class="icon-circle"><i class="fas fa-star"></i></div>
                         <div>
                             <h3>Expert</h3>
-                            <span class="sub">Niveau Gold</span>
+                            <span class="sub">Pack Gold</span>
                         </div>
                     </div>
                     <span class="lock-icon"><i class="fas fa-lock"></i></span>
                 </div>
                 <div class="card-body">
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations (30€)</div>
-                        <div class="content-item formation-item" data-id="gold-f1">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">IA & transformation</span>
-                            <span class="item-price">30€</span>
-                            <button class="btn-buy" data-id="gold-f1">Acheter</button>
-                            <span class="item-tag">4h</span>
-                        </div>
-                        <div class="content-item formation-item" data-id="gold-f2">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">Finance non-financiers</span>
-                            <span class="item-price">30€</span>
-                            <button class="btn-buy" data-id="gold-f2">Acheter</button>
-                            <span class="item-tag">3h</span>
-                        </div>
-                        <div class="content-item formation-item" data-id="gold-f3">
-                            <span class="item-icon"><i class="fas fa-play"></i></span>
-                            <span class="item-title">Innovation & disruption</span>
-                            <span class="item-price">30€</span>
-                            <button class="btn-buy" data-id="gold-f3">Acheter</button>
-                            <span class="item-tag">2h30</span>
-                        </div>
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">IA & transformation</span><span class="item-tag">4h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Finance non-financiers</span><span class="item-tag">3h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Innovation & disruption</span><span class="item-tag">2h30</span></div>
                     </div>
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications (gratuites)</div>
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Livre blanc IA</span><span class="item-tag">PDF</span></div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Analyse marché 2026</span><span class="item-tag">Étude</span></div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Boîte à outils leader</span><span class="item-tag">Kit</span></div>
                     </div>
+                    <div class="pack-purchase">
+                        <span class="pack-price">30 €</span>
+                        <button class="btn-buy-pack" data-tier="gold">Acheter le pack</button>
+                    </div>
                 </div>
                 <div class="access-status">
-                    <span class="status-badge locked" id="statusGold"><i class="fas fa-lock"></i> Verrouillé</span>
+                    <span class="status-badge locked" id="statusGold"><i class="fas fa-lock"></i> Pack non acheté</span>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
@@ -1144,13 +992,13 @@
         </div>
 
         <div class="footer-note">
-            <span><i class="fas fa-key"></i> <strong>Codes</strong> : BRONZE123 · SILVER456 · GOLD789</span>
-            <span><i class="fas fa-shopping-cart"></i> Chaque formation s'achète individuellement</span>
-            <span><i class="fas fa-check-circle"></i> Les achats sont sauvegardés</span>
+            <span><i class="fas fa-shopping-cart"></i> <strong>Packs</strong> : Découverte (10€) · Professionnel (20€) · Expert (30€)</span>
+            <span><i class="fas fa-check-circle"></i> Achat unique, accès à vie</span>
+            <span><i class="fas fa-user-plus"></i> Créez un compte pour acheter</span>
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- MODAL AUTH -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="authModal">
             <button class="close-modal" id="closeModal">&times;</button>
@@ -1201,14 +1049,6 @@
             const planLabel = document.getElementById('planLabel');
             const planLevel = document.getElementById('planLevel');
 
-            const codeInput = document.getElementById('codeInput');
-            const btnValidateCode = document.getElementById('btnValidateCode');
-            const codeStatus = document.getElementById('codeStatus');
-            const codeInputArea = document.getElementById('codeInputArea');
-            const codeActiveArea = document.getElementById('codeActiveArea');
-            const activeCodeLabel = document.getElementById('activeCodeLabel');
-            const btnChangeCode = document.getElementById('btnChangeCode');
-
             const modalOverlay = document.getElementById('modalOverlay');
             const closeModal = document.getElementById('closeModal');
             const modalTitle = document.getElementById('modalTitle');
@@ -1233,60 +1073,40 @@
 
             // ---- ÉTATS ----
             let currentUser = null;
-            let activeTier = null; // 'bronze', 'silver', 'gold' ou null
             let isLoginMode = true;
 
-            // ---- CODES MAP (strict) ----
-            const codeMap = {
-                'BRONZE123': 'bronze',
-                'SILVER456': 'silver',
-                'GOLD789': 'gold'
-            };
-            const tierInfo = {
-                bronze: { label: 'Découverte', level: 'BRONZE', icon: 'fa-compass' },
-                silver: { label: 'Professionnel', level: 'SILVER', icon: 'fa-briefcase' },
-                gold: { label: 'Expert', level: 'GOLD', icon: 'fa-star' }
-            };
-            const tierOrder = ['bronze', 'silver', 'gold'];
-
-            // ---- STOCKAGE ----
+            // ---- STOCKAGE UTILISATEURS ----
             function getUsers() {
                 try { return JSON.parse(localStorage.getItem('loyaltyUsers')) || {}; } catch { return {}; }
             }
-
             function saveUsers(users) {
                 localStorage.setItem('loyaltyUsers', JSON.stringify(users));
             }
-
             function getSession() {
                 try { return JSON.parse(localStorage.getItem('loyaltySession')) || null; } catch { return null; }
             }
-
             function saveSession(session) {
                 localStorage.setItem('loyaltySession', JSON.stringify(session));
             }
-
             function clearSession() {
                 localStorage.removeItem('loyaltySession');
             }
 
-            // ---- ACHATS ----
-            function getPurchases() {
-                try { return JSON.parse(localStorage.getItem('loyaltyPurchases')) || {}; } catch { return {}; }
+            // ---- STOCKAGE DES PACKS ACHETÉS ----
+            function getPurchasedPacks() {
+                try { return JSON.parse(localStorage.getItem('loyaltyPacks')) || {}; } catch { return {}; }
+            }
+            function savePurchasedPack(tier) {
+                const packs = getPurchasedPacks();
+                packs[tier] = true;
+                localStorage.setItem('loyaltyPacks', JSON.stringify(packs));
+            }
+            function isPackPurchased(tier) {
+                const packs = getPurchasedPacks();
+                return !!packs[tier];
             }
 
-            function savePurchase(id) {
-                const purchases = getPurchases();
-                purchases[id] = true;
-                localStorage.setItem('loyaltyPurchases', JSON.stringify(purchases));
-            }
-
-            function isPurchased(id) {
-                const purchases = getPurchases();
-                return !!purchases[id];
-            }
-
-            // ---- APPLIQUER ÉTAT ----
+            // ---- APPLIQUER ÉTAT UTILISATEUR ET MIS À JOUR DES CARTES ----
             function applyUserState() {
                 if (currentUser) {
                     authNotLogged.classList.add('hidden');
@@ -1297,79 +1117,70 @@
 
                     userAvatar.textContent = displayName.charAt(0).toUpperCase();
                     userName.textContent = `Bonjour, ${displayName}`;
+                    userSub.textContent = 'Achetez vos packs pour débloquer les espaces.';
+                    planLabel.textContent = 'Achetez un pack';
+                    planLevel.textContent = '';
 
-                    if (currentUser.tier) {
-                        const info = tierInfo[currentUser.tier];
-                        activeTier = currentUser.tier;
-                        userSub.textContent = `Espace ${info.label} activé`;
-                        planLabel.innerHTML = `<i class="fas ${info.icon}"></i> ${info.label}`;
-                        planLevel.textContent = info.level;
-                        codeInputArea.style.display = 'none';
-                        codeActiveArea.style.display = 'flex';
-                        activeCodeLabel.textContent = info.label.toUpperCase();
-                        codeStatus.textContent = '';
-                        codeStatus.className = 'code-status';
-                    } else {
-                        activeTier = null;
-                        userSub.textContent = 'Entrez votre code d’activation.';
-                        planLabel.textContent = '--';
-                        planLevel.textContent = '--';
-                        codeInputArea.style.display = 'flex';
-                        codeActiveArea.style.display = 'none';
-                        codeStatus.textContent = '';
-                        codeStatus.className = 'code-status';
-                    }
+                    // Mettre à jour les cartes
                     updateCards();
                 } else {
                     authNotLogged.classList.remove('hidden');
                     authLogged.classList.add('hidden');
                     userAvatar.textContent = '?';
                     userName.textContent = 'Bonjour, invité';
-                    userSub.textContent = 'Connectez-vous pour activer votre espace.';
-                    planLabel.textContent = '--';
-                    planLevel.textContent = '--';
-                    activeTier = null;
-                    codeInputArea.style.display = 'none';
-                    codeActiveArea.style.display = 'none';
+                    userSub.textContent = 'Connectez-vous pour acheter vos packs.';
+                    planLabel.textContent = 'Achetez un pack';
+                    planLevel.textContent = '';
+                    // On verrouille tout (on enlève les états d'achat locaux)
                     updateCards();
                 }
             }
 
-            // ---- UPDATE CARTES (strict : un seul espace débloqué) ----
+            // ---- METTRE À JOUR L'UI DES CARTES ----
             function updateCards() {
                 cards.forEach(card => {
-                    const cardTier = card.dataset.tier;
-                    const isUnlocked = (activeTier === cardTier);
+                    const tier = card.dataset.tier;
+                    const purchased = isPackPurchased(tier);
 
-                    // Statut badge
-                    const statusEl = card.querySelector('.access-status .status-badge');
-                    if (statusEl) {
-                        statusEl.classList.remove('active', 'locked');
-                        if (isUnlocked) {
-                            statusEl.classList.add('active');
-                            statusEl.innerHTML = `<i class="fas fa-check-circle"></i> Espace débloqué`;
+                    // Mise à jour du bouton d'achat
+                    const buyBtn = card.querySelector('.btn-buy-pack');
+                    if (buyBtn) {
+                        if (purchased) {
+                            buyBtn.textContent = '✅ Pack acheté';
+                            buyBtn.classList.add('purchased');
+                            buyBtn.disabled = true;
                         } else {
-                            statusEl.classList.add('locked');
-                            statusEl.innerHTML = `<i class="fas fa-lock"></i> Verrouillé`;
+                            buyBtn.textContent = 'Acheter le pack';
+                            buyBtn.classList.remove('purchased');
+                            buyBtn.disabled = false;
                         }
                     }
 
-                    // Lock / Unlock card
-                    if (isUnlocked) {
+                    // Verrouillage / déverrouillage de la carte
+                    if (purchased) {
                         card.classList.remove('locked-card');
-                        // Mettre à jour les formations (achats)
-                        updateFormationsInCard(card);
-                    } else {
-                        card.classList.add('locked-card');
-                    }
-
-                    // Icône cadenas
-                    const lockIcon = card.querySelector('.card-header .lock-icon');
-                    if (lockIcon) {
-                        if (isUnlocked) {
+                        // Mettre à jour le badge de statut
+                        const statusEl = card.querySelector('.access-status .status-badge');
+                        if (statusEl) {
+                            statusEl.classList.remove('locked');
+                            statusEl.classList.add('active');
+                            statusEl.innerHTML = `<i class="fas fa-check-circle"></i> Pack acheté`;
+                        }
+                        const lockIcon = card.querySelector('.card-header .lock-icon');
+                        if (lockIcon) {
                             lockIcon.innerHTML = `<i class="fas fa-unlock-alt" style="color:var(--gold);"></i>`;
                             lockIcon.style.opacity = '1';
-                        } else {
+                        }
+                    } else {
+                        card.classList.add('locked-card');
+                        const statusEl = card.querySelector('.access-status .status-badge');
+                        if (statusEl) {
+                            statusEl.classList.remove('active');
+                            statusEl.classList.add('locked');
+                            statusEl.innerHTML = `<i class="fas fa-lock"></i> Pack non acheté`;
+                        }
+                        const lockIcon = card.querySelector('.card-header .lock-icon');
+                        if (lockIcon) {
                             lockIcon.innerHTML = `<i class="fas fa-lock"></i>`;
                             lockIcon.style.opacity = '0.4';
                         }
@@ -1377,100 +1188,23 @@
                 });
             }
 
-            // ---- METTRE À JOUR LES FORMATIONS DANS UNE CARTE DÉBLOQUÉE ----
-            function updateFormationsInCard(card) {
-                const items = card.querySelectorAll('.formation-item');
-                items.forEach(item => {
-                    const id = item.dataset.id;
-                    const btn = item.querySelector('.btn-buy');
-                    const priceSpan = item.querySelector('.item-price');
-
-                    if (isPurchased(id)) {
-                        // Acheté
-                        if (btn) {
-                            btn.textContent = '✅ Acheté';
-                            btn.classList.add('purchased');
-                            btn.disabled = true;
-                        }
-                        // On peut enlever le verrou si existant
-                        const overlay = item.querySelector('.lock-overlay');
-                        if (overlay) overlay.remove();
-                        item.classList.remove('locked');
-                    } else {
-                        // Non acheté -> on affiche le bouton "Acheter"
-                        if (btn) {
-                            btn.textContent = 'Acheter';
-                            btn.classList.remove('purchased');
-                            btn.disabled = false;
-                        }
-                        // On enlève un éventuel overlay d'achat
-                        const overlay = item.querySelector('.lock-overlay');
-                        if (overlay) overlay.remove();
-                        // On s'assure que l'item n'est pas locké par l'espace (il ne l'est pas car carte débloquée)
-                        item.classList.remove('locked');
-                    }
-                });
-            }
-
-            // ---- VALIDER LE CODE ----
-            function validateCode(code) {
-                const trimmed = code.trim().toUpperCase();
-                const tier = codeMap[trimmed];
-                if (tier && currentUser) {
-                    currentUser.tier = tier;
-                    const users = getUsers();
-                    if (users[currentUser.email]) {
-                        users[currentUser.email].tier = tier;
-                        saveUsers(users);
-                    }
-                    saveSession({ email: currentUser.email });
-                    applyUserState();
-                    codeStatus.textContent = '✅ Espace débloqué !';
-                    codeStatus.className = 'code-status success';
-                    codeInput.value = '';
-                } else {
-                    codeStatus.textContent = '❌ Code invalide. Essayez BRONZE123, SILVER456 ou GOLD789';
-                    codeStatus.className = 'code-status error';
-                }
-            }
-
-            // ---- CHANGER DE CODE ----
-            function resetCode() {
-                if (!currentUser) return;
-                currentUser.tier = null;
-                const users = getUsers();
-                if (users[currentUser.email]) {
-                    users[currentUser.email].tier = null;
-                    saveUsers(users);
-                }
-                saveSession({ email: currentUser.email });
-                applyUserState();
-                codeInputArea.style.display = 'flex';
-                codeActiveArea.style.display = 'none';
-                codeInput.focus();
-            }
-
-            // ---- GESTION DES ACHATS (simulation) ----
-            function handleBuy(btn) {
-                const item = btn.closest('.formation-item');
-                if (!item) return;
-                const id = item.dataset.id;
-                const price = item.querySelector('.item-price')?.textContent || '0€';
-
-                if (isPurchased(id)) {
-                    alert('Cette formation est déjà achetée.');
+            // ---- GESTION DES ACHATS DE PACK ----
+            function handleBuyPack(btn) {
+                const tier = btn.dataset.tier;
+                if (!tier) return;
+                if (isPackPurchased(tier)) {
+                    alert('Ce pack est déjà acheté.');
                     return;
                 }
-
-                // Simulation de paiement
-                if (confirm(`💳 Acheter la formation pour ${price} ? (Simulation)`)) {
-                    // Simuler un paiement réussi
-                    savePurchase(id);
-                    // Mettre à jour l'UI
-                    btn.textContent = '✅ Acheté';
-                    btn.classList.add('purchased');
-                    btn.disabled = true;
-                    alert('🎉 Paiement accepté ! La formation est débloquée.');
+                // Récupérer le prix
+                const card = btn.closest('.space-card');
+                const priceEl = card.querySelector('.pack-price');
+                const price = priceEl ? priceEl.textContent.trim() : '0€';
+                if (confirm(`💳 Acheter le pack "${card.querySelector('.space-title h3').textContent}" pour ${price} ? (Simulation)`)) {
+                    // Simulation de paiement réussi
+                    savePurchasedPack(tier);
+                    updateCards();
+                    alert('🎉 Paiement accepté ! Le pack est débloqué.');
                 }
             }
 
@@ -1506,9 +1240,9 @@
                         showError('Un compte existe déjà.');
                         return;
                     }
-                    users[email] = { name, password, tier: null };
+                    users[email] = { name, password };
                     saveUsers(users);
-                    currentUser = { name, email, tier: null };
+                    currentUser = { name, email };
                     saveSession({ email });
                     closeModalHandler();
                     applyUserState();
@@ -1568,7 +1302,7 @@
                 const fakeEmail = 'google.user@example.com';
                 const users = getUsers();
                 if (!users[fakeEmail]) {
-                    users[fakeEmail] = { name: 'Utilisateur Google', password: 'google_oauth', tier: null };
+                    users[fakeEmail] = { name: 'Utilisateur Google' };
                     saveUsers(users);
                 }
                 currentUser = { ...users[fakeEmail], email: fakeEmail };
@@ -1580,7 +1314,7 @@
                 const fakeEmail = 'google.user@example.com';
                 const users = getUsers();
                 if (!users[fakeEmail]) {
-                    users[fakeEmail] = { name: 'Utilisateur Google', password: 'google_oauth', tier: null };
+                    users[fakeEmail] = { name: 'Utilisateur Google' };
                     saveUsers(users);
                 }
                 currentUser = { ...users[fakeEmail], email: fakeEmail };
@@ -1595,21 +1329,12 @@
                 applyUserState();
             });
 
-            // Code
-            btnValidateCode.addEventListener('click', () => {
-                validateCode(codeInput.value);
-            });
-            codeInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') validateCode(codeInput.value);
-            });
-            btnChangeCode.addEventListener('click', resetCode);
-
-            // ACHATS (délégation d'événements)
+            // ---- ACHAT DE PACK (délégation) ----
             document.addEventListener('click', function(e) {
-                const btn = e.target.closest('.btn-buy');
+                const btn = e.target.closest('.btn-buy-pack');
                 if (btn && !btn.classList.contains('purchased')) {
                     e.preventDefault();
-                    handleBuy(btn);
+                    handleBuyPack(btn);
                 }
             });
 
@@ -1630,10 +1355,9 @@
                     e.preventDefault();
                     const card = this.closest('.space-card');
                     const tier = card ? card.dataset.tier : 'unknown';
-                    const info = tierInfo[tier];
-                    const label = info ? info.label : tier;
-                    const unlocked = (activeTier === tier);
-                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${unlocked ? 'débloqué' : 'verrouillé'})`);
+                    const label = card ? card.querySelector('.space-title h3').textContent : tier;
+                    const purchased = isPackPurchased(tier);
+                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${purchased ? 'débloqué' : 'verrouillé'})`);
                 });
             });
 
