@@ -4,16 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Espace Fidélité · MyLoyalty</title>
-    <!-- Font Awesome 6 (gratuit) pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <!-- Google Fonts : Inter + Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
     <style>
-        /* ============================================================
-               RESET & BASE (repris du précédent avec modifications)
-            ============================================================ */
+        /* (tous les styles restent inchangés) */
         *,
         *::before,
         *::after {
@@ -21,7 +17,6 @@
             margin: 0;
             padding: 0;
         }
-
         :root {
             --primary: #0f1a2e;
             --primary-light: #1a2c4a;
@@ -42,11 +37,9 @@
             --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-display: 'Playfair Display', serif;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             font-family: var(--font);
             background: var(--bg-body);
@@ -57,7 +50,6 @@
             flex-direction: column;
             align-items: center;
         }
-
         .app {
             max-width: 1360px;
             width: 100%;
@@ -69,10 +61,6 @@
             position: relative;
             transition: var(--transition);
         }
-
-        /* ============================================================
-               EN-TÊTE AVEC AUTH
-            ============================================================ */
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -83,13 +71,11 @@
             margin-bottom: 32px;
             gap: 16px;
         }
-
         .brand {
             display: flex;
             align-items: center;
             gap: 14px;
         }
-
         .brand-icon {
             width: 52px;
             height: 52px;
@@ -102,7 +88,6 @@
             color: var(--primary);
             box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
         }
-
         .brand h1 {
             font-family: var(--font-display);
             font-size: 28px;
@@ -123,15 +108,12 @@
             background: none;
             letter-spacing: 0.2px;
         }
-
-        /* --- Contrôles d'authentification --- */
         .auth-controls {
             display: flex;
             align-items: center;
             gap: 12px;
             flex-wrap: wrap;
         }
-
         .auth-controls .user-info {
             display: flex;
             align-items: center;
@@ -140,7 +122,6 @@
             padding: 6px 16px 6px 12px;
             border-radius: 60px;
         }
-
         .auth-controls .user-info .avatar-sm {
             width: 36px;
             height: 36px;
@@ -153,12 +134,10 @@
             color: var(--primary);
             font-size: 16px;
         }
-
         .auth-controls .user-info .user-name {
             font-weight: 600;
             font-size: 14px;
         }
-
         .auth-controls .btn-outline {
             background: transparent;
             border: 1.5px solid var(--primary);
@@ -170,12 +149,10 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .auth-controls .btn-outline:hover {
             background: var(--primary);
             color: #fff;
         }
-
         .auth-controls .btn-primary {
             background: var(--primary);
             border: none;
@@ -187,12 +164,10 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .auth-controls .btn-primary:hover {
             background: var(--primary-light);
             transform: scale(1.02);
         }
-
         .auth-controls .btn-google {
             background: #fff;
             border: 1px solid #dadce0;
@@ -207,12 +182,10 @@
             align-items: center;
             gap: 8px;
         }
-
         .auth-controls .btn-google:hover {
             background: #f8f9fa;
             border-color: #bdc1c6;
         }
-
         .auth-controls .btn-logout {
             background: transparent;
             border: none;
@@ -222,15 +195,10 @@
             padding: 4px 8px;
             transition: var(--transition);
         }
-
         .auth-controls .btn-logout:hover {
             color: var(--text-primary);
             text-decoration: underline;
         }
-
-        /* ============================================================
-               BANNIÈRE UTILISATEUR + CODE
-            ============================================================ */
         .user-banner {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border-radius: var(--radius-sm);
@@ -243,13 +211,11 @@
             color: #fff;
             gap: 16px;
         }
-
         .user-banner .greeting {
             display: flex;
             align-items: center;
             gap: 16px;
         }
-
         .user-banner .avatar {
             width: 56px;
             height: 56px;
@@ -263,7 +229,6 @@
             color: var(--primary);
             box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
         }
-
         .user-banner .greeting-text h2 {
             font-size: 20px;
             font-weight: 600;
@@ -274,7 +239,6 @@
             opacity: 0.75;
             margin-top: 2px;
         }
-
         .user-banner .plan-badge {
             display: flex;
             align-items: center;
@@ -285,7 +249,6 @@
             border-radius: 60px;
             border: 1px solid rgba(255, 255, 255, 0.10);
         }
-
         .user-banner .plan-badge .plan-name {
             font-weight: 700;
             font-size: 16px;
@@ -295,7 +258,6 @@
             margin-right: 8px;
             color: var(--gold-light);
         }
-
         .user-banner .plan-badge .plan-level {
             font-size: 12px;
             font-weight: 500;
@@ -304,8 +266,6 @@
             padding: 2px 12px;
             border-radius: 40px;
         }
-
-        /* --- Zone de saisie du code --- */
         .code-section {
             background: rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-sm);
@@ -318,7 +278,6 @@
             margin-top: 8px;
             border: 1px dashed rgba(255, 255, 255, 0.15);
         }
-
         .code-section .code-label {
             font-size: 14px;
             font-weight: 500;
@@ -326,18 +285,15 @@
             align-items: center;
             gap: 10px;
         }
-
         .code-section .code-label i {
             color: var(--gold-light);
         }
-
         .code-section .code-input-group {
             display: flex;
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
         }
-
         .code-section .code-input-group input {
             padding: 10px 18px;
             border-radius: 60px;
@@ -350,11 +306,9 @@
             outline: none;
             transition: var(--transition);
         }
-
         .code-section .code-input-group input:focus {
             box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.4);
         }
-
         .code-section .code-input-group .btn-validate {
             background: var(--gold-gradient);
             border: none;
@@ -366,12 +320,10 @@
             transition: var(--transition);
             font-size: 14px;
         }
-
         .code-section .code-input-group .btn-validate:hover {
             transform: scale(1.03);
             box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
         }
-
         .code-section .code-status {
             font-size: 13px;
             font-weight: 500;
@@ -379,7 +331,6 @@
             border-radius: 40px;
             background: rgba(255, 255, 255, 0.1);
         }
-
         .code-section .code-status.success {
             background: #2e7d5e;
             color: #e6f7ee;
@@ -388,17 +339,33 @@
             background: #a04444;
             color: #fde8e8;
         }
-
-        /* ============================================================
-               GRILLE DES 3 ESPACES (identique)
-            ============================================================ */
+        .code-section #codeActiveArea {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .code-section #codeActiveArea .btn-change {
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .code-section #codeActiveArea .btn-change:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
         .spaces-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-top: 8px;
         }
-
         .space-card {
             background: var(--card-bg);
             border-radius: var(--radius-sm);
@@ -410,13 +377,11 @@
             flex-direction: column;
             position: relative;
         }
-
         .space-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
             border-color: rgba(201, 168, 76, 0.15);
         }
-
         .space-card .card-header {
             padding: 20px 22px 14px;
             border-bottom: 1px solid rgba(15, 26, 46, 0.04);
@@ -424,13 +389,11 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .space-card .card-header .space-title {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
         .space-card .card-header .space-title .icon-circle {
             width: 44px;
             height: 44px;
@@ -441,13 +404,11 @@
             font-size: 20px;
             flex-shrink: 0;
         }
-
         .space-card .card-header .space-title h3 {
             font-size: 18px;
             font-weight: 700;
             letter-spacing: -0.3px;
         }
-
         .space-card .card-header .space-title .sub {
             font-size: 12px;
             font-weight: 400;
@@ -455,14 +416,12 @@
             display: block;
             margin-top: 1px;
         }
-
         .space-card .card-header .lock-icon {
             font-size: 18px;
             color: var(--text-muted);
             opacity: 0.3;
             transition: var(--transition);
         }
-
         .space-card .card-body {
             padding: 16px 22px 22px;
             flex: 1;
@@ -470,13 +429,11 @@
             flex-direction: column;
             gap: 16px;
         }
-
         .space-card .content-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-
         .space-card .content-group .group-label {
             font-size: 11px;
             font-weight: 700;
@@ -487,11 +444,9 @@
             align-items: center;
             gap: 8px;
         }
-
         .space-card .content-group .group-label i {
             font-size: 13px;
         }
-
         .space-card .content-item {
             display: flex;
             align-items: center;
@@ -505,7 +460,6 @@
             color: var(--text-secondary);
             position: relative;
         }
-
         .space-card .content-item .item-icon {
             width: 28px;
             height: 28px;
@@ -518,12 +472,10 @@
             background: rgba(15, 26, 46, 0.04);
             color: var(--text-muted);
         }
-
         .space-card .content-item .item-title {
             flex: 1;
             font-weight: 500;
         }
-
         .space-card .content-item .item-tag {
             font-size: 10px;
             font-weight: 600;
@@ -534,13 +486,11 @@
             background: rgba(15, 26, 46, 0.04);
             color: var(--text-muted);
         }
-
         .space-card .content-item.locked {
             opacity: 0.5;
             filter: grayscale(0.3);
             cursor: not-allowed;
         }
-
         .space-card .content-item.locked .lock-overlay {
             position: absolute;
             inset: 0;
@@ -555,11 +505,9 @@
             font-size: 14px;
             gap: 6px;
         }
-
         .space-card .content-item.locked .lock-overlay i {
             font-size: 13px;
         }
-
         .space-card .access-status {
             padding: 12px 22px 18px;
             border-top: 1px solid rgba(15, 26, 46, 0.04);
@@ -569,7 +517,6 @@
             background: rgba(15, 26, 46, 0.01);
             transition: var(--transition);
         }
-
         .space-card .access-status .status-badge {
             display: inline-flex;
             align-items: center;
@@ -579,30 +526,24 @@
             font-weight: 600;
             font-size: 12px;
         }
-
         .space-card .access-status .status-badge.active {
             background: #e6f7ee;
             color: #0b6e3f;
         }
-
         .space-card .access-status .status-badge.locked {
             background: #f7f0f0;
             color: #a04444;
         }
-
         .space-card .access-status .status-badge.upgrade {
             background: #f7f3e6;
             color: #8a6d1b;
             cursor: pointer;
             transition: var(--transition);
         }
-
         .space-card .access-status .status-badge.upgrade:hover {
             background: #ede3c6;
             transform: scale(1.02);
         }
-
-        /* --- Couleurs par tier --- */
         .tier-bronze .icon-circle {
             background: #ece7dc;
             color: #a68b5b;
@@ -617,7 +558,6 @@
             background: #f3efe6;
             color: #a68b5b;
         }
-
         .tier-silver .icon-circle {
             background: #e8edf2;
             color: #6b7b8f;
@@ -632,7 +572,6 @@
             background: #eef2f6;
             color: #6b7b8f;
         }
-
         .tier-gold .icon-circle {
             background: #f7f0df;
             color: #b8942b;
@@ -647,12 +586,10 @@
             background: #f7f0df;
             color: #b8942b;
         }
-
         .space-card .card-footer {
             padding: 6px 22px 18px;
             text-align: right;
         }
-
         .space-card .card-footer .see-all {
             font-size: 13px;
             font-weight: 600;
@@ -663,15 +600,12 @@
             gap: 6px;
             transition: var(--transition);
         }
-
         .space-card .card-footer .see-all:hover {
             color: var(--primary);
         }
-
         .space-card .card-footer .see-all:hover i {
             transform: translateX(3px);
         }
-
         .space-card.locked-card {
             opacity: 0.7;
             filter: grayscale(0.15);
@@ -681,10 +615,6 @@
             background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(2px);
         }
-
-        /* ============================================================
-               MODAL LOGIN / REGISTER
-            ============================================================ */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -699,12 +629,10 @@
             visibility: hidden;
             transition: var(--transition);
         }
-
         .modal-overlay.open {
             opacity: 1;
             visibility: visible;
         }
-
         .modal {
             background: #fff;
             max-width: 480px;
@@ -716,11 +644,9 @@
             transition: var(--transition);
             position: relative;
         }
-
         .modal-overlay.open .modal {
             transform: scale(1);
         }
-
         .modal .close-modal {
             position: absolute;
             top: 16px;
@@ -732,27 +658,22 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .modal .close-modal:hover {
             color: var(--text-primary);
         }
-
         .modal h2 {
             font-family: var(--font-display);
             font-size: 26px;
             margin-bottom: 6px;
         }
-
         .modal .subtitle {
             color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 24px;
         }
-
         .modal .form-group {
             margin-bottom: 18px;
         }
-
         .modal .form-group label {
             display: block;
             font-weight: 600;
@@ -760,7 +681,6 @@
             margin-bottom: 4px;
             color: var(--text-secondary);
         }
-
         .modal .form-group input {
             width: 100%;
             padding: 12px 16px;
@@ -770,14 +690,12 @@
             transition: var(--transition);
             background: #f8fafc;
         }
-
         .modal .form-group input:focus {
             outline: none;
             border-color: var(--gold);
             background: #fff;
             box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
         }
-
         .modal .btn-submit {
             width: 100%;
             padding: 14px;
@@ -791,12 +709,10 @@
             transition: var(--transition);
             margin-top: 8px;
         }
-
         .modal .btn-submit:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 24px rgba(201, 168, 76, 0.25);
         }
-
         .modal .divider {
             display: flex;
             align-items: center;
@@ -805,13 +721,11 @@
             color: var(--text-muted);
             font-size: 13px;
         }
-
         .modal .divider hr {
             flex: 1;
             border: none;
             border-top: 1.5px solid #e2e8f0;
         }
-
         .modal .btn-google-modal {
             width: 100%;
             padding: 12px;
@@ -827,26 +741,22 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .modal .btn-google-modal:hover {
             background: #f8f9fa;
             border-color: #bdc1c6;
         }
-
         .modal .toggle-auth {
             text-align: center;
             margin-top: 18px;
             font-size: 14px;
             color: var(--text-muted);
         }
-
         .modal .toggle-auth a {
             color: var(--primary);
             font-weight: 600;
             cursor: pointer;
             text-decoration: underline;
         }
-
         .modal .error-msg {
             background: #fde8e8;
             color: #a04444;
@@ -856,14 +766,46 @@
             margin-bottom: 12px;
             display: none;
         }
-
         .modal .error-msg.show {
             display: block;
         }
-
-        /* ============================================================
-               RESPONSIVE
-            ============================================================ */
+        .footer-note {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(15, 26, 46, 0.05);
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 20px;
+        }
+        .footer-note i {
+            color: var(--gold);
+            margin-right: 4px;
+        }
+        .footer-note strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .text-gold {
+            color: var(--gold);
+        }
+        .fw-600 {
+            font-weight: 600;
+        }
+        .mt-2 {
+            margin-top: 8px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .inline-flex {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
         @media (max-width: 1100px) {
             .app {
                 padding: 24px 24px 36px;
@@ -872,7 +814,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
         @media (max-width: 780px) {
             body {
                 padding: 12px;
@@ -937,7 +878,6 @@
                 padding: 24px 18px;
             }
         }
-
         @media (max-width: 440px) {
             .user-banner .greeting-text h2 {
                 font-size: 17px;
@@ -962,10 +902,6 @@
                 font-size: 12px;
             }
         }
-
-        /* ============================================================
-               ANIMATION & DIVERS
-            ============================================================ */
         .space-card {
             opacity: 0;
             animation: fadeUp 0.6s ease forwards;
@@ -979,7 +915,6 @@
         .space-card:nth-child(3) {
             animation-delay: 0.25s;
         }
-
         @keyframes fadeUp {
             0% {
                 opacity: 0;
@@ -990,87 +925,38 @@
                 transform: translateY(0);
             }
         }
-
-        .footer-note {
-            margin-top: 36px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(15, 26, 46, 0.05);
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-muted);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px 20px;
-        }
-        .footer-note i {
-            color: var(--gold);
-            margin-right: 4px;
-        }
-        .footer-note strong {
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        .text-gold {
-            color: var(--gold);
-        }
-        .fw-600 {
-            font-weight: 600;
-        }
-        .mt-2 {
-            margin-top: 8px;
-        }
-        .hidden {
-            display: none !important;
-        }
-        .inline-flex {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
     </style>
 </head>
 <body>
 
     <div class="app" id="app">
 
-        <!-- ==========================================================
-        EN-TÊTE AVEC AUTH
-        ========================================================== -->
+        <!-- ========== EN-TÊTE ========== -->
         <header class="header">
             <div class="brand">
-                <div class="brand-icon">
-                    <i class="fas fa-crown"></i>
-                </div>
+                <div class="brand-icon"><i class="fas fa-crown"></i></div>
                 <div>
                     <h1>Espace Fidélité</h1>
                     <span>Contenus exclusifs · Formations · Publications</span>
                 </div>
             </div>
-
-            <!-- Contrôles d'authentification -->
             <div class="auth-controls" id="authControls">
-                <!-- État déconnecté -->
                 <div id="authNotLogged" class="inline-flex" style="gap:10px;">
                     <button class="btn-outline" id="btnLogin">Connexion</button>
                     <button class="btn-primary" id="btnRegister">S'inscrire</button>
                     <button class="btn-google" id="btnGoogle"><i class="fab fa-google"></i> Google</button>
                 </div>
-                <!-- État connecté -->
                 <div id="authLogged" class="hidden inline-flex" style="gap:8px;">
                     <div class="user-info">
                         <span class="avatar-sm" id="userAvatarSmall">M</span>
-                        <span class="user-name" id="userNameDisplay">Marie</span>
+                        <span class="user-name" id="userNameDisplay">Utilisateur</span>
                         <button class="btn-logout" id="btnLogout">Déconnexion</button>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- ==========================================================
-        BANNIÈRE UTILISATEUR + CODE
-        ========================================================== -->
+        <!-- ========== BANNIÈRE UTILISATEUR ========== -->
         <div class="user-banner" id="userBanner">
             <div class="greeting">
                 <div class="avatar" id="userAvatar">M</div>
@@ -1088,22 +974,31 @@
             </div>
         </div>
 
-        <!-- Zone de saisie du code (visible seulement si connecté et pas encore de code) -->
+        <!-- ========== ZONE CODE (améliorée) ========== -->
         <div class="code-section" id="codeSection">
-            <span class="code-label"><i class="fas fa-key"></i> Activez votre espace avec votre code</span>
-            <div class="code-input-group">
-                <input type="text" id="codeInput" placeholder="Ex: BRONZE123, SILVER456, GOLD789" />
-                <button class="btn-validate" id="btnValidateCode">Valider</button>
-                <span class="code-status" id="codeStatus"></span>
+            <!-- Zone de saisie (visible si aucun code actif) -->
+            <div id="codeInputArea">
+                <span class="code-label"><i class="fas fa-key"></i> Activez votre espace avec votre code</span>
+                <div class="code-input-group">
+                    <input type="text" id="codeInput" placeholder="Ex: BRONZE123, SILVER456, GOLD789" />
+                    <button class="btn-validate" id="btnValidateCode">Valider</button>
+                    <span class="code-status" id="codeStatus"></span>
+                </div>
+            </div>
+            <!-- Zone de code actif (visible si un code est déjà utilisé) -->
+            <div id="codeActiveArea" style="display:none;">
+                <span class="code-label">
+                    <i class="fas fa-check-circle" style="color:var(--gold-light);"></i>
+                    Code actif : <strong id="activeCodeLabel">BRONZE</strong>
+                </span>
+                <button class="btn-change" id="btnChangeCode">Changer</button>
             </div>
         </div>
 
-        <!-- ==========================================================
-        GRILLE DES 3 ESPACES
-        ========================================================== -->
+        <!-- ========== GRILLE DES 3 ESPACES ========== -->
         <div class="spaces-grid" id="spacesGrid">
 
-            <!-- ESPACE 1 – DÉCOUVERTE (BRONZE) -->
+            <!-- Carte Bronze -->
             <div class="space-card tier-bronze" data-tier="bronze" id="cardBronze">
                 <div class="card-header">
                     <div class="space-title">
@@ -1136,7 +1031,7 @@
                 </div>
             </div>
 
-            <!-- ESPACE 2 – PRO (SILVER) -->
+            <!-- Carte Silver -->
             <div class="space-card tier-silver" data-tier="silver" id="cardSilver">
                 <div class="card-header">
                     <div class="space-title">
@@ -1171,7 +1066,7 @@
                 </div>
             </div>
 
-            <!-- ESPACE 3 – EXPERT (GOLD) -->
+            <!-- Carte Gold -->
             <div class="space-card tier-gold" data-tier="gold" id="cardGold">
                 <div class="card-header">
                     <div class="space-title">
@@ -1210,9 +1105,7 @@
 
         </div><!-- /spaces-grid -->
 
-        <!-- ==========================================================
-        PIED DE PAGE
-        ========================================================== -->
+        <!-- ========== PIED DE PAGE ========== -->
         <div class="footer-note">
             <span><i class="fas fa-shield-alt"></i> <strong>3 espaces</strong> · chaque formule donne accès à son contenu dédié</span>
             <span><i class="fas fa-key"></i> <strong>Codes d'activation</strong> : BRONZE123 · SILVER456 · GOLD789</span>
@@ -1221,17 +1114,13 @@
 
     </div><!-- /app -->
 
-    <!-- ==========================================================
-    MODAL LOGIN / REGISTER
-    ========================================================== -->
+    <!-- ========== MODAL AUTH ========== -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="authModal">
             <button class="close-modal" id="closeModal">&times;</button>
             <h2 id="modalTitle">Connexion</h2>
             <p class="subtitle" id="modalSub">Accédez à votre espace fidélité</p>
-
             <div class="error-msg" id="modalError"></div>
-
             <form id="authForm">
                 <div id="nameField" class="form-group hidden">
                     <label>Nom complet</label>
@@ -1247,13 +1136,8 @@
                 </div>
                 <button type="submit" class="btn-submit" id="modalSubmit">Se connecter</button>
             </form>
-
-            <div class="divider">
-                <hr /> ou <hr />
-            </div>
-
+            <div class="divider"><hr /> ou <hr /></div>
             <button class="btn-google-modal" id="modalGoogle"><i class="fab fa-google"></i> Continuer avec Google</button>
-
             <div class="toggle-auth">
                 <span id="toggleText">Pas encore de compte ?</span>
                 <a id="toggleLink">S'inscrire</a>
@@ -1261,14 +1145,13 @@
         </div>
     </div>
 
-    <!-- ==========================================================
-    JAVASCRIPT – AUTH + CODE + GESTION DES TIERS
-    ========================================================== -->
+    <!-- ========================================================== -->
+    <!-- JAVASCRIPT -->
     <script>
         (function() {
             'use strict';
 
-            // ---- ÉLÉMENTS DOM ----
+            // ---- ÉLÉMENTS ----
             const authNotLogged = document.getElementById('authNotLogged');
             const authLogged = document.getElementById('authLogged');
             const userNameDisplay = document.getElementById('userNameDisplay');
@@ -1278,20 +1161,20 @@
             const btnGoogle = document.getElementById('btnGoogle');
             const btnLogout = document.getElementById('btnLogout');
 
-            // Banner
             const userAvatar = document.getElementById('userAvatar');
             const userName = document.getElementById('userName');
             const userSub = document.getElementById('userSub');
             const planLabel = document.getElementById('planLabel');
             const planLevel = document.getElementById('planLevel');
 
-            // Code
-            const codeSection = document.getElementById('codeSection');
             const codeInput = document.getElementById('codeInput');
             const btnValidateCode = document.getElementById('btnValidateCode');
             const codeStatus = document.getElementById('codeStatus');
+            const codeInputArea = document.getElementById('codeInputArea');
+            const codeActiveArea = document.getElementById('codeActiveArea');
+            const activeCodeLabel = document.getElementById('activeCodeLabel');
+            const btnChangeCode = document.getElementById('btnChangeCode');
 
-            // Modal
             const modalOverlay = document.getElementById('modalOverlay');
             const closeModal = document.getElementById('closeModal');
             const modalTitle = document.getElementById('modalTitle');
@@ -1307,7 +1190,6 @@
             const toggleLink = document.getElementById('toggleLink');
             const nameField = document.getElementById('nameField');
 
-            // Cartes
             const cards = document.querySelectorAll('.space-card');
             const statusBadges = {
                 bronze: document.getElementById('statusBronze'),
@@ -1317,28 +1199,25 @@
 
             // ---- ÉTATS ----
             let currentUser = null; // { email, name, tier? }
-            let activeTier = null; // 'bronze', 'silver', 'gold' ou null
+            let activeTier = null;
             let isLoginMode = true;
 
-            // ---- CODES VALIDES ----
+            // ---- CODES ----
             const codeMap = {
                 'BRONZE123': 'bronze',
                 'SILVER456': 'silver',
                 'GOLD789': 'gold'
             };
-
-            // ---- TIER MAP pour affichage ----
             const tierInfo = {
                 bronze: { label: 'Découverte', level: 'BRONZE', icon: 'fa-compass' },
                 silver: { label: 'Professionnel', level: 'SILVER', icon: 'fa-briefcase' },
                 gold: { label: 'Expert', level: 'GOLD', icon: 'fa-star' }
             };
+            const tierOrder = ['bronze', 'silver', 'gold'];
 
-            // ---- GESTION STOCKAGE LOCAL ----
+            // ---- STOCKAGE ----
             function getUsers() {
-                try {
-                    return JSON.parse(localStorage.getItem('loyaltyUsers')) || {};
-                } catch { return {}; }
+                try { return JSON.parse(localStorage.getItem('loyaltyUsers')) || {}; } catch { return {}; }
             }
 
             function saveUsers(users) {
@@ -1346,9 +1225,7 @@
             }
 
             function getSession() {
-                try {
-                    return JSON.parse(localStorage.getItem('loyaltySession')) || null;
-                } catch { return null; }
+                try { return JSON.parse(localStorage.getItem('loyaltySession')) || null; } catch { return null; }
             }
 
             function saveSession(session) {
@@ -1359,25 +1236,7 @@
                 localStorage.removeItem('loyaltySession');
             }
 
-            // ---- INIT SESSION ----
-            function loadSession() {
-                const session = getSession();
-                if (session && session.email) {
-                    const users = getUsers();
-                    const user = users[session.email];
-                    if (user) {
-                        currentUser = user;
-                        currentUser.email = session.email;
-                        applyUserState();
-                        return;
-                    }
-                }
-                // Pas de session valide
-                currentUser = null;
-                applyUserState();
-            }
-
-            // ---- APPLIQUER L'ÉTAT UTILISATEUR ----
+            // ---- APPLIQUER L'ÉTAT ----
             function applyUserState() {
                 if (currentUser) {
                     // Connecté
@@ -1387,30 +1246,32 @@
                     userNameDisplay.textContent = displayName;
                     userAvatarSmall.textContent = displayName.charAt(0).toUpperCase();
 
-                    // Banner
                     userAvatar.textContent = displayName.charAt(0).toUpperCase();
                     userName.textContent = `Bonjour, ${displayName}`;
-                    userSub.textContent = currentUser.tier ? `Votre niveau : ${tierInfo[currentUser.tier].label}` :
-                        'Entrez votre code d’activation pour débloquer votre espace.';
 
-                    // Plan badge
                     if (currentUser.tier) {
                         const info = tierInfo[currentUser.tier];
+                        activeTier = currentUser.tier;
+                        userSub.textContent = `Votre niveau : ${info.label}`;
                         planLabel.innerHTML = `<i class="fas ${info.icon}"></i> ${info.label}`;
                         planLevel.textContent = info.level;
-                        activeTier = currentUser.tier;
-                        // Cacher la section code
-                        codeSection.style.display = 'none';
+                        // Afficher la zone "code actif"
+                        codeInputArea.style.display = 'none';
+                        codeActiveArea.style.display = 'flex';
+                        activeCodeLabel.textContent = info.label.toUpperCase();
+                        codeStatus.textContent = '';
+                        codeStatus.className = 'code-status';
                     } else {
+                        activeTier = null;
+                        userSub.textContent = 'Entrez votre code d’activation pour débloquer votre espace.';
                         planLabel.textContent = '--';
                         planLevel.textContent = '--';
-                        activeTier = null;
-                        codeSection.style.display = 'flex';
+                        // Afficher la zone de saisie
+                        codeInputArea.style.display = 'flex';
+                        codeActiveArea.style.display = 'none';
                         codeStatus.textContent = '';
                         codeStatus.className = 'code-status';
                     }
-
-                    // Mettre à jour les cartes
                     updateCards();
                 } else {
                     // Déconnecté
@@ -1422,16 +1283,15 @@
                     planLabel.textContent = '--';
                     planLevel.textContent = '--';
                     activeTier = null;
-                    codeSection.style.display = 'none';
+                    codeInputArea.style.display = 'none';
+                    codeActiveArea.style.display = 'none';
                     updateCards();
                 }
             }
 
-            // ---- MISE À JOUR DES CARTES (verrouillage / déverrouillage) ----
+            // ---- MISE À JOUR DES CARTES ----
             function updateCards() {
-                const tierOrder = ['bronze', 'silver', 'gold'];
                 const activeIndex = activeTier ? tierOrder.indexOf(activeTier) : -1;
-
                 cards.forEach(card => {
                     const cardTier = card.dataset.tier;
                     const cardIndex = tierOrder.indexOf(cardTier);
@@ -1452,7 +1312,7 @@
                         }
                     });
 
-                    // Badge de statut
+                    // Badge statut
                     const statusEl = card.querySelector('.access-status .status-badge');
                     if (statusEl) {
                         statusEl.classList.remove('active', 'locked', 'upgrade');
@@ -1480,70 +1340,74 @@
                             lockIcon.style.opacity = '0.4';
                         }
                     }
-
                     card.classList.toggle('locked-card', !hasAccess);
                 });
             }
 
-            // ---- VALIDATION DU CODE ----
+            // ---- VALIDER LE CODE ----
             function validateCode(code) {
                 const trimmed = code.trim().toUpperCase();
                 const tier = codeMap[trimmed];
-                if (tier) {
-                    // Code valide
-                    if (currentUser) {
-                        currentUser.tier = tier;
-                        // Mettre à jour dans la base users
-                        const users = getUsers();
-                        if (users[currentUser.email]) {
-                            users[currentUser.email].tier = tier;
-                            saveUsers(users);
-                        }
-                        saveSession({ email: currentUser.email });
-                        applyUserState();
-                        codeStatus.textContent = '✅ Code validé !';
-                        codeStatus.className = 'code-status success';
-                        codeInput.value = '';
-                        // Déclencher la mise à jour des cartes
-                        updateCards();
+                if (tier && currentUser) {
+                    currentUser.tier = tier;
+                    const users = getUsers();
+                    if (users[currentUser.email]) {
+                        users[currentUser.email].tier = tier;
+                        saveUsers(users);
                     }
+                    saveSession({ email: currentUser.email });
+                    applyUserState();
+                    codeStatus.textContent = '✅ Code validé !';
+                    codeStatus.className = 'code-status success';
+                    codeInput.value = '';
                 } else {
                     codeStatus.textContent = '❌ Code invalide. Essayez BRONZE123, SILVER456 ou GOLD789';
                     codeStatus.className = 'code-status error';
                 }
             }
 
-            // ---- AUTH : Connexion / Inscription ----
+            // ---- CHANGER DE CODE (réinitialiser) ----
+            function resetCode() {
+                if (!currentUser) return;
+                // Supprimer le tier
+                currentUser.tier = null;
+                const users = getUsers();
+                if (users[currentUser.email]) {
+                    users[currentUser.email].tier = null;
+                    saveUsers(users);
+                }
+                saveSession({ email: currentUser.email });
+                applyUserState();
+                // Réafficher la zone de saisie
+                codeInputArea.style.display = 'flex';
+                codeActiveArea.style.display = 'none';
+                codeInput.focus();
+            }
+
+            // ---- AUTH ----
             function handleAuthSubmit(e) {
                 e.preventDefault();
                 modalError.classList.remove('show');
                 modalError.textContent = '';
-
                 const email = inputEmail.value.trim();
                 const password = inputPassword.value.trim();
                 const name = inputName.value.trim();
-
                 if (!email || !password) {
                     showError('Veuillez remplir tous les champs.');
                     return;
                 }
-
                 const users = getUsers();
-
                 if (isLoginMode) {
-                    // Connexion
                     const user = users[email];
                     if (!user || user.password !== password) {
                         showError('Email ou mot de passe incorrect.');
                         return;
                     }
-                    // OK
                     currentUser = { ...user, email };
                     saveSession({ email });
                     closeModalHandler();
                     applyUserState();
                 } else {
-                    // Inscription
                     if (!name) {
                         showError('Veuillez entrer votre nom.');
                         return;
@@ -1552,7 +1416,6 @@
                         showError('Un compte existe déjà avec cet email.');
                         return;
                     }
-                    // Créer
                     users[email] = { name, password, tier: null };
                     saveUsers(users);
                     currentUser = { name, email, tier: null };
@@ -1604,17 +1467,14 @@
             modalOverlay.addEventListener('click', (e) => {
                 if (e.target === modalOverlay) closeModalHandler();
             });
-
             toggleLink.addEventListener('click', () => {
                 isLoginMode = !isLoginMode;
                 openModal(isLoginMode ? 'login' : 'register');
             });
-
             authForm.addEventListener('submit', handleAuthSubmit);
 
-            // Google (simulation)
+            // Google (simulé)
             btnGoogle.addEventListener('click', () => {
-                // Simuler une connexion Google avec un utilisateur factice
                 const fakeEmail = 'google.user@example.com';
                 const users = getUsers();
                 if (!users[fakeEmail]) {
@@ -1627,7 +1487,6 @@
                 applyUserState();
             });
             modalGoogle.addEventListener('click', () => {
-                // Simuler un clic sur le bouton Google dans le modal
                 const fakeEmail = 'google.user@example.com';
                 const users = getUsers();
                 if (!users[fakeEmail]) {
@@ -1651,15 +1510,24 @@
                 validateCode(codeInput.value);
             });
             codeInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    validateCode(codeInput.value);
-                }
+                if (e.key === 'Enter') validateCode(codeInput.value);
             });
 
-            // ---- INIT ----
-            loadSession();
+            // Changer de code
+            btnChangeCode.addEventListener('click', resetCode);
 
-            // ---- Rendre les "Voir tout" interactifs ----
+            // ---- INIT ----
+            const session = getSession();
+            if (session && session.email) {
+                const users = getUsers();
+                const user = users[session.email];
+                if (user) {
+                    currentUser = { ...user, email: session.email };
+                }
+            }
+            applyUserState();
+
+            // ---- LIENS "VOIR TOUT" ----
             document.querySelectorAll('.see-all').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1667,12 +1535,10 @@
                     const tier = card ? card.dataset.tier : 'unknown';
                     const info = tierInfo[tier];
                     const label = info ? info.label : tier;
-                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${activeTier && tierOrder.indexOf(tier) <= tierOrder.indexOf(activeTier) ? 'débloqué' : 'verrouillé'})`);
+                    const hasAccess = activeTier && tierOrder.indexOf(tier) <= tierOrder.indexOf(activeTier);
+                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${hasAccess ? 'débloqué' : 'verrouillé'})`);
                 });
             });
-
-            // petite variable pour l'ordre dans les alertes
-            const tierOrder = ['bronze', 'silver', 'gold'];
 
         })();
     </script>
