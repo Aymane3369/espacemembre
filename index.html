@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Espace Fidélité · MyLoyalty</title>
+    <title>Espace Fidélité · Achats</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
     <style>
-        /* (tous les styles restent inchangés) */
+        /* RESET & BASE */
         *,
         *::before,
         *::after {
@@ -20,7 +20,6 @@
         :root {
             --primary: #0f1a2e;
             --primary-light: #1a2c4a;
-            --primary-dark: #070e19;
             --gold: #c9a84c;
             --gold-light: #e8d5a3;
             --gold-gradient: linear-gradient(135deg, #c9a84c, #f0dfb0);
@@ -34,7 +33,7 @@
             --radius: 20px;
             --radius-sm: 12px;
             --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font: 'Inter', sans-serif;
             --font-display: 'Playfair Display', serif;
         }
         html {
@@ -58,9 +57,9 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             padding: 32px 40px 48px;
-            position: relative;
-            transition: var(--transition);
         }
+
+        /* HEADER */
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -92,7 +91,6 @@
             font-family: var(--font-display);
             font-size: 28px;
             font-weight: 700;
-            letter-spacing: -0.5px;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -106,8 +104,9 @@
             display: block;
             -webkit-text-fill-color: var(--text-muted);
             background: none;
-            letter-spacing: 0.2px;
         }
+
+        /* AUTH */
         .auth-controls {
             display: flex;
             align-items: center;
@@ -166,7 +165,6 @@
         }
         .auth-controls .btn-primary:hover {
             background: var(--primary-light);
-            transform: scale(1.02);
         }
         .auth-controls .btn-google {
             background: #fff;
@@ -184,7 +182,6 @@
         }
         .auth-controls .btn-google:hover {
             background: #f8f9fa;
-            border-color: #bdc1c6;
         }
         .auth-controls .btn-logout {
             background: transparent;
@@ -193,12 +190,13 @@
             font-size: 13px;
             cursor: pointer;
             padding: 4px 8px;
-            transition: var(--transition);
         }
         .auth-controls .btn-logout:hover {
             color: var(--text-primary);
             text-decoration: underline;
         }
+
+        /* BANNER */
         .user-banner {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border-radius: var(--radius-sm);
@@ -232,7 +230,6 @@
         .user-banner .greeting-text h2 {
             font-size: 20px;
             font-weight: 600;
-            letter-spacing: -0.3px;
         }
         .user-banner .greeting-text p {
             font-size: 14px;
@@ -252,7 +249,6 @@
         .user-banner .plan-badge .plan-name {
             font-weight: 700;
             font-size: 16px;
-            letter-spacing: 0.3px;
         }
         .user-banner .plan-badge .plan-name i {
             margin-right: 8px;
@@ -266,6 +262,8 @@
             padding: 2px 12px;
             border-radius: 40px;
         }
+
+        /* CODE SECTION */
         .code-section {
             background: rgba(255, 255, 255, 0.06);
             border-radius: var(--radius-sm);
@@ -360,12 +358,16 @@
             background: var(--gold);
             color: var(--primary);
         }
+
+        /* GRILLE */
         .spaces-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-top: 8px;
         }
+
+        /* CARTES */
         .space-card {
             background: var(--card-bg);
             border-radius: var(--radius-sm);
@@ -447,7 +449,9 @@
         .space-card .content-group .group-label i {
             font-size: 13px;
         }
-        .space-card .content-item {
+
+        /* ÉLÉMENTS DE CONTENU */
+        .content-item {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -459,8 +463,9 @@
             font-weight: 500;
             color: var(--text-secondary);
             position: relative;
+            flex-wrap: wrap;
         }
-        .space-card .content-item .item-icon {
+        .content-item .item-icon {
             width: 28px;
             height: 28px;
             border-radius: 8px;
@@ -472,11 +477,17 @@
             background: rgba(15, 26, 46, 0.04);
             color: var(--text-muted);
         }
-        .space-card .content-item .item-title {
+        .content-item .item-title {
             flex: 1;
             font-weight: 500;
+            min-width: 80px;
         }
-        .space-card .content-item .item-tag {
+        .content-item .item-price {
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: 4px;
+        }
+        .content-item .item-tag {
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
@@ -486,28 +497,61 @@
             background: rgba(15, 26, 46, 0.04);
             color: var(--text-muted);
         }
-        .space-card .content-item.locked {
-            opacity: 0.5;
-            filter: grayscale(0.3);
-            cursor: not-allowed;
+        .content-item .btn-buy {
+            background: var(--gold-gradient);
+            border: none;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: auto;
         }
-        .space-card .content-item.locked .lock-overlay {
+        .content-item .btn-buy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        }
+        .content-item .btn-buy.purchased {
+            background: #2e7d5e;
+            color: #fff;
+            cursor: default;
+        }
+        .content-item .btn-buy.purchased:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Overlay espace verrouillé */
+        .space-card.locked-card .card-body {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.3);
+        }
+        .space-card.locked-card .card-body::after {
+            content: "Espace verrouillé";
             position: absolute;
             inset: 0;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(1px);
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            padding-right: 16px;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
             color: var(--text-muted);
-            font-size: 14px;
-            gap: 6px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(3px);
+            border-radius: var(--radius-sm);
+            z-index: 5;
+            pointer-events: none;
+            letter-spacing: 1px;
         }
-        .space-card .content-item.locked .lock-overlay i {
-            font-size: 13px;
+        .space-card.locked-card .card-header .lock-icon {
+            opacity: 1 !important;
+            color: var(--text-muted);
         }
+
+        /* STATUT */
         .space-card .access-status {
             padding: 12px 22px 18px;
             border-top: 1px solid rgba(15, 26, 46, 0.04);
@@ -534,58 +578,7 @@
             background: #f7f0f0;
             color: #a04444;
         }
-        .space-card .access-status .status-badge.upgrade {
-            background: #f7f3e6;
-            color: #8a6d1b;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .space-card .access-status .status-badge.upgrade:hover {
-            background: #ede3c6;
-            transform: scale(1.02);
-        }
-        .tier-bronze .icon-circle {
-            background: #ece7dc;
-            color: #a68b5b;
-        }
-        .tier-bronze .card-header .space-title h3 {
-            color: #7a653b;
-        }
-        .tier-bronze .card-header {
-            border-bottom-color: rgba(166, 139, 91, 0.15);
-        }
-        .tier-bronze .content-item .item-icon {
-            background: #f3efe6;
-            color: #a68b5b;
-        }
-        .tier-silver .icon-circle {
-            background: #e8edf2;
-            color: #6b7b8f;
-        }
-        .tier-silver .card-header .space-title h3 {
-            color: #3d4e62;
-        }
-        .tier-silver .card-header {
-            border-bottom-color: rgba(107, 123, 143, 0.15);
-        }
-        .tier-silver .content-item .item-icon {
-            background: #eef2f6;
-            color: #6b7b8f;
-        }
-        .tier-gold .icon-circle {
-            background: #f7f0df;
-            color: #b8942b;
-        }
-        .tier-gold .card-header .space-title h3 {
-            color: #8a6d1b;
-        }
-        .tier-gold .card-header {
-            border-bottom-color: rgba(201, 168, 76, 0.2);
-        }
-        .tier-gold .content-item .item-icon {
-            background: #f7f0df;
-            color: #b8942b;
-        }
+
         .space-card .card-footer {
             padding: 6px 22px 18px;
             text-align: right;
@@ -606,15 +599,31 @@
         .space-card .card-footer .see-all:hover i {
             transform: translateX(3px);
         }
-        .space-card.locked-card {
-            opacity: 0.7;
-            filter: grayscale(0.15);
-            cursor: default;
+
+        /* COULEURS PAR TIER */
+        .tier-bronze .icon-circle {
+            background: #ece7dc;
+            color: #a68b5b;
         }
-        .space-card.locked-card .content-item.locked .lock-overlay {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(2px);
+        .tier-bronze .card-header .space-title h3 {
+            color: #7a653b;
         }
+        .tier-silver .icon-circle {
+            background: #e8edf2;
+            color: #6b7b8f;
+        }
+        .tier-silver .card-header .space-title h3 {
+            color: #3d4e62;
+        }
+        .tier-gold .icon-circle {
+            background: #f7f0df;
+            color: #b8942b;
+        }
+        .tier-gold .card-header .space-title h3 {
+            color: #8a6d1b;
+        }
+
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -656,7 +665,6 @@
             font-size: 24px;
             color: var(--text-muted);
             cursor: pointer;
-            transition: var(--transition);
         }
         .modal .close-modal:hover {
             color: var(--text-primary);
@@ -743,7 +751,6 @@
         }
         .modal .btn-google-modal:hover {
             background: #f8f9fa;
-            border-color: #bdc1c6;
         }
         .modal .toggle-auth {
             text-align: center;
@@ -769,6 +776,7 @@
         .modal .error-msg.show {
             display: block;
         }
+
         .footer-note {
             margin-top: 36px;
             padding-top: 20px;
@@ -789,15 +797,6 @@
             color: var(--text-secondary);
             font-weight: 600;
         }
-        .text-gold {
-            color: var(--gold);
-        }
-        .fw-600 {
-            font-weight: 600;
-        }
-        .mt-2 {
-            margin-top: 8px;
-        }
         .hidden {
             display: none !important;
         }
@@ -806,10 +805,31 @@
             align-items: center;
             gap: 6px;
         }
-        @media (max-width: 1100px) {
-            .app {
-                padding: 24px 24px 36px;
+        .space-card {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .space-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+        .space-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+        .space-card:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
             }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1100px) {
             .spaces-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -819,7 +839,7 @@
                 padding: 12px;
             }
             .app {
-                padding: 16px 16px 28px;
+                padding: 16px;
             }
             .header {
                 flex-direction: column;
@@ -840,7 +860,6 @@
             .user-banner .plan-badge {
                 width: 100%;
                 justify-content: center;
-                padding: 8px 16px;
             }
             .code-section {
                 flex-direction: column;
@@ -877,6 +896,13 @@
             .modal {
                 padding: 24px 18px;
             }
+            .content-item {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .content-item .btn-buy {
+                margin-left: 0;
+            }
         }
         @media (max-width: 440px) {
             .user-banner .greeting-text h2 {
@@ -891,10 +917,6 @@
                 font-size: 13px;
                 padding: 8px 12px;
             }
-            .space-card .content-item .item-tag {
-                font-size: 9px;
-                padding: 1px 8px;
-            }
             .auth-controls .btn-outline,
             .auth-controls .btn-primary,
             .auth-controls .btn-google {
@@ -902,42 +924,18 @@
                 font-size: 12px;
             }
         }
-        .space-card {
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-        }
-        .space-card:nth-child(1) {
-            animation-delay: 0.05s;
-        }
-        .space-card:nth-child(2) {
-            animation-delay: 0.15s;
-        }
-        .space-card:nth-child(3) {
-            animation-delay: 0.25s;
-        }
-        @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
 <body>
-
     <div class="app" id="app">
 
-        <!-- ========== EN-TÊTE ========== -->
+        <!-- HEADER -->
         <header class="header">
             <div class="brand">
                 <div class="brand-icon"><i class="fas fa-crown"></i></div>
                 <div>
                     <h1>Espace Fidélité</h1>
-                    <span>Contenus exclusifs · Formations · Publications</span>
+                    <span>Formations · Publications · Achats packs</span>
                 </div>
             </div>
             <div class="auth-controls" id="authControls">
@@ -956,13 +954,13 @@
             </div>
         </header>
 
-        <!-- ========== BANNIÈRE UTILISATEUR ========== -->
+        <!-- BANNIERE -->
         <div class="user-banner" id="userBanner">
             <div class="greeting">
                 <div class="avatar" id="userAvatar">M</div>
                 <div class="greeting-text">
                     <h2 id="userName">Bonjour, invité</h2>
-                    <p id="userSub">Connectez-vous pour accéder à votre espace</p>
+                    <p id="userSub">Connectez-vous et activez votre code</p>
                 </div>
             </div>
             <div class="plan-badge" id="planBadge">
@@ -974,32 +972,30 @@
             </div>
         </div>
 
-        <!-- ========== ZONE CODE (améliorée) ========== -->
+        <!-- ZONE CODE -->
         <div class="code-section" id="codeSection">
-            <!-- Zone de saisie (visible si aucun code actif) -->
             <div id="codeInputArea">
-                <span class="code-label"><i class="fas fa-key"></i> Activez votre espace avec votre code</span>
+                <span class="code-label"><i class="fas fa-key"></i> Entrez votre code</span>
                 <div class="code-input-group">
-                    <input type="text" id="codeInput" placeholder="Ex: BRONZE123, SILVER456, GOLD789" />
+                    <input type="text" id="codeInput" placeholder="BRONZE123, SILVER456, GOLD789" />
                     <button class="btn-validate" id="btnValidateCode">Valider</button>
                     <span class="code-status" id="codeStatus"></span>
                 </div>
             </div>
-            <!-- Zone de code actif (visible si un code est déjà utilisé) -->
             <div id="codeActiveArea" style="display:none;">
                 <span class="code-label">
                     <i class="fas fa-check-circle" style="color:var(--gold-light);"></i>
-                    Code actif : <strong id="activeCodeLabel">BRONZE</strong>
+                    Espace actif : <strong id="activeCodeLabel">BRONZE</strong>
                 </span>
                 <button class="btn-change" id="btnChangeCode">Changer</button>
             </div>
         </div>
 
-        <!-- ========== GRILLE DES 3 ESPACES ========== -->
+        <!-- GRILLE -->
         <div class="spaces-grid" id="spacesGrid">
 
-            <!-- Carte Bronze -->
-            <div class="space-card tier-bronze" data-tier="bronze" id="cardBronze">
+            <!-- CARTE BRONZE -->
+            <div class="space-card tier-bronze locked-card" data-tier="bronze" id="cardBronze">
                 <div class="card-header">
                     <div class="space-title">
                         <div class="icon-circle"><i class="fas fa-compass"></i></div>
@@ -1012,15 +1008,26 @@
                 </div>
                 <div class="card-body">
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Les bases du marketing</span><span class="item-tag">2h</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Gestion de projet agile</span><span class="item-tag">1h30</span></div>
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations (10€)</div>
+                        <div class="content-item formation-item" data-id="bronze-f1">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">Bases du marketing</span>
+                            <span class="item-price">10€</span>
+                            <button class="btn-buy" data-id="bronze-f1">Acheter</button>
+                            <span class="item-tag">2h</span>
+                        </div>
+                        <div class="content-item formation-item" data-id="bronze-f2">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">Gestion agile</span>
+                            <span class="item-price">10€</span>
+                            <button class="btn-buy" data-id="bronze-f2">Acheter</button>
+                            <span class="item-tag">1h30</span>
+                        </div>
                     </div>
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications (gratuites)</div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Guide du débutant</span><span class="item-tag">PDF</span></div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">5 erreurs à éviter</span><span class="item-tag">Article</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Checklist hebdomadaire</span><span class="item-tag">Checklist</span></div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -1031,8 +1038,8 @@
                 </div>
             </div>
 
-            <!-- Carte Silver -->
-            <div class="space-card tier-silver" data-tier="silver" id="cardSilver">
+            <!-- CARTE SILVER -->
+            <div class="space-card tier-silver locked-card" data-tier="silver" id="cardSilver">
                 <div class="card-header">
                     <div class="space-title">
                         <div class="icon-circle"><i class="fas fa-briefcase"></i></div>
@@ -1045,17 +1052,33 @@
                 </div>
                 <div class="card-body">
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Stratégie digitale avancée</span><span class="item-tag">3h</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Data &amp; analyse</span><span class="item-tag">2h30</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Leadership &amp; équipes</span><span class="item-tag">2h</span></div>
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations (20€)</div>
+                        <div class="content-item formation-item" data-id="silver-f1">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">Stratégie digitale</span>
+                            <span class="item-price">20€</span>
+                            <button class="btn-buy" data-id="silver-f1">Acheter</button>
+                            <span class="item-tag">3h</span>
+                        </div>
+                        <div class="content-item formation-item" data-id="silver-f2">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">Data & analyse</span>
+                            <span class="item-price">20€</span>
+                            <button class="btn-buy" data-id="silver-f2">Acheter</button>
+                            <span class="item-tag">2h30</span>
+                        </div>
+                        <div class="content-item formation-item" data-id="silver-f3">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">Leadership</span>
+                            <span class="item-price">20€</span>
+                            <button class="btn-buy" data-id="silver-f3">Acheter</button>
+                            <span class="item-tag">2h</span>
+                        </div>
                     </div>
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Rapport annuel 2025</span><span class="item-tag">PDF</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Étude de cas : growth</span><span class="item-tag">Étude</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Template stratégique</span><span class="item-tag">Template</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Webinaire replay</span><span class="item-tag">Vidéo</span></div>
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications (gratuites)</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Rapport annuel</span><span class="item-tag">PDF</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Étude de cas growth</span><span class="item-tag">Étude</span></div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -1066,8 +1089,8 @@
                 </div>
             </div>
 
-            <!-- Carte Gold -->
-            <div class="space-card tier-gold" data-tier="gold" id="cardGold">
+            <!-- CARTE GOLD -->
+            <div class="space-card tier-gold locked-card" data-tier="gold" id="cardGold">
                 <div class="card-header">
                     <div class="space-title">
                         <div class="icon-circle"><i class="fas fa-star"></i></div>
@@ -1080,19 +1103,34 @@
                 </div>
                 <div class="card-body">
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">IA &amp; transformation</span><span class="item-tag">4h</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Finance pour non-financiers</span><span class="item-tag">3h</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Innovation &amp; disruption</span><span class="item-tag">2h30</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Mentorat exclusif</span><span class="item-tag">1h</span></div>
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations (30€)</div>
+                        <div class="content-item formation-item" data-id="gold-f1">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">IA & transformation</span>
+                            <span class="item-price">30€</span>
+                            <button class="btn-buy" data-id="gold-f1">Acheter</button>
+                            <span class="item-tag">4h</span>
+                        </div>
+                        <div class="content-item formation-item" data-id="gold-f2">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">Finance non-financiers</span>
+                            <span class="item-price">30€</span>
+                            <button class="btn-buy" data-id="gold-f2">Acheter</button>
+                            <span class="item-tag">3h</span>
+                        </div>
+                        <div class="content-item formation-item" data-id="gold-f3">
+                            <span class="item-icon"><i class="fas fa-play"></i></span>
+                            <span class="item-title">Innovation & disruption</span>
+                            <span class="item-price">30€</span>
+                            <button class="btn-buy" data-id="gold-f3">Acheter</button>
+                            <span class="item-tag">2h30</span>
+                        </div>
                     </div>
                     <div class="content-group">
-                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Livre blanc : IA &amp; stratégie</span><span class="item-tag">PDF</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Analyse de marché 2026</span><span class="item-tag">Étude</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Boîte à outils du leader</span><span class="item-tag">Kit</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Podcast : tendances</span><span class="item-tag">Audio</span></div>
-                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Accès anticipé aux nouveautés</span><span class="item-tag">Premium</span></div>
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications (gratuites)</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Livre blanc IA</span><span class="item-tag">PDF</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Analyse marché 2026</span><span class="item-tag">Étude</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Boîte à outils leader</span><span class="item-tag">Kit</span></div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -1103,23 +1141,21 @@
                 </div>
             </div>
 
-        </div><!-- /spaces-grid -->
-
-        <!-- ========== PIED DE PAGE ========== -->
-        <div class="footer-note">
-            <span><i class="fas fa-shield-alt"></i> <strong>3 espaces</strong> · chaque formule donne accès à son contenu dédié</span>
-            <span><i class="fas fa-key"></i> <strong>Codes d'activation</strong> : BRONZE123 · SILVER456 · GOLD789</span>
-            <span><i class="fas fa-user-plus"></i> Créez un compte et entrez votre code pour débloquer</span>
         </div>
 
-    </div><!-- /app -->
+        <div class="footer-note">
+            <span><i class="fas fa-key"></i> <strong>Codes</strong> : BRONZE123 · SILVER456 · GOLD789</span>
+            <span><i class="fas fa-shopping-cart"></i> Chaque formation s'achète individuellement</span>
+            <span><i class="fas fa-check-circle"></i> Les achats sont sauvegardés</span>
+        </div>
+    </div>
 
-    <!-- ========== MODAL AUTH ========== -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="authModal">
             <button class="close-modal" id="closeModal">&times;</button>
             <h2 id="modalTitle">Connexion</h2>
-            <p class="subtitle" id="modalSub">Accédez à votre espace fidélité</p>
+            <p class="subtitle" id="modalSub">Accédez à votre espace</p>
             <div class="error-msg" id="modalError"></div>
             <form id="authForm">
                 <div id="nameField" class="form-group hidden">
@@ -1127,7 +1163,7 @@
                     <input type="text" id="inputName" placeholder="Votre nom" />
                 </div>
                 <div class="form-group">
-                    <label>Adresse email</label>
+                    <label>Email</label>
                     <input type="email" id="inputEmail" placeholder="exemple@mail.com" required />
                 </div>
                 <div class="form-group">
@@ -1137,7 +1173,7 @@
                 <button type="submit" class="btn-submit" id="modalSubmit">Se connecter</button>
             </form>
             <div class="divider"><hr /> ou <hr /></div>
-            <button class="btn-google-modal" id="modalGoogle"><i class="fab fa-google"></i> Continuer avec Google</button>
+            <button class="btn-google-modal" id="modalGoogle"><i class="fab fa-google"></i> Google</button>
             <div class="toggle-auth">
                 <span id="toggleText">Pas encore de compte ?</span>
                 <a id="toggleLink">S'inscrire</a>
@@ -1145,8 +1181,6 @@
         </div>
     </div>
 
-    <!-- ========================================================== -->
-    <!-- JAVASCRIPT -->
     <script>
         (function() {
             'use strict';
@@ -1198,11 +1232,11 @@
             };
 
             // ---- ÉTATS ----
-            let currentUser = null; // { email, name, tier? }
-            let activeTier = null;
+            let currentUser = null;
+            let activeTier = null; // 'bronze', 'silver', 'gold' ou null
             let isLoginMode = true;
 
-            // ---- CODES ----
+            // ---- CODES MAP (strict) ----
             const codeMap = {
                 'BRONZE123': 'bronze',
                 'SILVER456': 'silver',
@@ -1236,10 +1270,25 @@
                 localStorage.removeItem('loyaltySession');
             }
 
-            // ---- APPLIQUER L'ÉTAT ----
+            // ---- ACHATS ----
+            function getPurchases() {
+                try { return JSON.parse(localStorage.getItem('loyaltyPurchases')) || {}; } catch { return {}; }
+            }
+
+            function savePurchase(id) {
+                const purchases = getPurchases();
+                purchases[id] = true;
+                localStorage.setItem('loyaltyPurchases', JSON.stringify(purchases));
+            }
+
+            function isPurchased(id) {
+                const purchases = getPurchases();
+                return !!purchases[id];
+            }
+
+            // ---- APPLIQUER ÉTAT ----
             function applyUserState() {
                 if (currentUser) {
-                    // Connecté
                     authNotLogged.classList.add('hidden');
                     authLogged.classList.remove('hidden');
                     const displayName = currentUser.name || currentUser.email.split('@')[0];
@@ -1252,10 +1301,9 @@
                     if (currentUser.tier) {
                         const info = tierInfo[currentUser.tier];
                         activeTier = currentUser.tier;
-                        userSub.textContent = `Votre niveau : ${info.label}`;
+                        userSub.textContent = `Espace ${info.label} activé`;
                         planLabel.innerHTML = `<i class="fas ${info.icon}"></i> ${info.label}`;
                         planLevel.textContent = info.level;
-                        // Afficher la zone "code actif"
                         codeInputArea.style.display = 'none';
                         codeActiveArea.style.display = 'flex';
                         activeCodeLabel.textContent = info.label.toUpperCase();
@@ -1263,10 +1311,9 @@
                         codeStatus.className = 'code-status';
                     } else {
                         activeTier = null;
-                        userSub.textContent = 'Entrez votre code d’activation pour débloquer votre espace.';
+                        userSub.textContent = 'Entrez votre code d’activation.';
                         planLabel.textContent = '--';
                         planLevel.textContent = '--';
-                        // Afficher la zone de saisie
                         codeInputArea.style.display = 'flex';
                         codeActiveArea.style.display = 'none';
                         codeStatus.textContent = '';
@@ -1274,12 +1321,11 @@
                     }
                     updateCards();
                 } else {
-                    // Déconnecté
                     authNotLogged.classList.remove('hidden');
                     authLogged.classList.add('hidden');
                     userAvatar.textContent = '?';
                     userName.textContent = 'Bonjour, invité';
-                    userSub.textContent = 'Connectez-vous pour accéder à votre espace';
+                    userSub.textContent = 'Connectez-vous pour activer votre espace.';
                     planLabel.textContent = '--';
                     planLevel.textContent = '--';
                     activeTier = null;
@@ -1289,50 +1335,38 @@
                 }
             }
 
-            // ---- MISE À JOUR DES CARTES ----
+            // ---- UPDATE CARTES (strict : un seul espace débloqué) ----
             function updateCards() {
-                const activeIndex = activeTier ? tierOrder.indexOf(activeTier) : -1;
                 cards.forEach(card => {
                     const cardTier = card.dataset.tier;
-                    const cardIndex = tierOrder.indexOf(cardTier);
-                    const hasAccess = (activeIndex >= cardIndex);
+                    const isUnlocked = (activeTier === cardTier);
 
-                    // Contenu
-                    const items = card.querySelectorAll('.content-item');
-                    items.forEach(item => {
-                        item.classList.remove('locked');
-                        const overlay = item.querySelector('.lock-overlay');
-                        if (overlay) overlay.remove();
-                        if (!hasAccess) {
-                            item.classList.add('locked');
-                            const lockDiv = document.createElement('div');
-                            lockDiv.className = 'lock-overlay';
-                            lockDiv.innerHTML = `<i class="fas fa-lock"></i> Verrouillé`;
-                            item.appendChild(lockDiv);
-                        }
-                    });
-
-                    // Badge statut
+                    // Statut badge
                     const statusEl = card.querySelector('.access-status .status-badge');
                     if (statusEl) {
-                        statusEl.classList.remove('active', 'locked', 'upgrade');
-                        if (hasAccess) {
+                        statusEl.classList.remove('active', 'locked');
+                        if (isUnlocked) {
                             statusEl.classList.add('active');
-                            statusEl.innerHTML = `<i class="fas fa-check-circle"></i> Accès complet`;
-                            statusEl.style.cursor = 'default';
-                            statusEl.onclick = null;
+                            statusEl.innerHTML = `<i class="fas fa-check-circle"></i> Espace débloqué`;
                         } else {
                             statusEl.classList.add('locked');
                             statusEl.innerHTML = `<i class="fas fa-lock"></i> Verrouillé`;
-                            statusEl.style.cursor = 'default';
-                            statusEl.onclick = null;
                         }
+                    }
+
+                    // Lock / Unlock card
+                    if (isUnlocked) {
+                        card.classList.remove('locked-card');
+                        // Mettre à jour les formations (achats)
+                        updateFormationsInCard(card);
+                    } else {
+                        card.classList.add('locked-card');
                     }
 
                     // Icône cadenas
                     const lockIcon = card.querySelector('.card-header .lock-icon');
                     if (lockIcon) {
-                        if (hasAccess) {
+                        if (isUnlocked) {
                             lockIcon.innerHTML = `<i class="fas fa-unlock-alt" style="color:var(--gold);"></i>`;
                             lockIcon.style.opacity = '1';
                         } else {
@@ -1340,7 +1374,41 @@
                             lockIcon.style.opacity = '0.4';
                         }
                     }
-                    card.classList.toggle('locked-card', !hasAccess);
+                });
+            }
+
+            // ---- METTRE À JOUR LES FORMATIONS DANS UNE CARTE DÉBLOQUÉE ----
+            function updateFormationsInCard(card) {
+                const items = card.querySelectorAll('.formation-item');
+                items.forEach(item => {
+                    const id = item.dataset.id;
+                    const btn = item.querySelector('.btn-buy');
+                    const priceSpan = item.querySelector('.item-price');
+
+                    if (isPurchased(id)) {
+                        // Acheté
+                        if (btn) {
+                            btn.textContent = '✅ Acheté';
+                            btn.classList.add('purchased');
+                            btn.disabled = true;
+                        }
+                        // On peut enlever le verrou si existant
+                        const overlay = item.querySelector('.lock-overlay');
+                        if (overlay) overlay.remove();
+                        item.classList.remove('locked');
+                    } else {
+                        // Non acheté -> on affiche le bouton "Acheter"
+                        if (btn) {
+                            btn.textContent = 'Acheter';
+                            btn.classList.remove('purchased');
+                            btn.disabled = false;
+                        }
+                        // On enlève un éventuel overlay d'achat
+                        const overlay = item.querySelector('.lock-overlay');
+                        if (overlay) overlay.remove();
+                        // On s'assure que l'item n'est pas locké par l'espace (il ne l'est pas car carte débloquée)
+                        item.classList.remove('locked');
+                    }
                 });
             }
 
@@ -1357,7 +1425,7 @@
                     }
                     saveSession({ email: currentUser.email });
                     applyUserState();
-                    codeStatus.textContent = '✅ Code validé !';
+                    codeStatus.textContent = '✅ Espace débloqué !';
                     codeStatus.className = 'code-status success';
                     codeInput.value = '';
                 } else {
@@ -1366,10 +1434,9 @@
                 }
             }
 
-            // ---- CHANGER DE CODE (réinitialiser) ----
+            // ---- CHANGER DE CODE ----
             function resetCode() {
                 if (!currentUser) return;
-                // Supprimer le tier
                 currentUser.tier = null;
                 const users = getUsers();
                 if (users[currentUser.email]) {
@@ -1378,10 +1445,33 @@
                 }
                 saveSession({ email: currentUser.email });
                 applyUserState();
-                // Réafficher la zone de saisie
                 codeInputArea.style.display = 'flex';
                 codeActiveArea.style.display = 'none';
                 codeInput.focus();
+            }
+
+            // ---- GESTION DES ACHATS (simulation) ----
+            function handleBuy(btn) {
+                const item = btn.closest('.formation-item');
+                if (!item) return;
+                const id = item.dataset.id;
+                const price = item.querySelector('.item-price')?.textContent || '0€';
+
+                if (isPurchased(id)) {
+                    alert('Cette formation est déjà achetée.');
+                    return;
+                }
+
+                // Simulation de paiement
+                if (confirm(`💳 Acheter la formation pour ${price} ? (Simulation)`)) {
+                    // Simuler un paiement réussi
+                    savePurchase(id);
+                    // Mettre à jour l'UI
+                    btn.textContent = '✅ Acheté';
+                    btn.classList.add('purchased');
+                    btn.disabled = true;
+                    alert('🎉 Paiement accepté ! La formation est débloquée.');
+                }
             }
 
             // ---- AUTH ----
@@ -1413,7 +1503,7 @@
                         return;
                     }
                     if (users[email]) {
-                        showError('Un compte existe déjà avec cet email.');
+                        showError('Un compte existe déjà.');
                         return;
                     }
                     users[email] = { name, password, tier: null };
@@ -1435,7 +1525,7 @@
                 isLoginMode = (mode === 'login');
                 if (isLoginMode) {
                     modalTitle.textContent = 'Connexion';
-                    modalSub.textContent = 'Accédez à votre espace fidélité';
+                    modalSub.textContent = 'Accédez à votre espace';
                     modalSubmit.textContent = 'Se connecter';
                     toggleText.textContent = 'Pas encore de compte ?';
                     toggleLink.textContent = "S'inscrire";
@@ -1443,7 +1533,7 @@
                     inputName.value = '';
                 } else {
                     modalTitle.textContent = 'Créer un compte';
-                    modalSub.textContent = 'Rejoignez l\'espace fidélité';
+                    modalSub.textContent = 'Rejoignez l\'espace';
                     modalSubmit.textContent = 'S\'inscrire';
                     toggleText.textContent = 'Déjà un compte ?';
                     toggleLink.textContent = 'Se connecter';
@@ -1505,16 +1595,23 @@
                 applyUserState();
             });
 
-            // Validation du code
+            // Code
             btnValidateCode.addEventListener('click', () => {
                 validateCode(codeInput.value);
             });
             codeInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') validateCode(codeInput.value);
             });
-
-            // Changer de code
             btnChangeCode.addEventListener('click', resetCode);
+
+            // ACHATS (délégation d'événements)
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.btn-buy');
+                if (btn && !btn.classList.contains('purchased')) {
+                    e.preventDefault();
+                    handleBuy(btn);
+                }
+            });
 
             // ---- INIT ----
             const session = getSession();
@@ -1535,13 +1632,12 @@
                     const tier = card ? card.dataset.tier : 'unknown';
                     const info = tierInfo[tier];
                     const label = info ? info.label : tier;
-                    const hasAccess = activeTier && tierOrder.indexOf(tier) <= tierOrder.indexOf(activeTier);
-                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${hasAccess ? 'débloqué' : 'verrouillé'})`);
+                    const unlocked = (activeTier === tier);
+                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${unlocked ? 'débloqué' : 'verrouillé'})`);
                 });
             });
 
         })();
     </script>
-
 </body>
 </html>
