@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Espace Fidélité · MyLoyalty</title>
+    <!-- Font Awesome 6 (gratuit) pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts : Inter + Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+               RESET & BASE (repris du précédent avec modifications)
+            ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #0f1a2e;
+            --primary-light: #1a2c4a;
+            --primary-dark: #070e19;
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --gold-gradient: linear-gradient(135deg, #c9a84c, #f0dfb0);
+            --bg-body: #f4f6fb;
+            --card-bg: #ffffff;
+            --text-primary: #0f1a2e;
+            --text-secondary: #4a5568;
+            --text-muted: #8896ab;
+            --shadow: 0 12px 40px rgba(15, 26, 46, 0.08);
+            --shadow-hover: 0 20px 60px rgba(15, 26, 46, 0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Playfair Display', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .app {
+            max-width: 1360px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            padding: 32px 40px 48px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        /* ============================================================
+               EN-TÊTE AVEC AUTH
+            ============================================================ */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 24px;
+            border-bottom: 2px solid rgba(15, 26, 46, 0.05);
+            margin-bottom: 32px;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--gold-gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        }
+
+        .brand h1 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .brand span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+            display: block;
+            -webkit-text-fill-color: var(--text-muted);
+            background: none;
+            letter-spacing: 0.2px;
+        }
+
+        /* --- Contrôles d'authentification --- */
+        .auth-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .auth-controls .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-body);
+            padding: 6px 16px 6px 12px;
+            border-radius: 60px;
+        }
+
+        .auth-controls .user-info .avatar-sm {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .auth-controls .user-info .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .auth-controls .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .auth-controls .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .auth-controls .btn-primary {
+            background: var(--primary);
+            border: none;
+            color: #fff;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .auth-controls .btn-primary:hover {
+            background: var(--primary-light);
+            transform: scale(1.02);
+        }
+
+        .auth-controls .btn-google {
+            background: #fff;
+            border: 1px solid #dadce0;
+            color: #3c4043;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auth-controls .btn-google:hover {
+            background: #f8f9fa;
+            border-color: #bdc1c6;
+        }
+
+        .auth-controls .btn-logout {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: var(--transition);
+        }
+
+        .auth-controls .btn-logout:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+
+        /* ============================================================
+               BANNIÈRE UTILISATEUR + CODE
+            ============================================================ */
+        .user-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-sm);
+            padding: 24px 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            color: #fff;
+            gap: 16px;
+        }
+
+        .user-banner .greeting {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-banner .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+        }
+
+        .user-banner .greeting-text h2 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        .user-banner .greeting-text p {
+            font-size: 14px;
+            opacity: 0.75;
+            margin-top: 2px;
+        }
+
+        .user-banner .plan-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 10px 24px 10px 20px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+
+        .user-banner .plan-badge .plan-name {
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
+        .user-banner .plan-badge .plan-name i {
+            margin-right: 8px;
+            color: var(--gold-light);
+        }
+
+        .user-banner .plan-badge .plan-level {
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 12px;
+            border-radius: 40px;
+        }
+
+        /* --- Zone de saisie du code --- */
+        .code-section {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-sm);
+            padding: 16px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 8px;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+
+        .code-section .code-label {
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .code-section .code-label i {
+            color: var(--gold-light);
+        }
+
+        .code-section .code-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .code-section .code-input-group input {
+            padding: 10px 18px;
+            border-radius: 60px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            min-width: 200px;
+            font-weight: 500;
+            color: var(--primary);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .code-section .code-input-group input:focus {
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.4);
+        }
+
+        .code-section .code-input-group .btn-validate {
+            background: var(--gold-gradient);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .code-section .code-input-group .btn-validate:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+        }
+
+        .code-section .code-status {
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .code-section .code-status.success {
+            background: #2e7d5e;
+            color: #e6f7ee;
+        }
+        .code-section .code-status.error {
+            background: #a04444;
+            color: #fde8e8;
+        }
+
+        /* ============================================================
+               GRILLE DES 3 ESPACES (identique)
+            ============================================================ */
+        .spaces-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .space-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(15, 26, 46, 0.06);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(15, 26, 46, 0.02);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .space-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(201, 168, 76, 0.15);
+        }
+
+        .space-card .card-header {
+            padding: 20px 22px 14px;
+            border-bottom: 1px solid rgba(15, 26, 46, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .space-card .card-header .space-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .space-card .card-header .space-title .icon-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .space-card .card-header .space-title h3 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .space-card .card-header .space-title .sub {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 1px;
+        }
+
+        .space-card .card-header .lock-icon {
+            font-size: 18px;
+            color: var(--text-muted);
+            opacity: 0.3;
+            transition: var(--transition);
+        }
+
+        .space-card .card-body {
+            padding: 16px 22px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .space-card .content-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .space-card .content-group .group-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .space-card .content-group .group-label i {
+            font-size: 13px;
+        }
+
+        .space-card .content-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: var(--bg-body);
+            transition: var(--transition);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .space-card .content-item .item-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+            background: rgba(15, 26, 46, 0.04);
+            color: var(--text-muted);
+        }
+
+        .space-card .content-item .item-title {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .space-card .content-item .item-tag {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 10px;
+            border-radius: 40px;
+            background: rgba(15, 26, 46, 0.04);
+            color: var(--text-muted);
+        }
+
+        .space-card .content-item.locked {
+            opacity: 0.5;
+            filter: grayscale(0.3);
+            cursor: not-allowed;
+        }
+
+        .space-card .content-item.locked .lock-overlay {
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(1px);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 16px;
+            color: var(--text-muted);
+            font-size: 14px;
+            gap: 6px;
+        }
+
+        .space-card .content-item.locked .lock-overlay i {
+            font-size: 13px;
+        }
+
+        .space-card .access-status {
+            padding: 12px 22px 18px;
+            border-top: 1px solid rgba(15, 26, 46, 0.04);
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            background: rgba(15, 26, 46, 0.01);
+            transition: var(--transition);
+        }
+
+        .space-card .access-status .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .space-card .access-status .status-badge.active {
+            background: #e6f7ee;
+            color: #0b6e3f;
+        }
+
+        .space-card .access-status .status-badge.locked {
+            background: #f7f0f0;
+            color: #a04444;
+        }
+
+        .space-card .access-status .status-badge.upgrade {
+            background: #f7f3e6;
+            color: #8a6d1b;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .space-card .access-status .status-badge.upgrade:hover {
+            background: #ede3c6;
+            transform: scale(1.02);
+        }
+
+        /* --- Couleurs par tier --- */
+        .tier-bronze .icon-circle {
+            background: #ece7dc;
+            color: #a68b5b;
+        }
+        .tier-bronze .card-header .space-title h3 {
+            color: #7a653b;
+        }
+        .tier-bronze .card-header {
+            border-bottom-color: rgba(166, 139, 91, 0.15);
+        }
+        .tier-bronze .content-item .item-icon {
+            background: #f3efe6;
+            color: #a68b5b;
+        }
+
+        .tier-silver .icon-circle {
+            background: #e8edf2;
+            color: #6b7b8f;
+        }
+        .tier-silver .card-header .space-title h3 {
+            color: #3d4e62;
+        }
+        .tier-silver .card-header {
+            border-bottom-color: rgba(107, 123, 143, 0.15);
+        }
+        .tier-silver .content-item .item-icon {
+            background: #eef2f6;
+            color: #6b7b8f;
+        }
+
+        .tier-gold .icon-circle {
+            background: #f7f0df;
+            color: #b8942b;
+        }
+        .tier-gold .card-header .space-title h3 {
+            color: #8a6d1b;
+        }
+        .tier-gold .card-header {
+            border-bottom-color: rgba(201, 168, 76, 0.2);
+        }
+        .tier-gold .content-item .item-icon {
+            background: #f7f0df;
+            color: #b8942b;
+        }
+
+        .space-card .card-footer {
+            padding: 6px 22px 18px;
+            text-align: right;
+        }
+
+        .space-card .card-footer .see-all {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .space-card .card-footer .see-all:hover {
+            color: var(--primary);
+        }
+
+        .space-card .card-footer .see-all:hover i {
+            transform: translateX(3px);
+        }
+
+        .space-card.locked-card {
+            opacity: 0.7;
+            filter: grayscale(0.15);
+            cursor: default;
+        }
+        .space-card.locked-card .content-item.locked .lock-overlay {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
+        /* ============================================================
+               MODAL LOGIN / REGISTER
+            ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 26, 46, 0.6);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: #fff;
+            max-width: 480px;
+            width: 100%;
+            border-radius: var(--radius);
+            padding: 36px 32px 32px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+            transform: scale(0.95);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1);
+        }
+
+        .modal .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        .modal h2 {
+            font-family: var(--font-display);
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .modal .subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .modal .form-group {
+            margin-bottom: 18px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 4px;
+            color: var(--text-secondary);
+        }
+
+        .modal .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: var(--transition);
+            background: #f8fafc;
+        }
+
+        .modal .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+        }
+
+        .modal .btn-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 60px;
+            background: var(--gold-gradient);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 8px;
+        }
+
+        .modal .btn-submit:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(201, 168, 76, 0.25);
+        }
+
+        .modal .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 20px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .modal .divider hr {
+            flex: 1;
+            border: none;
+            border-top: 1.5px solid #e2e8f0;
+        }
+
+        .modal .btn-google-modal {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #dadce0;
+            border-radius: 60px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal .btn-google-modal:hover {
+            background: #f8f9fa;
+            border-color: #bdc1c6;
+        }
+
+        .modal .toggle-auth {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .modal .toggle-auth a {
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .modal .error-msg {
+            background: #fde8e8;
+            color: #a04444;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .modal .error-msg.show {
+            display: block;
+        }
+
+        /* ============================================================
+               RESPONSIVE
+            ============================================================ */
+        @media (max-width: 1100px) {
+            .app {
+                padding: 24px 24px 36px;
+            }
+            .spaces-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 780px) {
+            body {
+                padding: 12px;
+            }
+            .app {
+                padding: 16px 16px 28px;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .brand h1 {
+                font-size: 22px;
+            }
+            .auth-controls {
+                justify-content: center;
+            }
+            .user-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 18px 20px;
+            }
+            .user-banner .plan-badge {
+                width: 100%;
+                justify-content: center;
+                padding: 8px 16px;
+            }
+            .code-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .code-section .code-input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .code-section .code-input-group input {
+                min-width: unset;
+            }
+            .spaces-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .space-card .card-header {
+                padding: 16px 18px 12px;
+            }
+            .space-card .card-body {
+                padding: 12px 18px 16px;
+            }
+            .space-card .access-status {
+                padding: 10px 18px 14px;
+            }
+            .space-card .card-footer {
+                padding: 2px 18px 14px;
+            }
+            .brand-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
+            }
+            .modal {
+                padding: 24px 18px;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .user-banner .greeting-text h2 {
+                font-size: 17px;
+            }
+            .user-banner .avatar {
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
+            }
+            .space-card .content-item {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+            .space-card .content-item .item-tag {
+                font-size: 9px;
+                padding: 1px 8px;
+            }
+            .auth-controls .btn-outline,
+            .auth-controls .btn-primary,
+            .auth-controls .btn-google {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+        }
+
+        /* ============================================================
+               ANIMATION & DIVERS
+            ============================================================ */
+        .space-card {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .space-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+        .space-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+        .space-card:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-note {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(15, 26, 46, 0.05);
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 20px;
+        }
+        .footer-note i {
+            color: var(--gold);
+            margin-right: 4px;
+        }
+        .footer-note strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .text-gold {
+            color: var(--gold);
+        }
+        .fw-600 {
+            font-weight: 600;
+        }
+        .mt-2 {
+            margin-top: 8px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .inline-flex {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app" id="app">
+
+        <!-- ==========================================================
+        EN-TÊTE AVEC AUTH
+        ========================================================== -->
+        <header class="header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div>
+                    <h1>Espace Fidélité</h1>
+                    <span>Contenus exclusifs · Formations · Publications</span>
+                </div>
+            </div>
+
+            <!-- Contrôles d'authentification -->
+            <div class="auth-controls" id="authControls">
+                <!-- État déconnecté -->
+                <div id="authNotLogged" class="inline-flex" style="gap:10px;">
+                    <button class="btn-outline" id="btnLogin">Connexion</button>
+                    <button class="btn-primary" id="btnRegister">S'inscrire</button>
+                    <button class="btn-google" id="btnGoogle"><i class="fab fa-google"></i> Google</button>
+                </div>
+                <!-- État connecté -->
+                <div id="authLogged" class="hidden inline-flex" style="gap:8px;">
+                    <div class="user-info">
+                        <span class="avatar-sm" id="userAvatarSmall">M</span>
+                        <span class="user-name" id="userNameDisplay">Marie</span>
+                        <button class="btn-logout" id="btnLogout">Déconnexion</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==========================================================
+        BANNIÈRE UTILISATEUR + CODE
+        ========================================================== -->
+        <div class="user-banner" id="userBanner">
+            <div class="greeting">
+                <div class="avatar" id="userAvatar">M</div>
+                <div class="greeting-text">
+                    <h2 id="userName">Bonjour, invité</h2>
+                    <p id="userSub">Connectez-vous pour accéder à votre espace</p>
+                </div>
+            </div>
+            <div class="plan-badge" id="planBadge">
+                <span class="plan-name">
+                    <i class="fas fa-gem"></i>
+                    <span id="planLabel">--</span>
+                </span>
+                <span class="plan-level" id="planLevel">--</span>
+            </div>
+        </div>
+
+        <!-- Zone de saisie du code (visible seulement si connecté et pas encore de code) -->
+        <div class="code-section" id="codeSection">
+            <span class="code-label"><i class="fas fa-key"></i> Activez votre espace avec votre code</span>
+            <div class="code-input-group">
+                <input type="text" id="codeInput" placeholder="Ex: BRONZE123, SILVER456, GOLD789" />
+                <button class="btn-validate" id="btnValidateCode">Valider</button>
+                <span class="code-status" id="codeStatus"></span>
+            </div>
+        </div>
+
+        <!-- ==========================================================
+        GRILLE DES 3 ESPACES
+        ========================================================== -->
+        <div class="spaces-grid" id="spacesGrid">
+
+            <!-- ESPACE 1 – DÉCOUVERTE (BRONZE) -->
+            <div class="space-card tier-bronze" data-tier="bronze" id="cardBronze">
+                <div class="card-header">
+                    <div class="space-title">
+                        <div class="icon-circle"><i class="fas fa-compass"></i></div>
+                        <div>
+                            <h3>Découverte</h3>
+                            <span class="sub">Niveau Bronze</span>
+                        </div>
+                    </div>
+                    <span class="lock-icon"><i class="fas fa-lock"></i></span>
+                </div>
+                <div class="card-body">
+                    <div class="content-group">
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Les bases du marketing</span><span class="item-tag">2h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Gestion de projet agile</span><span class="item-tag">1h30</span></div>
+                    </div>
+                    <div class="content-group">
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Guide du débutant</span><span class="item-tag">PDF</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">5 erreurs à éviter</span><span class="item-tag">Article</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Checklist hebdomadaire</span><span class="item-tag">Checklist</span></div>
+                    </div>
+                </div>
+                <div class="access-status">
+                    <span class="status-badge locked" id="statusBronze"><i class="fas fa-lock"></i> Verrouillé</span>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- ESPACE 2 – PRO (SILVER) -->
+            <div class="space-card tier-silver" data-tier="silver" id="cardSilver">
+                <div class="card-header">
+                    <div class="space-title">
+                        <div class="icon-circle"><i class="fas fa-briefcase"></i></div>
+                        <div>
+                            <h3>Professionnel</h3>
+                            <span class="sub">Niveau Silver</span>
+                        </div>
+                    </div>
+                    <span class="lock-icon"><i class="fas fa-lock"></i></span>
+                </div>
+                <div class="card-body">
+                    <div class="content-group">
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Stratégie digitale avancée</span><span class="item-tag">3h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Data &amp; analyse</span><span class="item-tag">2h30</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Leadership &amp; équipes</span><span class="item-tag">2h</span></div>
+                    </div>
+                    <div class="content-group">
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Rapport annuel 2025</span><span class="item-tag">PDF</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Étude de cas : growth</span><span class="item-tag">Étude</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Template stratégique</span><span class="item-tag">Template</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Webinaire replay</span><span class="item-tag">Vidéo</span></div>
+                    </div>
+                </div>
+                <div class="access-status">
+                    <span class="status-badge locked" id="statusSilver"><i class="fas fa-lock"></i> Verrouillé</span>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- ESPACE 3 – EXPERT (GOLD) -->
+            <div class="space-card tier-gold" data-tier="gold" id="cardGold">
+                <div class="card-header">
+                    <div class="space-title">
+                        <div class="icon-circle"><i class="fas fa-star"></i></div>
+                        <div>
+                            <h3>Expert</h3>
+                            <span class="sub">Niveau Gold</span>
+                        </div>
+                    </div>
+                    <span class="lock-icon"><i class="fas fa-lock"></i></span>
+                </div>
+                <div class="card-body">
+                    <div class="content-group">
+                        <div class="group-label"><i class="fas fa-graduation-cap"></i> Formations</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">IA &amp; transformation</span><span class="item-tag">4h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Finance pour non-financiers</span><span class="item-tag">3h</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Innovation &amp; disruption</span><span class="item-tag">2h30</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-play"></i></span><span class="item-title">Mentorat exclusif</span><span class="item-tag">1h</span></div>
+                    </div>
+                    <div class="content-group">
+                        <div class="group-label"><i class="fas fa-newspaper"></i> Publications</div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Livre blanc : IA &amp; stratégie</span><span class="item-tag">PDF</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Analyse de marché 2026</span><span class="item-tag">Étude</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Boîte à outils du leader</span><span class="item-tag">Kit</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Podcast : tendances</span><span class="item-tag">Audio</span></div>
+                        <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Accès anticipé aux nouveautés</span><span class="item-tag">Premium</span></div>
+                    </div>
+                </div>
+                <div class="access-status">
+                    <span class="status-badge locked" id="statusGold"><i class="fas fa-lock"></i> Verrouillé</span>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div><!-- /spaces-grid -->
+
+        <!-- ==========================================================
+        PIED DE PAGE
+        ========================================================== -->
+        <div class="footer-note">
+            <span><i class="fas fa-shield-alt"></i> <strong>3 espaces</strong> · chaque formule donne accès à son contenu dédié</span>
+            <span><i class="fas fa-key"></i> <strong>Codes d'activation</strong> : BRONZE123 · SILVER456 · GOLD789</span>
+            <span><i class="fas fa-user-plus"></i> Créez un compte et entrez votre code pour débloquer</span>
+        </div>
+
+    </div><!-- /app -->
+
+    <!-- ==========================================================
+    MODAL LOGIN / REGISTER
+    ========================================================== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="authModal">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h2 id="modalTitle">Connexion</h2>
+            <p class="subtitle" id="modalSub">Accédez à votre espace fidélité</p>
+
+            <div class="error-msg" id="modalError"></div>
+
+            <form id="authForm">
+                <div id="nameField" class="form-group hidden">
+                    <label>Nom complet</label>
+                    <input type="text" id="inputName" placeholder="Votre nom" />
+                </div>
+                <div class="form-group">
+                    <label>Adresse email</label>
+                    <input type="email" id="inputEmail" placeholder="exemple@mail.com" required />
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="inputPassword" placeholder="••••••••" required />
+                </div>
+                <button type="submit" class="btn-submit" id="modalSubmit">Se connecter</button>
+            </form>
+
+            <div class="divider">
+                <hr /> ou <hr />
+            </div>
+
+            <button class="btn-google-modal" id="modalGoogle"><i class="fab fa-google"></i> Continuer avec Google</button>
+
+            <div class="toggle-auth">
+                <span id="toggleText">Pas encore de compte ?</span>
+                <a id="toggleLink">S'inscrire</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+    JAVASCRIPT – AUTH + CODE + GESTION DES TIERS
+    ========================================================== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---- ÉLÉMENTS DOM ----
+            const authNotLogged = document.getElementById('authNotLogged');
+            const authLogged = document.getElementById('authLogged');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userAvatarSmall = document.getElementById('userAvatarSmall');
+            const btnLogin = document.getElementById('btnLogin');
+            const btnRegister = document.getElementById('btnRegister');
+            const btnGoogle = document.getElementById('btnGoogle');
+            const btnLogout = document.getElementById('btnLogout');
+
+            // Banner
+            const userAvatar = document.getElementById('userAvatar');
+            const userName = document.getElementById('userName');
+            const userSub = document.getElementById('userSub');
+            const planLabel = document.getElementById('planLabel');
+            const planLevel = document.getElementById('planLevel');
+
+            // Code
+            const codeSection = document.getElementById('codeSection');
+            const codeInput = document.getElementById('codeInput');
+            const btnValidateCode = document.getElementById('btnValidateCode');
+            const codeStatus = document.getElementById('codeStatus');
+
+            // Modal
+            const modalOverlay = document.getElementById('modalOverlay');
+            const closeModal = document.getElementById('closeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSub = document.getElementById('modalSub');
+            const modalError = document.getElementById('modalError');
+            const authForm = document.getElementById('authForm');
+            const inputName = document.getElementById('inputName');
+            const inputEmail = document.getElementById('inputEmail');
+            const inputPassword = document.getElementById('inputPassword');
+            const modalSubmit = document.getElementById('modalSubmit');
+            const modalGoogle = document.getElementById('modalGoogle');
+            const toggleText = document.getElementById('toggleText');
+            const toggleLink = document.getElementById('toggleLink');
+            const nameField = document.getElementById('nameField');
+
+            // Cartes
+            const cards = document.querySelectorAll('.space-card');
+            const statusBadges = {
+                bronze: document.getElementById('statusBronze'),
+                silver: document.getElementById('statusSilver'),
+                gold: document.getElementById('statusGold')
+            };
+
+            // ---- ÉTATS ----
+            let currentUser = null; // { email, name, tier? }
+            let activeTier = null; // 'bronze', 'silver', 'gold' ou null
+            let isLoginMode = true;
+
+            // ---- CODES VALIDES ----
+            const codeMap = {
+                'BRONZE123': 'bronze',
+                'SILVER456': 'silver',
+                'GOLD789': 'gold'
+            };
+
+            // ---- TIER MAP pour affichage ----
+            const tierInfo = {
+                bronze: { label: 'Découverte', level: 'BRONZE', icon: 'fa-compass' },
+                silver: { label: 'Professionnel', level: 'SILVER', icon: 'fa-briefcase' },
+                gold: { label: 'Expert', level: 'GOLD', icon: 'fa-star' }
+            };
+
+            // ---- GESTION STOCKAGE LOCAL ----
+            function getUsers() {
+                try {
+                    return JSON.parse(localStorage.getItem('loyaltyUsers')) || {};
+                } catch { return {}; }
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('loyaltyUsers', JSON.stringify(users));
+            }
+
+            function getSession() {
+                try {
+                    return JSON.parse(localStorage.getItem('loyaltySession')) || null;
+                } catch { return null; }
+            }
+
+            function saveSession(session) {
+                localStorage.setItem('loyaltySession', JSON.stringify(session));
+            }
+
+            function clearSession() {
+                localStorage.removeItem('loyaltySession');
+            }
+
+            // ---- INIT SESSION ----
+            function loadSession() {
+                const session = getSession();
+                if (session && session.email) {
+                    const users = getUsers();
+                    const user = users[session.email];
+                    if (user) {
+                        currentUser = user;
+                        currentUser.email = session.email;
+                        applyUserState();
+                        return;
+                    }
+                }
+                // Pas de session valide
+                currentUser = null;
+                applyUserState();
+            }
+
+            // ---- APPLIQUER L'ÉTAT UTILISATEUR ----
+            function applyUserState() {
+                if (currentUser) {
+                    // Connecté
+                    authNotLogged.classList.add('hidden');
+                    authLogged.classList.remove('hidden');
+                    const displayName = currentUser.name || currentUser.email.split('@')[0];
+                    userNameDisplay.textContent = displayName;
+                    userAvatarSmall.textContent = displayName.charAt(0).toUpperCase();
+
+                    // Banner
+                    userAvatar.textContent = displayName.charAt(0).toUpperCase();
+                    userName.textContent = `Bonjour, ${displayName}`;
+                    userSub.textContent = currentUser.tier ? `Votre niveau : ${tierInfo[currentUser.tier].label}` :
+                        'Entrez votre code d’activation pour débloquer votre espace.';
+
+                    // Plan badge
+                    if (currentUser.tier) {
+                        const info = tierInfo[currentUser.tier];
+                        planLabel.innerHTML = `<i class="fas ${info.icon}"></i> ${info.label}`;
+                        planLevel.textContent = info.level;
+                        activeTier = currentUser.tier;
+                        // Cacher la section code
+                        codeSection.style.display = 'none';
+                    } else {
+                        planLabel.textContent = '--';
+                        planLevel.textContent = '--';
+                        activeTier = null;
+                        codeSection.style.display = 'flex';
+                        codeStatus.textContent = '';
+                        codeStatus.className = 'code-status';
+                    }
+
+                    // Mettre à jour les cartes
+                    updateCards();
+                } else {
+                    // Déconnecté
+                    authNotLogged.classList.remove('hidden');
+                    authLogged.classList.add('hidden');
+                    userAvatar.textContent = '?';
+                    userName.textContent = 'Bonjour, invité';
+                    userSub.textContent = 'Connectez-vous pour accéder à votre espace';
+                    planLabel.textContent = '--';
+                    planLevel.textContent = '--';
+                    activeTier = null;
+                    codeSection.style.display = 'none';
+                    updateCards();
+                }
+            }
+
+            // ---- MISE À JOUR DES CARTES (verrouillage / déverrouillage) ----
+            function updateCards() {
+                const tierOrder = ['bronze', 'silver', 'gold'];
+                const activeIndex = activeTier ? tierOrder.indexOf(activeTier) : -1;
+
+                cards.forEach(card => {
+                    const cardTier = card.dataset.tier;
+                    const cardIndex = tierOrder.indexOf(cardTier);
+                    const hasAccess = (activeIndex >= cardIndex);
+
+                    // Contenu
+                    const items = card.querySelectorAll('.content-item');
+                    items.forEach(item => {
+                        item.classList.remove('locked');
+                        const overlay = item.querySelector('.lock-overlay');
+                        if (overlay) overlay.remove();
+                        if (!hasAccess) {
+                            item.classList.add('locked');
+                            const lockDiv = document.createElement('div');
+                            lockDiv.className = 'lock-overlay';
+                            lockDiv.innerHTML = `<i class="fas fa-lock"></i> Verrouillé`;
+                            item.appendChild(lockDiv);
+                        }
+                    });
+
+                    // Badge de statut
+                    const statusEl = card.querySelector('.access-status .status-badge');
+                    if (statusEl) {
+                        statusEl.classList.remove('active', 'locked', 'upgrade');
+                        if (hasAccess) {
+                            statusEl.classList.add('active');
+                            statusEl.innerHTML = `<i class="fas fa-check-circle"></i> Accès complet`;
+                            statusEl.style.cursor = 'default';
+                            statusEl.onclick = null;
+                        } else {
+                            statusEl.classList.add('locked');
+                            statusEl.innerHTML = `<i class="fas fa-lock"></i> Verrouillé`;
+                            statusEl.style.cursor = 'default';
+                            statusEl.onclick = null;
+                        }
+                    }
+
+                    // Icône cadenas
+                    const lockIcon = card.querySelector('.card-header .lock-icon');
+                    if (lockIcon) {
+                        if (hasAccess) {
+                            lockIcon.innerHTML = `<i class="fas fa-unlock-alt" style="color:var(--gold);"></i>`;
+                            lockIcon.style.opacity = '1';
+                        } else {
+                            lockIcon.innerHTML = `<i class="fas fa-lock"></i>`;
+                            lockIcon.style.opacity = '0.4';
+                        }
+                    }
+
+                    card.classList.toggle('locked-card', !hasAccess);
+                });
+            }
+
+            // ---- VALIDATION DU CODE ----
+            function validateCode(code) {
+                const trimmed = code.trim().toUpperCase();
+                const tier = codeMap[trimmed];
+                if (tier) {
+                    // Code valide
+                    if (currentUser) {
+                        currentUser.tier = tier;
+                        // Mettre à jour dans la base users
+                        const users = getUsers();
+                        if (users[currentUser.email]) {
+                            users[currentUser.email].tier = tier;
+                            saveUsers(users);
+                        }
+                        saveSession({ email: currentUser.email });
+                        applyUserState();
+                        codeStatus.textContent = '✅ Code validé !';
+                        codeStatus.className = 'code-status success';
+                        codeInput.value = '';
+                        // Déclencher la mise à jour des cartes
+                        updateCards();
+                    }
+                } else {
+                    codeStatus.textContent = '❌ Code invalide. Essayez BRONZE123, SILVER456 ou GOLD789';
+                    codeStatus.className = 'code-status error';
+                }
+            }
+
+            // ---- AUTH : Connexion / Inscription ----
+            function handleAuthSubmit(e) {
+                e.preventDefault();
+                modalError.classList.remove('show');
+                modalError.textContent = '';
+
+                const email = inputEmail.value.trim();
+                const password = inputPassword.value.trim();
+                const name = inputName.value.trim();
+
+                if (!email || !password) {
+                    showError('Veuillez remplir tous les champs.');
+                    return;
+                }
+
+                const users = getUsers();
+
+                if (isLoginMode) {
+                    // Connexion
+                    const user = users[email];
+                    if (!user || user.password !== password) {
+                        showError('Email ou mot de passe incorrect.');
+                        return;
+                    }
+                    // OK
+                    currentUser = { ...user, email };
+                    saveSession({ email });
+                    closeModalHandler();
+                    applyUserState();
+                } else {
+                    // Inscription
+                    if (!name) {
+                        showError('Veuillez entrer votre nom.');
+                        return;
+                    }
+                    if (users[email]) {
+                        showError('Un compte existe déjà avec cet email.');
+                        return;
+                    }
+                    // Créer
+                    users[email] = { name, password, tier: null };
+                    saveUsers(users);
+                    currentUser = { name, email, tier: null };
+                    saveSession({ email });
+                    closeModalHandler();
+                    applyUserState();
+                }
+            }
+
+            function showError(msg) {
+                modalError.textContent = msg;
+                modalError.classList.add('show');
+            }
+
+            // ---- MODAL ----
+            function openModal(mode) {
+                isLoginMode = (mode === 'login');
+                if (isLoginMode) {
+                    modalTitle.textContent = 'Connexion';
+                    modalSub.textContent = 'Accédez à votre espace fidélité';
+                    modalSubmit.textContent = 'Se connecter';
+                    toggleText.textContent = 'Pas encore de compte ?';
+                    toggleLink.textContent = "S'inscrire";
+                    nameField.classList.add('hidden');
+                    inputName.value = '';
+                } else {
+                    modalTitle.textContent = 'Créer un compte';
+                    modalSub.textContent = 'Rejoignez l\'espace fidélité';
+                    modalSubmit.textContent = 'S\'inscrire';
+                    toggleText.textContent = 'Déjà un compte ?';
+                    toggleLink.textContent = 'Se connecter';
+                    nameField.classList.remove('hidden');
+                }
+                modalError.classList.remove('show');
+                modalError.textContent = '';
+                inputEmail.value = '';
+                inputPassword.value = '';
+                modalOverlay.classList.add('open');
+            }
+
+            function closeModalHandler() {
+                modalOverlay.classList.remove('open');
+            }
+
+            // ---- ÉVÉNEMENTS ----
+            btnLogin.addEventListener('click', () => openModal('login'));
+            btnRegister.addEventListener('click', () => openModal('register'));
+            closeModal.addEventListener('click', closeModalHandler);
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModalHandler();
+            });
+
+            toggleLink.addEventListener('click', () => {
+                isLoginMode = !isLoginMode;
+                openModal(isLoginMode ? 'login' : 'register');
+            });
+
+            authForm.addEventListener('submit', handleAuthSubmit);
+
+            // Google (simulation)
+            btnGoogle.addEventListener('click', () => {
+                // Simuler une connexion Google avec un utilisateur factice
+                const fakeEmail = 'google.user@example.com';
+                const users = getUsers();
+                if (!users[fakeEmail]) {
+                    users[fakeEmail] = { name: 'Utilisateur Google', password: 'google_oauth', tier: null };
+                    saveUsers(users);
+                }
+                currentUser = { ...users[fakeEmail], email: fakeEmail };
+                saveSession({ email: fakeEmail });
+                closeModalHandler();
+                applyUserState();
+            });
+            modalGoogle.addEventListener('click', () => {
+                // Simuler un clic sur le bouton Google dans le modal
+                const fakeEmail = 'google.user@example.com';
+                const users = getUsers();
+                if (!users[fakeEmail]) {
+                    users[fakeEmail] = { name: 'Utilisateur Google', password: 'google_oauth', tier: null };
+                    saveUsers(users);
+                }
+                currentUser = { ...users[fakeEmail], email: fakeEmail };
+                saveSession({ email: fakeEmail });
+                closeModalHandler();
+                applyUserState();
+            });
+
+            btnLogout.addEventListener('click', () => {
+                clearSession();
+                currentUser = null;
+                applyUserState();
+            });
+
+            // Validation du code
+            btnValidateCode.addEventListener('click', () => {
+                validateCode(codeInput.value);
+            });
+            codeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    validateCode(codeInput.value);
+                }
+            });
+
+            // ---- INIT ----
+            loadSession();
+
+            // ---- Rendre les "Voir tout" interactifs ----
+            document.querySelectorAll('.see-all').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const card = this.closest('.space-card');
+                    const tier = card ? card.dataset.tier : 'unknown';
+                    const info = tierInfo[tier];
+                    const label = info ? info.label : tier;
+                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${activeTier && tierOrder.indexOf(tier) <= tierOrder.indexOf(activeTier) ? 'débloqué' : 'verrouillé'})`);
+                });
+            });
+
+            // petite variable pour l'ordre dans les alertes
+            const tierOrder = ['bronze', 'silver', 'gold'];
+
+        })();
+    </script>
+
+</body>
+</html>
