@@ -3,29 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiement Stripe - Packs</title>
-
-<script src="https://js.stripe.com/v3/"></script>
+<title>Packs + Panier</title>
 
 <style>
-body { font-family: Arial; background:#f4f6fb; padding:20px; }
-.container { max-width:800px; margin:auto; background:#fff; padding:20px; border-radius:12px; }
+body {
+    font-family: Arial;
+    background:#f4f6fb;
+    padding:20px;
+}
 
-.pack { display:flex; justify-content:space-between; padding:12px; border:1px solid #ddd; margin-bottom:10px; border-radius:8px; }
+.container {
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+}
+
+.pack {
+    display:flex;
+    justify-content:space-between;
+    padding:12px;
+    border:1px solid #ddd;
+    margin-bottom:10px;
+    border-radius:8px;
+}
 
 button {
     background:#0f1a2e;
-    color:white;
+    color:#fff;
     border:none;
-    padding:10px 16px;
-    border-radius:8px;
+    padding:8px 12px;
+    border-radius:6px;
     cursor:pointer;
 }
 
 button:hover { background:#1a2c4a; }
 
-.cart { margin-top:20px; padding:10px; border-top:2px solid #eee; }
-.total { font-weight:bold; margin-top:10px; }
+.cart {
+    margin-top:20px;
+    border-top:2px solid #eee;
+    padding-top:10px;
+}
+
+.cart-item {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px;
+    background:#f4f6fb;
+    margin-bottom:6px;
+    border-radius:6px;
+}
+
+.total {
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.btn-remove {
+    background:transparent;
+    border:none;
+    color:#a04444;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.btn-remove:hover {
+    transform:scale(1.2);
+    color:red;
+}
 </style>
 
 </head>
@@ -34,34 +81,39 @@ button:hover { background:#1a2c4a; }
 
 <div class="container">
 
-<h2>🛒 Packs disponibles</h2>
+<h2>🛒 Packs</h2>
 
 <div class="pack">
     <span>🥉 Bronze - 10€</span>
-    <button onclick="add('bronze')">Ajouter</button>
+    <button onclick="addToCart('bronze')">Ajouter</button>
 </div>
 
 <div class="pack">
     <span>🥈 Silver - 20€</span>
-    <button onclick="add('silver')">Ajouter</button>
+    <button onclick="addToCart('silver')">Ajouter</button>
 </div>
 
 <div class="pack">
     <span>🥇 Gold - 30€</span>
-    <button onclick="add('gold')">Ajouter</button>
+    <button onclick="addToCart('gold')">Ajouter</button>
 </div>
 
 <div class="cart">
-    <h3>Panier</h3>
-    <div id="cart"></div>
-    <div class="total" id="total">Total : 0€</div>
 
-    <button onclick="checkout()">💳 Payer avec Stripe</button>
+<h3>Panier</h3>
+
+<div id="cart"></div>
+
+<div class="total" id="total">Total : 0€</div>
+
+<button onclick="checkout()">💳 Payer Stripe</button>
+
 </div>
 
 </div>
 
 <script>
+// -------------------- DATA --------------------
 const prices = {
     bronze: 10,
     silver: 20,
@@ -70,11 +122,21 @@ const prices = {
 
 let cart = [];
 
-function add(item) {
-    if (!cart.includes(item)) cart.push(item);
+// -------------------- ADD --------------------
+function addToCart(item) {
+    if (!cart.includes(item)) {
+        cart.push(item);
+        render();
+    }
+}
+
+// -------------------- REMOVE --------------------
+function removeFromCart(item) {
+    cart = cart.filter(t => t !== item);
     render();
 }
 
+// -------------------- RENDER --------------------
 function render() {
     const cartDiv = document.getElementById("cart");
     cartDiv.innerHTML = "";
@@ -83,23 +145,32 @@ function render() {
 
     cart.forEach(item => {
         total += prices[item];
-        cartDiv.innerHTML += `<div>${item} - ${prices[item]}€</div>`;
+
+        cartDiv.innerHTML += `
+            <div class="cart-item">
+                <span>${item} - ${prices[item]}€</span>
+                <button class="btn-remove" onclick="removeFromCart('${item}')">❌</button>
+            </div>
+        `;
     });
 
     document.getElementById("total").innerText = "Total : " + total + "€";
 }
 
+// -------------------- STRIPE CHECKOUT --------------------
 async function checkout() {
-    if (cart.length === 0) return alert("Panier vide");
+    if (cart.length === 0) {
+        alert("Panier vide");
+        return;
+    }
 
+    // 👉 backend requis
     const res = await fetch("http://localhost:3000/create-checkout-session", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             cart,
-            userEmail: "user@test.com"
+            userEmail: "test@test.com"
         })
     });
 
@@ -107,8 +178,13 @@ async function checkout() {
 
     if (data.url) {
         window.location.href = data.url;
+    } else {
+        alert("Erreur Stripe");
     }
 }
+
+// init
+render();
 </script>
 
 </body>
