@@ -401,10 +401,17 @@
             gap: 10px;
         }
         .pack-purchase .pack-price {
-            font-weight: 700;
-            font-size: 18px;
+            font-weight: 800;
+            font-size: 22px;
             color: var(--primary);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .pack-purchase .pack-price i {
+            color: var(--gold);
+            font-size: 18px;
         }
         .pack-purchase .action-row {
             display: flex;
@@ -428,6 +435,10 @@
             background: #fff;
             box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
         }
+        .pack-purchase .action-row input.code-input:disabled {
+            background: #edf2f7;
+            cursor: not-allowed;
+        }
         .pack-purchase .action-row .btn-unlock-code {
             background: #e2e8f0;
             border: none;
@@ -439,11 +450,12 @@
             cursor: pointer;
             transition: var(--transition);
         }
-        .pack-purchase .action-row .btn-unlock-code:hover {
+        .pack-purchase .action-row .btn-unlock-code:hover:not(:disabled) {
             background: #d0d7e2;
         }
-        .pack-purchase .action-row .btn-unlock-code:active {
-            transform: scale(0.96);
+        .pack-purchase .action-row .btn-unlock-code:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .pack-purchase .action-row .btn-buy-pack {
             background: var(--gold-gradient);
@@ -456,9 +468,13 @@
             cursor: pointer;
             transition: var(--transition);
         }
-        .pack-purchase .action-row .btn-buy-pack:hover {
+        .pack-purchase .action-row .btn-buy-pack:hover:not(:disabled) {
             transform: scale(1.03);
             box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        }
+        .pack-purchase .action-row .btn-buy-pack:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .pack-purchase .action-row .btn-buy-pack.purchased,
         .pack-purchase .action-row .btn-unlock-code.purchased {
@@ -466,6 +482,7 @@
             color: #fff;
             cursor: default;
             pointer-events: none;
+            opacity: 1;
         }
         .pack-purchase .action-row .btn-buy-pack.purchased:hover,
         .pack-purchase .action-row .btn-unlock-code.purchased:hover {
@@ -482,6 +499,10 @@
         }
         .pack-purchase .code-message.error {
             color: #a04444;
+        }
+        .pack-purchase .code-message.info {
+            color: var(--text-muted);
+            font-style: italic;
         }
 
         /* Overlay verrouillage */
@@ -848,13 +869,13 @@
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">5 erreurs à éviter</span><span class="item-tag">Article</span></div>
                     </div>
                     <div class="pack-purchase">
-                        <div class="pack-price">10 €</div>
+                        <div class="pack-price"><i class="fas fa-euro-sign"></i> 10 €</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: BRONZE123)" data-tier="bronze" />
-                            <button class="btn-unlock-code" data-tier="bronze">Déverrouiller avec code</button>
-                            <button class="btn-buy-pack" data-tier="bronze">Acheter</button>
+                            <input type="text" class="code-input" placeholder="Code (ex: BRONZE123)" data-tier="bronze" disabled />
+                            <button class="btn-unlock-code" data-tier="bronze" disabled>Déverrouiller avec code</button>
+                            <button class="btn-buy-pack" data-tier="bronze" disabled>Acheter</button>
                         </div>
-                        <div class="code-message" id="msg-bronze"></div>
+                        <div class="code-message info" id="msg-bronze">Connectez-vous pour agir</div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -890,13 +911,13 @@
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Étude de cas growth</span><span class="item-tag">Étude</span></div>
                     </div>
                     <div class="pack-purchase">
-                        <div class="pack-price">20 €</div>
+                        <div class="pack-price"><i class="fas fa-euro-sign"></i> 20 €</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: SILVER456)" data-tier="silver" />
-                            <button class="btn-unlock-code" data-tier="silver">Déverrouiller avec code</button>
-                            <button class="btn-buy-pack" data-tier="silver">Acheter</button>
+                            <input type="text" class="code-input" placeholder="Code (ex: SILVER456)" data-tier="silver" disabled />
+                            <button class="btn-unlock-code" data-tier="silver" disabled>Déverrouiller avec code</button>
+                            <button class="btn-buy-pack" data-tier="silver" disabled>Acheter</button>
                         </div>
-                        <div class="code-message" id="msg-silver"></div>
+                        <div class="code-message info" id="msg-silver">Connectez-vous pour agir</div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -933,13 +954,13 @@
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Boîte à outils leader</span><span class="item-tag">Kit</span></div>
                     </div>
                     <div class="pack-purchase">
-                        <div class="pack-price">30 €</div>
+                        <div class="pack-price"><i class="fas fa-euro-sign"></i> 30 €</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: GOLD789)" data-tier="gold" />
-                            <button class="btn-unlock-code" data-tier="gold">Déverrouiller avec code</button>
-                            <button class="btn-buy-pack" data-tier="gold">Acheter</button>
+                            <input type="text" class="code-input" placeholder="Code (ex: GOLD789)" data-tier="gold" disabled />
+                            <button class="btn-unlock-code" data-tier="gold" disabled>Déverrouiller avec code</button>
+                            <button class="btn-buy-pack" data-tier="gold" disabled>Acheter</button>
                         </div>
-                        <div class="code-message" id="msg-gold"></div>
+                        <div class="code-message info" id="msg-gold">Connectez-vous pour agir</div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -1055,7 +1076,7 @@
                 localStorage.removeItem('loyaltySession');
             }
 
-            // ---- STOCKAGE DES PACKS DÉBLOQUÉS (par code ou achat) ----
+            // ---- STOCKAGE DES PACKS DÉBLOQUÉS ----
             function getUnlockedPacks() {
                 try { return JSON.parse(localStorage.getItem('loyaltyUnlockedPacks')) || {}; } catch { return {}; }
             }
@@ -1071,7 +1092,8 @@
 
             // ---- APPLIQUER ÉTAT UTILISATEUR ----
             function applyUserState() {
-                if (currentUser) {
+                const isLoggedIn = !!currentUser;
+                if (isLoggedIn) {
                     authNotLogged.classList.add('hidden');
                     authLogged.classList.remove('hidden');
                     const displayName = currentUser.name || currentUser.email.split('@')[0];
@@ -1083,9 +1105,6 @@
                     userSub.textContent = 'Débloquez vos packs avec un code ou un achat.';
                     planLabel.textContent = 'Codes : BRONZE123 · SILVER456 · GOLD789';
                     planLevel.textContent = '';
-
-                    // Mettre à jour les cartes
-                    updateCards();
                 } else {
                     authNotLogged.classList.remove('hidden');
                     authLogged.classList.add('hidden');
@@ -1094,30 +1113,51 @@
                     userSub.textContent = 'Connectez-vous pour débloquer vos packs.';
                     planLabel.textContent = 'Codes : BRONZE123 · SILVER456 · GOLD789';
                     planLevel.textContent = '';
-                    updateCards();
                 }
-            }
 
-            // ---- METTRE À JOUR L'UI DES CARTES ----
-            function updateCards() {
+                // Mettre à jour chaque carte
                 cards.forEach(card => {
                     const tier = card.dataset.tier;
                     const unlocked = isPackUnlocked(tier);
 
-                    // Mise à jour des boutons et champs
-                    const buyBtn = card.querySelector('.btn-buy-pack');
-                    const codeBtn = card.querySelector('.btn-unlock-code');
+                    // Champs et boutons
                     const codeInput = card.querySelector('.code-input');
+                    const codeBtn = card.querySelector('.btn-unlock-code');
+                    const buyBtn = card.querySelector('.btn-buy-pack');
                     const msgEl = card.querySelector('.code-message');
 
-                    if (unlocked) {
-                        // Désactiver tout
-                        if (buyBtn) { buyBtn.textContent = '✅ Acheté'; buyBtn.classList.add('purchased'); buyBtn.disabled = true; }
-                        if (codeBtn) { codeBtn.textContent = '✅ Débloqué'; codeBtn.classList.add('purchased'); codeBtn.disabled = true; }
+                    if (!isLoggedIn) {
+                        // Déconnecté : tout désactiver avec message
                         if (codeInput) { codeInput.disabled = true; }
-                        if (msgEl) { msgEl.textContent = '✅ Pack débloqué !'; msgEl.className = 'code-message success'; }
+                        if (codeBtn) { codeBtn.disabled = true; }
+                        if (buyBtn) { buyBtn.disabled = true; }
+                        if (msgEl) {
+                            msgEl.textContent = '🔒 Connectez-vous pour agir';
+                            msgEl.className = 'code-message info';
+                        }
+                    } else {
+                        // Connecté : activer si non débloqué
+                        if (unlocked) {
+                            if (codeInput) { codeInput.disabled = true; }
+                            if (codeBtn) { codeBtn.textContent = '✅ Débloqué'; codeBtn.classList.add('purchased'); codeBtn.disabled = true; }
+                            if (buyBtn) { buyBtn.textContent = '✅ Acheté'; buyBtn.classList.add('purchased'); buyBtn.disabled = true; }
+                            if (msgEl) {
+                                msgEl.textContent = '✅ Pack débloqué !';
+                                msgEl.className = 'code-message success';
+                            }
+                        } else {
+                            if (codeInput) { codeInput.disabled = false; }
+                            if (codeBtn) { codeBtn.textContent = 'Déverrouiller avec code'; codeBtn.classList.remove('purchased'); codeBtn.disabled = false; }
+                            if (buyBtn) { buyBtn.textContent = 'Acheter'; buyBtn.classList.remove('purchased'); buyBtn.disabled = false; }
+                            if (msgEl) {
+                                msgEl.textContent = '';
+                                msgEl.className = 'code-message';
+                            }
+                        }
+                    }
 
-                        // Déverrouiller la carte
+                    // Mise à jour du statut de la carte (verrouillage)
+                    if (unlocked) {
                         card.classList.remove('locked-card');
                         const statusEl = card.querySelector('.access-status .status-badge');
                         if (statusEl) {
@@ -1131,13 +1171,6 @@
                             lockIcon.style.opacity = '1';
                         }
                     } else {
-                        // Réactiver
-                        if (buyBtn) { buyBtn.textContent = 'Acheter'; buyBtn.classList.remove('purchased'); buyBtn.disabled = false; }
-                        if (codeBtn) { codeBtn.textContent = 'Déverrouiller avec code'; codeBtn.classList.remove('purchased'); codeBtn.disabled = false; }
-                        if (codeInput) { codeInput.disabled = false; codeInput.value = ''; }
-                        if (msgEl) { msgEl.textContent = ''; msgEl.className = 'code-message'; }
-
-                        // Verrouiller la carte
                         card.classList.add('locked-card');
                         const statusEl = card.querySelector('.access-status .status-badge');
                         if (statusEl) {
@@ -1170,9 +1203,8 @@
 
                 const expectedTier = codeMap[code];
                 if (expectedTier === tier) {
-                    // Bon code
                     saveUnlockedPack(tier);
-                    updateCards();
+                    applyUserState();
                     msgEl.textContent = '✅ Code valide, pack débloqué !';
                     msgEl.className = 'code-message success';
                 } else {
@@ -1192,9 +1224,8 @@
                 const priceEl = card.querySelector('.pack-price');
                 const price = priceEl ? priceEl.textContent.trim() : '0€';
                 if (confirm(`💳 Acheter le pack "${card.querySelector('.space-title h3').textContent}" pour ${price} ? (Simulation)`)) {
-                    // Simulation paiement réussi
                     saveUnlockedPack(tier);
-                    updateCards();
+                    applyUserState();
                     alert('🎉 Paiement accepté ! Pack débloqué.');
                 }
             }
@@ -1323,12 +1354,12 @@
             // ---- DÉLÉGATION D'ÉVÉNEMENTS POUR LES BOUTONS ----
             document.addEventListener('click', function(e) {
                 const codeBtn = e.target.closest('.btn-unlock-code');
-                if (codeBtn && !codeBtn.classList.contains('purchased')) {
+                if (codeBtn && !codeBtn.classList.contains('purchased') && !codeBtn.disabled) {
                     e.preventDefault();
                     handleCodeUnlock(codeBtn);
                 }
                 const buyBtn = e.target.closest('.btn-buy-pack');
-                if (buyBtn && !buyBtn.classList.contains('purchased')) {
+                if (buyBtn && !buyBtn.classList.contains('purchased') && !buyBtn.disabled) {
                     e.preventDefault();
                     handleBuyPack(buyBtn);
                 }
