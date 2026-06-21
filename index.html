@@ -1,59 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace Fidélité · Packs & Codes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        :root {
-            --primary: #0f1a2e;
-            --primary-light: #1a2c4a;
-            --gold: #c9a84c;
-            --gold-light: #e8d5a3;
-            --gold-gradient: linear-gradient(135deg, #c9a84c, #f0dfb0);
-            --bg-body: #f4f6fb;
-            --card-bg: #ffffff;
-            --text-primary: #0f1a2e;
-            --text-secondary: #4a5568;
-            --text-muted: #8896ab;
-            --shadow: 0 12px 40px rgba(15, 26, 46, 0.08);
-            --shadow-hover: 0 20px 60px rgba(15, 26, 46, 0.15);
-            --radius: 20px;
-            --radius-sm: 12px;
-            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --font: 'Inter', sans-serif;
-            --font-display: 'Playfair Display', serif;
-        }
-        html { scroll-behavior: smooth; }
         body {
-            font-family: var(--font);
-            background: var(--bg-body);
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            background: #f4f6fb;
             min-height: 100vh;
             padding: 24px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
         .app {
             max-width: 1360px;
             width: 100%;
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(15, 26, 46, 0.08);
             padding: 32px 40px 48px;
         }
-
         /* HEADER */
         .header {
             display: flex;
@@ -73,20 +50,20 @@
         .brand-icon {
             width: 52px;
             height: 52px;
-            background: var(--gold-gradient);
+            background: linear-gradient(135deg, #c9a84c, #f0dfb0);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 26px;
-            color: var(--primary);
+            color: #0f1a2e;
             box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
         }
         .brand h1 {
-            font-family: var(--font-display);
+            font-family: 'Playfair Display', serif;
             font-size: 28px;
             font-weight: 700;
-            background: var(--gold-gradient);
+            background: linear-gradient(135deg, #c9a84c, #f0dfb0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -94,14 +71,10 @@
         }
         .brand span {
             font-size: 14px;
-            font-weight: 400;
-            color: var(--text-muted);
+            color: #8896ab;
             display: block;
-            -webkit-text-fill-color: var(--text-muted);
-            background: none;
+            -webkit-text-fill-color: #8896ab;
         }
-
-        /* AUTH */
         .auth-controls {
             display: flex;
             align-items: center;
@@ -112,7 +85,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: var(--bg-body);
+            background: #f4f6fb;
             padding: 6px 16px 6px 12px;
             border-radius: 60px;
         }
@@ -120,12 +93,12 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: var(--gold-gradient);
+            background: linear-gradient(135deg, #c9a84c, #f0dfb0);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: var(--primary);
+            color: #0f1a2e;
             font-size: 16px;
         }
         .auth-controls .user-info .user-name {
@@ -134,21 +107,21 @@
         }
         .auth-controls .btn-outline {
             background: transparent;
-            border: 1.5px solid var(--primary);
-            color: var(--primary);
+            border: 1.5px solid #0f1a2e;
+            color: #0f1a2e;
             padding: 8px 20px;
             border-radius: 40px;
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .auth-controls .btn-outline:hover {
-            background: var(--primary);
+            background: #0f1a2e;
             color: #fff;
         }
         .auth-controls .btn-primary {
-            background: var(--primary);
+            background: #0f1a2e;
             border: none;
             color: #fff;
             padding: 8px 24px;
@@ -156,10 +129,10 @@
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .auth-controls .btn-primary:hover {
-            background: var(--primary-light);
+            background: #1a2c4a;
         }
         .auth-controls .btn-google {
             background: #fff;
@@ -170,10 +143,10 @@
             font-weight: 500;
             font-size: 14px;
             cursor: pointer;
-            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            transition: 0.35s;
         }
         .auth-controls .btn-google:hover {
             background: #f8f9fa;
@@ -181,20 +154,19 @@
         .auth-controls .btn-logout {
             background: transparent;
             border: none;
-            color: var(--text-muted);
+            color: #8896ab;
             font-size: 13px;
             cursor: pointer;
             padding: 4px 8px;
         }
         .auth-controls .btn-logout:hover {
-            color: var(--text-primary);
+            color: #0f1a2e;
             text-decoration: underline;
         }
-
         /* BANNER */
         .user-banner {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #0f1a2e, #1a2c4a);
+            border-radius: 12px;
             padding: 24px 32px;
             display: flex;
             flex-wrap: wrap;
@@ -213,14 +185,13 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: var(--gold-gradient);
+            background: linear-gradient(135deg, #c9a84c, #f0dfb0);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 26px;
             font-weight: 700;
-            color: var(--primary);
-            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+            color: #0f1a2e;
         }
         .user-banner .greeting-text h2 {
             font-size: 20px;
@@ -247,7 +218,7 @@
         }
         .user-banner .plan-badge .plan-name i {
             margin-right: 8px;
-            color: var(--gold-light);
+            color: #e8d5a3;
         }
         .user-banner .plan-badge .plan-level {
             font-size: 12px;
@@ -257,7 +228,6 @@
             padding: 2px 12px;
             border-radius: 40px;
         }
-
         /* GRILLE */
         .spaces-grid {
             display: grid;
@@ -265,14 +235,13 @@
             gap: 24px;
             margin-top: 8px;
         }
-
         /* CARTES */
         .space-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-sm);
+            background: #fff;
+            border-radius: 12px;
             border: 1px solid rgba(15, 26, 46, 0.06);
             overflow: hidden;
-            transition: var(--transition);
+            transition: 0.35s;
             box-shadow: 0 2px 8px rgba(15, 26, 46, 0.02);
             display: flex;
             flex-direction: column;
@@ -280,7 +249,7 @@
         }
         .space-card:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 20px 60px rgba(15, 26, 46, 0.15);
             border-color: rgba(201, 168, 76, 0.15);
         }
         .space-card .card-header {
@@ -313,15 +282,15 @@
         .space-card .card-header .space-title .sub {
             font-size: 12px;
             font-weight: 400;
-            color: var(--text-muted);
+            color: #8896ab;
             display: block;
             margin-top: 1px;
         }
         .space-card .card-header .lock-icon {
             font-size: 18px;
-            color: var(--text-muted);
+            color: #8896ab;
             opacity: 0.3;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .space-card .card-body {
             padding: 16px 22px 22px;
@@ -340,7 +309,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            color: var(--text-muted);
+            color: #8896ab;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -348,18 +317,17 @@
         .space-card .content-group .group-label i {
             font-size: 13px;
         }
-
         .content-item {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 10px 14px;
             border-radius: 10px;
-            background: var(--bg-body);
-            transition: var(--transition);
+            background: #f4f6fb;
+            transition: 0.35s;
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: #4a5568;
             position: relative;
             flex-wrap: wrap;
         }
@@ -373,7 +341,7 @@
             font-size: 13px;
             flex-shrink: 0;
             background: rgba(15, 26, 46, 0.04);
-            color: var(--text-muted);
+            color: #8896ab;
         }
         .content-item .item-title {
             flex: 1;
@@ -388,9 +356,8 @@
             padding: 2px 10px;
             border-radius: 40px;
             background: rgba(15, 26, 46, 0.04);
-            color: var(--text-muted);
+            color: #8896ab;
         }
-
         /* ZONE D'ACHAT / CODE */
         .pack-purchase {
             margin-top: 12px;
@@ -403,14 +370,14 @@
         .pack-purchase .pack-price {
             font-weight: 800;
             font-size: 22px;
-            color: var(--primary);
+            color: #0f1a2e;
             margin-bottom: 2px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
         .pack-purchase .pack-price i {
-            color: var(--gold);
+            color: #c9a84c;
             font-size: 18px;
         }
         .pack-purchase .action-row {
@@ -427,11 +394,11 @@
             border-radius: 40px;
             font-size: 14px;
             background: #f8fafc;
-            transition: var(--transition);
+            transition: 0.35s;
             outline: none;
         }
         .pack-purchase .action-row input.code-input:focus {
-            border-color: var(--gold);
+            border-color: #c9a84c;
             background: #fff;
             box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
         }
@@ -446,9 +413,9 @@
             border-radius: 40px;
             font-weight: 600;
             font-size: 13px;
-            color: var(--text-secondary);
+            color: #4a5568;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .pack-purchase .action-row .btn-unlock-code:hover:not(:disabled) {
             background: #d0d7e2;
@@ -458,15 +425,15 @@
             cursor: not-allowed;
         }
         .pack-purchase .action-row .btn-buy-pack {
-            background: var(--gold-gradient);
+            background: linear-gradient(135deg, #c9a84c, #f0dfb0);
             border: none;
             padding: 8px 22px;
             border-radius: 40px;
             font-weight: 700;
             font-size: 14px;
-            color: var(--primary);
+            color: #0f1a2e;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .pack-purchase .action-row .btn-buy-pack:hover:not(:disabled) {
             transform: scale(1.03);
@@ -501,10 +468,9 @@
             color: #a04444;
         }
         .pack-purchase .code-message.info {
-            color: var(--text-muted);
+            color: #8896ab;
             font-style: italic;
         }
-
         /* Overlay verrouillage */
         .space-card.locked-card .card-body {
             opacity: 0.6;
@@ -520,19 +486,18 @@
             justify-content: center;
             font-weight: 700;
             font-size: 18px;
-            color: var(--text-muted);
+            color: #8896ab;
             background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(3px);
-            border-radius: var(--radius-sm);
+            border-radius: 12px;
             z-index: 5;
             pointer-events: none;
             letter-spacing: 1px;
         }
         .space-card.locked-card .card-header .lock-icon {
             opacity: 1 !important;
-            color: var(--text-muted);
+            color: #8896ab;
         }
-
         .space-card .access-status {
             padding: 12px 22px 18px;
             border-top: 1px solid rgba(15, 26, 46, 0.04);
@@ -558,7 +523,6 @@
             background: #f7f0f0;
             color: #a04444;
         }
-
         .space-card .card-footer {
             padding: 6px 22px 18px;
             text-align: right;
@@ -566,28 +530,26 @@
         .space-card .card-footer .see-all {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-muted);
+            color: #8896ab;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .space-card .card-footer .see-all:hover {
-            color: var(--primary);
+            color: #0f1a2e;
         }
         .space-card .card-footer .see-all:hover i {
             transform: translateX(3px);
         }
-
         .tier-bronze .icon-circle { background: #ece7dc; color: #a68b5b; }
         .tier-bronze .card-header .space-title h3 { color: #7a653b; }
         .tier-silver .icon-circle { background: #e8edf2; color: #6b7b8f; }
         .tier-silver .card-header .space-title h3 { color: #3d4e62; }
         .tier-gold .icon-circle { background: #f7f0df; color: #b8942b; }
         .tier-gold .card-header .space-title h3 { color: #8a6d1b; }
-
-        /* MODAL */
+        /* MODAL AUTH */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -600,7 +562,7 @@
             padding: 20px;
             opacity: 0;
             visibility: hidden;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .modal-overlay.open {
             opacity: 1;
@@ -610,11 +572,11 @@
             background: #fff;
             max-width: 480px;
             width: 100%;
-            border-radius: var(--radius);
+            border-radius: 20px;
             padding: 36px 32px 32px;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
             transform: scale(0.95);
-            transition: var(--transition);
+            transition: 0.35s;
             position: relative;
         }
         .modal-overlay.open .modal { transform: scale(1); }
@@ -625,17 +587,17 @@
             background: none;
             border: none;
             font-size: 24px;
-            color: var(--text-muted);
+            color: #8896ab;
             cursor: pointer;
         }
-        .modal .close-modal:hover { color: var(--text-primary); }
+        .modal .close-modal:hover { color: #0f1a2e; }
         .modal h2 {
-            font-family: var(--font-display);
+            font-family: 'Playfair Display', serif;
             font-size: 26px;
             margin-bottom: 6px;
         }
         .modal .subtitle {
-            color: var(--text-muted);
+            color: #8896ab;
             font-size: 14px;
             margin-bottom: 24px;
         }
@@ -647,7 +609,7 @@
             font-weight: 600;
             font-size: 13px;
             margin-bottom: 4px;
-            color: var(--text-secondary);
+            color: #4a5568;
         }
         .modal .form-group input {
             width: 100%;
@@ -655,12 +617,12 @@
             border: 1.5px solid #e2e8f0;
             border-radius: 12px;
             font-size: 14px;
-            transition: var(--transition);
+            transition: 0.35s;
             background: #f8fafc;
         }
         .modal .form-group input:focus {
             outline: none;
-            border-color: var(--gold);
+            border-color: #c9a84c;
             background: #fff;
             box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
         }
@@ -669,12 +631,12 @@
             padding: 14px;
             border: none;
             border-radius: 60px;
-            background: var(--gold-gradient);
+            background: linear-gradient(135deg, #c9a84c, #f0dfb0);
             font-weight: 700;
             font-size: 16px;
-            color: var(--primary);
+            color: #0f1a2e;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.35s;
             margin-top: 8px;
         }
         .modal .btn-submit:hover {
@@ -686,7 +648,7 @@
             align-items: center;
             gap: 16px;
             margin: 20px 0;
-            color: var(--text-muted);
+            color: #8896ab;
             font-size: 13px;
         }
         .modal .divider hr {
@@ -707,7 +669,7 @@
             font-weight: 500;
             font-size: 14px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.35s;
         }
         .modal .btn-google-modal:hover {
             background: #f8f9fa;
@@ -716,10 +678,10 @@
             text-align: center;
             margin-top: 18px;
             font-size: 14px;
-            color: var(--text-muted);
+            color: #8896ab;
         }
         .modal .toggle-auth a {
-            color: var(--primary);
+            color: #0f1a2e;
             font-weight: 600;
             cursor: pointer;
             text-decoration: underline;
@@ -734,25 +696,24 @@
             display: none;
         }
         .modal .error-msg.show { display: block; }
-
         .footer-note {
             margin-top: 36px;
             padding-top: 20px;
             border-top: 1px solid rgba(15, 26, 46, 0.05);
             text-align: center;
             font-size: 13px;
-            color: var(--text-muted);
+            color: #8896ab;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px 20px;
         }
         .footer-note i {
-            color: var(--gold);
+            color: #c9a84c;
             margin-right: 4px;
         }
         .footer-note strong {
-            color: var(--text-secondary);
+            color: #4a5568;
             font-weight: 600;
         }
         .hidden { display: none !important; }
@@ -768,8 +729,9 @@
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        @media (max-width: 1100px) { .spaces-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1100px) {
+            .spaces-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 780px) {
             body { padding: 12px; }
             .app { padding: 16px; }
@@ -842,7 +804,7 @@
             </div>
         </div>
 
-        <!-- GRILLE -->
+        <!-- GRILLE DES CARTES -->
         <div class="spaces-grid" id="spacesGrid">
 
             <!-- PACK BRONZE (10€) -->
@@ -871,7 +833,7 @@
                     <div class="pack-purchase">
                         <div class="pack-price"><i class="fas fa-euro-sign"></i> 10 €</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: BRONZE123)" data-tier="bronze" disabled />
+                            <input type="text" class="code-input" placeholder="Code (ex: BRONZE123)" data-tier="bronze" disabled>
                             <button class="btn-unlock-code" data-tier="bronze" disabled>Déverrouiller avec code</button>
                             <button class="btn-buy-pack" data-tier="bronze" disabled>Acheter</button>
                         </div>
@@ -913,7 +875,7 @@
                     <div class="pack-purchase">
                         <div class="pack-price"><i class="fas fa-euro-sign"></i> 20 €</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: SILVER456)" data-tier="silver" disabled />
+                            <input type="text" class="code-input" placeholder="Code (ex: SILVER456)" data-tier="silver" disabled>
                             <button class="btn-unlock-code" data-tier="silver" disabled>Déverrouiller avec code</button>
                             <button class="btn-buy-pack" data-tier="silver" disabled>Acheter</button>
                         </div>
@@ -956,7 +918,7 @@
                     <div class="pack-purchase">
                         <div class="pack-price"><i class="fas fa-euro-sign"></i> 30 €</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: GOLD789)" data-tier="gold" disabled />
+                            <input type="text" class="code-input" placeholder="Code (ex: GOLD789)" data-tier="gold" disabled>
                             <button class="btn-unlock-code" data-tier="gold" disabled>Déverrouiller avec code</button>
                             <button class="btn-buy-pack" data-tier="gold" disabled>Acheter</button>
                         </div>
@@ -990,19 +952,19 @@
             <form id="authForm">
                 <div id="nameField" class="form-group hidden">
                     <label>Nom complet</label>
-                    <input type="text" id="inputName" placeholder="Votre nom" />
+                    <input type="text" id="inputName" placeholder="Votre nom">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="inputEmail" placeholder="exemple@mail.com" required />
+                    <input type="email" id="inputEmail" placeholder="exemple@mail.com" required>
                 </div>
                 <div class="form-group">
                     <label>Mot de passe</label>
-                    <input type="password" id="inputPassword" placeholder="••••••••" required />
+                    <input type="password" id="inputPassword" placeholder="••••••••" required>
                 </div>
                 <button type="submit" class="btn-submit" id="modalSubmit">Se connecter</button>
             </form>
-            <div class="divider"><hr /> ou <hr /></div>
+            <div class="divider"><hr> ou <hr></div>
             <button class="btn-google-modal" id="modalGoogle"><i class="fab fa-google"></i> Google</button>
             <div class="toggle-auth">
                 <span id="toggleText">Pas encore de compte ?</span>
@@ -1120,14 +1082,12 @@
                     const tier = card.dataset.tier;
                     const unlocked = isPackUnlocked(tier);
 
-                    // Champs et boutons
                     const codeInput = card.querySelector('.code-input');
                     const codeBtn = card.querySelector('.btn-unlock-code');
                     const buyBtn = card.querySelector('.btn-buy-pack');
                     const msgEl = card.querySelector('.code-message');
 
                     if (!isLoggedIn) {
-                        // Déconnecté : tout désactiver avec message
                         if (codeInput) { codeInput.disabled = true; }
                         if (codeBtn) { codeBtn.disabled = true; }
                         if (buyBtn) { buyBtn.disabled = true; }
@@ -1136,7 +1096,6 @@
                             msgEl.className = 'code-message info';
                         }
                     } else {
-                        // Connecté : activer si non débloqué
                         if (unlocked) {
                             if (codeInput) { codeInput.disabled = true; }
                             if (codeBtn) { codeBtn.textContent = '✅ Débloqué'; codeBtn.classList.add('purchased'); codeBtn.disabled = true; }
@@ -1156,7 +1115,7 @@
                         }
                     }
 
-                    // Mise à jour du statut de la carte (verrouillage)
+                    // Statut visuel de la carte
                     if (unlocked) {
                         card.classList.remove('locked-card');
                         const statusEl = card.querySelector('.access-status .status-badge');
@@ -1167,7 +1126,7 @@
                         }
                         const lockIcon = card.querySelector('.card-header .lock-icon');
                         if (lockIcon) {
-                            lockIcon.innerHTML = `<i class="fas fa-unlock-alt" style="color:var(--gold);"></i>`;
+                            lockIcon.innerHTML = `<i class="fas fa-unlock-alt" style="color:#c9a84c;"></i>`;
                             lockIcon.style.opacity = '1';
                         }
                     } else {
@@ -1351,7 +1310,7 @@
                 applyUserState();
             });
 
-            // ---- DÉLÉGATION D'ÉVÉNEMENTS POUR LES BOUTONS ----
+            // ---- DÉLÉGATION D'ÉVÉNEMENTS ----
             document.addEventListener('click', function(e) {
                 const codeBtn = e.target.closest('.btn-unlock-code');
                 if (codeBtn && !codeBtn.classList.contains('purchased') && !codeBtn.disabled) {
@@ -1390,6 +1349,5 @@
 
         })();
     </script>
-
 </body>
 </html>
