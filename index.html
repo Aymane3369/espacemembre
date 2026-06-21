@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Espace Fidélité · Achat de packs</title>
+    <title>Espace Fidélité · Packs & Codes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
     <style>
-        *,
-        *::before,
-        *::after {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -35,9 +33,7 @@
             --font: 'Inter', sans-serif;
             --font-display: 'Playfair Display', serif;
         }
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
         body {
             font-family: var(--font);
             background: var(--bg-body);
@@ -395,48 +391,97 @@
             color: var(--text-muted);
         }
 
-        /* Bouton d'achat de pack */
+        /* ZONE D'ACHAT / CODE */
         .pack-purchase {
             margin-top: 12px;
             padding: 12px 0 4px;
             border-top: 1px solid rgba(15, 26, 46, 0.06);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 10px;
         }
         .pack-purchase .pack-price {
             font-weight: 700;
             font-size: 18px;
             color: var(--primary);
+            margin-bottom: 4px;
         }
-        .pack-purchase .btn-buy-pack {
-            background: var(--gold-gradient);
-            border: none;
-            padding: 10px 28px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--primary);
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
+        .pack-purchase .action-row {
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 8px;
         }
-        .pack-purchase .btn-buy-pack:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+        .pack-purchase .action-row input.code-input {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 40px;
+            font-size: 14px;
+            background: #f8fafc;
+            transition: var(--transition);
+            outline: none;
         }
-        .pack-purchase .btn-buy-pack.purchased {
+        .pack-purchase .action-row input.code-input:focus {
+            border-color: var(--gold);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+        }
+        .pack-purchase .action-row .btn-unlock-code {
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .pack-purchase .action-row .btn-unlock-code:hover {
+            background: #d0d7e2;
+        }
+        .pack-purchase .action-row .btn-unlock-code:active {
+            transform: scale(0.96);
+        }
+        .pack-purchase .action-row .btn-buy-pack {
+            background: var(--gold-gradient);
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .pack-purchase .action-row .btn-buy-pack:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        }
+        .pack-purchase .action-row .btn-buy-pack.purchased,
+        .pack-purchase .action-row .btn-unlock-code.purchased {
             background: #2e7d5e;
             color: #fff;
             cursor: default;
+            pointer-events: none;
         }
-        .pack-purchase .btn-buy-pack.purchased:hover {
+        .pack-purchase .action-row .btn-buy-pack.purchased:hover,
+        .pack-purchase .action-row .btn-unlock-code.purchased:hover {
             transform: none;
             box-shadow: none;
+        }
+        .pack-purchase .code-message {
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        .pack-purchase .code-message.success {
+            color: #0b6e3f;
+        }
+        .pack-purchase .code-message.error {
+            color: #a04444;
         }
 
         /* Overlay verrouillage */
@@ -446,7 +491,7 @@
             filter: grayscale(0.2);
         }
         .space-card.locked-card .card-body::after {
-            content: "Pack non acheté";
+            content: "Pack non débloqué";
             position: absolute;
             inset: 0;
             display: flex;
@@ -514,29 +559,14 @@
             transform: translateX(3px);
         }
 
-        .tier-bronze .icon-circle {
-            background: #ece7dc;
-            color: #a68b5b;
-        }
-        .tier-bronze .card-header .space-title h3 {
-            color: #7a653b;
-        }
-        .tier-silver .icon-circle {
-            background: #e8edf2;
-            color: #6b7b8f;
-        }
-        .tier-silver .card-header .space-title h3 {
-            color: #3d4e62;
-        }
-        .tier-gold .icon-circle {
-            background: #f7f0df;
-            color: #b8942b;
-        }
-        .tier-gold .card-header .space-title h3 {
-            color: #8a6d1b;
-        }
+        .tier-bronze .icon-circle { background: #ece7dc; color: #a68b5b; }
+        .tier-bronze .card-header .space-title h3 { color: #7a653b; }
+        .tier-silver .icon-circle { background: #e8edf2; color: #6b7b8f; }
+        .tier-silver .card-header .space-title h3 { color: #3d4e62; }
+        .tier-gold .icon-circle { background: #f7f0df; color: #b8942b; }
+        .tier-gold .card-header .space-title h3 { color: #8a6d1b; }
 
-        /* MODAL AUTH */
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -566,9 +596,7 @@
             transition: var(--transition);
             position: relative;
         }
-        .modal-overlay.open .modal {
-            transform: scale(1);
-        }
+        .modal-overlay.open .modal { transform: scale(1); }
         .modal .close-modal {
             position: absolute;
             top: 16px;
@@ -579,9 +607,7 @@
             color: var(--text-muted);
             cursor: pointer;
         }
-        .modal .close-modal:hover {
-            color: var(--text-primary);
-        }
+        .modal .close-modal:hover { color: var(--text-primary); }
         .modal h2 {
             font-family: var(--font-display);
             font-size: 26px;
@@ -686,9 +712,7 @@
             margin-bottom: 12px;
             display: none;
         }
-        .modal .error-msg.show {
-            display: block;
-        }
+        .modal .error-msg.show { display: block; }
 
         .footer-note {
             margin-top: 36px;
@@ -710,122 +734,44 @@
             color: var(--text-secondary);
             font-weight: 600;
         }
-        .hidden {
-            display: none !important;
-        }
-        .inline-flex {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .hidden { display: none !important; }
+        .inline-flex { display: inline-flex; align-items: center; gap: 6px; }
         .space-card {
             opacity: 0;
             animation: fadeUp 0.6s ease forwards;
         }
-        .space-card:nth-child(1) {
-            animation-delay: 0.05s;
-        }
-        .space-card:nth-child(2) {
-            animation-delay: 0.15s;
-        }
-        .space-card:nth-child(3) {
-            animation-delay: 0.25s;
-        }
+        .space-card:nth-child(1) { animation-delay: 0.05s; }
+        .space-card:nth-child(2) { animation-delay: 0.15s; }
+        .space-card:nth-child(3) { animation-delay: 0.25s; }
         @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 1100px) {
-            .spaces-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        @media (max-width: 1100px) { .spaces-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 780px) {
-            body {
-                padding: 12px;
-            }
-            .app {
-                padding: 16px;
-            }
-            .header {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
-            }
-            .brand h1 {
-                font-size: 22px;
-            }
-            .auth-controls {
-                justify-content: center;
-            }
-            .user-banner {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 18px 20px;
-            }
-            .user-banner .plan-badge {
-                width: 100%;
-                justify-content: center;
-            }
-            .spaces-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .space-card .card-header {
-                padding: 16px 18px 12px;
-            }
-            .space-card .card-body {
-                padding: 12px 18px 16px;
-            }
-            .space-card .access-status {
-                padding: 10px 18px 14px;
-            }
-            .space-card .card-footer {
-                padding: 2px 18px 14px;
-            }
-            .brand-icon {
-                width: 44px;
-                height: 44px;
-                font-size: 20px;
-            }
-            .modal {
-                padding: 24px 18px;
-            }
-            .pack-purchase {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-            }
-            .pack-purchase .btn-buy-pack {
-                justify-content: center;
-            }
+            body { padding: 12px; }
+            .app { padding: 16px; }
+            .header { flex-direction: column; align-items: stretch; gap: 12px; }
+            .brand h1 { font-size: 22px; }
+            .auth-controls { justify-content: center; }
+            .user-banner { flex-direction: column; align-items: flex-start; padding: 18px 20px; }
+            .user-banner .plan-badge { width: 100%; justify-content: center; }
+            .spaces-grid { grid-template-columns: 1fr; gap: 20px; }
+            .space-card .card-header { padding: 16px 18px 12px; }
+            .space-card .card-body { padding: 12px 18px 16px; }
+            .space-card .access-status { padding: 10px 18px 14px; }
+            .space-card .card-footer { padding: 2px 18px 14px; }
+            .brand-icon { width: 44px; height: 44px; font-size: 20px; }
+            .modal { padding: 24px 18px; }
+            .pack-purchase .action-row { flex-direction: column; align-items: stretch; }
+            .pack-purchase .action-row input.code-input { min-width: unset; }
         }
         @media (max-width: 440px) {
-            .user-banner .greeting-text h2 {
-                font-size: 17px;
-            }
-            .user-banner .avatar {
-                width: 44px;
-                height: 44px;
-                font-size: 20px;
-            }
-            .space-card .content-item {
-                font-size: 13px;
-                padding: 8px 12px;
-            }
-            .auth-controls .btn-outline,
-            .auth-controls .btn-primary,
-            .auth-controls .btn-google {
-                padding: 6px 14px;
-                font-size: 12px;
-            }
+            .user-banner .greeting-text h2 { font-size: 17px; }
+            .user-banner .avatar { width: 44px; height: 44px; font-size: 20px; }
+            .space-card .content-item { font-size: 13px; padding: 8px 12px; }
+            .auth-controls .btn-outline, .auth-controls .btn-primary, .auth-controls .btn-google { padding: 6px 14px; font-size: 12px; }
         }
     </style>
 </head>
@@ -838,7 +784,7 @@
                 <div class="brand-icon"><i class="fas fa-crown"></i></div>
                 <div>
                     <h1>Espace Fidélité</h1>
-                    <span>Packs · Formations · Publications</span>
+                    <span>Packs · Codes · Achats</span>
                 </div>
             </div>
             <div class="auth-controls" id="authControls">
@@ -863,13 +809,13 @@
                 <div class="avatar" id="userAvatar">M</div>
                 <div class="greeting-text">
                     <h2 id="userName">Bonjour, invité</h2>
-                    <p id="userSub">Connectez-vous pour acheter vos packs</p>
+                    <p id="userSub">Connectez-vous pour débloquer vos packs</p>
                 </div>
             </div>
             <div class="plan-badge" id="planBadge">
                 <span class="plan-name">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span id="planLabel">Achetez un pack</span>
+                    <i class="fas fa-tag"></i>
+                    <span id="planLabel">Codes : BRONZE123 · SILVER456 · GOLD789</span>
                 </span>
                 <span class="plan-level" id="planLevel"></span>
             </div>
@@ -902,12 +848,17 @@
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">5 erreurs à éviter</span><span class="item-tag">Article</span></div>
                     </div>
                     <div class="pack-purchase">
-                        <span class="pack-price">10 €</span>
-                        <button class="btn-buy-pack" data-tier="bronze">Acheter le pack</button>
+                        <div class="pack-price">10 €</div>
+                        <div class="action-row">
+                            <input type="text" class="code-input" placeholder="Code (ex: BRONZE123)" data-tier="bronze" />
+                            <button class="btn-unlock-code" data-tier="bronze">Déverrouiller avec code</button>
+                            <button class="btn-buy-pack" data-tier="bronze">Acheter</button>
+                        </div>
+                        <div class="code-message" id="msg-bronze"></div>
                     </div>
                 </div>
                 <div class="access-status">
-                    <span class="status-badge locked" id="statusBronze"><i class="fas fa-lock"></i> Pack non acheté</span>
+                    <span class="status-badge locked" id="statusBronze"><i class="fas fa-lock"></i> Verrouillé</span>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
@@ -939,12 +890,17 @@
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Étude de cas growth</span><span class="item-tag">Étude</span></div>
                     </div>
                     <div class="pack-purchase">
-                        <span class="pack-price">20 €</span>
-                        <button class="btn-buy-pack" data-tier="silver">Acheter le pack</button>
+                        <div class="pack-price">20 €</div>
+                        <div class="action-row">
+                            <input type="text" class="code-input" placeholder="Code (ex: SILVER456)" data-tier="silver" />
+                            <button class="btn-unlock-code" data-tier="silver">Déverrouiller avec code</button>
+                            <button class="btn-buy-pack" data-tier="silver">Acheter</button>
+                        </div>
+                        <div class="code-message" id="msg-silver"></div>
                     </div>
                 </div>
                 <div class="access-status">
-                    <span class="status-badge locked" id="statusSilver"><i class="fas fa-lock"></i> Pack non acheté</span>
+                    <span class="status-badge locked" id="statusSilver"><i class="fas fa-lock"></i> Verrouillé</span>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
@@ -977,12 +933,17 @@
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Boîte à outils leader</span><span class="item-tag">Kit</span></div>
                     </div>
                     <div class="pack-purchase">
-                        <span class="pack-price">30 €</span>
-                        <button class="btn-buy-pack" data-tier="gold">Acheter le pack</button>
+                        <div class="pack-price">30 €</div>
+                        <div class="action-row">
+                            <input type="text" class="code-input" placeholder="Code (ex: GOLD789)" data-tier="gold" />
+                            <button class="btn-unlock-code" data-tier="gold">Déverrouiller avec code</button>
+                            <button class="btn-buy-pack" data-tier="gold">Acheter</button>
+                        </div>
+                        <div class="code-message" id="msg-gold"></div>
                     </div>
                 </div>
                 <div class="access-status">
-                    <span class="status-badge locked" id="statusGold"><i class="fas fa-lock"></i> Pack non acheté</span>
+                    <span class="status-badge locked" id="statusGold"><i class="fas fa-lock"></i> Verrouillé</span>
                 </div>
                 <div class="card-footer">
                     <a href="#" class="see-all">Voir tout <i class="fas fa-arrow-right"></i></a>
@@ -992,9 +953,9 @@
         </div>
 
         <div class="footer-note">
-            <span><i class="fas fa-shopping-cart"></i> <strong>Packs</strong> : Découverte (10€) · Professionnel (20€) · Expert (30€)</span>
-            <span><i class="fas fa-check-circle"></i> Achat unique, accès à vie</span>
-            <span><i class="fas fa-user-plus"></i> Créez un compte pour acheter</span>
+            <span><i class="fas fa-key"></i> <strong>Codes</strong> : BRONZE123 · SILVER456 · GOLD789</span>
+            <span><i class="fas fa-shopping-cart"></i> Ou achetez le pack directement</span>
+            <span><i class="fas fa-check-circle"></i> Les déblocages sont sauvegardés</span>
         </div>
     </div>
 
@@ -1065,15 +1026,17 @@
             const nameField = document.getElementById('nameField');
 
             const cards = document.querySelectorAll('.space-card');
-            const statusBadges = {
-                bronze: document.getElementById('statusBronze'),
-                silver: document.getElementById('statusSilver'),
-                gold: document.getElementById('statusGold')
-            };
 
             // ---- ÉTATS ----
             let currentUser = null;
             let isLoginMode = true;
+
+            // ---- MAP DES CODES ----
+            const codeMap = {
+                'BRONZE123': 'bronze',
+                'SILVER456': 'silver',
+                'GOLD789': 'gold'
+            };
 
             // ---- STOCKAGE UTILISATEURS ----
             function getUsers() {
@@ -1092,21 +1055,21 @@
                 localStorage.removeItem('loyaltySession');
             }
 
-            // ---- STOCKAGE DES PACKS ACHETÉS ----
-            function getPurchasedPacks() {
-                try { return JSON.parse(localStorage.getItem('loyaltyPacks')) || {}; } catch { return {}; }
+            // ---- STOCKAGE DES PACKS DÉBLOQUÉS (par code ou achat) ----
+            function getUnlockedPacks() {
+                try { return JSON.parse(localStorage.getItem('loyaltyUnlockedPacks')) || {}; } catch { return {}; }
             }
-            function savePurchasedPack(tier) {
-                const packs = getPurchasedPacks();
+            function saveUnlockedPack(tier) {
+                const packs = getUnlockedPacks();
                 packs[tier] = true;
-                localStorage.setItem('loyaltyPacks', JSON.stringify(packs));
+                localStorage.setItem('loyaltyUnlockedPacks', JSON.stringify(packs));
             }
-            function isPackPurchased(tier) {
-                const packs = getPurchasedPacks();
+            function isPackUnlocked(tier) {
+                const packs = getUnlockedPacks();
                 return !!packs[tier];
             }
 
-            // ---- APPLIQUER ÉTAT UTILISATEUR ET MIS À JOUR DES CARTES ----
+            // ---- APPLIQUER ÉTAT UTILISATEUR ----
             function applyUserState() {
                 if (currentUser) {
                     authNotLogged.classList.add('hidden');
@@ -1117,8 +1080,8 @@
 
                     userAvatar.textContent = displayName.charAt(0).toUpperCase();
                     userName.textContent = `Bonjour, ${displayName}`;
-                    userSub.textContent = 'Achetez vos packs pour débloquer les espaces.';
-                    planLabel.textContent = 'Achetez un pack';
+                    userSub.textContent = 'Débloquez vos packs avec un code ou un achat.';
+                    planLabel.textContent = 'Codes : BRONZE123 · SILVER456 · GOLD789';
                     planLevel.textContent = '';
 
                     // Mettre à jour les cartes
@@ -1128,10 +1091,9 @@
                     authLogged.classList.add('hidden');
                     userAvatar.textContent = '?';
                     userName.textContent = 'Bonjour, invité';
-                    userSub.textContent = 'Connectez-vous pour acheter vos packs.';
-                    planLabel.textContent = 'Achetez un pack';
+                    userSub.textContent = 'Connectez-vous pour débloquer vos packs.';
+                    planLabel.textContent = 'Codes : BRONZE123 · SILVER456 · GOLD789';
                     planLevel.textContent = '';
-                    // On verrouille tout (on enlève les états d'achat locaux)
                     updateCards();
                 }
             }
@@ -1140,31 +1102,28 @@
             function updateCards() {
                 cards.forEach(card => {
                     const tier = card.dataset.tier;
-                    const purchased = isPackPurchased(tier);
+                    const unlocked = isPackUnlocked(tier);
 
-                    // Mise à jour du bouton d'achat
+                    // Mise à jour des boutons et champs
                     const buyBtn = card.querySelector('.btn-buy-pack');
-                    if (buyBtn) {
-                        if (purchased) {
-                            buyBtn.textContent = '✅ Pack acheté';
-                            buyBtn.classList.add('purchased');
-                            buyBtn.disabled = true;
-                        } else {
-                            buyBtn.textContent = 'Acheter le pack';
-                            buyBtn.classList.remove('purchased');
-                            buyBtn.disabled = false;
-                        }
-                    }
+                    const codeBtn = card.querySelector('.btn-unlock-code');
+                    const codeInput = card.querySelector('.code-input');
+                    const msgEl = card.querySelector('.code-message');
 
-                    // Verrouillage / déverrouillage de la carte
-                    if (purchased) {
+                    if (unlocked) {
+                        // Désactiver tout
+                        if (buyBtn) { buyBtn.textContent = '✅ Acheté'; buyBtn.classList.add('purchased'); buyBtn.disabled = true; }
+                        if (codeBtn) { codeBtn.textContent = '✅ Débloqué'; codeBtn.classList.add('purchased'); codeBtn.disabled = true; }
+                        if (codeInput) { codeInput.disabled = true; }
+                        if (msgEl) { msgEl.textContent = '✅ Pack débloqué !'; msgEl.className = 'code-message success'; }
+
+                        // Déverrouiller la carte
                         card.classList.remove('locked-card');
-                        // Mettre à jour le badge de statut
                         const statusEl = card.querySelector('.access-status .status-badge');
                         if (statusEl) {
                             statusEl.classList.remove('locked');
                             statusEl.classList.add('active');
-                            statusEl.innerHTML = `<i class="fas fa-check-circle"></i> Pack acheté`;
+                            statusEl.innerHTML = `<i class="fas fa-check-circle"></i> Débloqué`;
                         }
                         const lockIcon = card.querySelector('.card-header .lock-icon');
                         if (lockIcon) {
@@ -1172,12 +1131,19 @@
                             lockIcon.style.opacity = '1';
                         }
                     } else {
+                        // Réactiver
+                        if (buyBtn) { buyBtn.textContent = 'Acheter'; buyBtn.classList.remove('purchased'); buyBtn.disabled = false; }
+                        if (codeBtn) { codeBtn.textContent = 'Déverrouiller avec code'; codeBtn.classList.remove('purchased'); codeBtn.disabled = false; }
+                        if (codeInput) { codeInput.disabled = false; codeInput.value = ''; }
+                        if (msgEl) { msgEl.textContent = ''; msgEl.className = 'code-message'; }
+
+                        // Verrouiller la carte
                         card.classList.add('locked-card');
                         const statusEl = card.querySelector('.access-status .status-badge');
                         if (statusEl) {
                             statusEl.classList.remove('active');
                             statusEl.classList.add('locked');
-                            statusEl.innerHTML = `<i class="fas fa-lock"></i> Pack non acheté`;
+                            statusEl.innerHTML = `<i class="fas fa-lock"></i> Verrouillé`;
                         }
                         const lockIcon = card.querySelector('.card-header .lock-icon');
                         if (lockIcon) {
@@ -1188,23 +1154,48 @@
                 });
             }
 
-            // ---- GESTION DES ACHATS DE PACK ----
-            function handleBuyPack(btn) {
+            // ---- GESTION DU CODE ----
+            function handleCodeUnlock(btn) {
                 const tier = btn.dataset.tier;
-                if (!tier) return;
-                if (isPackPurchased(tier)) {
-                    alert('Ce pack est déjà acheté.');
+                const card = btn.closest('.space-card');
+                const input = card.querySelector('.code-input');
+                const msgEl = card.querySelector('.code-message');
+                const code = input.value.trim().toUpperCase();
+
+                if (isPackUnlocked(tier)) {
+                    msgEl.textContent = 'Pack déjà débloqué.';
+                    msgEl.className = 'code-message success';
                     return;
                 }
-                // Récupérer le prix
+
+                const expectedTier = codeMap[code];
+                if (expectedTier === tier) {
+                    // Bon code
+                    saveUnlockedPack(tier);
+                    updateCards();
+                    msgEl.textContent = '✅ Code valide, pack débloqué !';
+                    msgEl.className = 'code-message success';
+                } else {
+                    msgEl.textContent = '❌ Code incorrect.';
+                    msgEl.className = 'code-message error';
+                }
+            }
+
+            // ---- GESTION DE L'ACHAT ----
+            function handleBuyPack(btn) {
+                const tier = btn.dataset.tier;
+                if (isPackUnlocked(tier)) {
+                    alert('Pack déjà débloqué.');
+                    return;
+                }
                 const card = btn.closest('.space-card');
                 const priceEl = card.querySelector('.pack-price');
                 const price = priceEl ? priceEl.textContent.trim() : '0€';
                 if (confirm(`💳 Acheter le pack "${card.querySelector('.space-title h3').textContent}" pour ${price} ? (Simulation)`)) {
-                    // Simulation de paiement réussi
-                    savePurchasedPack(tier);
+                    // Simulation paiement réussi
+                    saveUnlockedPack(tier);
                     updateCards();
-                    alert('🎉 Paiement accepté ! Le pack est débloqué.');
+                    alert('🎉 Paiement accepté ! Pack débloqué.');
                 }
             }
 
@@ -1329,12 +1320,17 @@
                 applyUserState();
             });
 
-            // ---- ACHAT DE PACK (délégation) ----
+            // ---- DÉLÉGATION D'ÉVÉNEMENTS POUR LES BOUTONS ----
             document.addEventListener('click', function(e) {
-                const btn = e.target.closest('.btn-buy-pack');
-                if (btn && !btn.classList.contains('purchased')) {
+                const codeBtn = e.target.closest('.btn-unlock-code');
+                if (codeBtn && !codeBtn.classList.contains('purchased')) {
                     e.preventDefault();
-                    handleBuyPack(btn);
+                    handleCodeUnlock(codeBtn);
+                }
+                const buyBtn = e.target.closest('.btn-buy-pack');
+                if (buyBtn && !buyBtn.classList.contains('purchased')) {
+                    e.preventDefault();
+                    handleBuyPack(buyBtn);
                 }
             });
 
@@ -1356,12 +1352,13 @@
                     const card = this.closest('.space-card');
                     const tier = card ? card.dataset.tier : 'unknown';
                     const label = card ? card.querySelector('.space-title h3').textContent : tier;
-                    const purchased = isPackPurchased(tier);
-                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${purchased ? 'débloqué' : 'verrouillé'})`);
+                    const unlocked = isPackUnlocked(tier);
+                    alert(`🔍 Vue détaillée de l'espace "${label}"\n(Accès ${unlocked ? 'débloqué' : 'verrouillé'})`);
                 });
             });
 
         })();
     </script>
+
 </body>
 </html>
