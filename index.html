@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Fidélité · Panier & Codes</title>
+    <title>Espace Fidélité · Panier & Paiement</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
-        /* ---- RESET ET STYLES (compacts) ---- */
+        /* ---- RESET ET STYLES COMPACTS ---- */
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',sans-serif; background:#f4f6fb; min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:center; }
         .app { max-width:1360px; width:100%; background:#fff; border-radius:24px; box-shadow:0 12px 40px rgba(15,26,46,0.08); padding:28px 32px 40px; }
         .header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; padding-bottom:20px; border-bottom:2px solid rgba(15,26,46,0.05); margin-bottom:28px; gap:12px; }
         .brand { display:flex; align-items:center; gap:12px; }
-        .brand-icon { width:48px; height:48px; background:linear-gradient(135deg,#c9a84c,#f0dfb0); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; color:#0f1a2e; box-shadow:0 4px 12px rgba(201,168,76,0.3); }
-        .brand h1 { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; background:linear-gradient(135deg,#c9a84c,#f0dfb0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-        .brand span { font-size:13px; color:#8896ab; display:block; -webkit-text-fill-color:#8896ab; }
+        .brand-icon { width:48px; height:48px; background:linear-gradient(135deg,#c9a84c,#f0dfb0); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; color:#0f1a2e; }
+        .brand h1 { font-family:'Georgia',serif; font-size:26px; font-weight:700; background:linear-gradient(135deg,#c9a84c,#f0dfb0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .brand span { font-size:13px; color:#8896ab; display:block; }
         .header-right { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
         .auth-controls { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
         .auth-controls .user-info { display:flex; align-items:center; gap:10px; background:#f4f6fb; padding:4px 14px 4px 10px; border-radius:60px; }
@@ -27,13 +24,13 @@
         .auth-controls .btn-outline:hover { background:#0f1a2e; color:#fff; }
         .auth-controls .btn-primary { background:#0f1a2e; border:none; color:#fff; padding:6px 20px; border-radius:40px; font-weight:600; font-size:13px; cursor:pointer; transition:0.3s; }
         .auth-controls .btn-primary:hover { background:#1a2c4a; }
-        .auth-controls .btn-google { background:#fff; border:1px solid #dadce0; color:#3c4043; padding:6px 16px; border-radius:40px; font-weight:500; font-size:13px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:0.3s; }
+        .auth-controls .btn-google { background:#fff; border:1px solid #dadce0; color:#3c4043; padding:6px 16px; border-radius:40px; font-weight:500; font-size:13px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
         .auth-controls .btn-google:hover { background:#f8f9fa; }
         .auth-controls .btn-logout { background:transparent; border:none; color:#8896ab; font-size:13px; cursor:pointer; padding:4px 6px; }
         .auth-controls .btn-logout:hover { color:#0f1a2e; text-decoration:underline; }
-        .cart-btn { background:transparent; border:none; font-size:22px; color:#0f1a2e; cursor:pointer; position:relative; padding:4px; transition:0.3s; }
+        .cart-btn { background:transparent; border:none; font-size:22px; color:#0f1a2e; cursor:pointer; position:relative; padding:4px; }
         .cart-btn:hover { transform:scale(1.05); }
-        .cart-btn .badge { position:absolute; top:-6px; right:-8px; background:#c9a84c; color:#0f1a2e; font-size:11px; font-weight:700; border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(201,168,76,0.4); }
+        .cart-btn .badge { position:absolute; top:-6px; right:-8px; background:#c9a84c; color:#0f1a2e; font-size:11px; font-weight:700; border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; }
         .user-banner { background:linear-gradient(135deg,#0f1a2e,#1a2c4a); border-radius:14px; padding:20px 28px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; margin-bottom:28px; color:#fff; gap:12px; }
         .user-banner .greeting { display:flex; align-items:center; gap:14px; }
         .user-banner .avatar { width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#c9a84c,#f0dfb0); display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:700; color:#0f1a2e; }
@@ -60,11 +57,13 @@
         .content-item .item-icon { width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; background:rgba(15,26,46,0.04); color:#8896ab; }
         .content-item .item-title { flex:1; font-weight:500; min-width:70px; }
         .content-item .item-tag { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px; padding:2px 8px; border-radius:40px; background:rgba(15,26,46,0.04); color:#8896ab; }
-
-        /* === ZONE DES ACTIONS (PRIX, CODE, PANIER) === */
+        /* Zone d'actions */
         .pack-actions { margin-top:10px; padding:12px 0 0; border-top:1px solid rgba(15,26,46,0.06); display:flex; flex-direction:column; gap:10px; }
         .pack-actions .pack-price { font-weight:800; font-size:20px; color:#0f1a2e; display:flex; align-items:center; gap:6px; }
         .pack-actions .pack-price i { color:#c9a84c; font-size:16px; }
+        /* Descriptif du pack */
+        .pack-description { font-size:13px; color:#4a5568; font-weight:400; line-height:1.4; margin: -4px 0 2px; }
+        .pack-description i { color:#c9a84c; margin-right:4px; }
         .pack-actions .action-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
         .pack-actions .action-row input.code-input { flex:1; min-width:100px; padding:6px 12px; border:1.5px solid #e2e8f0; border-radius:40px; font-size:13px; background:#f8fafc; outline:none; transition:0.3s; }
         .pack-actions .action-row input.code-input:focus { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.15); }
@@ -72,8 +71,7 @@
         .pack-actions .action-row .btn-unlock-code { background:#e2e8f0; border:none; padding:6px 16px; border-radius:40px; font-weight:600; font-size:12px; color:#4a5568; cursor:pointer; transition:0.3s; }
         .pack-actions .action-row .btn-unlock-code:hover:not(:disabled) { background:#d0d7e2; }
         .pack-actions .action-row .btn-unlock-code:disabled { opacity:0.4; cursor:not-allowed; }
-
-        /* ===== BOUTON AJOUTER AU PANIER ===== */
+        /* BOUTON AJOUTER AU PANIER : TOUJOURS ACTIF */
         .pack-actions .action-row .btn-add-cart {
             background: #0f1a2e;
             border: none;
@@ -87,12 +85,11 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            opacity: 1;
         }
-        .pack-actions .action-row .btn-add-cart:hover:not(:disabled) { background: #1a2c4a; transform: scale(1.02); }
-        .pack-actions .action-row .btn-add-cart:disabled { opacity: 0.4; cursor: not-allowed; }
+        .pack-actions .action-row .btn-add-cart:hover { background: #1a2c4a; transform: scale(1.02); }
         .pack-actions .action-row .btn-add-cart.in-cart { background: #2e7d5e; cursor: default; opacity: 0.8; }
         .pack-actions .action-row .btn-add-cart.in-cart:hover { transform: none; }
-
         .pack-actions .code-message { font-size:12px; font-weight:500; margin-top:2px; }
         .pack-actions .code-message.success { color:#0b6e3f; }
         .pack-actions .code-message.error { color:#a04444; }
@@ -109,7 +106,6 @@
         .space-card .card-footer .see-all { font-size:12px; font-weight:600; color:#8896ab; text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:0.3s; }
         .space-card .card-footer .see-all:hover { color:#0f1a2e; }
         .space-card .card-footer .see-all:hover i { transform:translateX(3px); }
-
         .tier-bronze .icon-circle { background:#ece7dc; color:#a68b5b; }
         .tier-bronze .card-header .space-title h3 { color:#7a653b; }
         .tier-silver .icon-circle { background:#e8edf2; color:#6b7b8f; }
@@ -117,13 +113,13 @@
         .tier-gold .icon-circle { background:#f7f0df; color:#b8942b; }
         .tier-gold .card-header .space-title h3 { color:#8a6d1b; }
 
-        /* MODAL PANIER (simplifiée) */
+        /* MODALES */
         .cart-modal { position:fixed; inset:0; background:rgba(15,26,46,0.5); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; z-index:2000; padding:20px; opacity:0; visibility:hidden; transition:0.3s; }
         .cart-modal.open { opacity:1; visibility:visible; }
-        .cart-modal .cart-content { background:#fff; max-width:500px; width:100%; border-radius:24px; padding:28px 24px 32px; box-shadow:0 40px 80px rgba(0,0,0,0.2); transform:scale(0.95); transition:0.3s; max-height:80vh; overflow-y:auto; }
+        .cart-modal .cart-content { background:#fff; max-width:540px; width:100%; border-radius:24px; padding:28px 24px 32px; box-shadow:0 40px 80px rgba(0,0,0,0.2); transform:scale(0.95); transition:0.3s; max-height:80vh; overflow-y:auto; }
         .cart-modal.open .cart-content { transform:scale(1); }
         .cart-content .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-        .cart-content .cart-header h2 { font-family:'Playfair Display',serif; font-size:24px; }
+        .cart-content .cart-header h2 { font-size:24px; }
         .cart-content .cart-header .close-cart { background:none; border:none; font-size:24px; color:#8896ab; cursor:pointer; }
         .cart-content .cart-header .close-cart:hover { color:#0f1a2e; }
         .cart-content .cart-items { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
@@ -132,7 +128,19 @@
         .cart-content .cart-item .item-price { font-weight:700; color:#0f1a2e; }
         .cart-content .cart-total { font-size:18px; font-weight:700; text-align:right; padding:10px 0; border-top:1px solid rgba(15,26,46,0.06); margin-top:4px; }
         .cart-content .cart-actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
-        .cart-content .cart-actions .btn-checkout { flex:1; background:linear-gradient(135deg,#c9a84c,#f0dfb0); border:none; padding:12px 20px; border-radius:60px; font-weight:700; font-size:16px; color:#0f1a2e; cursor:pointer; transition:0.3s; min-width:120px; }
+        .cart-content .cart-actions .btn-checkout {
+            flex:1;
+            background: linear-gradient(135deg,#c9a84c,#f0dfb0);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #0f1a2e;
+            cursor: pointer;
+            transition: 0.3s;
+            min-width: 140px;
+        }
         .cart-content .cart-actions .btn-checkout:hover:not(:disabled) { transform:scale(1.02); box-shadow:0 6px 20px rgba(201,168,76,0.3); }
         .cart-content .cart-actions .btn-checkout:disabled { opacity:0.4; cursor:not-allowed; }
         .cart-content .cart-actions .btn-code { background:#e2e8f0; border:none; padding:12px 20px; border-radius:60px; font-weight:600; font-size:14px; color:#4a5568; cursor:pointer; transition:0.3s; flex:1; }
@@ -149,14 +157,13 @@
         .cart-content .checkout-message.error { color:#a04444; }
         .cart-content .empty-cart { text-align:center; color:#8896ab; padding:20px 0; }
 
-        /* MODAL AUTH */
         .modal-overlay { position:fixed; inset:0; background:rgba(15,26,46,0.6); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; z-index:1500; padding:20px; opacity:0; visibility:hidden; transition:0.3s; }
         .modal-overlay.open { opacity:1; visibility:visible; }
         .modal { background:#fff; max-width:440px; width:100%; border-radius:24px; padding:32px 28px; box-shadow:0 40px 80px rgba(0,0,0,0.2); transform:scale(0.95); transition:0.3s; position:relative; }
         .modal-overlay.open .modal { transform:scale(1); }
         .modal .close-modal { position:absolute; top:16px; right:20px; background:none; border:none; font-size:22px; color:#8896ab; cursor:pointer; }
         .modal .close-modal:hover { color:#0f1a2e; }
-        .modal h2 { font-family:'Playfair Display',serif; font-size:24px; margin-bottom:4px; }
+        .modal h2 { font-size:24px; margin-bottom:4px; }
         .modal .subtitle { color:#8896ab; font-size:13px; margin-bottom:20px; }
         .modal .form-group { margin-bottom:16px; }
         .modal .form-group label { display:block; font-weight:600; font-size:13px; margin-bottom:4px; color:#4a5568; }
@@ -249,7 +256,7 @@
                 <div class="avatar" id="userAvatar">M</div>
                 <div class="greeting-text">
                     <h2 id="userName">Bonjour, invité</h2>
-                    <p id="userSub">Connectez-vous pour ajouter au panier</p>
+                    <p id="userSub">Ajoutez des packs au panier, puis passez à la caisse</p>
                 </div>
             </div>
             <div class="plan-badge" id="planBadge">
@@ -261,12 +268,10 @@
             </div>
         </div>
 
-        <!-- GRILLE DES CARTES -->
+        <!-- GRILLE DES PACKS -->
         <div class="spaces-grid" id="spacesGrid">
 
-            <!-- ========================================================= -->
-            <!-- PACK BRONZE -->
-            <!-- ========================================================= -->
+            <!-- Pack Bronze -->
             <div class="space-card tier-bronze locked-card" data-tier="bronze" id="cardBronze">
                 <div class="card-header">
                     <div class="space-title">
@@ -289,17 +294,15 @@
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">Guide du débutant</span><span class="item-tag">PDF</span></div>
                         <div class="content-item"><span class="item-icon"><i class="fas fa-file-alt"></i></span><span class="item-title">5 erreurs à éviter</span><span class="item-tag">Article</span></div>
                     </div>
-
-                    <!-- ⬇️⬇️⬇️ ZONE AVEC LE BOUTON "AJOUTER AU PANIER" ⬇️⬇️⬇️ -->
                     <div class="pack-actions">
                         <div class="pack-price"><i class="fas fa-euro-sign"></i> 10 €</div>
+                        <div class="pack-description"><i class="fas fa-bullhorn"></i> Idéal pour débuter, accédez aux fondamentaux et aux premiers outils.</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: BRONZE123)" data-tier="bronze" disabled>
-                            <button class="btn-unlock-code" data-tier="bronze" disabled>Déverrouiller</button>
-                            <!-- 👉 VOICI LE BOUTON "AJOUTER AU PANIER" -->
-                            <button class="btn-add-cart" data-tier="bronze" disabled>Ajouter au panier</button>
+                            <input type="text" class="code-input" placeholder="Code (ex: BRONZE123)" data-tier="bronze">
+                            <button class="btn-unlock-code" data-tier="bronze">Déverrouiller</button>
+                            <button class="btn-add-cart" data-tier="bronze">Ajouter au panier</button>
                         </div>
-                        <div class="code-message info" id="msg-bronze">Connectez-vous pour agir</div>
+                        <div class="code-message" id="msg-bronze"></div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -310,9 +313,7 @@
                 </div>
             </div>
 
-            <!-- ========================================================= -->
-            <!-- PACK SILVER -->
-            <!-- ========================================================= -->
+            <!-- Pack Silver -->
             <div class="space-card tier-silver locked-card" data-tier="silver" id="cardSilver">
                 <div class="card-header">
                     <div class="space-title">
@@ -338,12 +339,13 @@
                     </div>
                     <div class="pack-actions">
                         <div class="pack-price"><i class="fas fa-euro-sign"></i> 20 €</div>
+                        <div class="pack-description"><i class="fas fa-rocket"></i> Passez au niveau supérieur avec des stratégies avancées et des études de cas.</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: SILVER456)" data-tier="silver" disabled>
-                            <button class="btn-unlock-code" data-tier="silver" disabled>Déverrouiller</button>
-                            <button class="btn-add-cart" data-tier="silver" disabled>Ajouter au panier</button>
+                            <input type="text" class="code-input" placeholder="Code (ex: SILVER456)" data-tier="silver">
+                            <button class="btn-unlock-code" data-tier="silver">Déverrouiller</button>
+                            <button class="btn-add-cart" data-tier="silver">Ajouter au panier</button>
                         </div>
-                        <div class="code-message info" id="msg-silver">Connectez-vous pour agir</div>
+                        <div class="code-message" id="msg-silver"></div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -354,9 +356,7 @@
                 </div>
             </div>
 
-            <!-- ========================================================= -->
-            <!-- PACK GOLD -->
-            <!-- ========================================================= -->
+            <!-- Pack Gold -->
             <div class="space-card tier-gold locked-card" data-tier="gold" id="cardGold">
                 <div class="card-header">
                     <div class="space-title">
@@ -383,12 +383,13 @@
                     </div>
                     <div class="pack-actions">
                         <div class="pack-price"><i class="fas fa-euro-sign"></i> 30 €</div>
+                        <div class="pack-description"><i class="fas fa-crown"></i> Devenez un expert avec des contenus exclusifs et un mentorat de haut niveau.</div>
                         <div class="action-row">
-                            <input type="text" class="code-input" placeholder="Code (ex: GOLD789)" data-tier="gold" disabled>
-                            <button class="btn-unlock-code" data-tier="gold" disabled>Déverrouiller</button>
-                            <button class="btn-add-cart" data-tier="gold" disabled>Ajouter au panier</button>
+                            <input type="text" class="code-input" placeholder="Code (ex: GOLD789)" data-tier="gold">
+                            <button class="btn-unlock-code" data-tier="gold">Déverrouiller</button>
+                            <button class="btn-add-cart" data-tier="gold">Ajouter au panier</button>
                         </div>
-                        <div class="code-message info" id="msg-gold">Connectez-vous pour agir</div>
+                        <div class="code-message" id="msg-gold"></div>
                     </div>
                 </div>
                 <div class="access-status">
@@ -465,7 +466,7 @@
         (function() {
             'use strict';
 
-            // ---- ÉLÉMENTS ----
+            // ---- ÉLÉMENTS DOM ----
             const authNotLogged = document.getElementById('authNotLogged');
             const authLogged = document.getElementById('authLogged');
             const userNameDisplay = document.getElementById('userNameDisplay');
@@ -474,13 +475,11 @@
             const btnRegister = document.getElementById('btnRegister');
             const btnGoogle = document.getElementById('btnGoogle');
             const btnLogout = document.getElementById('btnLogout');
-
             const userAvatar = document.getElementById('userAvatar');
             const userName = document.getElementById('userName');
             const userSub = document.getElementById('userSub');
             const planLabel = document.getElementById('planLabel');
             const planLevel = document.getElementById('planLevel');
-
             const modalOverlay = document.getElementById('modalOverlay');
             const closeModal = document.getElementById('closeModal');
             const modalTitle = document.getElementById('modalTitle');
@@ -495,7 +494,6 @@
             const toggleText = document.getElementById('toggleText');
             const toggleLink = document.getElementById('toggleLink');
             const nameField = document.getElementById('nameField');
-
             const cartBtn = document.getElementById('cartBtn');
             const cartBadge = document.getElementById('cartBadge');
             const cartModal = document.getElementById('cartModal');
@@ -509,14 +507,14 @@
             const cartCodeApply = document.getElementById('cartCodeApply');
             const btnClearCart = document.getElementById('btnClearCart');
             const cartMessage = document.getElementById('cartMessage');
-
             const cards = document.querySelectorAll('.space-card');
 
             // ---- ÉTATS ----
             let currentUser = null;
             let isLoginMode = true;
+            let pendingCheckout = false; // pour déclencher le paiement après auth
 
-            // ---- MAP DES CODES ----
+            // ---- CODES ----
             const codeMap = {
                 'BRONZE123': 'bronze',
                 'SILVER456': 'silver',
@@ -539,7 +537,6 @@
             function clearSession() {
                 localStorage.removeItem('loyaltySession');
             }
-
             function getUnlockedPacks() {
                 try { return JSON.parse(localStorage.getItem('loyaltyUnlockedPacks')) || {}; } catch { return {}; }
             }
@@ -555,41 +552,21 @@
 
             // ---- PANIER ----
             let cart = [];
-
             function loadCart() {
-                try {
-                    const saved = localStorage.getItem('loyaltyCart');
-                    cart = saved ? JSON.parse(saved) : [];
-                } catch { cart = []; }
+                try { const saved = localStorage.getItem('loyaltyCart'); cart = saved ? JSON.parse(saved) : []; } catch { cart = []; }
                 updateCartUI();
             }
-
             function saveCart() {
                 localStorage.setItem('loyaltyCart', JSON.stringify(cart));
                 updateCartUI();
             }
-
-            function addToCart(tier) {
-                if (cart.includes(tier)) return;
-                cart.push(tier);
-                saveCart();
-            }
-
-            function removeFromCart(tier) {
-                cart = cart.filter(t => t !== tier);
-                saveCart();
-            }
-
-            function clearCart() {
-                cart = [];
-                saveCart();
-            }
-
+            function addToCart(tier) { if (cart.includes(tier)) return; cart.push(tier); saveCart(); }
+            function removeFromCart(tier) { cart = cart.filter(t => t !== tier); saveCart(); }
+            function clearCart() { cart = []; saveCart(); }
             function getCartTotal() {
                 const prices = { bronze: 10, silver: 20, gold: 30 };
                 return cart.reduce((sum, tier) => sum + prices[tier], 0);
             }
-
             function updateCartUI() {
                 cartBadge.textContent = cart.length;
                 document.querySelectorAll('.btn-add-cart').forEach(btn => {
@@ -604,7 +581,6 @@
                 });
                 renderCartModal();
             }
-
             function renderCartModal() {
                 const total = getCartTotal();
                 const tierNames = { bronze: 'Découverte (10€)', silver: 'Professionnel (20€)', gold: 'Expert (30€)' };
@@ -631,7 +607,6 @@
                     const displayName = currentUser.name || currentUser.email.split('@')[0];
                     userNameDisplay.textContent = displayName;
                     userAvatarSmall.textContent = displayName.charAt(0).toUpperCase();
-
                     userAvatar.textContent = displayName.charAt(0).toUpperCase();
                     userName.textContent = `Bonjour, ${displayName}`;
                     userSub.textContent = 'Vous pouvez ajouter au panier ou utiliser un code.';
@@ -642,49 +617,31 @@
                     authLogged.classList.add('hidden');
                     userAvatar.textContent = '?';
                     userName.textContent = 'Bonjour, invité';
-                    userSub.textContent = 'Connectez-vous pour ajouter au panier et payer.';
+                    userSub.textContent = 'Ajoutez des packs au panier, puis passez à la caisse.';
                     planLabel.textContent = 'Codes : BRONZE123 · SILVER456 · GOLD789';
                     planLevel.textContent = '';
                 }
 
+                // Mettre à jour les cartes (verrouillage / déverrouillage)
                 cards.forEach(card => {
                     const tier = card.dataset.tier;
                     const unlocked = isPackUnlocked(tier);
-
                     const codeInput = card.querySelector('.code-input');
                     const codeBtn = card.querySelector('.btn-unlock-code');
                     const addBtn = card.querySelector('.btn-add-cart');
                     const msgEl = card.querySelector('.code-message');
 
-                    if (!isLoggedIn) {
-                        if (codeInput) { codeInput.disabled = true; }
-                        if (codeBtn) { codeBtn.disabled = true; }
-                        if (addBtn) { addBtn.disabled = true; }
-                        if (msgEl) {
-                            msgEl.textContent = '🔒 Connectez-vous pour agir';
-                            msgEl.className = 'code-message info';
-                        }
-                    } else {
-                        if (unlocked) {
-                            if (codeInput) { codeInput.disabled = true; }
-                            if (codeBtn) { codeBtn.textContent = '✅ Débloqué'; codeBtn.classList.add('purchased'); codeBtn.disabled = true; }
-                            if (addBtn) { addBtn.disabled = true; }
-                            if (msgEl) {
-                                msgEl.textContent = '✅ Pack débloqué !';
-                                msgEl.className = 'code-message success';
-                            }
-                        } else {
-                            if (codeInput) { codeInput.disabled = false; }
-                            if (codeBtn) { codeBtn.textContent = 'Déverrouiller'; codeBtn.classList.remove('purchased'); codeBtn.disabled = false; }
-                            if (addBtn) { addBtn.disabled = false; }
-                            if (msgEl) {
-                                msgEl.textContent = '';
-                                msgEl.className = 'code-message';
-                            }
-                        }
-                    }
-
+                    // Le champ code et bouton déverrouiller sont toujours actifs (pas de désactivation)
+                    // mais on gère le message
                     if (unlocked) {
+                        // Si déjà débloqué, on désactive le champ et le bouton
+                        if (codeInput) codeInput.disabled = true;
+                        if (codeBtn) { codeBtn.textContent = '✅ Débloqué'; codeBtn.classList.add('purchased'); codeBtn.disabled = true; }
+                        if (addBtn) addBtn.disabled = true; // plus besoin d'ajouter
+                        if (msgEl) {
+                            msgEl.textContent = '✅ Pack débloqué !';
+                            msgEl.className = 'code-message success';
+                        }
                         card.classList.remove('locked-card');
                         const statusEl = card.querySelector('.access-status .status-badge');
                         if (statusEl) {
@@ -698,6 +655,14 @@
                             lockIcon.style.opacity = '1';
                         }
                     } else {
+                        // Non débloqué : tout est actif (sauf si déjà dans le panier, géré par updateCartUI)
+                        if (codeInput) codeInput.disabled = false;
+                        if (codeBtn) { codeBtn.textContent = 'Déverrouiller'; codeBtn.classList.remove('purchased'); codeBtn.disabled = false; }
+                        if (addBtn) addBtn.disabled = false;
+                        if (msgEl) {
+                            msgEl.textContent = '';
+                            msgEl.className = 'code-message';
+                        }
                         card.classList.add('locked-card');
                         const statusEl = card.querySelector('.access-status .status-badge');
                         if (statusEl) {
@@ -712,24 +677,21 @@
                         }
                     }
                 });
-
                 updateCartUI();
             }
 
-            // ---- GESTION DU CODE (carte) ----
+            // ---- CODE SUR CARTE ----
             function handleCodeUnlock(btn) {
                 const tier = btn.dataset.tier;
                 const card = btn.closest('.space-card');
                 const input = card.querySelector('.code-input');
                 const msgEl = card.querySelector('.code-message');
                 const code = input.value.trim().toUpperCase();
-
                 if (isPackUnlocked(tier)) {
                     msgEl.textContent = 'Pack déjà débloqué.';
                     msgEl.className = 'code-message success';
                     return;
                 }
-
                 const expectedTier = codeMap[code];
                 if (expectedTier === tier) {
                     saveUnlockedPack(tier);
@@ -743,22 +705,26 @@
                 }
             }
 
-            // ---- GESTION DU PANIER : CHECKOUT ----
+            // ---- CHECKOUT (avec Stripe simulé) ----
             function handleCheckout() {
                 if (cart.length === 0) return;
                 if (!currentUser) {
-                    sessionStorage.setItem('pendingCheckout', 'true');
+                    // Demander authentification avant paiement
+                    pendingCheckout = true;
                     openModal('login');
                     return;
                 }
+                // L'utilisateur est connecté, on simule l'ouverture de Stripe
                 const total = getCartTotal();
-                if (confirm(`💳 Passer à la caisse pour un total de ${total.toFixed(2)} € ? (Simulation)`)) {
+                if (confirm(`💳 Paiement Stripe : ${total.toFixed(2)} € ? (Simulation)`)) {
+                    // Ici on intégrera plus tard l'API Stripe
+                    // Pour l'instant on simule un paiement réussi
                     cart.forEach(tier => saveUnlockedPack(tier));
                     clearCart();
                     applyUserState();
                     cartMessage.textContent = '🎉 Paiement accepté ! Tous les packs sont débloqués.';
                     cartMessage.className = 'checkout-message success';
-                    setTimeout(() => { closeCartModal(); }, 2000);
+                    setTimeout(() => { closeCartModal(); }, 2500);
                 }
             }
 
@@ -808,8 +774,10 @@
                     saveSession({ email });
                     closeModalHandler();
                     applyUserState();
-                    if (sessionStorage.getItem('pendingCheckout') === 'true') {
-                        sessionStorage.removeItem('pendingCheckout');
+                    // Après connexion, si on avait un paiement en attente
+                    if (pendingCheckout) {
+                        pendingCheckout = false;
+                        // Rouvrir le panier et lancer le paiement
                         openCartModal();
                         setTimeout(() => handleCheckout(), 300);
                     }
@@ -828,20 +796,19 @@
                     saveSession({ email });
                     closeModalHandler();
                     applyUserState();
-                    if (sessionStorage.getItem('pendingCheckout') === 'true') {
-                        sessionStorage.removeItem('pendingCheckout');
+                    if (pendingCheckout) {
+                        pendingCheckout = false;
                         openCartModal();
                         setTimeout(() => handleCheckout(), 300);
                     }
                 }
             }
-
             function showError(msg) {
                 modalError.textContent = msg;
                 modalError.classList.add('show');
             }
 
-            // ---- MODAL AUTH ----
+            // ---- MODALES ----
             function openModal(mode) {
                 isLoginMode = (mode === 'login');
                 if (isLoginMode) {
@@ -866,17 +833,13 @@
                 inputPassword.value = '';
                 modalOverlay.classList.add('open');
             }
-
             function closeModalHandler() {
                 modalOverlay.classList.remove('open');
             }
-
-            // ---- PANIER MODAL ----
             function openCartModal() {
                 renderCartModal();
                 cartModal.classList.add('open');
             }
-
             function closeCartModal() {
                 cartModal.classList.remove('open');
                 cartMessage.textContent = '';
@@ -908,8 +871,8 @@
                 saveSession({ email: fakeEmail });
                 closeModalHandler();
                 applyUserState();
-                if (sessionStorage.getItem('pendingCheckout') === 'true') {
-                    sessionStorage.removeItem('pendingCheckout');
+                if (pendingCheckout) {
+                    pendingCheckout = false;
                     openCartModal();
                     setTimeout(() => handleCheckout(), 300);
                 }
@@ -920,7 +883,7 @@
             btnLogout.addEventListener('click', () => {
                 clearSession();
                 currentUser = null;
-                sessionStorage.removeItem('pendingCheckout');
+                pendingCheckout = false;
                 applyUserState();
             });
 
@@ -929,7 +892,6 @@
             cartModal.addEventListener('click', (e) => {
                 if (e.target === cartModal) closeCartModal();
             });
-
             btnCheckout.addEventListener('click', handleCheckout);
 
             btnCartCode.addEventListener('click', () => {
@@ -940,7 +902,6 @@
             cartCodeInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') applyCartCode();
             });
-
             btnClearCart.addEventListener('click', () => {
                 if (cart.length === 0) return;
                 if (confirm('Vider le panier ?')) {
@@ -950,6 +911,7 @@
                 }
             });
 
+            // Clic sur "Ajouter au panier" et "Déverrouiller" sur les cartes
             document.addEventListener('click', function(e) {
                 const addBtn = e.target.closest('.btn-add-cart');
                 if (addBtn && !addBtn.disabled && !addBtn.classList.contains('in-cart')) {
@@ -980,6 +942,7 @@
             loadCart();
             applyUserState();
 
+            // ---- LIENS "VOIR TOUT" ----
             document.querySelectorAll('.see-all').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
