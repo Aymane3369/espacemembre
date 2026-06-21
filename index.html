@@ -6,7 +6,6 @@
     <title>Espace Fidélité · Panier & Paiement</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ---- RESET ET STYLES COMPACTS ---- */
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',sans-serif; background:#f4f6fb; min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:center; }
         .app { max-width:1360px; width:100%; background:#fff; border-radius:24px; box-shadow:0 12px 40px rgba(15,26,46,0.08); padding:28px 32px 40px; }
@@ -57,11 +56,9 @@
         .content-item .item-icon { width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; background:rgba(15,26,46,0.04); color:#8896ab; }
         .content-item .item-title { flex:1; font-weight:500; min-width:70px; }
         .content-item .item-tag { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px; padding:2px 8px; border-radius:40px; background:rgba(15,26,46,0.04); color:#8896ab; }
-        /* Zone d'actions */
         .pack-actions { margin-top:10px; padding:12px 0 0; border-top:1px solid rgba(15,26,46,0.06); display:flex; flex-direction:column; gap:10px; }
         .pack-actions .pack-price { font-weight:800; font-size:20px; color:#0f1a2e; display:flex; align-items:center; gap:6px; }
         .pack-actions .pack-price i { color:#c9a84c; font-size:16px; }
-        /* Descriptif du pack */
         .pack-description { font-size:13px; color:#4a5568; font-weight:400; line-height:1.4; margin: -4px 0 2px; }
         .pack-description i { color:#c9a84c; margin-right:4px; }
         .pack-actions .action-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
@@ -71,7 +68,7 @@
         .pack-actions .action-row .btn-unlock-code { background:#e2e8f0; border:none; padding:6px 16px; border-radius:40px; font-weight:600; font-size:12px; color:#4a5568; cursor:pointer; transition:0.3s; }
         .pack-actions .action-row .btn-unlock-code:hover:not(:disabled) { background:#d0d7e2; }
         .pack-actions .action-row .btn-unlock-code:disabled { opacity:0.4; cursor:not-allowed; }
-        /* BOUTON AJOUTER AU PANIER : TOUJOURS ACTIF */
+        /* BOUTON AJOUTER AU PANIER : TOUJOURS ACTIF (sauf si déjà dans le panier ou pack débloqué) */
         .pack-actions .action-row .btn-add-cart {
             background: #0f1a2e;
             border: none;
@@ -86,9 +83,10 @@
             align-items: center;
             gap: 6px;
             opacity: 1;
+            pointer-events: auto;
         }
         .pack-actions .action-row .btn-add-cart:hover { background: #1a2c4a; transform: scale(1.02); }
-        .pack-actions .action-row .btn-add-cart.in-cart { background: #2e7d5e; cursor: default; opacity: 0.8; }
+        .pack-actions .action-row .btn-add-cart.in-cart { background: #2e7d5e; cursor: default; opacity: 0.8; pointer-events: none; }
         .pack-actions .action-row .btn-add-cart.in-cart:hover { transform: none; }
         .pack-actions .code-message { font-size:12px; font-weight:500; margin-top:2px; }
         .pack-actions .code-message.success { color:#0b6e3f; }
@@ -113,7 +111,6 @@
         .tier-gold .icon-circle { background:#f7f0df; color:#b8942b; }
         .tier-gold .card-header .space-title h3 { color:#8a6d1b; }
 
-        /* MODALES */
         .cart-modal { position:fixed; inset:0; background:rgba(15,26,46,0.5); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; z-index:2000; padding:20px; opacity:0; visibility:hidden; transition:0.3s; }
         .cart-modal.open { opacity:1; visibility:visible; }
         .cart-modal .cart-content { background:#fff; max-width:540px; width:100%; border-radius:24px; padding:28px 24px 32px; box-shadow:0 40px 80px rgba(0,0,0,0.2); transform:scale(0.95); transition:0.3s; max-height:80vh; overflow-y:auto; }
@@ -128,19 +125,7 @@
         .cart-content .cart-item .item-price { font-weight:700; color:#0f1a2e; }
         .cart-content .cart-total { font-size:18px; font-weight:700; text-align:right; padding:10px 0; border-top:1px solid rgba(15,26,46,0.06); margin-top:4px; }
         .cart-content .cart-actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
-        .cart-content .cart-actions .btn-checkout {
-            flex:1;
-            background: linear-gradient(135deg,#c9a84c,#f0dfb0);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 16px;
-            color: #0f1a2e;
-            cursor: pointer;
-            transition: 0.3s;
-            min-width: 140px;
-        }
+        .cart-content .cart-actions .btn-checkout { flex:1; background:linear-gradient(135deg,#c9a84c,#f0dfb0); border:none; padding:12px 20px; border-radius:60px; font-weight:700; font-size:16px; color:#0f1a2e; cursor:pointer; transition:0.3s; min-width:140px; }
         .cart-content .cart-actions .btn-checkout:hover:not(:disabled) { transform:scale(1.02); box-shadow:0 6px 20px rgba(201,168,76,0.3); }
         .cart-content .cart-actions .btn-checkout:disabled { opacity:0.4; cursor:not-allowed; }
         .cart-content .cart-actions .btn-code { background:#e2e8f0; border:none; padding:12px 20px; border-radius:60px; font-weight:600; font-size:14px; color:#4a5568; cursor:pointer; transition:0.3s; flex:1; }
@@ -512,7 +497,7 @@
             // ---- ÉTATS ----
             let currentUser = null;
             let isLoginMode = true;
-            let pendingCheckout = false; // pour déclencher le paiement après auth
+            let pendingCheckout = false;
 
             // ---- CODES ----
             const codeMap = {
@@ -622,7 +607,6 @@
                     planLevel.textContent = '';
                 }
 
-                // Mettre à jour les cartes (verrouillage / déverrouillage)
                 cards.forEach(card => {
                     const tier = card.dataset.tier;
                     const unlocked = isPackUnlocked(tier);
@@ -631,13 +615,10 @@
                     const addBtn = card.querySelector('.btn-add-cart');
                     const msgEl = card.querySelector('.code-message');
 
-                    // Le champ code et bouton déverrouiller sont toujours actifs (pas de désactivation)
-                    // mais on gère le message
                     if (unlocked) {
-                        // Si déjà débloqué, on désactive le champ et le bouton
                         if (codeInput) codeInput.disabled = true;
                         if (codeBtn) { codeBtn.textContent = '✅ Débloqué'; codeBtn.classList.add('purchased'); codeBtn.disabled = true; }
-                        if (addBtn) addBtn.disabled = true; // plus besoin d'ajouter
+                        if (addBtn) { addBtn.disabled = true; } // plus besoin d'ajouter
                         if (msgEl) {
                             msgEl.textContent = '✅ Pack débloqué !';
                             msgEl.className = 'code-message success';
@@ -655,7 +636,7 @@
                             lockIcon.style.opacity = '1';
                         }
                     } else {
-                        // Non débloqué : tout est actif (sauf si déjà dans le panier, géré par updateCartUI)
+                        // Non débloqué : tout est actif
                         if (codeInput) codeInput.disabled = false;
                         if (codeBtn) { codeBtn.textContent = 'Déverrouiller'; codeBtn.classList.remove('purchased'); codeBtn.disabled = false; }
                         if (addBtn) addBtn.disabled = false;
@@ -705,20 +686,16 @@
                 }
             }
 
-            // ---- CHECKOUT (avec Stripe simulé) ----
+            // ---- CHECKOUT ----
             function handleCheckout() {
                 if (cart.length === 0) return;
                 if (!currentUser) {
-                    // Demander authentification avant paiement
                     pendingCheckout = true;
                     openModal('login');
                     return;
                 }
-                // L'utilisateur est connecté, on simule l'ouverture de Stripe
                 const total = getCartTotal();
                 if (confirm(`💳 Paiement Stripe : ${total.toFixed(2)} € ? (Simulation)`)) {
-                    // Ici on intégrera plus tard l'API Stripe
-                    // Pour l'instant on simule un paiement réussi
                     cart.forEach(tier => saveUnlockedPack(tier));
                     clearCart();
                     applyUserState();
@@ -774,10 +751,8 @@
                     saveSession({ email });
                     closeModalHandler();
                     applyUserState();
-                    // Après connexion, si on avait un paiement en attente
                     if (pendingCheckout) {
                         pendingCheckout = false;
-                        // Rouvrir le panier et lancer le paiement
                         openCartModal();
                         setTimeout(() => handleCheckout(), 300);
                     }
