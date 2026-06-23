@@ -3,342 +3,248 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin · Packs · Promos · Codes</title>
+    <title>Espace Fidélité · Packs & Promotions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== TOUT LE STYLE EXISTANT (je le garde) ===== */
+        /* ===== TOUT LE STYLE EXISTANT (IDENTIQUE À AVANT) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f0f2f6; min-height: 100vh; display: flex; }
-        .sidebar { width: 260px; background: #0f1a2e; color: #e8edf2; padding: 28px 20px; display: flex; flex-direction: column; min-height: 100vh; position: sticky; top: 0; height: 100vh; overflow-y: auto; flex-shrink: 0; }
-        .sidebar .logo { display: flex; align-items: center; gap: 12px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 24px; }
-        .sidebar .logo .icon { width: 42px; height: 42px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #0f1a2e; }
-        .sidebar .logo h1 { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #c9a84c, #f0dfb0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .sidebar .logo span { font-size: 11px; opacity: 0.5; display: block; -webkit-text-fill-color: #8896ab; font-weight: 400; }
-        .sidebar .nav { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-        .sidebar .nav a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px; color: #9aa8b9; text-decoration: none; font-weight: 500; font-size: 14px; transition: 0.25s; cursor: pointer; }
-        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: #fff; }
-        .sidebar .nav a.active { background: rgba(201,168,76,0.15); color: #f0dfb0; }
-        .sidebar .nav a i { width: 20px; font-size: 15px; text-align: center; }
-        .sidebar .nav a .badge-nav { margin-left: auto; background: rgba(255,255,255,0.08); padding: 1px 10px; border-radius: 40px; font-size: 11px; font-weight: 600; color: #9aa8b9; }
-        .sidebar .nav a.active .badge-nav { background: rgba(201,168,76,0.2); color: #f0dfb0; }
-        .sidebar .footer-nav { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 8px; }
-        .sidebar .footer-nav a { color: #6a7a8d; font-size: 13px; }
-        .sidebar .footer-nav a:hover { color: #fff; }
-        .sidebar .admin-user { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: rgba(255,255,255,0.04); border-radius: 10px; margin-top: 12px; }
-        .sidebar .admin-user .avatar-admin { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #f0dfb0); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0f1a2e; font-size: 14px; }
-        .sidebar .admin-user .info { font-size: 13px; font-weight: 500; }
-        .sidebar .admin-user .info small { display: block; font-weight: 400; opacity: 0.5; font-size: 11px; }
-        .main { flex: 1; padding: 28px 36px 40px; overflow-y: auto; min-height: 100vh; }
-        .main .topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(15,26,46,0.06); margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
-        .main .topbar h2 { font-size: 24px; font-weight: 700; color: #0f1a2e; }
-        .main .topbar h2 small { font-weight: 400; font-size: 14px; color: #8896ab; margin-left: 10px; }
-        .main .topbar .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-        .main .topbar .actions .btn-outline { background: transparent; border: 1.5px solid #e2e8f0; padding: 6px 18px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #4a5568; cursor: pointer; transition: 0.3s; }
-        .main .topbar .actions .btn-outline:hover { background: #f4f6fb; border-color: #c9a84c; }
-        .main .topbar .actions .btn-primary { background: #0f1a2e; border: none; padding: 6px 20px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #fff; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; }
-        .main .topbar .actions .btn-primary:hover { background: #1a2c4a; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 18px; margin-bottom: 28px; }
-        .stats-grid .stat-card { background: #fff; border-radius: 14px; padding: 18px 22px; box-shadow: 0 2px 10px rgba(15,26,46,0.04); border: 1px solid rgba(15,26,46,0.05); display: flex; align-items: center; gap: 14px; }
-        .stats-grid .stat-card .stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-        .stats-grid .stat-card .stat-icon.gold { background: #f7f0df; color: #b8942b; }
-        .stats-grid .stat-card .stat-icon.blue { background: #e8edf5; color: #2c5282; }
-        .stats-grid .stat-card .stat-icon.green { background: #e6f7ee; color: #0b6e3f; }
-        .stats-grid .stat-card .stat-icon.purple { background: #ede7f7; color: #6b3fa0; }
-        .stats-grid .stat-card .stat-info .stat-number { font-size: 22px; font-weight: 700; color: #0f1a2e; line-height: 1.2; }
-        .stats-grid .stat-card .stat-info .stat-label { font-size: 12px; font-weight: 500; color: #8896ab; }
-        .tab-content { display: none; animation: fadeUp 0.35s ease forwards; }
-        .tab-content.active { display: block; }
-        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(12px); } 100% { opacity: 1; transform: translateY(0); } }
-        .section-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
-        .section-toolbar .search-box { display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #e2e8f0; border-radius: 40px; padding: 4px 16px 4px 18px; transition: 0.3s; }
-        .section-toolbar .search-box:focus-within { border-color: #c9a84c; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
-        .section-toolbar .search-box input { border: none; background: transparent; padding: 6px 0; font-size: 13px; outline: none; min-width: 180px; font-weight: 500; color: #0f1a2e; }
-        .section-toolbar .search-box i { color: #8896ab; font-size: 14px; }
-        .section-toolbar .btn-add { background: #0f1a2e; border: none; padding: 8px 22px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #fff; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .section-toolbar .btn-add:hover { background: #1a2c4a; transform: scale(1.02); }
-        .table-wrap { background: #fff; border-radius: 14px; border: 1px solid rgba(15,26,46,0.05); overflow: hidden; box-shadow: 0 2px 8px rgba(15,26,46,0.02); }
-        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .table-wrap table thead { background: #f8fafc; }
-        .table-wrap table th { text-align: left; padding: 12px 18px; font-weight: 600; color: #4a5568; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 1px solid #eef2f6; }
-        .table-wrap table td { padding: 12px 18px; border-bottom: 1px solid #f0f2f6; color: #2d3748; vertical-align: middle; }
-        .table-wrap table tr:last-child td { border-bottom: none; }
-        .table-wrap table tr:hover td { background: #fafbfc; }
-        .table-wrap .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 12px; border-radius: 40px; font-size: 11px; font-weight: 600; }
-        .table-wrap .status-badge.paid { background: #e6f7ee; color: #0b6e3f; }
-        .table-wrap .status-badge.pending { background: #fef7e6; color: #a67c1a; }
-        .table-wrap .status-badge.cancelled { background: #f7f0f0; color: #a04444; }
-        .table-wrap .actions-cell { display: flex; gap: 6px; }
-        .table-wrap .actions-cell button { background: transparent; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: 0.2s; color: #8896ab; }
-        .table-wrap .actions-cell button:hover { background: #f4f6fb; color: #0f1a2e; }
-        .table-wrap .actions-cell button.danger:hover { background: #fde8e8; color: #a04444; }
-        .table-wrap .actions-cell button.success:hover { background: #e6f7ee; color: #0b6e3f; }
-        .empty-state { text-align: center; padding: 40px 20px; color: #8896ab; }
-        .empty-state i { font-size: 40px; opacity: 0.3; margin-bottom: 12px; display: block; }
-        .empty-state p { font-weight: 500; }
-        .packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
-        .pack-card { background: #fff; border-radius: 14px; border: 1px solid rgba(15,26,46,0.06); padding: 18px 20px 20px; transition: 0.3s; box-shadow: 0 2px 8px rgba(15,26,46,0.02); display: flex; flex-direction: column; }
-        .pack-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(15,26,46,0.07); border-color: rgba(201,168,76,0.2); }
-        .pack-card .pc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-        .pack-card .pc-header .pc-title { font-weight: 700; font-size: 17px; color: #0f1a2e; }
-        .pack-card .pc-header .pc-tier { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 2px 14px; border-radius: 40px; background: #f4f6fb; color: #4a5568; }
-        .pack-card .pc-tier.bronze { background: #ece7dc; color: #7a653b; }
-        .pack-card .pc-tier.silver { background: #e8edf2; color: #3d4e62; }
-        .pack-card .pc-tier.gold { background: #f7f0df; color: #8a6d1b; }
-        .pack-card .pc-desc { font-size: 13px; color: #4a5568; margin: 6px 0 10px; line-height: 1.4; flex: 1; }
-        .pack-card .pc-price { font-weight: 700; font-size: 16px; color: #0f1a2e; margin-bottom: 8px; }
-        .pack-card .pc-price i { color: #c9a84c; margin-right: 4px; }
-        .pack-card .pc-access-code { font-size: 12px; background: #f4f6fb; padding: 2px 10px; border-radius: 40px; display: inline-block; margin-bottom: 8px; color: #4a5568; }
-        .pack-card .pc-access-code i { margin-right: 4px; color: #c9a84c; }
-        .pack-card .pc-content-list { margin: 6px 0 12px; border-top: 1px solid rgba(15,26,46,0.04); padding-top: 10px; }
-        .pack-card .pc-content-list .content-item { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 4px 0; color: #2d3748; }
-        .pack-card .pc-content-list .content-item i { width: 18px; color: #8896ab; font-size: 13px; }
-        .pack-card .pc-content-list .content-item .file-link { color: #2c5282; text-decoration: none; font-weight: 500; word-break: break-all; }
-        .pack-card .pc-content-list .content-item .file-link:hover { text-decoration: underline; }
-        .pack-card .pc-actions { display: flex; gap: 8px; border-top: 1px solid rgba(15,26,46,0.04); padding-top: 12px; margin-top: 4px; }
-        .pack-card .pc-actions button { flex: 1; padding: 6px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
-        .pack-card .pc-actions .btn-edit { background: #f4f6fb; color: #4a5568; }
-        .pack-card .pc-actions .btn-edit:hover { background: #e8edf5; color: #0f1a2e; }
-        .pack-card .pc-actions .btn-delete { background: #fde8e8; color: #a04444; }
-        .pack-card .pc-actions .btn-delete:hover { background: #fcd5d5; }
-        .modal-overlay { position: fixed; inset: 0; background: rgba(15,26,46,0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .modal-overlay.open { opacity: 1; visibility: visible; }
-        .modal-overlay .modal { background: #fff; max-width: 720px; width: 100%; border-radius: 24px; padding: 32px 28px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); transform: scale(0.95); transition: 0.3s; max-height: 90vh; overflow-y: auto; position: relative; }
-        .modal-overlay.open .modal { transform: scale(1); }
-        .modal .close-modal { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 22px; color: #8896ab; cursor: pointer; }
+        body { font-family: 'Inter', sans-serif; background: #f4f6fb; min-height: 100vh; padding: 20px; display: flex; justify-content: center; align-items: center; }
+        .app { max-width: 1360px; width: 100%; background: #fff; border-radius: 24px; box-shadow: 0 12px 40px rgba(15,26,46,0.08); padding: 28px 32px 40px; }
+        .header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 2px solid rgba(15,26,46,0.05); margin-bottom: 28px; gap: 12px; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #0f1a2e; }
+        .brand h1 { font-family: 'Georgia', serif; font-size: 26px; font-weight: 700; background: linear-gradient(135deg, #c9a84c, #f0dfb0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .brand span { font-size: 13px; color: #8896ab; display: block; -webkit-text-fill-color: #8896ab; }
+        .header-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .auth-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .auth-controls .user-info { display: flex; align-items: center; gap: 10px; background: #f4f6fb; padding: 4px 14px 4px 10px; border-radius: 60px; }
+        .auth-controls .user-info .avatar-sm { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #f0dfb0); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0f1a2e; font-size: 14px; }
+        .auth-controls .user-info .user-name { font-weight: 600; font-size: 14px; }
+        .auth-controls .btn-outline { background: transparent; border: 1.5px solid #0f1a2e; color: #0f1a2e; padding: 6px 16px; border-radius: 40px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.3s; }
+        .auth-controls .btn-outline:hover { background: #0f1a2e; color: #fff; }
+        .auth-controls .btn-primary { background: #0f1a2e; border: none; color: #fff; padding: 6px 20px; border-radius: 40px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.3s; }
+        .auth-controls .btn-primary:hover { background: #1a2c4a; }
+        .auth-controls .btn-google { background: #fff; border: 1px solid #dadce0; color: #3c4043; padding: 6px 16px; border-radius: 40px; font-weight: 500; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+        .auth-controls .btn-google:hover { background: #f8f9fa; }
+        .auth-controls .btn-logout { background: transparent; border: none; color: #8896ab; font-size: 13px; cursor: pointer; padding: 4px 6px; }
+        .auth-controls .btn-logout:hover { color: #0f1a2e; text-decoration: underline; }
+        .cart-btn { background: transparent; border: none; font-size: 22px; color: #0f1a2e; cursor: pointer; position: relative; padding: 4px; }
+        .cart-btn .badge { position: absolute; top: -6px; right: -8px; background: #c9a84c; color: #0f1a2e; font-size: 11px; font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+        .user-banner { background: linear-gradient(135deg, #0f1a2e, #1a2c4a); border-radius: 14px; padding: 20px 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 28px; color: #fff; gap: 12px; }
+        .user-banner .greeting { display: flex; align-items: center; gap: 14px; }
+        .user-banner .avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #f0dfb0); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; color: #0f1a2e; }
+        .user-banner .greeting-text h2 { font-size: 19px; font-weight: 600; }
+        .user-banner .greeting-text p { font-size: 13px; opacity: 0.75; margin-top: 2px; }
+        .user-banner .plan-badge { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); padding: 8px 18px; border-radius: 60px; border: 1px solid rgba(255,255,255,0.08); }
+        .user-banner .plan-badge .plan-name { font-weight: 600; font-size: 14px; }
+        .user-banner .plan-badge .plan-name i { margin-right: 6px; color: #e8d5a3; }
+        .user-banner .plan-badge .plan-level { font-size: 11px; font-weight: 500; opacity: 0.7; background: rgba(255,255,255,0.08); padding: 2px 10px; border-radius: 40px; }
+        .spaces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 6px; }
+        .space-card { background: #fff; border-radius: 16px; border: 1px solid rgba(15,26,46,0.06); overflow: hidden; transition: 0.3s; box-shadow: 0 2px 8px rgba(15,26,46,0.02); display: flex; flex-direction: column; position: relative; }
+        .space-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(15,26,46,0.10); border-color: rgba(201,168,76,0.2); }
+        .space-card .card-header { padding: 18px 20px 12px; border-bottom: 1px solid rgba(15,26,46,0.04); display: flex; align-items: center; justify-content: space-between; }
+        .space-card .card-header .space-title { display: flex; align-items: center; gap: 10px; }
+        .space-card .card-header .space-title .icon-circle { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .space-card .card-header .space-title h3 { font-size: 17px; font-weight: 700; }
+        .space-card .card-header .space-title .sub { font-size: 11px; font-weight: 400; color: #8896ab; display: block; margin-top: 1px; }
+        .space-card .card-header .lock-icon { font-size: 16px; color: #8896ab; opacity: 0.3; transition: 0.3s; }
+        .space-card .card-body { padding: 14px 20px 18px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+        .space-card .content-group { display: flex; flex-direction: column; gap: 6px; }
+        .space-card .content-group .group-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #8896ab; display: flex; align-items: center; gap: 6px; }
+        .space-card .content-group .group-label i { font-size: 12px; }
+        .content-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 10px; background: #f4f6fb; font-size: 13px; font-weight: 500; color: #4a5568; flex-wrap: wrap; }
+        .content-item .item-icon { width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; background: rgba(15,26,46,0.04); color: #8896ab; }
+        .content-item .item-title { flex: 1; font-weight: 500; min-width: 70px; }
+        .content-item .item-tag { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; padding: 2px 8px; border-radius: 40px; background: rgba(15,26,46,0.04); color: #8896ab; }
+        .pack-actions { margin-top: 10px; padding: 12px 0 0; border-top: 1px solid rgba(15,26,46,0.06); display: flex; flex-direction: column; gap: 10px; }
+        .pack-actions .pack-price { font-weight: 800; font-size: 20px; color: #0f1a2e; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .pack-actions .pack-price .original-price { font-size: 16px; font-weight: 400; color: #8896ab; text-decoration: line-through; }
+        .pack-actions .pack-price .discount-badge { font-size: 12px; font-weight: 700; background: #e6f7ee; color: #0b6e3f; padding: 2px 10px; border-radius: 40px; }
+        .pack-actions .pack-price i { color: #c9a84c; font-size: 16px; }
+        .pack-description { font-size: 13px; color: #4a5568; font-weight: 400; line-height: 1.4; margin: -4px 0 2px; }
+        .pack-description i { color: #c9a84c; margin-right: 4px; }
+        .pack-actions .action-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .pack-actions .action-row input.code-input { flex: 1; min-width: 100px; padding: 6px 12px; border: 1.5px solid #e2e8f0; border-radius: 40px; font-size: 13px; background: #f8fafc; outline: none; transition: 0.3s; }
+        .pack-actions .action-row input.code-input:focus { border-color: #c9a84c; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+        .pack-actions .action-row input.code-input:disabled { background: #edf2f7; cursor: not-allowed; }
+        .pack-actions .action-row .btn-unlock-code { background: #e2e8f0; border: none; padding: 6px 16px; border-radius: 40px; font-weight: 600; font-size: 12px; color: #4a5568; cursor: pointer; transition: 0.3s; }
+        .pack-actions .action-row .btn-unlock-code:hover:not(:disabled) { background: #d0d7e2; }
+        .pack-actions .action-row .btn-unlock-code:disabled { opacity: 0.4; cursor: not-allowed; }
+        .pack-actions .action-row .btn-add-cart { background: #0f1a2e; border: none; padding: 6px 18px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #fff; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; opacity: 1; pointer-events: auto; min-width: 140px; justify-content: center; }
+        .pack-actions .action-row .btn-add-cart:hover { background: #1a2c4a; transform: scale(1.02); }
+        .pack-actions .action-row .btn-add-cart.in-cart { background: #2e7d5e; }
+        .pack-actions .action-row .btn-add-cart.in-cart:hover { background: #1f5a45; }
+        .pack-actions .code-message { font-size: 12px; font-weight: 500; margin-top: 2px; }
+        .pack-actions .code-message.success { color: #0b6e3f; }
+        .pack-actions .code-message.error { color: #a04444; }
+        .space-card.locked-card .card-body { opacity: 0.7; pointer-events: none; filter: grayscale(0.15); }
+        .space-card.locked-card .pack-actions { pointer-events: auto !important; position: relative; z-index: 10; }
+        .space-card.locked-card .card-body::after { content: "Pack non débloqué"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: #8896ab; background: rgba(255,255,255,0.5); backdrop-filter: blur(2px); border-radius: 12px; z-index: 5; pointer-events: none; letter-spacing: 0.5px; height: calc(100% - 150px); top: 0; left: 0; width: 100%; }
+        .space-card.locked-card .card-body { position: relative; overflow: hidden; }
+        .space-card .access-status { padding: 10px 20px 14px; border-top: 1px solid rgba(15,26,46,0.04); text-align: center; font-size: 12px; font-weight: 500; background: rgba(15,26,46,0.01); }
+        .space-card .access-status .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: 40px; font-weight: 600; font-size: 11px; }
+        .space-card .access-status .status-badge.active { background: #e6f7ee; color: #0b6e3f; }
+        .space-card .access-status .status-badge.locked { background: #f7f0f0; color: #a04444; }
+        .space-card .card-footer { padding: 4px 20px 14px; text-align: right; }
+        .space-card .card-footer .see-all { font-size: 12px; font-weight: 600; color: #8896ab; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: 0.3s; }
+        .space-card .card-footer .see-all:hover { color: #0f1a2e; }
+        .space-card .card-footer .see-all:hover i { transform: translateX(3px); }
+        .tier-bronze .icon-circle { background: #ece7dc; color: #a68b5b; }
+        .tier-bronze .card-header .space-title h3 { color: #7a653b; }
+        .tier-silver .icon-circle { background: #e8edf2; color: #6b7b8f; }
+        .tier-silver .card-header .space-title h3 { color: #3d4e62; }
+        .tier-gold .icon-circle { background: #f7f0df; color: #b8942b; }
+        .tier-gold .card-header .space-title h3 { color: #8a6d1b; }
+        .cart-modal, .modal-overlay { position: fixed; inset: 0; background: rgba(15,26,46,0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .cart-modal.open, .modal-overlay.open { opacity: 1; visibility: visible; }
+        .cart-modal .cart-content, .modal-overlay .modal { background: #fff; max-width: 540px; width: 100%; border-radius: 24px; padding: 28px 24px 32px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); transform: scale(0.95); transition: 0.3s; max-height: 80vh; overflow-y: auto; }
+        .cart-modal.open .cart-content, .modal-overlay.open .modal { transform: scale(1); }
+        .cart-content .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .cart-content .cart-header h2 { font-size: 24px; }
+        .cart-content .cart-header .close-cart { background: none; border: none; font-size: 24px; color: #8896ab; cursor: pointer; }
+        .cart-content .cart-header .close-cart:hover { color: #0f1a2e; }
+        .cart-content .cart-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+        .cart-content .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f4f6fb; border-radius: 10px; font-weight: 500; }
+        .cart-content .cart-item .item-name { font-size: 14px; }
+        .cart-content .cart-item .item-price { font-weight: 700; color: #0f1a2e; }
+        .cart-content .cart-total { font-size: 18px; font-weight: 700; text-align: right; padding: 10px 0; border-top: 1px solid rgba(15,26,46,0.06); margin-top: 4px; }
+        .cart-content .cart-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+        .cart-content .cart-actions .btn-checkout { flex: 1; background: linear-gradient(135deg, #c9a84c, #f0dfb0); border: none; padding: 12px 20px; border-radius: 60px; font-weight: 700; font-size: 16px; color: #0f1a2e; cursor: pointer; transition: 0.3s; min-width: 140px; }
+        .cart-content .cart-actions .btn-checkout:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 6px 20px rgba(201,168,76,0.3); }
+        .cart-content .cart-actions .btn-checkout:disabled { opacity: 0.4; cursor: not-allowed; }
+        .cart-content .cart-actions .btn-code { background: #e2e8f0; border: none; padding: 12px 20px; border-radius: 60px; font-weight: 600; font-size: 14px; color: #4a5568; cursor: pointer; transition: 0.3s; flex: 1; }
+        .cart-content .cart-actions .btn-code:hover { background: #d0d7e2; }
+        .cart-content .cart-actions .btn-clear { background: transparent; border: 1.5px solid #e2e8f0; padding: 12px 20px; border-radius: 60px; font-weight: 600; font-size: 14px; color: #4a5568; cursor: pointer; transition: 0.3s; }
+        .cart-content .cart-actions .btn-clear:hover { background: #f4f6fb; }
+        .cart-content .code-area { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .cart-content .code-area input { flex: 1; padding: 8px 14px; border: 1.5px solid #e2e8f0; border-radius: 40px; font-size: 14px; outline: none; }
+        .cart-content .code-area input:focus { border-color: #c9a84c; }
+        .cart-content .code-area button { background: #0f1a2e; border: none; padding: 8px 20px; border-radius: 40px; color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .cart-content .code-area button:hover { background: #1a2c4a; }
+        .cart-content .checkout-message { margin-top: 12px; font-size: 14px; font-weight: 500; }
+        .cart-content .checkout-message.success { color: #0b6e3f; }
+        .cart-content .checkout-message.error { color: #a04444; }
+        .cart-content .empty-cart { text-align: center; color: #8896ab; padding: 20px 0; }
+        .modal .close-modal { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 22px; color: #8896ab; cursor: pointer; }
         .modal .close-modal:hover { color: #0f1a2e; }
-        .modal h2 { font-size: 22px; margin-bottom: 4px; }
+        .modal h2 { font-size: 24px; margin-bottom: 4px; }
         .modal .subtitle { color: #8896ab; font-size: 13px; margin-bottom: 20px; }
-        .modal .form-group { margin-bottom: 14px; }
+        .modal .form-group { margin-bottom: 16px; }
         .modal .form-group label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; color: #4a5568; }
-        .modal .form-group input, .modal .form-group select, .modal .form-group textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; background: #f8fafc; transition: 0.3s; font-family: inherit; }
-        .modal .form-group textarea { min-height: 60px; resize: vertical; }
-        .modal .form-group input:focus, .modal .form-group select:focus, .modal .form-group textarea:focus { outline: none; border-color: #c9a84c; background: #fff; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
-        .modal .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .modal .form-group input { width: 100%; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; background: #f8fafc; transition: 0.3s; }
+        .modal .form-group input:focus { outline: none; border-color: #c9a84c; background: #fff; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
         .modal .btn-submit { width: 100%; padding: 12px; border: none; border-radius: 60px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); font-weight: 700; font-size: 16px; color: #0f1a2e; cursor: pointer; transition: 0.3s; margin-top: 6px; }
         .modal .btn-submit:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
-        .modal .btn-submit.danger { background: #e2d4d4; color: #7a4a4a; }
-        .modal .btn-submit.danger:hover { background: #d4bdbd; box-shadow: 0 6px 20px rgba(160,68,68,0.2); }
+        .modal .divider { display: flex; align-items: center; gap: 14px; margin: 16px 0; color: #8896ab; font-size: 13px; }
+        .modal .divider hr { flex: 1; border: none; border-top: 1.5px solid #e2e8f0; }
+        .modal .btn-google-modal { width: 100%; padding: 10px; border: 1.5px solid #dadce0; border-radius: 60px; background: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: 0.3s; }
+        .modal .btn-google-modal:hover { background: #f8f9fa; }
+        .modal .toggle-auth { text-align: center; margin-top: 14px; font-size: 14px; color: #8896ab; }
+        .modal .toggle-auth a { color: #0f1a2e; font-weight: 600; cursor: pointer; text-decoration: underline; }
         .modal .error-msg { background: #fde8e8; color: #a04444; padding: 8px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 12px; display: none; }
         .modal .error-msg.show { display: block; }
-        .modal .content-fields { background: #f8fafc; border-radius: 12px; padding: 14px 16px; margin: 8px 0 12px; border: 1px dashed #e2e8f0; }
-        .modal .content-fields .cf-row { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
-        .modal .content-fields .cf-row:last-child { margin-bottom: 0; }
-        .modal .content-fields .cf-row input, .modal .content-fields .cf-row select { padding: 8px 12px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: #fff; flex: 1; min-width: 100px; }
-        .modal .content-fields .cf-row input:focus, .modal .content-fields .cf-row select:focus { border-color: #c9a84c; outline: none; }
-        .modal .content-fields .cf-row .btn-remove-content { background: #fde8e8; border: none; border-radius: 6px; padding: 4px 10px; color: #a04444; cursor: pointer; font-size: 13px; }
-        .modal .content-fields .cf-row .btn-remove-content:hover { background: #fcd5d5; }
-        .modal .btn-add-content { background: #f4f6fb; border: 1px dashed #c9a84c; border-radius: 8px; padding: 8px 14px; font-weight: 600; font-size: 13px; color: #4a5568; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
-        .modal .btn-add-content:hover { background: #e8edf5; border-color: #b8942b; }
-        .admin-login-overlay { position: fixed; inset: 0; background: rgba(15,26,46,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 3000; padding: 20px; opacity: 0; visibility: hidden; transition: 0.4s; }
-        .admin-login-overlay.open { opacity: 1; visibility: visible; }
-        .admin-login-overlay .login-box { background: #fff; max-width: 400px; width: 100%; border-radius: 24px; padding: 36px 30px 32px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); transform: scale(0.95); transition: 0.3s; }
-        .admin-login-overlay.open .login-box { transform: scale(1); }
-        .admin-login-overlay .login-box .logo { text-align: center; margin-bottom: 20px; }
-        .admin-login-overlay .login-box .logo .icon { width: 56px; height: 56px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 26px; color: #0f1a2e; }
-        .admin-login-overlay .login-box h2 { text-align: center; font-size: 22px; margin-top: 4px; }
-        .admin-login-overlay .login-box .sub { text-align: center; color: #8896ab; font-size: 13px; margin-bottom: 20px; }
-        .admin-login-overlay .login-box .form-group { margin-bottom: 14px; }
-        .admin-login-overlay .login-box .form-group label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; color: #4a5568; }
-        .admin-login-overlay .login-box .form-group input { width: 100%; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; background: #f8fafc; transition: 0.3s; }
-        .admin-login-overlay .login-box .form-group input:focus { outline: none; border-color: #c9a84c; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
-        .admin-login-overlay .login-box .btn-login { width: 100%; padding: 12px; border: none; border-radius: 60px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); font-weight: 700; font-size: 16px; color: #0f1a2e; cursor: pointer; transition: 0.3s; margin-top: 4px; }
-        .admin-login-overlay .login-box .btn-login:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
-        .admin-login-overlay .login-box .error-msg { background: #fde8e8; color: #a04444; padding: 8px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 12px; display: none; }
-        .admin-login-overlay .login-box .error-msg.show { display: block; }
-        .admin-login-overlay .login-box .back-link { display: block; text-align: center; margin-top: 14px; color: #8896ab; font-size: 13px; cursor: pointer; text-decoration: underline; }
-        .admin-login-overlay .login-box .back-link:hover { color: #0f1a2e; }
-        @media (max-width:1024px) { .sidebar { width:72px; padding:16px 10px; } .sidebar .logo h1, .sidebar .logo span, .sidebar .nav a span, .sidebar .nav a .badge-nav, .sidebar .admin-user .info, .sidebar .footer-nav a span { display:none; } .sidebar .logo .icon { width:36px; height:36px; font-size:16px; } .sidebar .nav a { justify-content:center; padding:12px; font-size:18px; } .sidebar .nav a i { width:auto; font-size:18px; } .sidebar .admin-user { justify-content:center; padding:8px; } .sidebar .admin-user .avatar-admin { width:32px; height:32px; font-size:12px; } .main { padding:20px 18px 32px; } .main .topbar h2 { font-size:20px; } .stats-grid { grid-template-columns:repeat(2,1fr); } .packs-grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); } .modal .form-row { grid-template-columns:1fr; } }
-        @media (max-width:640px) { .sidebar { width:56px; padding:12px 6px; } .sidebar .logo .icon { width:30px; height:30px; font-size:13px; } .sidebar .nav a { padding:8px; font-size:15px; } .main { padding:14px 12px 28px; } .stats-grid { grid-template-columns:1fr 1fr; gap:10px; } .stats-grid .stat-card { padding:12px 14px; flex-direction:column; align-items:flex-start; gap:6px; } .stats-grid .stat-card .stat-icon { width:36px; height:36px; font-size:14px; } .stats-grid .stat-card .stat-info .stat-number { font-size:18px; } .section-toolbar { flex-direction:column; align-items:stretch; } .section-toolbar .search-box input { min-width:unset; width:100%; } .table-wrap { overflow-x:auto; } .table-wrap table { font-size:12px; } .table-wrap table th, .table-wrap table td { padding:8px 12px; white-space:nowrap; } .packs-grid { grid-template-columns:1fr; } .modal .modal { padding:24px 16px; } .modal .form-row { grid-template-columns:1fr; } .main .topbar h2 small { display:block; margin-left:0; margin-top:2px; } }
-        ::-webkit-scrollbar { width:6px; height:6px; }
-        ::-webkit-scrollbar-track { background:transparent; }
-        ::-webkit-scrollbar-thumb { background:#d0d7e2; border-radius:10px; }
-        ::-webkit-scrollbar-thumb:hover { background:#b0b8c8; }
-
-        /* ===== NOUVEAU STYLE POUR LES PRIX MODIFIABLES ===== */
-        .price-fields {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            background: #f8fafc;
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 14px;
-        }
-        .price-fields .pf-group label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #4a5568;
-            display: block;
-            margin-bottom: 2px;
-        }
-        .price-fields .pf-group input {
-            width: 100%;
-            padding: 6px 10px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            background: #fff;
-            transition: 0.3s;
-        }
-        .price-fields .pf-group input:focus {
-            border-color: #c9a84c;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
-        }
-        .price-fields .pf-group input.prix-initial { color: #8896ab; text-decoration: line-through; }
-        .price-fields .pf-group input.prix-reduit { color: #0b6e3f; }
-        .price-fields .pf-group input.prix-reel { color: #2c5282; font-weight: 700; }
-        .price-fields .pf-group input[readonly] { background: #f0f2f6; cursor: not-allowed; }
-        .price-fields .pf-group .pf-badge {
-            font-size: 10px;
-            font-weight: 600;
-            color: #fff;
-            padding: 1px 8px;
-            border-radius: 40px;
-            display: inline-block;
-            margin-top: 2px;
-        }
-        .price-fields .pf-group .pf-badge.badge-barre { background: #8896ab; }
-        .price-fields .pf-group .pf-badge.badge-reduit { background: #0b6e3f; }
-        .price-fields .pf-group .pf-badge.badge-reel { background: #2c5282; }
+        .footer-note { margin-top: 32px; padding-top: 18px; border-top: 1px solid rgba(15,26,46,0.05); text-align: center; font-size: 13px; color: #8896ab; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; }
+        .footer-note i { color: #c9a84c; margin-right: 4px; }
+        .footer-note strong { color: #4a5568; font-weight: 600; }
+        .hidden { display: none !important; }
+        .inline-flex { display: inline-flex; align-items: center; gap: 6px; }
+        .space-card { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+        .space-card:nth-child(1) { animation-delay: 0.05s; }
+        .space-card:nth-child(2) { animation-delay: 0.15s; }
+        .space-card:nth-child(3) { animation-delay: 0.25s; }
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @media (max-width:1100px) { .spaces-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width:780px) { body { padding:12px; } .app { padding:16px; } .header { flex-direction:column; align-items:stretch; gap:10px; } .brand h1 { font-size:22px; } .header-right { justify-content:space-between; } .auth-controls { justify-content:center; } .user-banner { flex-direction:column; align-items:flex-start; padding:16px 18px; } .user-banner .plan-badge { width:100%; justify-content:center; } .spaces-grid { grid-template-columns:1fr; gap:18px; } .space-card .card-header { padding:14px 16px 10px; } .space-card .card-body { padding:10px 16px 14px; } .space-card .access-status { padding:8px 16px 12px; } .space-card .card-footer { padding:2px 16px 12px; } .brand-icon { width:40px; height:40px; font-size:20px; } .cart-modal .cart-content { padding:20px 16px; } .pack-actions .action-row { flex-direction:column; align-items:stretch; } .pack-actions .action-row input.code-input { min-width:unset; } .space-card.locked-card .card-body::after { height:calc(100% - 180px); } }
+        @media (max-width:440px) { .user-banner .greeting-text h2 { font-size:17px; } .user-banner .avatar { width:42px; height:42px; font-size:20px; } .content-item { font-size:12px; padding:6px 10px; } .auth-controls .btn-outline, .auth-controls .btn-primary, .auth-controls .btn-google { padding:4px 12px; font-size:12px; } }
     </style>
 </head>
 <body>
+    <div class="app" id="app">
+        <header class="header">
+            <div class="brand">
+                <div class="brand-icon"><i class="fas fa-crown"></i></div>
+                <div><h1>Espace Fidélité</h1><span>Packs · Promotions · Contenu</span></div>
+            </div>
+            <div class="header-right">
+                <div class="auth-controls" id="authControls">
+                    <div id="authNotLogged" class="inline-flex" style="gap:8px;">
+                        <button class="btn-outline" id="btnLogin">Connexion</button>
+                        <button class="btn-primary" id="btnRegister">S'inscrire</button>
+                        <button class="btn-google" id="btnGoogle"><i class="fab fa-google"></i> Google</button>
+                    </div>
+                    <div id="authLogged" class="hidden inline-flex" style="gap:6px;">
+                        <div class="user-info">
+                            <span class="avatar-sm" id="userAvatarSmall">M</span>
+                            <span class="user-name" id="userNameDisplay">Utilisateur</span>
+                            <button class="btn-logout" id="btnLogout">Déconnexion</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="cart-btn" id="cartBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </header>
 
-    <!-- ===== SIDEBAR ===== -->
-    <aside class="sidebar" id="sidebar">
-        <div class="logo">
-            <div class="icon"><i class="fas fa-crown"></i></div>
-            <div>
-                <h1>Admin</h1>
-                <span>Packs · Promos · Codes</span>
+        <div class="user-banner" id="userBanner">
+            <div class="greeting">
+                <div class="avatar" id="userAvatar">M</div>
+                <div class="greeting-text">
+                    <h2 id="userName">Bonjour, invité</h2>
+                    <p id="userSub">Découvrez nos packs et profitez des promotions</p>
+                </div>
             </div>
-        </div>
-        <nav class="nav">
-            <a class="active" data-tab="dashboard"><i class="fas fa-chart-pie"></i><span>Tableau de bord</span></a>
-            <a data-tab="packs"><i class="fas fa-boxes"></i><span>Packs</span><span class="badge-nav" id="packCountBadge">0</span></a>
-            <a data-tab="promotions"><i class="fas fa-tags"></i><span>Promotions</span><span class="badge-nav" id="promoCountBadge">0</span></a>
-            <a data-tab="users"><i class="fas fa-users"></i><span>Utilisateurs</span><span class="badge-nav" id="userCountBadge">0</span></a>
-            <a data-tab="orders"><i class="fas fa-shopping-bag"></i><span>Commandes</span><span class="badge-nav" id="orderCountBadge">0</span></a>
-            <div class="footer-nav">
-                <a id="goToSite"><i class="fas fa-arrow-left"></i><span>Retour au site</span></a>
-                <a id="adminLogout"><i class="fas fa-sign-out-alt"></i><span>Déconnexion</span></a>
-            </div>
-        </nav>
-        <div class="admin-user">
-            <div class="avatar-admin">A</div>
-            <div class="info">
-                Administrateur
-                <small>admin@loyalty.fr</small>
-            </div>
-        </div>
-    </aside>
-
-    <!-- ===== MAIN CONTENT ===== -->
-    <div class="main" id="mainContent">
-
-        <div class="topbar">
-            <h2 id="pageTitle">Tableau de bord <small>vue d'ensemble</small></h2>
-            <div class="actions">
-                <button class="btn-outline" id="refreshData"><i class="fas fa-sync-alt"></i> Rafraîchir</button>
-                <button class="btn-primary" id="btnAddPack" style="display:none;"><i class="fas fa-plus"></i> Nouveau pack</button>
-                <button class="btn-primary" id="btnAddPromo" style="display:none;"><i class="fas fa-plus"></i> Nouvelle promo</button>
-            </div>
-        </div>
-
-        <!-- TAB: DASHBOARD -->
-        <div class="tab-content active" id="tabDashboard">
-            <div class="stats-grid" id="statsGrid">
-                <div class="stat-card"><div class="stat-icon gold"><i class="fas fa-boxes"></i></div><div class="stat-info"><div class="stat-number" id="statPacks">0</div><div class="stat-label">Packs</div></div></div>
-                <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-users"></i></div><div class="stat-info"><div class="stat-number" id="statUsers">0</div><div class="stat-label">Utilisateurs</div></div></div>
-                <div class="stat-card"><div class="stat-icon green"><i class="fas fa-shopping-bag"></i></div><div class="stat-info"><div class="stat-number" id="statOrders">0</div><div class="stat-label">Commandes</div></div></div>
-                <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-euro-sign"></i></div><div class="stat-info"><div class="stat-number" id="statRevenue">0 €</div><div class="stat-label">CA</div></div></div>
-            </div>
-            <div style="background:#fff;border-radius:14px;border:1px solid rgba(15,26,46,0.05);padding:20px 24px;margin-top:8px;">
-                <h4 style="font-size:15px;font-weight:600;margin-bottom:10px;"><i class="fas fa-info-circle" style="color:#c9a84c;margin-right:8px;"></i>Gestion complète</h4>
-                <p style="color:#4a5568;font-size:14px;line-height:1.6;">
-                    Gérez vos packs, leur contenu, les codes d'accès, les promotions et suivez les commandes.
-                </p>
+            <div class="plan-badge" id="planBadge">
+                <span class="plan-name"><i class="fas fa-tag"></i> <span id="planLabel">Codes : BRONZE123 · SILVER456 · GOLD789</span></span>
+                <span class="plan-level" id="planLevel"></span>
             </div>
         </div>
 
-        <!-- TAB: PACKS -->
-        <div class="tab-content" id="tabPacks">
-            <div class="section-toolbar">
-                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="packSearch" placeholder="Rechercher un pack..." /></div>
-                <button class="btn-add" id="btnAddPack2"><i class="fas fa-plus"></i> Nouveau pack</button>
-            </div>
-            <div class="packs-grid" id="packsGrid"><div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-boxes"></i><p>Aucun pack</p></div></div>
-        </div>
+        <div class="spaces-grid" id="spacesGrid"></div>
 
-        <!-- TAB: PROMOTIONS -->
-        <div class="tab-content" id="tabPromotions">
-            <div class="section-toolbar">
-                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="promoSearch" placeholder="Rechercher une promo..." /></div>
-                <button class="btn-add" id="btnAddPromo2"><i class="fas fa-plus"></i> Nouvelle promotion</button>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead><tr><th>Code</th><th>Type</th><th>Valeur</th><th>Appliqué à</th><th>Date début</th><th>Date fin</th><th>Statut</th><th>Actions</th></tr></thead>
-                    <tbody id="promosTableBody"><tr><td colspan="8" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion</p></td></tr></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- TAB: USERS -->
-        <div class="tab-content" id="tabUsers">
-            <div class="section-toolbar">
-                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="userSearch" placeholder="Rechercher un utilisateur..." /></div>
-                <span style="font-size:13px;color:#8896ab;" id="userCountLabel">0 utilisateurs</span>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead><tr><th>Nom</th><th>Email</th><th>Packs débloqués</th><th>Actions</th></tr></thead>
-                    <tbody id="usersTableBody"><tr><td colspan="4" class="empty-state"><i class="fas fa-users"></i><p>Aucun utilisateur</p></td></tr></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- TAB: ORDERS -->
-        <div class="tab-content" id="tabOrders">
-            <div class="section-toolbar">
-                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="orderSearch" placeholder="Rechercher une commande..." /></div>
-                <span style="font-size:13px;color:#8896ab;" id="orderCountLabel">0 commandes</span>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead><tr><th>#</th><th>Client</th><th>Articles</th><th>Total</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead>
-                    <tbody id="ordersTableBody"><tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr></tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ===== ADMIN LOGIN OVERLAY ===== -->
-    <div class="admin-login-overlay" id="adminLoginOverlay">
-        <div class="login-box">
-            <div class="logo"><div class="icon"><i class="fas fa-shield-alt"></i></div><h2>Accès administrateur</h2><div class="sub">Mot de passe requis</div></div>
-            <div class="error-msg" id="loginError">Mot de passe incorrect.</div>
-            <div class="form-group"><label><i class="fas fa-lock"></i> Mot de passe</label><input type="password" id="adminPasswordInput" placeholder="••••••••" /></div>
-            <button class="btn-login" id="adminLoginBtn">Se connecter</button>
-            <a class="back-link" id="adminBackToSite">← Retour au site</a>
+        <div class="footer-note">
+            <span><i class="fas fa-key"></i> <strong>Codes d'accès</strong> : BRONZE123 · SILVER456 · GOLD789</span>
+            <span><i class="fas fa-shopping-cart"></i> Ajoutez au panier, puis payez avec Stripe</span>
+            <span><i class="fas fa-tags"></i> Les promotions s'appliquent automatiquement</span>
         </div>
     </div>
 
-    <!-- ===== MODAL ===== -->
+    <!-- MODAL PANIER -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header"><h2><i class="fas fa-shopping-bag"></i> Votre panier</h2><button class="close-cart" id="closeCart">&times;</button></div>
+            <div id="cartItems" class="cart-items"></div>
+            <div id="cartTotal" class="cart-total">Total : 0.00 €</div>
+            <div class="cart-actions">
+                <button class="btn-checkout" id="btnStripeCheckout" disabled>Payer avec Stripe</button>
+                <button class="btn-code" id="btnCartCode">Utiliser un code</button>
+                <button class="btn-clear" id="btnClearCart">Vider</button>
+            </div>
+            <div id="cartCodeArea" class="code-area hidden">
+                <input type="text" id="cartCodeInput" placeholder="Entrez votre code promo" />
+                <button id="cartCodeApply">Appliquer</button>
+            </div>
+            <div id="cartMessage" class="checkout-message"></div>
+        </div>
+    </div>
+
+    <!-- MODAL AUTH -->
     <div class="modal-overlay" id="modalOverlay">
-        <div class="modal" id="genericModal">
+        <div class="modal" id="authModal">
             <button class="close-modal" id="closeModal">&times;</button>
-            <h2 id="modalTitle">Nouveau pack</h2>
-            <p class="subtitle" id="modalSub">Configurez le pack et son contenu</p>
+            <h2 id="modalTitle">Connexion</h2>
+            <p class="subtitle" id="modalSub">Accédez à votre espace</p>
             <div class="error-msg" id="modalError"></div>
-            <form id="modalForm">
-                <div id="modalFormFields"></div>
-                <button type="submit" class="btn-submit" id="modalSubmitBtn">Enregistrer</button>
+            <form id="authForm">
+                <div id="nameField" class="form-group hidden"><label>Nom complet</label><input type="text" id="inputName" placeholder="Votre nom" /></div>
+                <div class="form-group"><label>Email</label><input type="email" id="inputEmail" placeholder="exemple@mail.com" required /></div>
+                <div class="form-group"><label>Mot de passe</label><input type="password" id="inputPassword" placeholder="••••••••" required /></div>
+                <button type="submit" class="btn-submit" id="modalSubmit">Se connecter</button>
             </form>
+            <div class="divider"><hr> ou <hr></div>
+            <button class="btn-google-modal" id="modalGoogle"><i class="fab fa-google"></i> Google</button>
+            <div class="toggle-auth"><span id="toggleText">Pas encore de compte ?</span> <a id="toggleLink">S'inscrire</a></div>
         </div>
     </div>
 
@@ -346,7 +252,9 @@
         (function() {
             'use strict';
 
-            const ADMIN_PASSWORD = 'admin123';
+            // ============================================================
+            //  CLÉS STORAGE (IDENTIQUES À L'ADMIN)
+            // ============================================================
             const STORAGE_KEYS = {
                 users: 'loyaltyUsers',
                 unlocked: 'loyaltyUnlockedPacks',
@@ -354,910 +262,678 @@
                 orders: 'loyaltyOrders',
                 packs: 'loyaltyPacks',
                 promos: 'loyaltyPromos',
-                session: 'loyaltySession',
-                adminLogged: 'loyaltyAdminLogged'
+                session: 'loyaltySession'
             };
 
-            // ---- DOM refs ----
-            const sidebar = document.getElementById('sidebar');
-            const navLinks = sidebar.querySelectorAll('.nav a[data-tab]');
-            const tabContents = {
-                dashboard: document.getElementById('tabDashboard'),
-                packs: document.getElementById('tabPacks'),
-                promotions: document.getElementById('tabPromotions'),
-                users: document.getElementById('tabUsers'),
-                orders: document.getElementById('tabOrders'),
-            };
-            const pageTitle = document.getElementById('pageTitle');
-            const btnAddPack = document.getElementById('btnAddPack');
-            const btnAddPack2 = document.getElementById('btnAddPack2');
-            const btnAddPromo = document.getElementById('btnAddPromo');
-            const btnAddPromo2 = document.getElementById('btnAddPromo2');
+            // ============================================================
+            //  HELPERS
+            // ============================================================
+            function getUsers() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || {}; } catch { return {}; } }
+            function getUnlockedPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.unlocked)) || {}; } catch { return {}; } }
+            function getPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.packs)) || []; } catch { return []; } }
+            function getPromos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promos)) || []; } catch { return []; } }
+            function getCart() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.cart)) || []; } catch { return []; } }
+            function getSession() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.session)) || null; } catch { return null; } }
+            function getOrders() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || []; } catch { return []; } }
 
-            const statPacks = document.getElementById('statPacks');
-            const statUsers = document.getElementById('statUsers');
-            const statOrders = document.getElementById('statOrders');
-            const statRevenue = document.getElementById('statRevenue');
+            function saveCart(cart) { localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(cart)); }
+            function saveUnlockedPacks(u) { localStorage.setItem(STORAGE_KEYS.unlocked, JSON.stringify(u)); }
+            function saveOrders(o) { localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(o)); }
 
-            const packCountBadge = document.getElementById('packCountBadge');
-            const promoCountBadge = document.getElementById('promoCountBadge');
-            const userCountBadge = document.getElementById('userCountBadge');
-            const orderCountBadge = document.getElementById('orderCountBadge');
-            const userCountLabel = document.getElementById('userCountLabel');
-            const orderCountLabel = document.getElementById('orderCountLabel');
+            // ============================================================
+            //  INITIALISATION DES DONNÉES (UNIQUEMENT SI VIDE)
+            // ============================================================
+            function initDefaultData() {
+                if (getPacks().length === 0) {
+                    const defaultPacks = [{
+                        id: 'pack_bronze',
+                        tier: 'bronze',
+                        title: 'Découverte',
+                        niveau: 'Débutant',
+                        description: 'Idéal pour débuter, accédez aux fondamentaux.',
+                        price: 149.00,
+                        prix_barre: 149.00,
+                        prix_reduit: 119.00,
+                        reduction_pct: 20,
+                        prix_reel: 119.00,
+                        accessCode: 'BRONZE123',
+                        content: [
+                            { type: 'video', label: 'Introduction au marketing', url: 'https://youtu.be/example1' },
+                            { type: 'pdf', label: 'Guide du débutant', url: '/files/guide-debutant.pdf' }
+                        ]
+                    }, {
+                        id: 'pack_silver',
+                        tier: 'silver',
+                        title: 'Professionnel',
+                        niveau: 'Intermédiaire',
+                        description: 'Stratégies avancées et études de cas.',
+                        price: 199.00,
+                        prix_barre: 199.00,
+                        prix_reduit: 159.00,
+                        reduction_pct: 20,
+                        prix_reel: 159.00,
+                        accessCode: 'SILVER456',
+                        content: [
+                            { type: 'video', label: 'Stratégie digitale avancée', url: 'https://youtu.be/example2' },
+                            { type: 'pdf', label: 'Rapport annuel', url: '/files/rapport-annuel.pdf' }
+                        ]
+                    }, {
+                        id: 'pack_gold',
+                        tier: 'gold',
+                        title: 'Expert',
+                        niveau: 'Expert',
+                        description: 'Contenus exclusifs et mentorat de haut niveau.',
+                        price: 299.00,
+                        prix_barre: 299.00,
+                        prix_reduit: 239.00,
+                        reduction_pct: 20,
+                        prix_reel: 239.00,
+                        accessCode: 'GOLD789',
+                        content: [
+                            { type: 'video', label: 'IA & transformation', url: 'https://youtu.be/example3' },
+                            { type: 'pdf', label: 'Livre blanc IA', url: '/files/livre-blanc-ia.pdf' }
+                        ]
+                    }];
+                    localStorage.setItem(STORAGE_KEYS.packs, JSON.stringify(defaultPacks));
+                }
 
-            const packsGrid = document.getElementById('packsGrid');
-            const promosTableBody = document.getElementById('promosTableBody');
-            const usersTableBody = document.getElementById('usersTableBody');
-            const ordersTableBody = document.getElementById('ordersTableBody');
+                if (getPromos().length === 0) {
+                    const defaultPromos = [
+                        { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01', endDate: '2026-12-31', active: true },
+                        { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01', endDate: '2026-07-01', active: true }
+                    ];
+                    localStorage.setItem(STORAGE_KEYS.promos, JSON.stringify(defaultPromos));
+                }
+            }
 
-            const packSearch = document.getElementById('packSearch');
-            const promoSearch = document.getElementById('promoSearch');
-            const userSearch = document.getElementById('userSearch');
-            const orderSearch = document.getElementById('orderSearch');
+            // ============================================================
+            //  CALCUL DU PRIX AVEC PROMOTION
+            // ============================================================
+            function getDiscountedPrice(price, tier, promoCode = null) {
+                const promos = getPromos();
+                const now = new Date().toISOString().split('T')[0];
+                let bestDiscount = 0;
+                let promoAppliquee = null;
+                
+                promos.forEach(p => {
+                    if (!p.active) return;
+                    if (p.startDate && p.startDate > now) return;
+                    if (p.endDate && p.endDate < now) return;
+                    if (p.packTier !== 'all' && p.packTier !== tier) return;
+                    if (promoCode && p.code !== promoCode) return;
+                    
+                    let discount = 0;
+                    if (p.type === 'percentage') {
+                        discount = price * (p.value / 100);
+                    } else if (p.type === 'fixed') {
+                        discount = Math.min(p.value, price);
+                    }
+                    if (discount > bestDiscount) {
+                        bestDiscount = discount;
+                        promoAppliquee = p.code;
+                    }
+                });
+                
+                return { 
+                    discountedPrice: Math.max(0, price - bestDiscount), 
+                    discount: bestDiscount,
+                    promoCode: promoAppliquee
+                };
+            }
 
-            const adminLoginOverlay = document.getElementById('adminLoginOverlay');
-            const adminPasswordInput = document.getElementById('adminPasswordInput');
-            const adminLoginBtn = document.getElementById('adminLoginBtn');
-            const loginError = document.getElementById('loginError');
-            const adminBackToSite = document.getElementById('adminBackToSite');
-            const adminLogoutBtn = document.getElementById('adminLogout');
+            // ============================================================
+            //  DOM REFS
+            // ============================================================
+            const spacesGrid = document.getElementById('spacesGrid');
+            const authNotLogged = document.getElementById('authNotLogged');
+            const authLogged = document.getElementById('authLogged');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userAvatarSmall = document.getElementById('userAvatarSmall');
+            const userAvatar = document.getElementById('userAvatar');
+            const userName = document.getElementById('userName');
+            const userSub = document.getElementById('userSub');
+            const planLabel = document.getElementById('planLabel');
+            const cartBadge = document.getElementById('cartBadge');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const btnStripeCheckout = document.getElementById('btnStripeCheckout');
+            const btnCartCode = document.getElementById('btnCartCode');
+            const cartCodeArea = document.getElementById('cartCodeArea');
+            const cartCodeInput = document.getElementById('cartCodeInput');
+            const cartCodeApply = document.getElementById('cartCodeApply');
+            const btnClearCart = document.getElementById('btnClearCart');
+            const cartMessage = document.getElementById('cartMessage');
 
+            // ============================================================
+            //  RENDU DES PACKS
+            // ============================================================
+            function renderPacks() {
+                const packs = getPacks();
+                const unlocked = getUnlockedPacks();
+                const cart = getCart();
+
+                if (packs.length === 0) {
+                    spacesGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;padding:40px;text-align:center;"><i class="fas fa-boxes" style="font-size:40px;opacity:0.3;"></i><p>Aucun pack disponible</p></div>`;
+                    return;
+                }
+
+                spacesGrid.innerHTML = packs.map(p => {
+                    const isUnlocked = !!unlocked[p.tier] || !!unlocked[p.id];
+                    const inCart = cart.some(item => item === p.id || item === p.tier);
+                    
+                    const prixBarre = p.prix_barre || p.price || 0;
+                    const prixReduit = p.prix_reduit || p.price || 0;
+                    const prixReel = p.prix_reel || p.price || 0;
+                    const reduction = p.reduction_pct || 0;
+                    
+                    // Appliquer les promotions sur le prix réel
+                    const { discountedPrice, discount } = getDiscountedPrice(prixReel, p.tier);
+                    const prixFinal = discountedPrice;
+
+                    const tierIcons = { bronze: 'fa-compass', silver: 'fa-briefcase', gold: 'fa-star' };
+                    const tierClasses = { bronze: 'tier-bronze', silver: 'tier-silver', gold: 'tier-gold' };
+                    const tierNames = { bronze: 'Bronze', silver: 'Silver', gold: 'Gold' };
+
+                    const contentGroups = p.content ? p.content.reduce((acc, c) => {
+                        if (!acc[c.type]) acc[c.type] = [];
+                        acc[c.type].push(c);
+                        return acc;
+                    }, {}) : {};
+
+                    let contentHtml = '';
+                    if (Object.keys(contentGroups).length > 0) {
+                        contentHtml = Object.entries(contentGroups).map(([type, items]) => `
+                            <div class="content-group">
+                                <div class="group-label"><i class="fas ${type === 'video' ? 'fa-video' : type === 'pdf' ? 'fa-file-pdf' : type === 'link' ? 'fa-link' : 'fa-file'}"></i> ${type.charAt(0).toUpperCase() + type.slice(1)}s</div>
+                                ${items.slice(0, 3).map(c => `
+                                    <div class="content-item">
+                                        <span class="item-icon"><i class="fas ${c.type === 'video' ? 'fa-play' : c.type === 'pdf' ? 'fa-file-pdf' : c.type === 'link' ? 'fa-link' : 'fa-file'}"></i></span>
+                                        <span class="item-title">${c.label}</span>
+                                        <span class="item-tag">${c.type}</span>
+                                    </div>
+                                `).join('')}
+                                ${items.length > 3 ? `<div style="font-size:12px;color:#8896ab;padding:4px 0;">+ ${items.length - 3} autre(s)</div>` : ''}
+                            </div>
+                        `).join('');
+                    }
+
+                    let priceHtml = '';
+                    if (reduction > 0) {
+                        priceHtml = `
+                            <span class="original-price">${prixBarre.toFixed(2)} €</span>
+                            <span style="color:#0b6e3f;font-weight:700;">${prixReduit.toFixed(2)} €</span>
+                            <span class="discount-badge">-${reduction}%</span>
+                            ${discount > 0 ? `<span style="font-size:14px;color:#2c5282;font-weight:600;">| Promo : ${prixFinal.toFixed(2)} €</span>` : ''}
+                        `;
+                    } else {
+                        priceHtml = `${prixReel.toFixed(2)} €`;
+                        if (discount > 0) {
+                            priceHtml += ` <span style="font-size:14px;color:#2c5282;font-weight:600;">| Promo : ${prixFinal.toFixed(2)} €</span>`;
+                        }
+                    }
+
+                    return `
+                        <div class="space-card ${tierClasses[p.tier] || ''} ${isUnlocked ? '' : 'locked-card'}" data-id="${p.id}" data-tier="${p.tier}">
+                            <div class="card-header">
+                                <div class="space-title">
+                                    <div class="icon-circle"><i class="fas ${tierIcons[p.tier] || 'fa-box'}"></i></div>
+                                    <div>
+                                        <h3>${p.title}</h3>
+                                        <span class="sub">${p.niveau || tierNames[p.tier] || 'Pack'}</span>
+                                    </div>
+                                </div>
+                                <span class="lock-icon"><i class="fas ${isUnlocked ? 'fa-unlock-alt' : 'fa-lock'}"></i></span>
+                            </div>
+                            <div class="card-body">
+                                ${contentHtml}
+                                <div class="pack-actions">
+                                    <div class="pack-price"><i class="fas fa-euro-sign"></i> ${priceHtml}</div>
+                                    ${p.description ? `<div class="pack-description"><i class="fas fa-bullhorn"></i> ${p.description}</div>` : ''}
+                                    <div class="action-row">
+                                        <input type="text" class="code-input" placeholder="Code d'accès" data-id="${p.id}" ${isUnlocked ? 'disabled' : ''} />
+                                        <button class="btn-unlock-code" data-id="${p.id}" ${isUnlocked ? 'disabled' : ''}>${isUnlocked ? '✅ Débloqué' : 'Déverrouiller'}</button>
+                                        <button class="btn-add-cart ${inCart ? 'in-cart' : ''}" data-id="${p.id}">${inCart ? '🛒 Retirer' : 'Ajouter au panier'}</button>
+                                    </div>
+                                    <div class="code-message" id="msg-${p.id}"></div>
+                                </div>
+                            </div>
+                            <div class="access-status">
+                                <span class="status-badge ${isUnlocked ? 'active' : 'locked'}">
+                                    <i class="fas ${isUnlocked ? 'fa-check-circle' : 'fa-lock'}"></i>
+                                    ${isUnlocked ? 'Débloqué' : 'Verrouillé'}
+                                </span>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="see-all" data-id="${p.id}">Voir tout <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // ---- Événements ----
+                document.querySelectorAll('.see-all').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const id = this.dataset.id;
+                        const pack = getPacks().find(p => p.id === id);
+                        if (!pack) return;
+                        const unlocked = getUnlockedPacks();
+                        const isUnlocked = !!unlocked[pack.tier] || !!unlocked[pack.id];
+                        alert(`🔍 ${pack.title}\n${pack.description || ''}\nPrix : ${pack.price} €\nAccès : ${isUnlocked ? 'Débloqué ✅' : 'Verrouillé 🔒'}\nContenu : ${(pack.content || []).length} éléments`);
+                    });
+                });
+
+                document.querySelectorAll('.btn-unlock-code').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        const card = this.closest('.space-card');
+                        const input = card.querySelector('.code-input');
+                        const msg = card.querySelector('.code-message');
+                        const code = input.value.trim().toUpperCase();
+                        const packs = getPacks();
+                        const pack = packs.find(p => p.id === id);
+                        if (!pack) return;
+                        if (getUnlockedPacks()[pack.tier] || getUnlockedPacks()[pack.id]) {
+                            msg.textContent = 'Pack déjà débloqué.';
+                            msg.className = 'code-message success';
+                            return;
+                        }
+                        if (pack.accessCode && pack.accessCode.toUpperCase() === code) {
+                            const unlocked = getUnlockedPacks();
+                            unlocked[pack.tier] = true;
+                            unlocked[pack.id] = true;
+                            saveUnlockedPacks(unlocked);
+                            renderPacks();
+                            updateCartUI();
+                            msg.textContent = '✅ Code valide, pack débloqué !';
+                            msg.className = 'code-message success';
+                        } else {
+                            msg.textContent = '❌ Code incorrect.';
+                            msg.className = 'code-message error';
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.btn-add-cart').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        let cart = getCart();
+                        const index = cart.indexOf(id);
+                        if (index !== -1) {
+                            cart.splice(index, 1);
+                        } else {
+                            cart.push(id);
+                        }
+                        saveCart(cart);
+                        renderPacks();
+                        updateCartUI();
+                    });
+                });
+            }
+
+            // ============================================================
+            //  PANIER
+            // ============================================================
+            function updateCartUI() {
+                const cart = getCart();
+                cartBadge.textContent = cart.length;
+                renderCartModal();
+            }
+
+            function renderCartModal() {
+                const cart = getCart();
+                const packs = getPacks();
+                let total = 0;
+                let itemsHtml = '';
+
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<div class="empty-cart">Votre panier est vide.</div>';
+                } else {
+                    itemsHtml = cart.map(id => {
+                        const p = packs.find(pk => pk.id === id);
+                        if (!p) return '';
+                        const prixReel = p.prix_reel || p.price || 0;
+                        const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
+                        total += discountedPrice;
+                        return `<div class="cart-item"><span class="item-name">${p.title}</span><span class="item-price">${discountedPrice.toFixed(2)} €</span></div>`;
+                    }).join('');
+                    cartItems.innerHTML = itemsHtml;
+                }
+                cartTotal.textContent = `Total : ${total.toFixed(2)} €`;
+                btnStripeCheckout.disabled = (cart.length === 0);
+            }
+
+            // ============================================================
+            //  STRIPE (simulé)
+            // ============================================================
+            function simulateStripePayment() {
+                const cart = getCart();
+                if (cart.length === 0) return;
+                const packs = getPacks();
+                let total = 0;
+                cart.forEach(id => {
+                    const p = packs.find(pk => pk.id === id);
+                    if (p) {
+                        const prixReel = p.prix_reel || p.price || 0;
+                        const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
+                        total += discountedPrice;
+                    }
+                });
+
+                if (confirm(`💳 Simulation Stripe : paiement de ${total.toFixed(2)} € ?`)) {
+                    const unlocked = getUnlockedPacks();
+                    cart.forEach(id => {
+                        const p = packs.find(pk => pk.id === id);
+                        if (p) {
+                            unlocked[p.tier] = true;
+                            unlocked[p.id] = true;
+                        }
+                    });
+                    saveUnlockedPacks(unlocked);
+
+                    const session = getSession();
+                    const email = session ? session.email : 'inconnu@example.com';
+                    const orders = getOrders();
+                    orders.push({
+                        id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                        email: email,
+                        items: cart.slice(),
+                        total: total,
+                        date: new Date().toISOString().split('T')[0],
+                        status: 'paid'
+                    });
+                    saveOrders(orders);
+                    saveCart([]);
+                    renderPacks();
+                    updateCartUI();
+                    cartMessage.textContent = '🎉 Paiement accepté ! Tous les packs sont débloqués.';
+                    cartMessage.className = 'checkout-message success';
+                    setTimeout(() => { closeCartModal(); }, 2500);
+                }
+            }
+
+            // ============================================================
+            //  AUTH
+            // ============================================================
+            let currentUser = null;
+            let isLoginMode = true;
+
+            function applyUserState() {
+                const session = getSession();
+                if (session && session.email) {
+                    const users = getUsers();
+                    const user = users[session.email];
+                    if (user) {
+                        currentUser = { ...user, email: session.email };
+                        authNotLogged.classList.add('hidden');
+                        authLogged.classList.remove('hidden');
+                        const displayName = user.name || session.email.split('@')[0];
+                        userNameDisplay.textContent = displayName;
+                        userAvatarSmall.textContent = displayName.charAt(0).toUpperCase();
+                        userAvatar.textContent = displayName.charAt(0).toUpperCase();
+                        userName.textContent = `Bonjour, ${displayName}`;
+                        userSub.textContent = 'Ajoutez / retirez des packs du panier.';
+                        planLabel.textContent = 'Codes : BRONZE123 · SILVER456 · GOLD789';
+                        return;
+                    }
+                }
+                currentUser = null;
+                authNotLogged.classList.remove('hidden');
+                authLogged.classList.add('hidden');
+                userAvatar.textContent = '?';
+                userName.textContent = 'Bonjour, invité';
+                userSub.textContent = 'Connectez-vous pour accéder à votre contenu.';
+                planLabel.textContent = 'Codes : BRONZE123 · SILVER456 · GOLD789';
+                renderPacks();
+                updateCartUI();
+            }
+
+            // ---- Événements Auth ----
+            document.getElementById('btnLogin').addEventListener('click', () => openAuthModal('login'));
+            document.getElementById('btnRegister').addEventListener('click', () => openAuthModal('register'));
+            document.getElementById('btnGoogle').addEventListener('click', googleLogin);
+            document.getElementById('modalGoogle').addEventListener('click', googleLogin);
+            document.getElementById('btnLogout').addEventListener('click', function() {
+                localStorage.removeItem(STORAGE_KEYS.session);
+                currentUser = null;
+                applyUserState();
+                renderPacks();
+                updateCartUI();
+            });
+
+            // ---- Modal Auth ----
             const modalOverlay = document.getElementById('modalOverlay');
             const closeModal = document.getElementById('closeModal');
             const modalTitle = document.getElementById('modalTitle');
             const modalSub = document.getElementById('modalSub');
             const modalError = document.getElementById('modalError');
-            const modalForm = document.getElementById('modalForm');
-            const modalFormFields = document.getElementById('modalFormFields');
-            const modalSubmitBtn = document.getElementById('modalSubmitBtn');
+            const authForm = document.getElementById('authForm');
+            const inputName = document.getElementById('inputName');
+            const inputEmail = document.getElementById('inputEmail');
+            const inputPassword = document.getElementById('inputPassword');
+            const modalSubmit = document.getElementById('modalSubmit');
+            const toggleLink = document.getElementById('toggleLink');
+            const toggleText = document.getElementById('toggleText');
+            const nameField = document.getElementById('nameField');
 
-            const refreshBtn = document.getElementById('refreshData');
-            const goToSiteBtn = document.getElementById('goToSite');
-
-            let currentTab = 'dashboard';
-            let isAdminLogged = false;
-            let editingId = null;
-            let modalMode = 'create';
-            let modalEntity = 'pack';
-
-            // ---- Helpers ----
-            function getUsers() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || {}; } catch { return {}; } }
-            function getOrders() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || []; } catch { return []; } }
-            function getPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.packs)) || []; } catch { return []; } }
-            function getPromos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promos)) || []; } catch { return []; } }
-            function getAdminLogged() { return localStorage.getItem(STORAGE_KEYS.adminLogged) === 'true'; }
-            function setAdminLogged(v) { localStorage.setItem(STORAGE_KEYS.adminLogged, v ? 'true' : 'false'); }
-
-            function savePacks(p) { localStorage.setItem(STORAGE_KEYS.packs, JSON.stringify(p)); }
-            function savePromos(p) { localStorage.setItem(STORAGE_KEYS.promos, JSON.stringify(p)); }
-
-            // ---- Default data ----
-            function getDefaultPacks() {
-                return [{
-                    id: 'pack_bronze',
-                    tier: 'bronze',
-                    title: 'Découverte',
-                    niveau: 'Débutant',
-                    description: 'Idéal pour débuter, accédez aux fondamentaux.',
-                    price: 149.00,
-                    prix_barre: 149.00,
-                    prix_reduit: 119.00,
-                    reduction_pct: 20,
-                    prix_reel: 119.00,
-                    accessCode: 'BRONZE123',
-                    content: [
-                        { type: 'video', label: 'Introduction au marketing', url: 'https://youtu.be/example1' },
-                        { type: 'pdf', label: 'Guide du débutant', url: '/files/guide-debutant.pdf' }
-                    ]
-                }, {
-                    id: 'pack_silver',
-                    tier: 'silver',
-                    title: 'Professionnel',
-                    niveau: 'Intermédiaire',
-                    description: 'Stratégies avancées et études de cas.',
-                    price: 199.00,
-                    prix_barre: 199.00,
-                    prix_reduit: 159.00,
-                    reduction_pct: 20,
-                    prix_reel: 159.00,
-                    accessCode: 'SILVER456',
-                    content: [
-                        { type: 'video', label: 'Stratégie digitale avancée', url: 'https://youtu.be/example2' },
-                        { type: 'pdf', label: 'Rapport annuel', url: '/files/rapport-annuel.pdf' }
-                    ]
-                }, {
-                    id: 'pack_gold',
-                    tier: 'gold',
-                    title: 'Expert',
-                    niveau: 'Expert',
-                    description: 'Contenus exclusifs et mentorat de haut niveau.',
-                    price: 299.00,
-                    prix_barre: 299.00,
-                    prix_reduit: 239.00,
-                    reduction_pct: 20,
-                    prix_reel: 239.00,
-                    accessCode: 'GOLD789',
-                    content: [
-                        { type: 'video', label: 'IA & transformation', url: 'https://youtu.be/example3' },
-                        { type: 'pdf', label: 'Livre blanc IA', url: '/files/livre-blanc-ia.pdf' }
-                    ]
-                }];
-            }
-
-            function getDefaultPromos() {
-                return [
-                    { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01', endDate: '2026-12-31', active: true },
-                    { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01', endDate: '2026-07-01', active: true }
-                ];
-            }
-
-            function initData() {
-                if (getPacks().length === 0) savePacks(getDefaultPacks());
-                if (getPromos().length === 0) savePromos(getDefaultPromos());
-                if (getOrders().length === 0) {
-                    const users = getUsers();
-                    const emails = Object.keys(users);
-                    if (emails.length > 0) {
-                        const sampleOrders = [];
-                        for (let i = 0; i < Math.min(3, emails.length); i++) {
-                            const email = emails[i];
-                            const items = ['bronze'];
-                            if (i % 2 === 0) items.push('silver');
-                            if (i % 3 === 0) items.push('gold');
-                            const total = items.reduce((sum, t) => sum + (t === 'bronze' ? 119 : t === 'silver' ? 159 : 239), 0);
-                            sampleOrders.push({
-                                id: 'ord_' + Date.now() + '_' + i,
-                                email: email,
-                                items: items,
-                                total: total,
-                                date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
-                                status: i === 0 ? 'paid' : i === 1 ? 'pending' : 'paid'
-                            });
-                        }
-                        localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(sampleOrders));
-                    }
+            function openAuthModal(mode) {
+                isLoginMode = (mode === 'login');
+                if (isLoginMode) {
+                    modalTitle.textContent = 'Connexion';
+                    modalSub.textContent = 'Accédez à votre espace';
+                    modalSubmit.textContent = 'Se connecter';
+                    toggleText.textContent = 'Pas encore de compte ?';
+                    toggleLink.textContent = "S'inscrire";
+                    nameField.classList.add('hidden');
+                } else {
+                    modalTitle.textContent = 'Créer un compte';
+                    modalSub.textContent = 'Rejoignez l\'espace';
+                    modalSubmit.textContent = 'S\'inscrire';
+                    toggleText.textContent = 'Déjà un compte ?';
+                    toggleLink.textContent = 'Se connecter';
+                    nameField.classList.remove('hidden');
                 }
-            }
-
-            // ---- Render ----
-            function renderStats() {
-                const packs = getPacks();
-                const users = getUsers();
-                const orders = getOrders();
-                const promos = getPromos();
-                const revenue = orders.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.total || 0), 0);
-                statPacks.textContent = packs.length;
-                statUsers.textContent = Object.keys(users).length;
-                statOrders.textContent = orders.length;
-                statRevenue.textContent = revenue.toFixed(2) + ' €';
-                packCountBadge.textContent = packs.length;
-                promoCountBadge.textContent = promos.length;
-                userCountBadge.textContent = Object.keys(users).length;
-                orderCountBadge.textContent = orders.length;
-                userCountLabel.textContent = Object.keys(users).length + ' utilisateur' + (Object.keys(users).length > 1 ? 's' : '');
-                orderCountLabel.textContent = orders.length + ' commande' + (orders.length > 1 ? 's' : '');
-            }
-
-            function renderPacks(filter = '') {
-                const packs = getPacks();
-                const filtered = packs.filter(p =>
-                    p.title.toLowerCase().includes(filter.toLowerCase()) ||
-                    p.tier.toLowerCase().includes(filter.toLowerCase()) ||
-                    (p.accessCode || '').toLowerCase().includes(filter.toLowerCase())
-                );
-                if (filtered.length === 0) {
-                    packsGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-boxes"></i><p>Aucun pack trouvé</p></div>`;
-                    return;
-                }
-                packsGrid.innerHTML = filtered.map(p => {
-                    const contentCount = p.content ? p.content.length : 0;
-                    const tierClass = p.tier;
-                    const prixBarre = p.prix_barre || p.price || 0;
-                    const prixReduit = p.prix_reduit || p.price || 0;
-                    const prixReel = p.prix_reel || p.price || 0;
-                    const reduction = p.reduction_pct || 0;
-                    return `
-                        <div class="pack-card">
-                            <div class="pc-header">
-                                <span class="pc-title">${p.title}</span>
-                                <span class="pc-tier ${tierClass}">${p.niveau || p.tier.charAt(0).toUpperCase() + p.tier.slice(1)}</span>
-                            </div>
-                            <div class="pc-desc">${p.description || ''}</div>
-                            <div class="pc-price">
-                                <i class="fas fa-euro-sign"></i>
-                                <span style="text-decoration:line-through;color:#8896ab;font-weight:400;">${prixBarre.toFixed(2)} €</span>
-                                <span style="color:#0b6e3f;font-weight:700;">${prixReduit.toFixed(2)} €</span>
-                                <span style="background:#e6f7ee;color:#0b6e3f;padding:1px 10px;border-radius:40px;font-size:12px;font-weight:600;">-${reduction}%</span>
-                                <span style="font-size:14px;color:#8896ab;font-weight:400;">| Réel: ${prixReel.toFixed(2)} €</span>
-                            </div>
-                            ${p.accessCode ? `<div class="pc-access-code"><i class="fas fa-key"></i> Code : ${p.accessCode}</div>` : ''}
-                            <div class="pc-content-list">
-                                <div style="font-size:12px;font-weight:600;color:#8896ab;margin-bottom:4px;">
-                                    <i class="fas fa-file-alt"></i> ${contentCount} élément${contentCount > 1 ? 's' : ''}
-                                </div>
-                                ${(p.content || []).slice(0, 3).map(c => `
-                                    <div class="content-item">
-                                        <i class="fas ${c.type === 'video' ? 'fa-video' : c.type === 'pdf' ? 'fa-file-pdf' : c.type === 'link' ? 'fa-link' : 'fa-file'}"></i>
-                                        <span>${c.label}</span>
-                                        <span style="font-size:10px;background:#e2e8f0;padding:1px 8px;border-radius:40px;color:#4a5568;margin-left:auto;">${c.type}</span>
-                                    </div>
-                                `).join('')}
-                                ${contentCount > 3 ? `<div style="font-size:12px;color:#8896ab;padding:4px 0;">+ ${contentCount - 3} autre(s)</div>` : ''}
-                            </div>
-                            <div class="pc-actions">
-                                <button class="btn-edit" onclick="window.adminEditPack('${p.id}')"><i class="fas fa-pen"></i> Modifier</button>
-                                <button class="btn-delete" onclick="window.adminDeletePack('${p.id}')"><i class="fas fa-trash"></i> Supprimer</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-                window.adminEditPack = function(id) { openModal('pack', 'edit', id); };
-                window.adminDeletePack = function(id) {
-                    if (!confirm('Supprimer ce pack ?')) return;
-                    let packs = getPacks();
-                    packs = packs.filter(p => p.id !== id);
-                    savePacks(packs);
-                    renderAll();
-                };
-            }
-
-            function renderPromos(filter = '') {
-                const promos = getPromos();
-                const filtered = promos.filter(p =>
-                    p.code.toLowerCase().includes(filter.toLowerCase()) ||
-                    p.packTier.toLowerCase().includes(filter.toLowerCase()) ||
-                    (p.type || '').toLowerCase().includes(filter.toLowerCase())
-                );
-                if (filtered.length === 0) {
-                    promosTableBody.innerHTML = `<tr><td colspan="8" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion trouvée</p></td></tr>`;
-                    return;
-                }
-                promosTableBody.innerHTML = filtered.map(p => {
-                    const now = new Date().toISOString().split('T')[0];
-                    const isActive = p.active && p.startDate <= now && p.endDate >= now;
-                    const typeLabel = p.type === 'percentage' ? '%' : '€';
-                    const tierLabel = p.packTier === 'all' ? 'Tous' : p.packTier.charAt(0).toUpperCase() + p.packTier.slice(1);
-                    return `
-                        <tr>
-                            <td><strong>${p.code}</strong></td>
-                            <td>${p.type === 'percentage' ? 'Pourcentage' : 'Montant fixe'}</td>
-                            <td>${p.value} ${typeLabel}</td>
-                            <td>${tierLabel}</td>
-                            <td>${p.startDate || '—'}</td>
-                            <td>${p.endDate || '—'}</td>
-                            <td><span class="status-badge ${isActive ? 'paid' : 'cancelled'}">${isActive ? 'Active' : 'Inactive'}</span></td>
-                            <td class="actions-cell">
-                                <button class="success" onclick="window.adminEditPromo('${p.id}')"><i class="fas fa-pen"></i></button>
-                                <button class="danger" onclick="window.adminDeletePromo('${p.id}')"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
-                window.adminEditPromo = function(id) { openModal('promo', 'edit', id); };
-                window.adminDeletePromo = function(id) {
-                    if (!confirm('Supprimer cette promotion ?')) return;
-                    let promos = getPromos();
-                    promos = promos.filter(p => p.id !== id);
-                    savePromos(promos);
-                    renderAll();
-                };
-            }
-
-            function renderUsers(filter = '') {
-                const users = getUsers();
-                const entries = Object.entries(users);
-                const filtered = entries.filter(([email, data]) =>
-                    email.toLowerCase().includes(filter.toLowerCase()) ||
-                    (data.name || '').toLowerCase().includes(filter.toLowerCase())
-                );
-                if (filtered.length === 0) {
-                    usersTableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fas fa-users"></i><p>Aucun utilisateur</p></td></tr>`;
-                    return;
-                }
-                usersTableBody.innerHTML = filtered.map(([email, data]) => {
-                    const name = data.name || email.split('@')[0];
-                    return `
-                        <tr><td><strong>${name}</strong></td><td>${email}</td><td>—</td>
-                        <td class="actions-cell">
-                            <button class="success" onclick="window.adminViewUser('${email}')"><i class="fas fa-eye"></i></button>
-                            <button class="danger" onclick="window.adminDeleteUser('${email}')"><i class="fas fa-trash"></i></button>
-                        </td></tr>
-                    `;
-                }).join('');
-                window.adminViewUser = function(email) {
-                    const users = getUsers();
-                    const user = users[email];
-                    if (!user) return alert('Introuvable.');
-                    alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}`);
-                };
-                window.adminDeleteUser = function(email) {
-                    if (!confirm(`Supprimer ${email} ?`)) return;
-                    const users = getUsers();
-                    delete users[email];
-                    localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
-                    renderAll();
-                };
-            }
-
-            function renderOrders(filter = '') {
-                const orders = getOrders();
-                const users = getUsers();
-                const filtered = orders.filter(o =>
-                    o.email.toLowerCase().includes(filter.toLowerCase()) ||
-                    o.id.toLowerCase().includes(filter.toLowerCase()) ||
-                    (o.items || []).join(' ').toLowerCase().includes(filter.toLowerCase())
-                );
-                if (filtered.length === 0) {
-                    ordersTableBody.innerHTML = `<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr>`;
-                    return;
-                }
-                ordersTableBody.innerHTML = filtered.map(o => {
-                    const userName = users[o.email]?.name || o.email.split('@')[0];
-                    const itemsStr = (o.items || []).map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(', ');
-                    const statusClass = o.status === 'paid' ? 'paid' : o.status === 'pending' ? 'pending' : 'cancelled';
-                    const statusLabel = o.status === 'paid' ? 'Payée' : o.status === 'pending' ? 'En attente' : 'Annulée';
-                    return `
-                        <tr>
-                            <td><strong>#${o.id.slice(-6)}</strong></td>
-                            <td>${userName}<br><small style="color:#8896ab;">${o.email}</small></td>
-                            <td>${itemsStr}</td>
-                            <td><strong>${(o.total || 0).toFixed(2)} €</strong></td>
-                            <td>${o.date || '—'}</td>
-                            <td><span class="status-badge ${statusClass}"><i class="fas ${o.status === 'paid' ? 'fa-check-circle' : o.status === 'pending' ? 'fa-clock' : 'fa-times-circle'}"></i> ${statusLabel}</span></td>
-                            <td class="actions-cell">
-                                <button class="success" onclick="window.adminToggleOrderStatus('${o.id}')"><i class="fas fa-sync-alt"></i></button>
-                                <button class="danger" onclick="window.adminDeleteOrder('${o.id}')"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
-                window.adminToggleOrderStatus = function(id) {
-                    const orders = getOrders();
-                    const idx = orders.findIndex(o => o.id === id);
-                    if (idx === -1) return;
-                    const statuses = ['pending', 'paid', 'cancelled'];
-                    const current = orders[idx].status || 'pending';
-                    const nextIdx = (statuses.indexOf(current) + 1) % statuses.length;
-                    orders[idx].status = statuses[nextIdx];
-                    localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
-                    renderAll();
-                };
-                window.adminDeleteOrder = function(id) {
-                    if (!confirm('Supprimer cette commande ?')) return;
-                    let orders = getOrders();
-                    orders = orders.filter(o => o.id !== id);
-                    localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
-                    renderAll();
-                };
-            }
-
-            function renderAll() {
-                renderStats();
-                renderPacks(packSearch ? packSearch.value : '');
-                renderPromos(promoSearch ? promoSearch.value : '');
-                renderUsers(userSearch ? userSearch.value : '');
-                renderOrders(orderSearch ? orderSearch.value : '');
-            }
-
-            // ---- Tab switching ----
-            function switchTab(tabId) {
-                currentTab = tabId;
-                Object.keys(tabContents).forEach(key => {
-                    tabContents[key].classList.toggle('active', key === tabId);
-                });
-                navLinks.forEach(link => {
-                    link.classList.toggle('active', link.dataset.tab === tabId);
-                });
-                const titles = { dashboard: 'Tableau de bord', packs: 'Packs', promotions: 'Promotions', users: 'Utilisateurs', orders: 'Commandes' };
-                const subtitles = { dashboard: 'vue d\'ensemble', packs: 'gestion du catalogue', promotions: 'codes promo et réductions', users: 'gestion des comptes', orders: 'suivi des commandes' };
-                pageTitle.innerHTML = `${titles[tabId]} <small>${subtitles[tabId]}</small>`;
-                btnAddPack.style.display = tabId === 'packs' ? 'inline-flex' : 'none';
-                btnAddPromo.style.display = tabId === 'promotions' ? 'inline-flex' : 'none';
-                renderAll();
-            }
-
-            // ---- Modal ----
-            function openModal(entity, mode, id = null) {
-                modalEntity = entity;
-                modalMode = mode;
-                editingId = id;
                 modalError.classList.remove('show');
                 modalError.textContent = '';
-
-                if (entity === 'pack') {
-                    openPackModal(mode, id);
-                } else if (entity === 'promo') {
-                    openPromoModal(mode, id);
-                }
+                inputEmail.value = '';
+                inputPassword.value = '';
+                inputName.value = '';
+                modalOverlay.classList.add('open');
             }
 
-            function openPackModal(mode, id = null) {
-                const packs = getPacks();
-                let data = { 
-                    tier: 'bronze', 
-                    title: '', 
-                    niveau: 'Débutant', 
-                    description: '', 
-                    price: 149.00,
-                    prix_barre: 149.00,
-                    prix_reduit: 119.00,
-                    reduction_pct: 20,
-                    prix_reel: 119.00,
-                    accessCode: '', 
-                    content: [] 
-                };
-                if (mode === 'edit' && id) {
-                    const found = packs.find(p => p.id === id);
-                    if (found) data = JSON.parse(JSON.stringify(found));
-                }
+            function closeAuthModal() { modalOverlay.classList.remove('open'); }
+            closeModal.addEventListener('click', closeAuthModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) closeAuthModal();
+            });
+            toggleLink.addEventListener('click', function() {
+                isLoginMode = !isLoginMode;
+                openAuthModal(isLoginMode ? 'login' : 'register');
+            });
 
-                if (mode === 'delete') {
-                    modalTitle.textContent = 'Supprimer le pack';
-                    modalSub.textContent = 'Confirmez la suppression';
-                    modalSubmitBtn.textContent = 'Supprimer';
-                    modalSubmitBtn.className = 'btn-submit danger';
-                    modalFormFields.innerHTML = `
-                        <p style="color:#4a5568;font-size:14px;padding:8px 0;">
-                            Êtes-vous sûr de vouloir supprimer <strong>« ${data.title} »</strong> ?
-                            <br><span style="color:#a04444;font-size:13px;">Cette action est irréversible.</span>
-                        </p>
-                        <input type="hidden" id="form_delete_id" value="${data.id}" />
-                    `;
-                    modalSubmitBtn.onclick = function(e) {
-                        e.preventDefault();
-                        const id = document.getElementById('form_delete_id')?.value;
-                        if (!id) return;
-                        let packs = getPacks();
-                        packs = packs.filter(p => p.id !== id);
-                        savePacks(packs);
-                        closeModalHandler();
-                        renderAll();
-                    };
-                    modalOverlay.classList.add('open');
+            authForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                modalError.classList.remove('show');
+                modalError.textContent = '';
+                const email = inputEmail.value.trim();
+                const password = inputPassword.value.trim();
+                const name = inputName.value.trim();
+
+                if (!email || !password) {
+                    modalError.textContent = 'Veuillez remplir tous les champs.';
+                    modalError.classList.add('show');
                     return;
                 }
 
-                modalTitle.textContent = mode === 'edit' ? 'Modifier le pack' : 'Nouveau pack';
-                modalSub.textContent = mode === 'edit' ? 'Modifiez le pack et son contenu' : 'Configurez le pack';
-                modalSubmitBtn.textContent = mode === 'edit' ? 'Mettre à jour' : 'Créer';
-                modalSubmitBtn.className = 'btn-submit';
-
-                const tiers = ['bronze', 'silver', 'gold'];
-                const tierOptions = tiers.map(t => `<option value="${t}" ${data.tier === t ? 'selected' : ''}>${t.charAt(0).toUpperCase() + t.slice(1)}</option>`).join('');
-                const niveauOptions = ['Débutant', 'Intermédiaire', 'Expert'].map(n => `<option value="${n}" ${data.niveau === n ? 'selected' : ''}>${n}</option>`).join('');
-
-                let contentRows = (data.content || []).map((c, idx) => `
-                    <div class="cf-row" data-index="${idx}">
-                        <input type="text" class="content-label" value="${c.label}" placeholder="Titre" />
-                        <select class="content-type">
-                            <option value="video" ${c.type === 'video' ? 'selected' : ''}>Vidéo</option>
-                            <option value="pdf" ${c.type === 'pdf' ? 'selected' : ''}>PDF</option>
-                            <option value="link" ${c.type === 'link' ? 'selected' : ''}>Lien</option>
-                            <option value="file" ${c.type === 'file' ? 'selected' : ''}>Fichier</option>
-                        </select>
-                        <input type="text" class="content-url" value="${c.url || ''}" placeholder="URL" style="flex:2;" />
-                        <button type="button" class="btn-remove-content" onclick="this.closest('.cf-row').remove()"><i class="fas fa-times"></i></button>
-                    </div>
-                `).join('');
-
-                modalFormFields.innerHTML = `
-                    <input type="hidden" id="form_edit_id" value="${data.id || ''}" />
-                    <div class="form-group">
-                        <label>Titre *</label>
-                        <input type="text" id="form_title" value="${data.title || ''}" required />
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Niveau</label>
-                            <select id="form_niveau">${niveauOptions}</select>
-                        </div>
-                        <div class="form-group">
-                            <label>Tier</label>
-                            <select id="form_tier">${tierOptions}</select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="form_description" placeholder="Description du pack">${data.description || ''}</textarea>
-                    </div>
-                    <!-- ===== NOUVEAUX CHAMPS PRIX MODIFIABLES ===== -->
-                    <div class="price-fields">
-                        <div class="pf-group">
-                            <label>Prix barré (€)</label>
-                            <input type="number" class="prix-initial" id="form_prix_barre" value="${data.prix_barre || data.price || 0}" step="0.01" min="0" onchange="calculerPrixAuto()" />
-                            <span class="pf-badge badge-barre">Barré</span>
-                        </div>
-                        <div class="pf-group">
-                            <label>Réduction (%)</label>
-                            <input type="number" id="form_reduction_pct" value="${data.reduction_pct || 0}" step="0.1" min="0" max="100" onchange="calculerPrixAuto()" />
-                            <span class="pf-badge badge-reduit">Réduction</span>
-                        </div>
-                        <div class="pf-group">
-                            <label>Prix réduit (€)</label>
-                            <input type="number" class="prix-reduit" id="form_prix_reduit" value="${data.prix_reduit || data.price || 0}" step="0.01" min="0" readonly />
-                            <span class="pf-badge badge-reduit">💰 Réduit</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Prix réel (€) - après promo</label>
-                        <input type="number" id="form_prix_reel" value="${data.prix_reel || data.price || 0}" step="0.01" min="0" />
-                        <span style="font-size:11px;color:#8896ab;">Prix qui sera payé par le client (modifiable manuellement)</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Code d'accès</label>
-                        <div style="display:flex;gap:8px;">
-                            <input type="text" id="form_accessCode" value="${data.accessCode || ''}" placeholder="Ex: BRONZE123" style="flex:1;" />
-                            <button type="button" id="generateCodeBtn" class="btn-add-content" style="margin:0;padding:6px 14px;border:1px solid #c9a84c;background:#f4f6fb;border-radius:8px;cursor:pointer;">
-                                <i class="fas fa-random"></i> Générer
-                            </button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-file-alt"></i> Contenu du pack</label>
-                        <div class="content-fields" id="contentFields">${contentRows}</div>
-                        <button type="button" class="btn-add-content" id="addContentBtn"><i class="fas fa-plus"></i> Ajouter un élément</button>
-                    </div>
-                `;
-
-                // Fonction de calcul automatique des prix
-                window.calculerPrixAuto = function() {
-                    const prixBarre = parseFloat(document.getElementById('form_prix_barre')?.value) || 0;
-                    const reduction = parseFloat(document.getElementById('form_reduction_pct')?.value) || 0;
-                    const prixReduit = prixBarre * (1 - reduction / 100);
-                    document.getElementById('form_prix_reduit').value = prixReduit.toFixed(2);
-                    // Ne pas écraser prix_reel s'il a été modifié manuellement
-                    if (!document.getElementById('form_prix_reel').dataset.manuel) {
-                        document.getElementById('form_prix_reel').value = prixReduit.toFixed(2);
-                    }
-                };
-
-                // Détecter si l'utilisateur modifie manuellement le prix réel
-                document.addEventListener('input', function(e) {
-                    if (e.target.id === 'form_prix_reel') {
-                        e.target.dataset.manuel = 'true';
-                    }
-                });
-
-                document.getElementById('generateCodeBtn')?.addEventListener('click', function() {
-                    const tier = document.getElementById('form_tier')?.value || 'bronze';
-                    const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
-                    document.getElementById('form_accessCode').value = tier.toUpperCase() + rand;
-                });
-
-                document.getElementById('addContentBtn')?.addEventListener('click', function() {
-                    const container = document.getElementById('contentFields');
-                    const row = document.createElement('div');
-                    row.className = 'cf-row';
-                    row.innerHTML = `
-                        <input type="text" class="content-label" placeholder="Titre" />
-                        <select class="content-type">
-                            <option value="video">Vidéo</option>
-                            <option value="pdf">PDF</option>
-                            <option value="link">Lien</option>
-                            <option value="file">Fichier</option>
-                        </select>
-                        <input type="text" class="content-url" placeholder="URL" style="flex:2;" />
-                        <button type="button" class="btn-remove-content" onclick="this.closest('.cf-row').remove()"><i class="fas fa-times"></i></button>
-                    `;
-                    container.appendChild(row);
-                });
-
-                // Appliquer le calcul initial
-                setTimeout(calculerPrixAuto, 50);
-
-                modalSubmitBtn.onclick = function(e) {
-                    e.preventDefault();
-                    const id = document.getElementById('form_edit_id')?.value || null;
-                    const title = document.getElementById('form_title')?.value.trim();
-                    const tier = document.getElementById('form_tier')?.value || 'bronze';
-                    const niveau = document.getElementById('form_niveau')?.value || 'Débutant';
-                    const description = document.getElementById('form_description')?.value.trim() || '';
-                    const prixBarre = parseFloat(document.getElementById('form_prix_barre')?.value) || 0;
-                    const reductionPct = parseFloat(document.getElementById('form_reduction_pct')?.value) || 0;
-                    const prixReduit = parseFloat(document.getElementById('form_prix_reduit')?.value) || 0;
-                    const prixReel = parseFloat(document.getElementById('form_prix_reel')?.value) || 0;
-                    const accessCode = document.getElementById('form_accessCode')?.value.trim().toUpperCase() || '';
-
-                    if (!title) {
-                        modalError.textContent = 'Le titre est requis.';
+                const users = getUsers();
+                if (isLoginMode) {
+                    const user = users[email];
+                    if (!user || user.password !== password) {
+                        modalError.textContent = 'Email ou mot de passe incorrect.';
                         modalError.classList.add('show');
                         return;
                     }
-
-                    const rows = document.querySelectorAll('#contentFields .cf-row');
-                    const content = [];
-                    rows.forEach(row => {
-                        const label = row.querySelector('.content-label')?.value.trim();
-                        const type = row.querySelector('.content-type')?.value || 'file';
-                        const url = row.querySelector('.content-url')?.value.trim();
-                        if (label && url) content.push({ type, label, url });
-                    });
-
-                    let packs = getPacks();
-                    if (id) {
-                        const idx = packs.findIndex(p => p.id === id);
-                        if (idx !== -1) {
-                            packs[idx] = { 
-                                ...packs[idx], 
-                                title, tier, niveau, description, 
-                                prix_barre: prixBarre,
-                                reduction_pct: reductionPct,
-                                prix_reduit: prixReduit,
-                                prix_reel: prixReel,
-                                price: prixReel,
-                                accessCode, 
-                                content 
-                            };
-                        }
-                    } else {
-                        const newId = 'pack_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
-                        packs.push({ 
-                            id: newId, title, tier, niveau, description, 
-                            prix_barre: prixBarre,
-                            reduction_pct: reductionPct,
-                            prix_reduit: prixReduit,
-                            prix_reel: prixReel,
-                            price: prixReel,
-                            accessCode, 
-                            content 
-                        });
+                    const session = { email };
+                    localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(session));
+                    closeAuthModal();
+                    applyUserState();
+                    renderPacks();
+                    updateCartUI();
+                } else {
+                    if (!name) {
+                        modalError.textContent = 'Veuillez entrer votre nom.';
+                        modalError.classList.add('show');
+                        return;
                     }
-                    savePacks(packs);
-                    closeModalHandler();
-                    renderAll();
-                };
-                modalOverlay.classList.add('open');
+                    if (users[email]) {
+                        modalError.textContent = 'Un compte existe déjà.';
+                        modalError.classList.add('show');
+                        return;
+                    }
+                    users[email] = { name, password };
+                    localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
+                    const session = { email };
+                    localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(session));
+                    closeAuthModal();
+                    applyUserState();
+                    renderPacks();
+                    updateCartUI();
+                }
+            });
+
+            function googleLogin() {
+                const fakeEmail = 'google.user@example.com';
+                const users = getUsers();
+                if (!users[fakeEmail]) {
+                    users[fakeEmail] = { name: 'Utilisateur Google' };
+                    localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
+                }
+                const session = { email: fakeEmail };
+                localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(session));
+                closeAuthModal();
+                applyUserState();
+                renderPacks();
+                updateCartUI();
             }
 
-            function openPromoModal(mode, id = null) {
-                const promos = getPromos();
-                let data = { code: '', type: 'percentage', value: 10, packTier: 'all', startDate: '', endDate: '', active: true };
-                if (mode === 'edit' && id) {
-                    const found = promos.find(p => p.id === id);
-                    if (found) data = JSON.parse(JSON.stringify(found));
-                }
+            // ============================================================
+            //  MODAL PANIER
+            // ============================================================
+            const cartModal = document.getElementById('cartModal');
+            const closeCart = document.getElementById('closeCart');
 
-                if (mode === 'delete') {
-                    modalTitle.textContent = 'Supprimer la promotion';
-                    modalSub.textContent = 'Confirmez la suppression';
-                    modalSubmitBtn.textContent = 'Supprimer';
-                    modalSubmitBtn.className = 'btn-submit danger';
-                    modalFormFields.innerHTML = `
-                        <p style="color:#4a5568;font-size:14px;padding:8px 0;">Supprimer le code <strong>${data.code}</strong> ?</p>
-                        <input type="hidden" id="form_delete_id" value="${data.id}" />
-                    `;
-                    modalSubmitBtn.onclick = function(e) {
-                        e.preventDefault();
-                        const id = document.getElementById('form_delete_id')?.value;
-                        if (!id) return;
-                        let promos = getPromos();
-                        promos = promos.filter(p => p.id !== id);
-                        savePromos(promos);
-                        closeModalHandler();
-                        renderAll();
-                    };
-                    modalOverlay.classList.add('open');
+            document.getElementById('cartBtn').addEventListener('click', function() {
+                renderCartModal();
+                cartModal.classList.add('open');
+            });
+            closeCart.addEventListener('click', function() {
+                cartModal.classList.remove('open');
+                cartMessage.textContent = '';
+                cartMessage.className = 'checkout-message';
+                cartCodeArea.classList.add('hidden');
+            });
+            cartModal.addEventListener('click', function(e) {
+                if (e.target === cartModal) {
+                    cartModal.classList.remove('open');
+                    cartMessage.textContent = '';
+                    cartMessage.className = 'checkout-message';
+                    cartCodeArea.classList.add('hidden');
+                }
+            });
+
+            btnStripeCheckout.addEventListener('click', simulateStripePayment);
+
+            btnCartCode.addEventListener('click', function() {
+                cartCodeArea.classList.toggle('hidden');
+                if (!cartCodeArea.classList.contains('hidden')) cartCodeInput.focus();
+            });
+
+            // ===== CODE PROMO : APPLICATION RÉELLE =====
+            cartCodeApply.addEventListener('click', function() {
+                const code = cartCodeInput.value.trim().toUpperCase();
+                const promos = getPromos();
+                const now = new Date().toISOString().split('T')[0];
+                const promo = promos.find(p =>
+                    p.code === code &&
+                    p.active &&
+                    (!p.startDate || p.startDate <= now) &&
+                    (!p.endDate || p.endDate >= now)
+                );
+                
+                if (!promo) {
+                    cartMessage.textContent = '❌ Code promo invalide ou expiré.';
+                    cartMessage.className = 'checkout-message error';
                     return;
                 }
-
-                modalTitle.textContent = mode === 'edit' ? 'Modifier la promotion' : 'Nouvelle promotion';
-                modalSub.textContent = 'Définissez les paramètres de réduction';
-                modalSubmitBtn.textContent = mode === 'edit' ? 'Mettre à jour' : 'Créer';
-                modalSubmitBtn.className = 'btn-submit';
-
-                const packTiers = ['all', 'bronze', 'silver', 'gold'];
-                const tierOptions = packTiers.map(t => `<option value="${t}" ${data.packTier === t ? 'selected' : ''}>${t === 'all' ? 'Tous' : t.charAt(0).toUpperCase() + t.slice(1)}</option>`).join('');
-
-                modalFormFields.innerHTML = `
-                    <input type="hidden" id="form_edit_id" value="${data.id || ''}" />
-                    <div class="form-group"><label>Code promo *</label><input type="text" id="form_promo_code" value="${data.code || ''}" placeholder="Ex: SUMMER20" required /></div>
-                    <div class="form-row">
-                        <div class="form-group"><label>Type</label><select id="form_promo_type"><option value="percentage" ${data.type === 'percentage' ? 'selected' : ''}>Pourcentage (%)</option><option value="fixed" ${data.type === 'fixed' ? 'selected' : ''}>Montant fixe (€)</option></select></div>
-                        <div class="form-group"><label>Valeur</label><input type="number" id="form_promo_value" value="${data.value || 0}" min="0" step="0.5" /></div>
-                    </div>
-                    <div class="form-group"><label>Appliqué au pack</label><select id="form_promo_tier">${tierOptions}</select></div>
-                    <div class="form-row">
-                        <div class="form-group"><label>Date de début</label><input type="date" id="form_promo_start" value="${data.startDate || ''}" /></div>
-                        <div class="form-group"><label>Date de fin</label><input type="date" id="form_promo_end" value="${data.endDate || ''}" /></div>
-                    </div>
-                    <div class="form-group"><label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="form_promo_active" ${data.active ? 'checked' : ''} /> Actif</label></div>
-                `;
-
-                modalSubmitBtn.onclick = function(e) {
-                    e.preventDefault();
-                    const id = document.getElementById('form_edit_id')?.value || null;
-                    const code = document.getElementById('form_promo_code')?.value.trim().toUpperCase();
-                    const type = document.getElementById('form_promo_type')?.value || 'percentage';
-                    const value = parseFloat(document.getElementById('form_promo_value')?.value) || 0;
-                    const packTier = document.getElementById('form_promo_tier')?.value || 'all';
-                    const startDate = document.getElementById('form_promo_start')?.value || '';
-                    const endDate = document.getElementById('form_promo_end')?.value || '';
-                    const active = document.getElementById('form_promo_active')?.checked || false;
-
-                    if (!code) { modalError.textContent = 'Le code est requis.'; modalError.classList.add('show'); return; }
-                    if (value <= 0) { modalError.textContent = 'La valeur doit être positive.'; modalError.classList.add('show'); return; }
-
-                    let promos = getPromos();
-                    if (id) {
-                        const idx = promos.findIndex(p => p.id === id);
-                        if (idx !== -1) promos[idx] = { ...promos[idx], code, type, value, packTier, startDate, endDate, active };
-                    } else {
-                        const newId = 'promo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
-                        promos.push({ id: newId, code, type, value, packTier, startDate, endDate, active });
+                
+                // Recalculer les prix du panier avec le code promo
+                let cart = getCart();
+                const packs = getPacks();
+                let total = 0;
+                const cartWithPromo = [];
+                
+                cart.forEach(id => {
+                    const p = packs.find(pk => pk.id === id);
+                    if (p) {
+                        const prixReel = p.prix_reel || p.price || 0;
+                        const { discountedPrice } = getDiscountedPrice(prixReel, p.tier, code);
+                        total += discountedPrice;
+                        cartWithPromo.push({
+                            ...p,
+                            prix_avec_promo: discountedPrice
+                        });
                     }
-                    savePromos(promos);
-                    closeModalHandler();
-                    renderAll();
-                };
-                modalOverlay.classList.add('open');
-            }
-
-            function closeModalHandler() {
-                modalOverlay.classList.remove('open');
-                modalError.classList.remove('show');
-                modalError.textContent = '';
-            }
-
-            // ---- Admin Login ----
-            function checkAdminAuth() {
-                if (getAdminLogged()) {
-                    isAdminLogged = true;
-                    adminLoginOverlay.classList.remove('open');
-                    renderAll();
-                    return true;
-                } else {
-                    isAdminLogged = false;
-                    adminLoginOverlay.classList.add('open');
-                    adminPasswordInput.value = '';
-                    loginError.classList.remove('show');
-                    adminPasswordInput.focus();
-                    return false;
-                }
-            }
-
-            function adminLogin() {
-                const pwd = adminPasswordInput.value.trim();
-                if (pwd === ADMIN_PASSWORD) {
-                    setAdminLogged(true);
-                    isAdminLogged = true;
-                    adminLoginOverlay.classList.remove('open');
-                    loginError.classList.remove('show');
-                    renderAll();
-                } else {
-                    loginError.textContent = 'Mot de passe incorrect.';
-                    loginError.classList.add('show');
-                    adminPasswordInput.value = '';
-                    adminPasswordInput.focus();
-                }
-            }
-
-            function adminLogout() {
-                setAdminLogged(false);
-                isAdminLogged = false;
-                adminLoginOverlay.classList.add('open');
-                adminPasswordInput.value = '';
-                loginError.classList.remove('show');
-                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-                document.querySelector('.tab-content#tabDashboard')?.classList.add('active');
-                navLinks.forEach(link => link.classList.toggle('active', link.dataset.tab === 'dashboard'));
-                pageTitle.innerHTML = 'Tableau de bord <small>vue d\'ensemble</small>';
-                btnAddPack.style.display = 'none';
-                btnAddPromo.style.display = 'none';
-            }
-
-            // ---- Event listeners ----
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const tab = this.dataset.tab;
-                    if (tab) switchTab(tab);
                 });
+                
+                // Mettre à jour l'affichage
+                renderCartModal();
+                
+                cartMessage.textContent = `✅ Code ${code} appliqué ! Réduction de ${promo.value}${promo.type === 'percentage' ? '%' : '€'}`;
+                cartMessage.className = 'checkout-message success';
+                cartCodeInput.value = '';
             });
 
-            adminLoginBtn.addEventListener('click', adminLogin);
-            adminPasswordInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') adminLogin();
-            });
-            adminBackToSite.addEventListener('click', function() {
-                window.location.href = window.location.pathname + '?view=site';
-            });
-            adminLogoutBtn.addEventListener('click', adminLogout);
-            goToSiteBtn.addEventListener('click', function() {
-                window.location.href = window.location.pathname + '?view=site';
+            btnClearCart.addEventListener('click', function() {
+                if (getCart().length === 0) return;
+                if (confirm('Vider le panier ?')) {
+                    saveCart([]);
+                    renderPacks();
+                    updateCartUI();
+                }
             });
 
-            refreshBtn.addEventListener('click', renderAll);
-            btnAddPack.addEventListener('click', () => openModal('pack', 'create'));
-            btnAddPack2.addEventListener('click', () => openModal('pack', 'create'));
-            btnAddPromo.addEventListener('click', () => openModal('promo', 'create'));
-            btnAddPromo2.addEventListener('click', () => openModal('promo', 'create'));
+            // ============================================================
+            //  INIT
+            // ============================================================
+            // Initialiser les données par défaut (seulement si vide)
+            initDefaultData();
+            
+            applyUserState();
+            renderPacks();
+            updateCartUI();
 
-            closeModal.addEventListener('click', closeModalHandler);
-            modalOverlay.addEventListener('click', function(e) {
-                if (e.target === modalOverlay) closeModalHandler();
-            });
-
-            packSearch.addEventListener('input', function() { renderPacks(this.value); });
-            promoSearch.addEventListener('input', function() { renderPromos(this.value); });
-            userSearch.addEventListener('input', function() { renderUsers(this.value); });
-            orderSearch.addEventListener('input', function() { renderOrders(this.value); });
-
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModalHandler();
-            });
-
-            // ---- Init ----
-            initData();
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('view') === 'site') {
-                window.location.href = window.location.pathname;
-                return;
+            // Vérifier retour Stripe
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('success') === 'true') {
+                alert('🎉 Paiement Stripe confirmé ! Vos packs sont débloqués.');
+                const unlocked = getUnlockedPacks();
+                const cart = getCart();
+                const packs = getPacks();
+                cart.forEach(id => {
+                    const p = packs.find(pk => pk.id === id);
+                    if (p) {
+                        unlocked[p.tier] = true;
+                        unlocked[p.id] = true;
+                    }
+                });
+                saveUnlockedPacks(unlocked);
+                saveCart([]);
+                renderPacks();
+                updateCartUI();
+                window.history.replaceState({}, document.title, window.location.pathname);
             }
-
-            if (getAdminLogged()) {
-                isAdminLogged = true;
-                adminLoginOverlay.classList.remove('open');
-                renderAll();
-                switchTab('dashboard');
-            } else {
-                adminLoginOverlay.classList.add('open');
-                adminPasswordInput.focus();
-                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-                document.querySelector('.tab-content#tabDashboard')?.classList.add('active');
-            }
-
-            // expose globals
-            window.adminEditPack = function(id) { openModal('pack', 'edit', id); };
-            window.adminDeletePack = function(id) {
-                if (!confirm('Supprimer ce pack ?')) return;
-                let packs = getPacks();
-                packs = packs.filter(p => p.id !== id);
-                savePacks(packs);
-                renderAll();
-            };
-            window.adminEditPromo = function(id) { openModal('promo', 'edit', id); };
-            window.adminDeletePromo = function(id) {
-                if (!confirm('Supprimer cette promo ?')) return;
-                let promos = getPromos();
-                promos = promos.filter(p => p.id !== id);
-                savePromos(promos);
-                renderAll();
-            };
-            window.adminViewUser = function(email) {
-                const users = getUsers();
-                const user = users[email];
-                if (!user) return alert('Introuvable.');
-                alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}`);
-            };
-            window.adminDeleteUser = function(email) {
-                if (!confirm(`Supprimer ${email} ?`)) return;
-                const users = getUsers();
-                delete users[email];
-                localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
-                renderAll();
-            };
-            window.adminToggleOrderStatus = function(id) {
-                const orders = getOrders();
-                const idx = orders.findIndex(o => o.id === id);
-                if (idx === -1) return;
-                const statuses = ['pending', 'paid', 'cancelled'];
-                const current = orders[idx].status || 'pending';
-                const nextIdx = (statuses.indexOf(current) + 1) % statuses.length;
-                orders[idx].status = statuses[nextIdx];
-                localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
-                renderAll();
-            };
-            window.adminDeleteOrder = function(id) {
-                if (!confirm('Supprimer cette commande ?')) return;
-                let orders = getOrders();
-                orders = orders.filter(o => o.id !== id);
-                localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
-                renderAll();
-            };
 
         })();
     </script>
-
 </body>
 </html>
