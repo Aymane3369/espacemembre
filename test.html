@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test JSONBin</title></head>
+<body>
+    <h1>Test JSONBin</h1>
+    <div id="result">Chargement...</div>
+    <script>
+        const BIN_ID = '6a3a6cf0da38895dfef10b2a';
+        const API_KEY = '$2a$10$yYujh3uZTe5eYF5tEXW9qO5nU8rw735V9ZQZ3I0b80cPvxCSowHBu';
+        const BASE_URL = 'https://api.jsonbin.io/v3/b/';
+
+        fetch(BASE_URL + BIN_ID + '/latest', {
+            headers: { 'X-Master-Key': API_KEY }
+        })
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        })
+        .catch(err => {
+            document.getElementById('result').innerHTML = '❌ Erreur : ' + err.message;
+        });
+    </script>
+</body>
+</html>
