@@ -6,8 +6,7 @@
     <title>Espace Fidélité · Packs & Promotions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== STYLE IDENTIQUE À L'INDEX PRÉCÉDENT ===== */
-        /* Je le reprends en version courte pour gagner de la place, mais tu peux utiliser le tien */
+        /* ===== TOUT LE STYLE EXISTANT (identique) ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',sans-serif; background:#f4f6fb; min-height:100vh; padding:20px; display:flex; justify-content:center; align-items:center; }
         .app { max-width:1360px; width:100%; background:#fff; border-radius:24px; box-shadow:0 12px 40px rgba(15,26,46,0.08); padding:28px 32px 40px; }
@@ -250,15 +249,14 @@
         </div>
     </div>
 
-    <script src="config.js"></script>
     <script>
         (function() {
             'use strict';
 
-            // ===== CONFIGURATION JSONBIN =====
-            const BIN_ID = CONFIG.BIN_ID;
-            const API_KEY = CONFIG.API_KEY;
-            const BASE_URL = CONFIG.BASE_URL;
+            // ===== IDENTIFIANTS JSONBIN INTÉGRÉS DIRECTEMENT =====
+            const BIN_ID = '6a3a6cf0da38895dfef10b2a';
+            const API_KEY = '$2a$10$yYujh3uZTe5eYF5tEXW9qO5nU8rw735V9ZQZ3I0b80cPvxCSowHBu';
+            const BASE_URL = 'https://api.jsonbin.io/v3/b/';
 
             // ===== ÉTAT LOCAL =====
             let data = { packs: [], promos: [], commandes: [], promoUsage: {} };
@@ -306,8 +304,59 @@
                 } catch (e) {
                     console.warn('Chargement JSONBin échoué, utilisation des données par défaut.');
                     data = {
-                        packs: [ /* packs par défaut comme dans admin */ ],
-                        promos: [ /* promos par défaut */ ],
+                        packs: [{
+                            id: 'pack_bronze',
+                            tier: 'bronze',
+                            title: 'Découverte',
+                            niveau: 'Débutant',
+                            description: 'Idéal pour débuter, accédez aux fondamentaux.',
+                            price: 149.00,
+                            prix_barre: 149.00,
+                            prix_reduit: 119.00,
+                            reduction_pct: 20,
+                            prix_reel: 119.00,
+                            accessCode: 'BRONZE123',
+                            content: [
+                                { type: 'video', label: 'Introduction', url: 'https://youtu.be/example1' },
+                                { type: 'pdf', label: 'Guide du débutant', url: '/files/guide-debutant.pdf' }
+                            ]
+                        }, {
+                            id: 'pack_silver',
+                            tier: 'silver',
+                            title: 'Professionnel',
+                            niveau: 'Intermédiaire',
+                            description: 'Stratégies avancées et études de cas.',
+                            price: 199.00,
+                            prix_barre: 199.00,
+                            prix_reduit: 159.00,
+                            reduction_pct: 20,
+                            prix_reel: 159.00,
+                            accessCode: 'SILVER456',
+                            content: [
+                                { type: 'video', label: 'Stratégie digitale', url: 'https://youtu.be/example2' },
+                                { type: 'pdf', label: 'Rapport annuel', url: '/files/rapport-annuel.pdf' }
+                            ]
+                        }, {
+                            id: 'pack_gold',
+                            tier: 'gold',
+                            title: 'Expert',
+                            niveau: 'Expert',
+                            description: 'Contenus exclusifs et mentorat de haut niveau.',
+                            price: 299.00,
+                            prix_barre: 299.00,
+                            prix_reduit: 239.00,
+                            reduction_pct: 20,
+                            prix_reel: 239.00,
+                            accessCode: 'GOLD789',
+                            content: [
+                                { type: 'video', label: 'IA & transformation', url: 'https://youtu.be/example3' },
+                                { type: 'pdf', label: 'Livre blanc IA', url: '/files/livre-blanc-ia.pdf' }
+                            ]
+                        }],
+                        promos: [
+                            { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01', endDate: '2026-12-31', active: true },
+                            { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01', endDate: '2026-07-01', active: true }
+                        ],
                         commandes: [],
                         promoUsage: {}
                     };
@@ -371,7 +420,6 @@
                     const prixReel = p.prix_reel || p.price || 0;
                     const reduction = p.reduction_pct || 0;
 
-                    // Calcul du prix avec promo (uniquement si un code promo est actif)
                     let prixAffiche = prixReel;
                     let promoInfo = '';
                     if (codePromoActif) {
@@ -545,7 +593,6 @@
                 cartTotal.textContent = `Total : ${total.toFixed(2)} €`;
                 btnStripeCheckout.disabled = (panier.length === 0);
 
-                // Afficher le code promo appliqué
                 if (codePromoActif) {
                     cartMessage.textContent = `✅ Code promo "${codePromoActif}" appliqué`;
                     cartMessage.className = 'checkout-message success';
@@ -627,7 +674,6 @@
                 });
 
                 if (confirm(`💳 Paiement de ${total.toFixed(2)} € avec Stripe (simulé) ?`)) {
-                    // Débloquer les packs
                     panier.forEach(id => {
                         unlockedPacks[id] = true;
                         const p = data.packs.find(pk => pk.id === id);
@@ -635,7 +681,6 @@
                     });
                     localStorage.setItem('unlockedPacks', JSON.stringify(unlockedPacks));
 
-                    // Enregistrer la commande
                     const commande = {
                         id: 'ord_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                         email: currentUser ? currentUser.email : 'invité@example.com',
@@ -646,13 +691,11 @@
                         date_heure: new Date().toISOString().replace('T', ' ').slice(0, 19)
                     };
                     data.commandes.push(commande);
-                    // Mise à jour du compteur promoUsage
                     if (codePromoActif) {
                         data.promoUsage[codePromoActif] = (data.promoUsage[codePromoActif] || 0) + 1;
                     }
                     await saveData();
 
-                    // Vider panier
                     panier = [];
                     localStorage.removeItem('panier');
                     codePromoActif = null;
@@ -668,7 +711,6 @@
             });
 
             // ===== AUTH =====
-            // Gestion simplifiée (localStorage)
             function applyUserState() {
                 const session = JSON.parse(localStorage.getItem('session') || 'null');
                 if (session && session.email) {
@@ -701,7 +743,6 @@
                 updateCartUI();
             });
 
-            // Auth modal (simplifié)
             const authModal = document.getElementById('modalOverlay');
             const closeAuth = document.getElementById('closeModal');
             const authForm = document.getElementById('authForm');
@@ -764,9 +805,7 @@
                     return;
                 }
 
-                // Simulation (pas de vraie BDD)
                 if (isLoginMode) {
-                    // Accepte n'importe quel email/mdp pour la démo
                     const session = { email };
                     localStorage.setItem('session', JSON.stringify(session));
                     authModal.classList.remove('open');
@@ -809,7 +848,6 @@
             // ===== INIT =====
             (async function init() {
                 await loadData();
-                // Restaurer panier, unlocked, code promo
                 const savedPanier = localStorage.getItem('panier');
                 if (savedPanier) panier = JSON.parse(savedPanier) || [];
                 const savedUnlocked = localStorage.getItem('unlockedPacks');
