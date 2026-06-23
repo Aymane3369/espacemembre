@@ -37,13 +37,14 @@
         .main .topbar .actions .btn-outline:hover { background: #f4f6fb; border-color: #c9a84c; }
         .main .topbar .actions .btn-primary { background: #0f1a2e; border: none; padding: 6px 20px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #fff; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; }
         .main .topbar .actions .btn-primary:hover { background: #1a2c4a; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 18px; margin-bottom: 28px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 18px; margin-bottom: 28px; }
         .stats-grid .stat-card { background: #fff; border-radius: 14px; padding: 18px 22px; box-shadow: 0 2px 10px rgba(15,26,46,0.04); border: 1px solid rgba(15,26,46,0.05); display: flex; align-items: center; gap: 14px; }
         .stats-grid .stat-card .stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
         .stats-grid .stat-card .stat-icon.gold { background: #f7f0df; color: #b8942b; }
         .stats-grid .stat-card .stat-icon.blue { background: #e8edf5; color: #2c5282; }
         .stats-grid .stat-card .stat-icon.green { background: #e6f7ee; color: #0b6e3f; }
         .stats-grid .stat-card .stat-icon.purple { background: #ede7f7; color: #6b3fa0; }
+        .stats-grid .stat-card .stat-icon.orange { background: #fef7e6; color: #a67c1a; }
         .stats-grid .stat-card .stat-info .stat-number { font-size: 22px; font-weight: 700; color: #0f1a2e; line-height: 1.2; }
         .stats-grid .stat-card .stat-info .stat-label { font-size: 12px; font-weight: 500; color: #8896ab; }
         .tab-content { display: none; animation: fadeUp 0.35s ease forwards; }
@@ -87,6 +88,10 @@
         .pack-card .pc-desc { font-size: 13px; color: #4a5568; margin: 6px 0 10px; line-height: 1.4; flex: 1; }
         .pack-card .pc-price { font-weight: 700; font-size: 16px; color: #0f1a2e; margin-bottom: 8px; }
         .pack-card .pc-price i { color: #c9a84c; margin-right: 4px; }
+        .pack-card .pc-price .price-barre { text-decoration: line-through; color: #8896ab; font-weight: 400; }
+        .pack-card .pc-price .price-reduit { color: #0b6e3f; font-weight: 700; }
+        .pack-card .pc-price .price-reel { color: #2c5282; font-weight: 700; }
+        .pack-card .pc-price .discount-badge { background: #e6f7ee; color: #0b6e3f; padding: 1px 10px; border-radius: 40px; font-size: 12px; font-weight: 600; }
         .pack-card .pc-access-code { font-size: 12px; background: #f4f6fb; padding: 2px 10px; border-radius: 40px; display: inline-block; margin-bottom: 8px; color: #4a5568; }
         .pack-card .pc-access-code i { margin-right: 4px; color: #c9a84c; }
         .pack-card .pc-content-list { margin: 6px 0 12px; border-top: 1px solid rgba(15,26,46,0.04); padding-top: 10px; }
@@ -159,6 +164,15 @@
         .admin-login-overlay .login-box .error-msg.show { display: block; }
         .admin-login-overlay .login-box .back-link { display: block; text-align: center; margin-top: 14px; color: #8896ab; font-size: 13px; cursor: pointer; text-decoration: underline; }
         .admin-login-overlay .login-box .back-link:hover { color: #0f1a2e; }
+        
+        /* Nouveau style pour le récapitulatif des promos */
+        .promo-usage-card { background: #fff; border-radius: 14px; border: 1px solid rgba(15,26,46,0.05); padding: 18px 22px; }
+        .promo-usage-card .pu-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f2f6; font-size: 13px; }
+        .promo-usage-card .pu-row:last-child { border-bottom: none; }
+        .promo-usage-card .pu-code { font-weight: 700; color: #0f1a2e; }
+        .promo-usage-card .pu-count { background: #e8edf5; padding: 2px 12px; border-radius: 40px; font-weight: 600; font-size: 12px; color: #2c5282; }
+        .promo-usage-card .pu-total { font-weight: 700; color: #0b6e3f; }
+        
         @media (max-width:1024px) { .sidebar { width:72px; padding:16px 10px; } .sidebar .logo h1, .sidebar .logo span, .sidebar .nav a span, .sidebar .nav a .badge-nav, .sidebar .admin-user .info, .sidebar .footer-nav a span { display:none; } .sidebar .logo .icon { width:36px; height:36px; font-size:16px; } .sidebar .nav a { justify-content:center; padding:12px; font-size:18px; } .sidebar .nav a i { width:auto; font-size:18px; } .sidebar .admin-user { justify-content:center; padding:8px; } .sidebar .admin-user .avatar-admin { width:32px; height:32px; font-size:12px; } .main { padding:20px 18px 32px; } .main .topbar h2 { font-size:20px; } .stats-grid { grid-template-columns:repeat(2,1fr); } .packs-grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); } .modal .form-row { grid-template-columns:1fr; } }
         @media (max-width:640px) { .sidebar { width:56px; padding:12px 6px; } .sidebar .logo .icon { width:30px; height:30px; font-size:13px; } .sidebar .nav a { padding:8px; font-size:15px; } .main { padding:14px 12px 28px; } .stats-grid { grid-template-columns:1fr 1fr; gap:10px; } .stats-grid .stat-card { padding:12px 14px; flex-direction:column; align-items:flex-start; gap:6px; } .stats-grid .stat-card .stat-icon { width:36px; height:36px; font-size:14px; } .stats-grid .stat-card .stat-info .stat-number { font-size:18px; } .section-toolbar { flex-direction:column; align-items:stretch; } .section-toolbar .search-box input { min-width:unset; width:100%; } .table-wrap { overflow-x:auto; } .table-wrap table { font-size:12px; } .table-wrap table th, .table-wrap table td { padding:8px 12px; white-space:nowrap; } .packs-grid { grid-template-columns:1fr; } .modal .modal { padding:24px 16px; } .modal .form-row { grid-template-columns:1fr; } .main .topbar h2 small { display:block; margin-left:0; margin-top:2px; } }
         ::-webkit-scrollbar { width:6px; height:6px; }
@@ -209,10 +223,23 @@
                 <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-users"></i></div><div class="stat-info"><div class="stat-number" id="statUsers">0</div><div class="stat-label">Utilisateurs</div></div></div>
                 <div class="stat-card"><div class="stat-icon green"><i class="fas fa-shopping-bag"></i></div><div class="stat-info"><div class="stat-number" id="statOrders">0</div><div class="stat-label">Commandes</div></div></div>
                 <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-euro-sign"></i></div><div class="stat-info"><div class="stat-number" id="statRevenue">0 €</div><div class="stat-label">CA</div></div></div>
+                <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-tags"></i></div><div class="stat-info"><div class="stat-number" id="statPromoUsage">0</div><div class="stat-label">Promos utilisées</div></div></div>
             </div>
-            <div style="background:#fff;border-radius:14px;border:1px solid rgba(15,26,46,0.05);padding:20px 24px;margin-top:8px;">
-                <h4 style="font-size:15px;font-weight:600;margin-bottom:10px;"><i class="fas fa-info-circle" style="color:#c9a84c;margin-right:8px;"></i>Gestion complète</h4>
-                <p style="color:#4a5568;font-size:14px;line-height:1.6;">Gérez vos packs, leur contenu, les codes d'accès, les promotions et suivez les commandes.</p>
+            
+            <!-- RÉCAPITULATIF DES PROMOS UTILISÉES -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-top:8px;">
+                <div class="promo-usage-card">
+                    <h4 style="font-size:14px;font-weight:600;margin-bottom:10px;"><i class="fas fa-tag" style="color:#c9a84c;"></i> Promotions actives</h4>
+                    <div id="promoUsageList">
+                        <div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucune promotion utilisée</div>
+                    </div>
+                </div>
+                <div style="background:#fff;border-radius:14px;border:1px solid rgba(15,26,46,0.05);padding:18px 22px;">
+                    <h4 style="font-size:14px;font-weight:600;margin-bottom:10px;"><i class="fas fa-info-circle" style="color:#c9a84c;"></i> Résumé des prix</h4>
+                    <div id="priceSummary">
+                        <div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucun pack disponible</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -233,8 +260,8 @@
             </div>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>Code</th><th>Type</th><th>Valeur</th><th>Appliqué à</th><th>Date début</th><th>Date fin</th><th>Statut</th><th>Actions</th></tr></thead>
-                    <tbody id="promosTableBody"><tr><td colspan="8" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion</p></td></tr></tbody>
+                    <thead><tr><th>Code</th><th>Type</th><th>Valeur</th><th>Appliqué à</th><th>Date début</th><th>Date fin</th><th>Statut</th><th>Utilisations</th><th>Actions</th></tr></thead>
+                    <tbody id="promosTableBody"><tr><td colspan="9" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion</p></td></tr></tbody>
                 </table>
             </div>
         </div>
@@ -306,7 +333,8 @@
                 packs: 'loyaltyPacks',
                 promos: 'loyaltyPromos',
                 session: 'loyaltySession',
-                adminLogged: 'loyaltyAdminLogged'
+                adminLogged: 'loyaltyAdminLogged',
+                promoUsage: 'loyaltyPromoUsage'  // Nouvelle clé pour le suivi des promos
             };
 
             // ---- DOM refs ----
@@ -329,6 +357,7 @@
             const statUsers = document.getElementById('statUsers');
             const statOrders = document.getElementById('statOrders');
             const statRevenue = document.getElementById('statRevenue');
+            const statPromoUsage = document.getElementById('statPromoUsage');
 
             const packCountBadge = document.getElementById('packCountBadge');
             const promoCountBadge = document.getElementById('promoCountBadge');
@@ -341,6 +370,8 @@
             const promosTableBody = document.getElementById('promosTableBody');
             const usersTableBody = document.getElementById('usersTableBody');
             const ordersTableBody = document.getElementById('ordersTableBody');
+            const promoUsageList = document.getElementById('promoUsageList');
+            const priceSummary = document.getElementById('priceSummary');
 
             const packSearch = document.getElementById('packSearch');
             const promoSearch = document.getElementById('promoSearch');
@@ -377,13 +408,15 @@
             function getOrders() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || []; } catch { return []; } }
             function getPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.packs)) || []; } catch { return []; } }
             function getPromos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promos)) || []; } catch { return []; } }
+            function getPromoUsage() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promoUsage)) || {}; } catch { return {}; } }
             function getAdminLogged() { return localStorage.getItem(STORAGE_KEYS.adminLogged) === 'true'; }
             function setAdminLogged(v) { localStorage.setItem(STORAGE_KEYS.adminLogged, v ? 'true' : 'false'); }
 
             function savePacks(p) { localStorage.setItem(STORAGE_KEYS.packs, JSON.stringify(p)); }
             function savePromos(p) { localStorage.setItem(STORAGE_KEYS.promos, JSON.stringify(p)); }
+            function savePromoUsage(u) { localStorage.setItem(STORAGE_KEYS.promoUsage, JSON.stringify(u)); }
 
-            // ---- Default data (UNIQUEMENT si localStorage vide) ----
+            // ---- Default data ----
             function getDefaultPacks() {
                 return [{
                     id: 'pack_bronze',
@@ -444,9 +477,11 @@
             }
 
             function initData() {
-                // NE PAS ÉCRASER si des données existent déjà
                 if (getPacks().length === 0) savePacks(getDefaultPacks());
                 if (getPromos().length === 0) savePromos(getDefaultPromos());
+                if (Object.keys(getPromoUsage()).length === 0) {
+                    savePromoUsage({});
+                }
                 if (getOrders().length === 0) {
                     const users = getUsers();
                     const emails = Object.keys(users);
@@ -464,12 +499,46 @@
                                 items: items,
                                 total: total,
                                 date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
-                                status: i === 0 ? 'paid' : i === 1 ? 'pending' : 'paid'
+                                status: i === 0 ? 'paid' : i === 1 ? 'pending' : 'paid',
+                                promoCode: i === 0 ? 'PROMO10' : null
                             });
                         }
                         localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(sampleOrders));
                     }
                 }
+            }
+
+            // ---- Calcul du prix avec promo ----
+            function getDiscountedPrice(price, tier, promoCode = null) {
+                const promos = getPromos();
+                const now = new Date().toISOString().split('T')[0];
+                let bestDiscount = 0;
+                let promoAppliquee = null;
+                
+                promos.forEach(p => {
+                    if (!p.active) return;
+                    if (p.startDate && p.startDate > now) return;
+                    if (p.endDate && p.endDate < now) return;
+                    if (p.packTier !== 'all' && p.packTier !== tier) return;
+                    if (promoCode && p.code !== promoCode) return;
+                    
+                    let discount = 0;
+                    if (p.type === 'percentage') {
+                        discount = price * (p.value / 100);
+                    } else if (p.type === 'fixed') {
+                        discount = Math.min(p.value, price);
+                    }
+                    if (discount > bestDiscount) {
+                        bestDiscount = discount;
+                        promoAppliquee = p.code;
+                    }
+                });
+                
+                return { 
+                    discountedPrice: Math.max(0, price - bestDiscount), 
+                    discount: bestDiscount,
+                    promoCode: promoAppliquee
+                };
             }
 
             // ---- Render ----
@@ -478,17 +547,63 @@
                 const users = getUsers();
                 const orders = getOrders();
                 const promos = getPromos();
+                const promoUsage = getPromoUsage();
                 const revenue = orders.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.total || 0), 0);
                 statPacks.textContent = packs.length;
                 statUsers.textContent = Object.keys(users).length;
                 statOrders.textContent = orders.length;
                 statRevenue.textContent = revenue.toFixed(2) + ' €';
+                statPromoUsage.textContent = Object.keys(promoUsage).filter(k => promoUsage[k] > 0).length;
                 packCountBadge.textContent = packs.length;
                 promoCountBadge.textContent = promos.length;
                 userCountBadge.textContent = Object.keys(users).length;
                 orderCountBadge.textContent = orders.length;
                 userCountLabel.textContent = Object.keys(users).length + ' utilisateur' + (Object.keys(users).length > 1 ? 's' : '');
                 orderCountLabel.textContent = orders.length + ' commande' + (orders.length > 1 ? 's' : '');
+            }
+
+            function renderPromoUsage() {
+                const promoUsage = getPromoUsage();
+                const promos = getPromos();
+                const usageArray = Object.keys(promoUsage).filter(k => promoUsage[k] > 0);
+                
+                if (usageArray.length === 0) {
+                    promoUsageList.innerHTML = '<div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucune promotion utilisée</div>';
+                } else {
+                    promoUsageList.innerHTML = usageArray.map(code => {
+                        const promo = promos.find(p => p.code === code);
+                        return `
+                            <div class="pu-row">
+                                <span class="pu-code">${code}</span>
+                                <span class="pu-count">${promoUsage[code]} utilisation${promoUsage[code] > 1 ? 's' : ''}</span>
+                                <span style="color:#4a5568;font-size:12px;">${promo ? (promo.type === 'percentage' ? promo.value + '%' : promo.value + '€') : 'N/A'}</span>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
+
+            function renderPriceSummary() {
+                const packs = getPacks();
+                if (packs.length === 0) {
+                    priceSummary.innerHTML = '<div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucun pack disponible</div>';
+                    return;
+                }
+                priceSummary.innerHTML = packs.map(p => {
+                    const prixBarre = p.prix_barre || p.price || 0;
+                    const prixReel = p.prix_reel || p.price || 0;
+                    const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
+                    return `
+                        <div class="pu-row">
+                            <span><strong>${p.title}</strong></span>
+                            <span>
+                                <span style="text-decoration:line-through;color:#8896ab;font-size:12px;">${prixBarre.toFixed(2)}€</span>
+                                <span style="color:#0b6e3f;font-weight:700;">${prixReel.toFixed(2)}€</span>
+                                ${discountedPrice < prixReel ? `<span style="color:#2c5282;font-weight:700;"> → ${discountedPrice.toFixed(2)}€</span>` : ''}
+                            </span>
+                        </div>
+                    `;
+                }).join('');
             }
 
             function renderPacks(filter = '') {
@@ -509,6 +624,8 @@
                     const prixReduit = p.prix_reduit || p.price || 0;
                     const prixReel = p.prix_reel || p.price || 0;
                     const reduction = p.reduction_pct || 0;
+                    const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
+                    const hasPromo = discountedPrice < prixReel;
                     return `
                         <div class="pack-card">
                             <div class="pc-header">
@@ -518,10 +635,13 @@
                             <div class="pc-desc">${p.description || ''}</div>
                             <div class="pc-price">
                                 <i class="fas fa-euro-sign"></i>
-                                <span style="text-decoration:line-through;color:#8896ab;font-weight:400;">${prixBarre.toFixed(2)} €</span>
-                                <span style="color:#0b6e3f;font-weight:700;">${prixReduit.toFixed(2)} €</span>
-                                ${reduction > 0 ? `<span style="background:#e6f7ee;color:#0b6e3f;padding:1px 10px;border-radius:40px;font-size:12px;font-weight:600;">-${reduction}%</span>` : ''}
-                                <span style="font-size:14px;color:#2c5282;font-weight:400;">| Réel: ${prixReel.toFixed(2)} €</span>
+                                <span class="price-barre">${prixBarre.toFixed(2)} €</span>
+                                <span class="price-reduit">${prixReduit.toFixed(2)} €</span>
+                                ${reduction > 0 ? `<span class="discount-badge">-${reduction}%</span>` : ''}
+                                <span style="font-size:12px;color:#2c5282;font-weight:600;display:block;margin-top:2px;">
+                                    Réel: ${prixReel.toFixed(2)} €
+                                    ${hasPromo ? ` → <span style="color:#2c5282;">${discountedPrice.toFixed(2)} €</span>` : ''}
+                                </span>
                             </div>
                             ${p.accessCode ? `<div class="pc-access-code"><i class="fas fa-key"></i> Code : ${p.accessCode}</div>` : ''}
                             <div class="pc-content-list">
@@ -556,13 +676,14 @@
 
             function renderPromos(filter = '') {
                 const promos = getPromos();
+                const promoUsage = getPromoUsage();
                 const filtered = promos.filter(p =>
                     p.code.toLowerCase().includes(filter.toLowerCase()) ||
                     p.packTier.toLowerCase().includes(filter.toLowerCase()) ||
                     (p.type || '').toLowerCase().includes(filter.toLowerCase())
                 );
                 if (filtered.length === 0) {
-                    promosTableBody.innerHTML = `<tr><td colspan="8" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion trouvée</p></td></tr>`;
+                    promosTableBody.innerHTML = `<tr><td colspan="9" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion trouvée</p></td></tr>`;
                     return;
                 }
                 promosTableBody.innerHTML = filtered.map(p => {
@@ -570,6 +691,7 @@
                     const isActive = p.active && p.startDate <= now && p.endDate >= now;
                     const typeLabel = p.type === 'percentage' ? '%' : '€';
                     const tierLabel = p.packTier === 'all' ? 'Tous' : p.packTier.charAt(0).toUpperCase() + p.packTier.slice(1);
+                    const usageCount = promoUsage[p.code] || 0;
                     return `
                         <tr>
                             <td><strong>${p.code}</strong></td>
@@ -579,6 +701,7 @@
                             <td>${p.startDate || '—'}</td>
                             <td>${p.endDate || '—'}</td>
                             <td><span class="status-badge ${isActive ? 'paid' : 'cancelled'}">${isActive ? 'Active' : 'Inactive'}</span></td>
+                            <td><span style="font-weight:600;color:#2c5282;">${usageCount}</span></td>
                             <td class="actions-cell">
                                 <button class="success" onclick="window.adminEditPromo('${p.id}')"><i class="fas fa-pen"></i></button>
                                 <button class="danger" onclick="window.adminDeletePromo('${p.id}')"><i class="fas fa-trash"></i></button>
@@ -649,12 +772,13 @@
                     const itemsStr = (o.items || []).map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(', ');
                     const statusClass = o.status === 'paid' ? 'paid' : o.status === 'pending' ? 'pending' : 'cancelled';
                     const statusLabel = o.status === 'paid' ? 'Payée' : o.status === 'pending' ? 'En attente' : 'Annulée';
+                    const promoStr = o.promoCode ? `<span style="font-size:10px;background:#fef7e6;padding:1px 8px;border-radius:40px;color:#a67c1a;">${o.promoCode}</span>` : '';
                     return `
                         <tr>
                             <td><strong>#${o.id.slice(-6)}</strong></td>
                             <td>${userName}<br><small style="color:#8896ab;">${o.email}</small></td>
                             <td>${itemsStr}</td>
-                            <td><strong>${(o.total || 0).toFixed(2)} €</strong></td>
+                            <td><strong>${(o.total || 0).toFixed(2)} €</strong> ${promoStr}</td>
                             <td>${o.date || '—'}</td>
                             <td><span class="status-badge ${statusClass}"><i class="fas ${o.status === 'paid' ? 'fa-check-circle' : o.status === 'pending' ? 'fa-clock' : 'fa-times-circle'}"></i> ${statusLabel}</span></td>
                             <td class="actions-cell">
@@ -690,6 +814,8 @@
                 renderPromos(promoSearch ? promoSearch.value : '');
                 renderUsers(userSearch ? userSearch.value : '');
                 renderOrders(orderSearch ? orderSearch.value : '');
+                renderPromoUsage();
+                renderPriceSummary();
             }
 
             // ---- Tab switching ----
@@ -831,9 +957,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Prix réel (€) - après promo</label>
+                        <label>Prix réel (€) - après promo (BLEU)</label>
                         <input type="number" id="form_prix_reel" value="${data.prix_reel || data.price || 0}" step="0.01" min="0" />
-                        <span style="font-size:11px;color:#8896ab;">Prix qui sera payé par le client (modifiable manuellement)</span>
+                        <span style="font-size:11px;color:#2c5282;">⚠️ Ce prix est le prix de base avant application des codes promo</span>
                     </div>
                     <div class="form-group">
                         <label>Code d'accès</label>
