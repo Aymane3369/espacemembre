@@ -6,7 +6,7 @@
     <title>Admin · Packs & Promos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== TOUT LE STYLE EXISTANT (je le reprends en condensé) ===== */
+        /* ===== TOUT LE STYLE EXISTANT (identique à avant) ===== */
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',sans-serif; background:#f0f2f6; min-height:100vh; display:flex; }
         .sidebar { width:260px; background:#0f1a2e; color:#e8edf2; padding:28px 20px; display:flex; flex-direction:column; min-height:100vh; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
@@ -309,15 +309,14 @@
         </div>
     </div>
 
-    <script src="config.js"></script>
     <script>
         (function() {
             'use strict';
 
-            // ===== CONFIGURATION JSONBIN =====
-            const BIN_ID = CONFIG.BIN_ID;
-            const API_KEY = CONFIG.API_KEY;
-            const BASE_URL = CONFIG.BASE_URL;
+            // ===== IDENTIFIANTS DIRECTEMENT INTÉGRÉS =====
+            const BIN_ID = '6a3a6cf0da38895dfef10b2a';
+            const API_KEY = '$2a$10$yYujh3uZTe5eYF5tEXW9qO5nU8rw735V9ZQZ3I0b80cPvxCSowHBu';
+            const BASE_URL = 'https://api.jsonbin.io/v3/b/';
 
             // ===== ÉTAT LOCAL =====
             let currentData = { packs: [], promos: [], commandes: [], promoUsage: {} };
@@ -395,7 +394,6 @@
                     if (!response.ok) throw new Error('Erreur chargement');
                     const json = await response.json();
                     const record = json.record || { packs: [], promos: [], commandes: [], promoUsage: {} };
-                    // Si certaines clés manquent, on les initialise
                     if (!record.packs) record.packs = [];
                     if (!record.promos) record.promos = [];
                     if (!record.commandes) record.commandes = [];
@@ -403,10 +401,9 @@
                     currentData = record;
                     return record;
                 } catch (e) {
-                    console.warn('Chargement depuis JSONBin échoué, on utilise des données par défaut.');
+                    console.warn('Chargement JSONBin échoué, utilisation des données par défaut.');
                     const defaultData = getDefaultData();
                     currentData = defaultData;
-                    // On tente de sauvegarder pour la première fois
                     await saveData(defaultData);
                     return defaultData;
                 }
@@ -538,7 +535,7 @@
                 const usage = currentData.promoUsage || {};
                 const revenue = commandes.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.total || 0), 0);
                 statPacks.textContent = packs.length;
-                statUsers.textContent = 0; // À implémenter si besoin
+                statUsers.textContent = 0;
                 statOrders.textContent = commandes.length;
                 statRevenue.textContent = revenue.toFixed(2) + ' €';
                 statPromoUsage.textContent = Object.keys(usage).filter(k => usage[k] > 0).length;
@@ -662,7 +659,6 @@
             }
 
             function renderUsers(filter = '') {
-                // Pour l'instant, pas de gestion utilisateur, on laisse vide.
                 usersTableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fas fa-users"></i><p>Gestion des utilisateurs à venir</p></td></tr>`;
             }
 
@@ -1200,7 +1196,6 @@
                     renderAll();
                     switchTab('dashboard');
                 } else {
-                    // Afficher le login
                     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
                     document.querySelector('.tab-content#tabDashboard')?.classList.add('active');
                 }
