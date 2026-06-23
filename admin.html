@@ -221,9 +221,6 @@
         .main .topbar .actions .btn-primary:hover {
             background: #1a2c4a;
         }
-        .main .topbar .actions .btn-primary i {
-            font-size: 12px;
-        }
 
         /* ===== CARDS STATS ===== */
         .stats-grid {
@@ -289,14 +286,8 @@
             display: block;
         }
         @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .section-toolbar {
@@ -800,148 +791,44 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .sidebar {
-                width: 72px;
-                padding: 16px 10px;
-            }
-            .sidebar .logo h1,
-            .sidebar .logo span,
-            .sidebar .nav a span,
-            .sidebar .nav a .badge-nav,
-            .sidebar .admin-user .info,
-            .sidebar .footer-nav a span {
-                display: none;
-            }
-            .sidebar .logo .icon {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-            .sidebar .nav a {
-                justify-content: center;
-                padding: 12px;
-                font-size: 18px;
-            }
-            .sidebar .nav a i {
-                width: auto;
-                font-size: 18px;
-            }
-            .sidebar .admin-user {
-                justify-content: center;
-                padding: 8px;
-            }
-            .sidebar .admin-user .avatar-admin {
-                width: 32px;
-                height: 32px;
-                font-size: 12px;
-            }
-            .main {
-                padding: 20px 18px 32px;
-            }
-            .main .topbar h2 {
-                font-size: 20px;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .packs-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            }
-            .modal .form-row {
-                grid-template-columns: 1fr;
-            }
+            .sidebar { width: 72px; padding: 16px 10px; }
+            .sidebar .logo h1, .sidebar .logo span, .sidebar .nav a span, .sidebar .nav a .badge-nav, .sidebar .admin-user .info, .sidebar .footer-nav a span { display: none; }
+            .sidebar .logo .icon { width: 36px; height: 36px; font-size: 16px; }
+            .sidebar .nav a { justify-content: center; padding: 12px; font-size: 18px; }
+            .sidebar .nav a i { width: auto; font-size: 18px; }
+            .sidebar .admin-user { justify-content: center; padding: 8px; }
+            .sidebar .admin-user .avatar-admin { width: 32px; height: 32px; font-size: 12px; }
+            .main { padding: 20px 18px 32px; }
+            .main .topbar h2 { font-size: 20px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .packs-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+            .modal .form-row { grid-template-columns: 1fr; }
         }
         @media (max-width: 640px) {
-            .sidebar {
-                width: 56px;
-                padding: 12px 6px;
-            }
-            .sidebar .logo .icon {
-                width: 30px;
-                height: 30px;
-                font-size: 13px;
-            }
-            .sidebar .nav a {
-                padding: 8px;
-                font-size: 15px;
-            }
-            .main {
-                padding: 14px 12px 28px;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .stats-grid .stat-card {
-                padding: 12px 14px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-            }
-            .stats-grid .stat-card .stat-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
-            .stats-grid .stat-card .stat-info .stat-number {
-                font-size: 18px;
-            }
-            .section-toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .section-toolbar .search-box input {
-                min-width: unset;
-                width: 100%;
-            }
-            .table-wrap {
-                overflow-x: auto;
-            }
-            .table-wrap table {
-                font-size: 12px;
-            }
-            .table-wrap table th,
-            .table-wrap table td {
-                padding: 8px 12px;
-                white-space: nowrap;
-            }
-            .packs-grid {
-                grid-template-columns: 1fr;
-            }
-            .modal .modal {
-                padding: 24px 16px;
-            }
-            .modal .form-row {
-                grid-template-columns: 1fr;
-            }
-            .main .topbar h2 small {
-                display: block;
-                margin-left: 0;
-                margin-top: 2px;
-            }
-            .modal .content-fields .cf-row {
-                flex-wrap: wrap;
-            }
-            .modal .content-fields .cf-row select {
-                min-width: 100px;
-            }
+            .sidebar { width: 56px; padding: 12px 6px; }
+            .sidebar .logo .icon { width: 30px; height: 30px; font-size: 13px; }
+            .sidebar .nav a { padding: 8px; font-size: 15px; }
+            .main { padding: 14px 12px 28px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .stats-grid .stat-card { padding: 12px 14px; flex-direction: column; align-items: flex-start; gap: 6px; }
+            .stats-grid .stat-card .stat-icon { width: 36px; height: 36px; font-size: 14px; }
+            .stats-grid .stat-card .stat-info .stat-number { font-size: 18px; }
+            .section-toolbar { flex-direction: column; align-items: stretch; }
+            .section-toolbar .search-box input { min-width: unset; width: 100%; }
+            .table-wrap { overflow-x: auto; }
+            .table-wrap table { font-size: 12px; }
+            .table-wrap table th, .table-wrap table td { padding: 8px 12px; white-space: nowrap; }
+            .packs-grid { grid-template-columns: 1fr; }
+            .modal .modal { padding: 24px 16px; }
+            .modal .form-row { grid-template-columns: 1fr; }
+            .main .topbar h2 small { display: block; margin-left: 0; margin-top: 2px; }
         }
 
         /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d0d7e2;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b0b8c8;
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d0d7e2; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b0b8c8; }
 
         /* ===== ADMIN LOGIN OVERLAY ===== */
         .admin-login-overlay {
@@ -1102,7 +989,6 @@
     <!-- ===== MAIN CONTENT ===== -->
     <div class="main" id="mainContent">
 
-        <!-- TOPBAR -->
         <div class="topbar">
             <h2 id="pageTitle">Tableau de bord <small>vue d'ensemble</small></h2>
             <div class="actions">
@@ -1123,12 +1009,8 @@
             <div style="background:#fff;border-radius:14px;border:1px solid rgba(15,26,46,0.05);padding:20px 24px;margin-top:8px;">
                 <h4 style="font-size:15px;font-weight:600;margin-bottom:10px;"><i class="fas fa-info-circle" style="color:#c9a84c;margin-right:8px;"></i>Gestion complète</h4>
                 <p style="color:#4a5568;font-size:14px;line-height:1.6;">
-                    Gérez vos packs, leur contenu, les codes d’accès, les promotions et suivez les commandes.
+                    Gérez vos packs, leur contenu, les codes d'accès, les promotions et suivez les commandes.
                 </p>
-                <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;">
-                    <span style="background:#f4f6fb;padding:4px 14px;border-radius:40px;font-size:12px;font-weight:500;color:#4a5568;"><i class="fas fa-box" style="color:#b8942b;"></i> Packs : <span id="statPacksInline">0</span></span>
-                    <span style="background:#f4f6fb;padding:4px 14px;border-radius:40px;font-size:12px;font-weight:500;color:#4a5568;"><i class="fas fa-tags" style="color:#2c5282;"></i> Promos : <span id="statPromosInline">0</span></span>
-                </div>
             </div>
         </div>
 
@@ -1196,7 +1078,7 @@
         </div>
     </div>
 
-    <!-- ===== MODAL (Pack / Promo) ===== -->
+    <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="genericModal">
             <button class="close-modal" id="closeModal">&times;</button>
@@ -1213,10 +1095,6 @@
     <script>
         (function() {
             'use strict';
-
-            // ============================================================
-            //  ADMIN – Packs, Promotions, Access Codes
-            // ============================================================
 
             const ADMIN_PASSWORD = 'admin123';
             const STORAGE_KEYS = {
@@ -1246,15 +1124,11 @@
             const btnAddPromo = document.getElementById('btnAddPromo');
             const btnAddPromo2 = document.getElementById('btnAddPromo2');
 
-            // Stats
             const statPacks = document.getElementById('statPacks');
             const statUsers = document.getElementById('statUsers');
             const statOrders = document.getElementById('statOrders');
             const statRevenue = document.getElementById('statRevenue');
-            const statPacksInline = document.getElementById('statPacksInline');
-            const statPromosInline = document.getElementById('statPromosInline');
 
-            // Badges
             const packCountBadge = document.getElementById('packCountBadge');
             const promoCountBadge = document.getElementById('promoCountBadge');
             const userCountBadge = document.getElementById('userCountBadge');
@@ -1262,19 +1136,16 @@
             const userCountLabel = document.getElementById('userCountLabel');
             const orderCountLabel = document.getElementById('orderCountLabel');
 
-            // Grids / Tables
             const packsGrid = document.getElementById('packsGrid');
             const promosTableBody = document.getElementById('promosTableBody');
             const usersTableBody = document.getElementById('usersTableBody');
             const ordersTableBody = document.getElementById('ordersTableBody');
 
-            // Search
             const packSearch = document.getElementById('packSearch');
             const promoSearch = document.getElementById('promoSearch');
             const userSearch = document.getElementById('userSearch');
             const orderSearch = document.getElementById('orderSearch');
 
-            // Admin login
             const adminLoginOverlay = document.getElementById('adminLoginOverlay');
             const adminPasswordInput = document.getElementById('adminPasswordInput');
             const adminLoginBtn = document.getElementById('adminLoginBtn');
@@ -1282,7 +1153,6 @@
             const adminBackToSite = document.getElementById('adminBackToSite');
             const adminLogoutBtn = document.getElementById('adminLogout');
 
-            // Modal
             const modalOverlay = document.getElementById('modalOverlay');
             const closeModal = document.getElementById('closeModal');
             const modalTitle = document.getElementById('modalTitle');
@@ -1295,26 +1165,22 @@
             const refreshBtn = document.getElementById('refreshData');
             const goToSiteBtn = document.getElementById('goToSite');
 
-            // ---- State ----
             let currentTab = 'dashboard';
             let isAdminLogged = false;
             let editingId = null;
-            let modalMode = 'create'; // 'create' | 'edit' | 'delete'
-            let modalEntity = 'pack'; // 'pack' | 'promo'
+            let modalMode = 'create';
+            let modalEntity = 'pack';
 
             // ---- Helpers ----
             function getUsers() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || {}; } catch { return {}; } }
-            function saveUsers(u) { localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(u)); }
-            function getUnlockedPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.unlocked)) || {}; } catch { return {}; } }
             function getOrders() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || []; } catch { return []; } }
-            function saveOrders(o) { localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(o)); }
             function getPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.packs)) || []; } catch { return []; } }
-            function savePacks(p) { localStorage.setItem(STORAGE_KEYS.packs, JSON.stringify(p)); }
             function getPromos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promos)) || []; } catch { return []; } }
-            function savePromos(p) { localStorage.setItem(STORAGE_KEYS.promos, JSON.stringify(p)); }
-            function getSession() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.session)) || null; } catch { return null; } }
             function getAdminLogged() { return localStorage.getItem(STORAGE_KEYS.adminLogged) === 'true'; }
             function setAdminLogged(v) { localStorage.setItem(STORAGE_KEYS.adminLogged, v ? 'true' : 'false'); }
+
+            function savePacks(p) { localStorage.setItem(STORAGE_KEYS.packs, JSON.stringify(p)); }
+            function savePromos(p) { localStorage.setItem(STORAGE_KEYS.promos, JSON.stringify(p)); }
 
             // ---- Default data ----
             function getDefaultPacks() {
@@ -1322,6 +1188,7 @@
                     id: 'pack_bronze',
                     tier: 'bronze',
                     title: 'Découverte',
+                    niveau: 'Débutant',
                     description: 'Idéal pour débuter, accédez aux fondamentaux.',
                     price: 10,
                     accessCode: 'BRONZE123',
@@ -1333,6 +1200,7 @@
                     id: 'pack_silver',
                     tier: 'silver',
                     title: 'Professionnel',
+                    niveau: 'Intermédiaire',
                     description: 'Stratégies avancées et études de cas.',
                     price: 20,
                     accessCode: 'SILVER456',
@@ -1344,6 +1212,7 @@
                     id: 'pack_gold',
                     tier: 'gold',
                     title: 'Expert',
+                    niveau: 'Expert',
                     description: 'Contenus exclusifs et mentorat de haut niveau.',
                     price: 30,
                     accessCode: 'GOLD789',
@@ -1356,10 +1225,8 @@
 
             function getDefaultPromos() {
                 return [
-                    { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01',
-                        endDate: '2026-12-31', active: true },
-                    { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01',
-                        endDate: '2026-07-01', active: true }
+                    { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01', endDate: '2026-12-31', active: true },
+                    { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01', endDate: '2026-07-01', active: true }
                 ];
             }
 
@@ -1376,8 +1243,7 @@
                             const items = ['bronze'];
                             if (i % 2 === 0) items.push('silver');
                             if (i % 3 === 0) items.push('gold');
-                            const total = items.reduce((sum, t) => sum + (t === 'bronze' ? 10 : t === 'silver' ? 20 :
-                                30), 0);
+                            const total = items.reduce((sum, t) => sum + (t === 'bronze' ? 10 : t === 'silver' ? 20 : 30), 0);
                             sampleOrders.push({
                                 id: 'ord_' + Date.now() + '_' + i,
                                 email: email,
@@ -1387,13 +1253,12 @@
                                 status: i === 0 ? 'paid' : i === 1 ? 'pending' : 'paid'
                             });
                         }
-                        saveOrders(sampleOrders);
+                        localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(sampleOrders));
                     }
                 }
             }
 
-            // ---- Render functions ----
-
+            // ---- Render ----
             function renderStats() {
                 const packs = getPacks();
                 const users = getUsers();
@@ -1404,14 +1269,11 @@
                 statUsers.textContent = Object.keys(users).length;
                 statOrders.textContent = orders.length;
                 statRevenue.textContent = revenue.toFixed(2) + ' €';
-                statPacksInline.textContent = packs.length;
-                statPromosInline.textContent = promos.length;
                 packCountBadge.textContent = packs.length;
                 promoCountBadge.textContent = promos.length;
                 userCountBadge.textContent = Object.keys(users).length;
                 orderCountBadge.textContent = orders.length;
-                userCountLabel.textContent = Object.keys(users).length + ' utilisateur' + (Object.keys(users).length > 1 ?
-                    's' : '');
+                userCountLabel.textContent = Object.keys(users).length + ' utilisateur' + (Object.keys(users).length > 1 ? 's' : '');
                 orderCountLabel.textContent = orders.length + ' commande' + (orders.length > 1 ? 's' : '');
             }
 
@@ -1423,8 +1285,7 @@
                     (p.accessCode || '').toLowerCase().includes(filter.toLowerCase())
                 );
                 if (filtered.length === 0) {
-                    packsGrid.innerHTML =
-                        `<div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-boxes"></i><p>Aucun pack trouvé</p></div>`;
+                    packsGrid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-boxes"></i><p>Aucun pack trouvé</p></div>`;
                     return;
                 }
                 packsGrid.innerHTML = filtered.map(p => {
@@ -1434,7 +1295,7 @@
                         <div class="pack-card">
                             <div class="pc-header">
                                 <span class="pc-title">${p.title}</span>
-                                <span class="pc-tier ${tierClass}">${p.tier.charAt(0).toUpperCase() + p.tier.slice(1)}</span>
+                                <span class="pc-tier ${tierClass}">${p.niveau || p.tier.charAt(0).toUpperCase() + p.tier.slice(1)}</span>
                             </div>
                             <div class="pc-desc">${p.description || ''}</div>
                             <div class="pc-price"><i class="fas fa-euro-sign"></i> ${p.price} €</div>
@@ -1477,16 +1338,14 @@
                     (p.type || '').toLowerCase().includes(filter.toLowerCase())
                 );
                 if (filtered.length === 0) {
-                    promosTableBody.innerHTML =
-                        `<tr><td colspan="8" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion trouvée</p></td></tr>`;
+                    promosTableBody.innerHTML = `<tr><td colspan="8" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion trouvée</p></td></tr>`;
                     return;
                 }
                 promosTableBody.innerHTML = filtered.map(p => {
                     const now = new Date().toISOString().split('T')[0];
                     const isActive = p.active && p.startDate <= now && p.endDate >= now;
                     const typeLabel = p.type === 'percentage' ? '%' : '€';
-                    const tierLabel = p.packTier === 'all' ? 'Tous' : p.packTier.charAt(0).toUpperCase() + p.packTier
-                        .slice(1);
+                    const tierLabel = p.packTier === 'all' ? 'Tous' : p.packTier.charAt(0).toUpperCase() + p.packTier.slice(1);
                     return `
                         <tr>
                             <td><strong>${p.code}</strong></td>
@@ -1515,24 +1374,19 @@
 
             function renderUsers(filter = '') {
                 const users = getUsers();
-                const unlocked = getUnlockedPacks();
                 const entries = Object.entries(users);
                 const filtered = entries.filter(([email, data]) =>
                     email.toLowerCase().includes(filter.toLowerCase()) ||
                     (data.name || '').toLowerCase().includes(filter.toLowerCase())
                 );
                 if (filtered.length === 0) {
-                    usersTableBody.innerHTML =
-                        `<tr><td colspan="4" class="empty-state"><i class="fas fa-users"></i><p>Aucun utilisateur</p></td></tr>`;
+                    usersTableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fas fa-users"></i><p>Aucun utilisateur</p></td></tr>`;
                     return;
                 }
                 usersTableBody.innerHTML = filtered.map(([email, data]) => {
                     const name = data.name || email.split('@')[0];
-                    const packs = ['bronze', 'silver', 'gold'].filter(t => unlocked[t] === true);
-                    const packStr = packs.length ? packs.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ') :
-                        'Aucun';
                     return `
-                        <tr><td><strong>${name}</strong></td><td>${email}</td><td>${packStr}</td>
+                        <tr><td><strong>${name}</strong></td><td>${email}</td><td>—</td>
                         <td class="actions-cell">
                             <button class="success" onclick="window.adminViewUser('${email}')"><i class="fas fa-eye"></i></button>
                             <button class="danger" onclick="window.adminDeleteUser('${email}')"><i class="fas fa-trash"></i></button>
@@ -1543,15 +1397,13 @@
                     const users = getUsers();
                     const user = users[email];
                     if (!user) return alert('Introuvable.');
-                    const unlocked = getUnlockedPacks();
-                    const packs = ['bronze', 'silver', 'gold'].filter(t => unlocked[t] === true);
-                    alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}\n🔓 ${packs.length ? packs.join(', ') : 'Aucun pack'}`);
+                    alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}`);
                 };
                 window.adminDeleteUser = function(email) {
                     if (!confirm(`Supprimer ${email} ?`)) return;
                     const users = getUsers();
                     delete users[email];
-                    saveUsers(users);
+                    localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
                     renderAll();
                 };
             }
@@ -1565,17 +1417,14 @@
                     (o.items || []).join(' ').toLowerCase().includes(filter.toLowerCase())
                 );
                 if (filtered.length === 0) {
-                    ordersTableBody.innerHTML =
-                        `<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr>`;
+                    ordersTableBody.innerHTML = `<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr>`;
                     return;
                 }
                 ordersTableBody.innerHTML = filtered.map(o => {
                     const userName = users[o.email]?.name || o.email.split('@')[0];
                     const itemsStr = (o.items || []).map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(', ');
-                    const statusClass = o.status === 'paid' ? 'paid' : o.status === 'pending' ? 'pending' :
-                        'cancelled';
-                    const statusLabel = o.status === 'paid' ? 'Payée' : o.status === 'pending' ? 'En attente' :
-                        'Annulée';
+                    const statusClass = o.status === 'paid' ? 'paid' : o.status === 'pending' ? 'pending' : 'cancelled';
+                    const statusLabel = o.status === 'paid' ? 'Payée' : o.status === 'pending' ? 'En attente' : 'Annulée';
                     return `
                         <tr>
                             <td><strong>#${o.id.slice(-6)}</strong></td>
@@ -1599,14 +1448,14 @@
                     const current = orders[idx].status || 'pending';
                     const nextIdx = (statuses.indexOf(current) + 1) % statuses.length;
                     orders[idx].status = statuses[nextIdx];
-                    saveOrders(orders);
+                    localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
                     renderAll();
                 };
                 window.adminDeleteOrder = function(id) {
                     if (!confirm('Supprimer cette commande ?')) return;
                     let orders = getOrders();
                     orders = orders.filter(o => o.id !== id);
-                    saveOrders(orders);
+                    localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
                     renderAll();
                 };
             }
@@ -1628,27 +1477,15 @@
                 navLinks.forEach(link => {
                     link.classList.toggle('active', link.dataset.tab === tabId);
                 });
-                const titles = {
-                    dashboard: 'Tableau de bord',
-                    packs: 'Packs',
-                    promotions: 'Promotions',
-                    users: 'Utilisateurs',
-                    orders: 'Commandes'
-                };
-                const subtitles = {
-                    dashboard: 'vue d\'ensemble',
-                    packs: 'gestion du catalogue',
-                    promotions: 'codes promo et réductions',
-                    users: 'gestion des comptes',
-                    orders: 'suivi des commandes'
-                };
+                const titles = { dashboard: 'Tableau de bord', packs: 'Packs', promotions: 'Promotions', users: 'Utilisateurs', orders: 'Commandes' };
+                const subtitles = { dashboard: 'vue d\'ensemble', packs: 'gestion du catalogue', promotions: 'codes promo et réductions', users: 'gestion des comptes', orders: 'suivi des commandes' };
                 pageTitle.innerHTML = `${titles[tabId]} <small>${subtitles[tabId]}</small>`;
                 btnAddPack.style.display = tabId === 'packs' ? 'inline-flex' : 'none';
                 btnAddPromo.style.display = tabId === 'promotions' ? 'inline-flex' : 'none';
                 renderAll();
             }
 
-            // ---- Modal: Pack or Promo ----
+            // ---- Modal ----
             function openModal(entity, mode, id = null) {
                 modalEntity = entity;
                 modalMode = mode;
@@ -1663,10 +1500,9 @@
                 }
             }
 
-            // --- Pack Modal ---
             function openPackModal(mode, id = null) {
                 const packs = getPacks();
-                let data = { tier: 'bronze', title: '', description: '', price: 10, accessCode: '', content: [] };
+                let data = { tier: 'bronze', title: '', niveau: 'Débutant', description: '', price: 10, accessCode: '', content: [] };
                 if (mode === 'edit' && id) {
                     const found = packs.find(p => p.id === id);
                     if (found) data = JSON.parse(JSON.stringify(found));
@@ -1704,9 +1540,8 @@
                 modalSubmitBtn.className = 'btn-submit';
 
                 const tiers = ['bronze', 'silver', 'gold'];
-                const tierOptions = tiers.map(t =>
-                    `<option value="${t}" ${data.tier === t ? 'selected' : ''}>${t.charAt(0).toUpperCase() + t.slice(1)}</option>`
-                ).join('');
+                const tierOptions = tiers.map(t => `<option value="${t}" ${data.tier === t ? 'selected' : ''}>${t.charAt(0).toUpperCase() + t.slice(1)}</option>`).join('');
+                const niveauOptions = ['Débutant', 'Intermédiaire', 'Expert'].map(n => `<option value="${n}" ${data.niveau === n ? 'selected' : ''}>${n}</option>`).join('');
 
                 let contentRows = (data.content || []).map((c, idx) => `
                     <div class="cf-row" data-index="${idx}">
@@ -1731,20 +1566,26 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Niveau</label>
+                            <select id="form_niveau">${niveauOptions}</select>
+                        </div>
+                        <div class="form-group">
+                            <label>Niveau (tier)</label>
                             <select id="form_tier">${tierOptions}</select>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group">
                             <label>Prix (€)</label>
                             <input type="number" id="form_price" value="${data.price || 10}" min="0" step="1" />
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Code d'accès (pour déblocage)</label>
-                        <div style="display:flex;gap:8px;">
-                            <input type="text" id="form_accessCode" value="${data.accessCode || ''}" placeholder="Ex: BRONZE123" style="flex:1;" />
-                            <button type="button" id="generateCodeBtn" class="btn-add-content" style="margin:0;padding:6px 14px;border:1px solid #c9a84c;background:#f4f6fb;border-radius:8px;cursor:pointer;">
-                                <i class="fas fa-random"></i> Générer
-                            </button>
+                        <div class="form-group">
+                            <label>Code d'accès</label>
+                            <div style="display:flex;gap:8px;">
+                                <input type="text" id="form_accessCode" value="${data.accessCode || ''}" placeholder="Ex: BRONZE123" style="flex:1;" />
+                                <button type="button" id="generateCodeBtn" class="btn-add-content" style="margin:0;padding:6px 14px;border:1px solid #c9a84c;background:#f4f6fb;border-radius:8px;cursor:pointer;">
+                                    <i class="fas fa-random"></i> Générer
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1784,52 +1625,47 @@
 
                 modalSubmitBtn.onclick = function(e) {
                     e.preventDefault();
-                    savePackFromModal();
+                    const id = document.getElementById('form_edit_id')?.value || null;
+                    const title = document.getElementById('form_title')?.value.trim();
+                    const tier = document.getElementById('form_tier')?.value || 'bronze';
+                    const niveau = document.getElementById('form_niveau')?.value || 'Débutant';
+                    const price = parseFloat(document.getElementById('form_price')?.value) || 0;
+                    const description = document.getElementById('form_description')?.value.trim() || '';
+                    const accessCode = document.getElementById('form_accessCode')?.value.trim().toUpperCase() || '';
+
+                    if (!title) {
+                        modalError.textContent = 'Le titre est requis.';
+                        modalError.classList.add('show');
+                        return;
+                    }
+
+                    const rows = document.querySelectorAll('#contentFields .cf-row');
+                    const content = [];
+                    rows.forEach(row => {
+                        const label = row.querySelector('.content-label')?.value.trim();
+                        const type = row.querySelector('.content-type')?.value || 'file';
+                        const url = row.querySelector('.content-url')?.value.trim();
+                        if (label && url) content.push({ type, label, url });
+                    });
+
+                    let packs = getPacks();
+                    if (id) {
+                        const idx = packs.findIndex(p => p.id === id);
+                        if (idx !== -1) packs[idx] = { ...packs[idx], title, tier, niveau, description, price, accessCode, content };
+                    } else {
+                        const newId = 'pack_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+                        packs.push({ id: newId, title, tier, niveau, description, price, accessCode, content });
+                    }
+                    savePacks(packs);
+                    closeModalHandler();
+                    renderAll();
                 };
                 modalOverlay.classList.add('open');
             }
 
-            function savePackFromModal() {
-                const id = document.getElementById('form_edit_id')?.value || null;
-                const title = document.getElementById('form_title')?.value.trim();
-                const tier = document.getElementById('form_tier')?.value || 'bronze';
-                const price = parseFloat(document.getElementById('form_price')?.value) || 0;
-                const description = document.getElementById('form_description')?.value.trim() || '';
-                const accessCode = document.getElementById('form_accessCode')?.value.trim().toUpperCase() || '';
-
-                if (!title) {
-                    modalError.textContent = 'Le titre est requis.';
-                    modalError.classList.add('show');
-                    return;
-                }
-
-                const rows = document.querySelectorAll('#contentFields .cf-row');
-                const content = [];
-                rows.forEach(row => {
-                    const label = row.querySelector('.content-label')?.value.trim();
-                    const type = row.querySelector('.content-type')?.value || 'file';
-                    const url = row.querySelector('.content-url')?.value.trim();
-                    if (label && url) content.push({ type, label, url });
-                });
-
-                let packs = getPacks();
-                if (id) {
-                    const idx = packs.findIndex(p => p.id === id);
-                    if (idx !== -1) packs[idx] = { ...packs[idx], title, tier, description, price, accessCode, content };
-                } else {
-                    const newId = 'pack_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
-                    packs.push({ id: newId, title, tier, description, price, accessCode, content });
-                }
-                savePacks(packs);
-                closeModalHandler();
-                renderAll();
-            }
-
-            // --- Promo Modal ---
             function openPromoModal(mode, id = null) {
                 const promos = getPromos();
-                let data = { code: '', type: 'percentage', value: 10, packTier: 'all', startDate: '', endDate: '',
-                    active: true };
+                let data = { code: '', type: 'percentage', value: 10, packTier: 'all', startDate: '', endDate: '', active: true };
                 if (mode === 'edit' && id) {
                     const found = promos.find(p => p.id === id);
                     if (found) data = JSON.parse(JSON.stringify(found));
@@ -1841,9 +1677,7 @@
                     modalSubmitBtn.textContent = 'Supprimer';
                     modalSubmitBtn.className = 'btn-submit danger';
                     modalFormFields.innerHTML = `
-                        <p style="color:#4a5568;font-size:14px;padding:8px 0;">
-                            Supprimer le code <strong>${data.code}</strong> ?
-                        </p>
+                        <p style="color:#4a5568;font-size:14px;padding:8px 0;">Supprimer le code <strong>${data.code}</strong> ?</p>
                         <input type="hidden" id="form_delete_id" value="${data.id}" />
                     `;
                     modalSubmitBtn.onclick = function(e) {
@@ -1866,91 +1700,50 @@
                 modalSubmitBtn.className = 'btn-submit';
 
                 const packTiers = ['all', 'bronze', 'silver', 'gold'];
-                const tierOptions = packTiers.map(t =>
-                    `<option value="${t}" ${data.packTier === t ? 'selected' : ''}>${t === 'all' ? 'Tous' : t.charAt(0).toUpperCase() + t.slice(1)}</option>`
-                ).join('');
+                const tierOptions = packTiers.map(t => `<option value="${t}" ${data.packTier === t ? 'selected' : ''}>${t === 'all' ? 'Tous' : t.charAt(0).toUpperCase() + t.slice(1)}</option>`).join('');
 
                 modalFormFields.innerHTML = `
                     <input type="hidden" id="form_edit_id" value="${data.id || ''}" />
-                    <div class="form-group">
-                        <label>Code promo *</label>
-                        <input type="text" id="form_promo_code" value="${data.code || ''}" placeholder="Ex: SUMMER20" required />
-                    </div>
+                    <div class="form-group"><label>Code promo *</label><input type="text" id="form_promo_code" value="${data.code || ''}" placeholder="Ex: SUMMER20" required /></div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Type</label>
-                            <select id="form_promo_type">
-                                <option value="percentage" ${data.type === 'percentage' ? 'selected' : ''}>Pourcentage (%)</option>
-                                <option value="fixed" ${data.type === 'fixed' ? 'selected' : ''}>Montant fixe (€)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Valeur</label>
-                            <input type="number" id="form_promo_value" value="${data.value || 0}" min="0" step="0.5" />
-                        </div>
+                        <div class="form-group"><label>Type</label><select id="form_promo_type"><option value="percentage" ${data.type === 'percentage' ? 'selected' : ''}>Pourcentage (%)</option><option value="fixed" ${data.type === 'fixed' ? 'selected' : ''}>Montant fixe (€)</option></select></div>
+                        <div class="form-group"><label>Valeur</label><input type="number" id="form_promo_value" value="${data.value || 0}" min="0" step="0.5" /></div>
                     </div>
-                    <div class="form-group">
-                        <label>Appliqué au pack</label>
-                        <select id="form_promo_tier">${tierOptions}</select>
-                    </div>
+                    <div class="form-group"><label>Appliqué au pack</label><select id="form_promo_tier">${tierOptions}</select></div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Date de début</label>
-                            <input type="date" id="form_promo_start" value="${data.startDate || ''}" />
-                        </div>
-                        <div class="form-group">
-                            <label>Date de fin</label>
-                            <input type="date" id="form_promo_end" value="${data.endDate || ''}" />
-                        </div>
+                        <div class="form-group"><label>Date de début</label><input type="date" id="form_promo_start" value="${data.startDate || ''}" /></div>
+                        <div class="form-group"><label>Date de fin</label><input type="date" id="form_promo_end" value="${data.endDate || ''}" /></div>
                     </div>
-                    <div class="form-group">
-                        <label style="display:flex;align-items:center;gap:8px;">
-                            <input type="checkbox" id="form_promo_active" ${data.active ? 'checked' : ''} />
-                            Actif
-                        </label>
-                    </div>
+                    <div class="form-group"><label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="form_promo_active" ${data.active ? 'checked' : ''} /> Actif</label></div>
                 `;
 
                 modalSubmitBtn.onclick = function(e) {
                     e.preventDefault();
-                    savePromoFromModal();
+                    const id = document.getElementById('form_edit_id')?.value || null;
+                    const code = document.getElementById('form_promo_code')?.value.trim().toUpperCase();
+                    const type = document.getElementById('form_promo_type')?.value || 'percentage';
+                    const value = parseFloat(document.getElementById('form_promo_value')?.value) || 0;
+                    const packTier = document.getElementById('form_promo_tier')?.value || 'all';
+                    const startDate = document.getElementById('form_promo_start')?.value || '';
+                    const endDate = document.getElementById('form_promo_end')?.value || '';
+                    const active = document.getElementById('form_promo_active')?.checked || false;
+
+                    if (!code) { modalError.textContent = 'Le code est requis.'; modalError.classList.add('show'); return; }
+                    if (value <= 0) { modalError.textContent = 'La valeur doit être positive.'; modalError.classList.add('show'); return; }
+
+                    let promos = getPromos();
+                    if (id) {
+                        const idx = promos.findIndex(p => p.id === id);
+                        if (idx !== -1) promos[idx] = { ...promos[idx], code, type, value, packTier, startDate, endDate, active };
+                    } else {
+                        const newId = 'promo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+                        promos.push({ id: newId, code, type, value, packTier, startDate, endDate, active });
+                    }
+                    savePromos(promos);
+                    closeModalHandler();
+                    renderAll();
                 };
                 modalOverlay.classList.add('open');
-            }
-
-            function savePromoFromModal() {
-                const id = document.getElementById('form_edit_id')?.value || null;
-                const code = document.getElementById('form_promo_code')?.value.trim().toUpperCase();
-                const type = document.getElementById('form_promo_type')?.value || 'percentage';
-                const value = parseFloat(document.getElementById('form_promo_value')?.value) || 0;
-                const packTier = document.getElementById('form_promo_tier')?.value || 'all';
-                const startDate = document.getElementById('form_promo_start')?.value || '';
-                const endDate = document.getElementById('form_promo_end')?.value || '';
-                const active = document.getElementById('form_promo_active')?.checked || false;
-
-                if (!code) {
-                    modalError.textContent = 'Le code est requis.';
-                    modalError.classList.add('show');
-                    return;
-                }
-                if (value <= 0) {
-                    modalError.textContent = 'La valeur doit être positive.';
-                    modalError.classList.add('show');
-                    return;
-                }
-
-                let promos = getPromos();
-                if (id) {
-                    const idx = promos.findIndex(p => p.id === id);
-                    if (idx !== -1) promos[idx] = { ...promos[idx], code, type, value, packTier, startDate, endDate,
-                        active };
-                } else {
-                    const newId = 'promo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
-                    promos.push({ id: newId, code, type, value, packTier, startDate, endDate, active });
-                }
-                savePromos(promos);
-                closeModalHandler();
-                renderAll();
             }
 
             function closeModalHandler() {
@@ -2088,15 +1881,13 @@
                 const users = getUsers();
                 const user = users[email];
                 if (!user) return alert('Introuvable.');
-                const unlocked = getUnlockedPacks();
-                const packs = ['bronze', 'silver', 'gold'].filter(t => unlocked[t] === true);
-                alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}\n🔓 ${packs.length ? packs.join(', ') : 'Aucun'}`);
+                alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}`);
             };
             window.adminDeleteUser = function(email) {
                 if (!confirm(`Supprimer ${email} ?`)) return;
                 const users = getUsers();
                 delete users[email];
-                saveUsers(users);
+                localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
                 renderAll();
             };
             window.adminToggleOrderStatus = function(id) {
@@ -2107,14 +1898,14 @@
                 const current = orders[idx].status || 'pending';
                 const nextIdx = (statuses.indexOf(current) + 1) % statuses.length;
                 orders[idx].status = statuses[nextIdx];
-                saveOrders(orders);
+                localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
                 renderAll();
             };
             window.adminDeleteOrder = function(id) {
                 if (!confirm('Supprimer cette commande ?')) return;
                 let orders = getOrders();
                 orders = orders.filter(o => o.id !== id);
-                saveOrders(orders);
+                localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
                 renderAll();
             };
 
