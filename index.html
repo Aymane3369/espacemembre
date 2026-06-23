@@ -1107,6 +1107,9 @@
         (function() {
             'use strict';
 
+            // ============================================================
+            //  CLÉS STORAGE (IDENTIQUES À L'ADMIN)
+            // ============================================================
             const STORAGE_KEYS = {
                 users: 'loyaltyUsers',
                 unlocked: 'loyaltyUnlockedPacks',
@@ -1117,7 +1120,125 @@
                 session: 'loyaltySession'
             };
 
-            // ---- DOM ----
+            // ============================================================
+            //  HELPERS
+            // ============================================================
+            function getUsers() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || {}; } catch { return {}; } }
+            function getUnlockedPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.unlocked)) || {}; } catch { return {}; } }
+            function getPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.packs)) || []; } catch { return []; } }
+            function getPromos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promos)) || []; } catch { return []; } }
+            function getCart() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.cart)) || []; } catch { return []; } }
+            function getSession() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.session)) || null; } catch { return null; } }
+            function getOrders() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || []; } catch { return []; } }
+
+            function saveCart(cart) { localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(cart)); }
+            function saveUnlockedPacks(u) { localStorage.setItem(STORAGE_KEYS.unlocked, JSON.stringify(u)); }
+            function saveOrders(o) { localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(o)); }
+
+            // ============================================================
+            //  INITIALISATION DES DONNÉES PAR DÉFAUT (pour navigateur privé)
+            // ============================================================
+            function initDefaultData() {
+                if (getPacks().length === 0) {
+                    const defaultPacks = [{
+                        id: 'pack_bronze',
+                        tier: 'bronze',
+                        title: 'Découverte',
+                        niveau: 'Débutant',
+                        description: 'Idéal pour débuter, accédez aux fondamentaux.',
+                        price: 149.00,
+                        prix_barre: 149.00,
+                        prix_reduit: 119.00,
+                        reduction_pct: 20,
+                        prix_reel: 119.00,
+                        accessCode: 'BRONZE123',
+                        content: [
+                            { type: 'video', label: 'Introduction au marketing', url: 'https://youtu.be/example1' },
+                            { type: 'pdf', label: 'Guide du débutant', url: '/files/guide-debutant.pdf' }
+                        ]
+                    }, {
+                        id: 'pack_silver',
+                        tier: 'silver',
+                        title: 'Professionnel',
+                        niveau: 'Intermédiaire',
+                        description: 'Stratégies avancées et études de cas.',
+                        price: 199.00,
+                        prix_barre: 199.00,
+                        prix_reduit: 159.00,
+                        reduction_pct: 20,
+                        prix_reel: 159.00,
+                        accessCode: 'SILVER456',
+                        content: [
+                            { type: 'video', label: 'Stratégie digitale avancée', url: 'https://youtu.be/example2' },
+                            { type: 'pdf', label: 'Rapport annuel', url: '/files/rapport-annuel.pdf' }
+                        ]
+                    }, {
+                        id: 'pack_gold',
+                        tier: 'gold',
+                        title: 'Expert',
+                        niveau: 'Expert',
+                        description: 'Contenus exclusifs et mentorat de haut niveau.',
+                        price: 299.00,
+                        prix_barre: 299.00,
+                        prix_reduit: 239.00,
+                        reduction_pct: 20,
+                        prix_reel: 239.00,
+                        accessCode: 'GOLD789',
+                        content: [
+                            { type: 'video', label: 'IA & transformation', url: 'https://youtu.be/example3' },
+                            { type: 'pdf', label: 'Livre blanc IA', url: '/files/livre-blanc-ia.pdf' }
+                        ]
+                    }];
+                    localStorage.setItem(STORAGE_KEYS.packs, JSON.stringify(defaultPacks));
+                }
+
+                if (getPromos().length === 0) {
+                    const defaultPromos = [
+                        { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01', endDate: '2026-12-31', active: true },
+                        { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01', endDate: '2026-07-01', active: true }
+                    ];
+                    localStorage.setItem(STORAGE_KEYS.promos, JSON.stringify(defaultPromos));
+                }
+            }
+
+            // ============================================================
+            //  CALCUL DU PRIX AVEC PROMOTION (APPLIQUÉ RÉELLEMENT)
+            // ============================================================
+            function getDiscountedPrice(price, tier, promoCode = null) {
+                const promos = getPromos();
+                const now = new Date().toISOString().split('T')[0];
+                let bestDiscount = 0;
+                let promoAppliquee = null;
+                
+                promos.forEach(p => {
+                    if (!p.active) return;
+                    if (p.startDate && p.startDate > now) return;
+                    if (p.endDate && p.endDate < now) return;
+                    if (p.packTier !== 'all' && p.packTier !== tier) return;
+                    if (promoCode && p.code !== promoCode) return;
+                    
+                    let discount = 0;
+                    if (p.type === 'percentage') {
+                        discount = price * (p.value / 100);
+                    } else if (p.type === 'fixed') {
+                        discount = Math.min(p.value, price);
+                    }
+                    if (discount > bestDiscount) {
+                        bestDiscount = discount;
+                        promoAppliquee = p.code;
+                    }
+                });
+                
+                return { 
+                    discountedPrice: Math.max(0, price - bestDiscount), 
+                    discount: bestDiscount,
+                    promoCode: promoAppliquee
+                };
+            }
+
+            // ============================================================
+            //  DOM REFS
+            // ============================================================
             const spacesGrid = document.getElementById('spacesGrid');
             const authNotLogged = document.getElementById('authNotLogged');
             const authLogged = document.getElementById('authLogged');
@@ -1138,41 +1259,9 @@
             const btnClearCart = document.getElementById('btnClearCart');
             const cartMessage = document.getElementById('cartMessage');
 
-            // ---- Helpers ----
-            function getUsers() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || {}; } catch { return {}; } }
-            function getUnlockedPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.unlocked)) || {}; } catch { return {}; } }
-            function getPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.packs)) || []; } catch { return []; } }
-            function getPromos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promos)) || []; } catch { return []; } }
-            function getCart() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.cart)) || []; } catch { return []; } }
-            function getSession() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.session)) || null; } catch { return null; } }
-            function getOrders() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || []; } catch { return []; } }
-
-            function saveCart(cart) { localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(cart)); }
-            function saveUnlockedPacks(u) { localStorage.setItem(STORAGE_KEYS.unlocked, JSON.stringify(u)); }
-            function saveOrders(o) { localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(o)); }
-
-            // ---- Calcul du prix réduit ----
-            function getDiscountedPrice(price, tier) {
-                const promos = getPromos();
-                const now = new Date().toISOString().split('T')[0];
-                let bestDiscount = 0;
-                promos.forEach(p => {
-                    if (!p.active) return;
-                    if (p.startDate && p.startDate > now) return;
-                    if (p.endDate && p.endDate < now) return;
-                    if (p.packTier !== 'all' && p.packTier !== tier) return;
-                    let discount = 0;
-                    if (p.type === 'percentage') {
-                        discount = price * (p.value / 100);
-                    } else if (p.type === 'fixed') {
-                        discount = Math.min(p.value, price);
-                    }
-                    if (discount > bestDiscount) bestDiscount = discount;
-                });
-                return { discountedPrice: Math.max(0, price - bestDiscount), discount: bestDiscount };
-            }
-
-            // ---- Rendu des cartes ----
+            // ============================================================
+            //  RENDU DES PACKS
+            // ============================================================
             function renderPacks() {
                 const packs = getPacks();
                 const unlocked = getUnlockedPacks();
@@ -1186,7 +1275,16 @@
                 spacesGrid.innerHTML = packs.map(p => {
                     const isUnlocked = !!unlocked[p.tier] || !!unlocked[p.id];
                     const inCart = cart.some(item => item === p.id || item === p.tier);
-                    const { discountedPrice, discount } = getDiscountedPrice(p.price, p.tier);
+                    
+                    // Utiliser les prix définis dans l'admin
+                    const prixBarre = p.prix_barre || p.price || 0;
+                    const prixReduit = p.prix_reduit || p.price || 0;
+                    const prixReel = p.prix_reel || p.price || 0;
+                    const reduction = p.reduction_pct || 0;
+                    
+                    // Appliquer les promotions sur le prix réel
+                    const { discountedPrice, discount, promoCode } = getDiscountedPrice(prixReel, p.tier);
+                    const prixFinal = discountedPrice;
                     const hasDiscount = discount > 0;
 
                     const tierIcons = { bronze: 'fa-compass', silver: 'fa-briefcase', gold: 'fa-star' };
@@ -1216,9 +1314,21 @@
                         `).join('');
                     }
 
-                    const priceHtml = hasDiscount ?
-                        `<span class="original-price">${p.price.toFixed(2)} €</span> ${discountedPrice.toFixed(2)} € <span class="discount-badge">-${discount.toFixed(2)} €</span>` :
-                        `${p.price.toFixed(2)} €`;
+                    // Affichage des prix avec réduction
+                    let priceHtml = '';
+                    if (reduction > 0) {
+                        priceHtml = `
+                            <span class="original-price">${prixBarre.toFixed(2)} €</span>
+                            <span style="color:#0b6e3f;font-weight:700;">${prixReduit.toFixed(2)} €</span>
+                            <span class="discount-badge">-${reduction}%</span>
+                            ${hasDiscount ? `<span style="font-size:14px;color:#2c5282;font-weight:600;">| Promo : ${prixFinal.toFixed(2)} €</span>` : ''}
+                        `;
+                    } else {
+                        priceHtml = `${prixReel.toFixed(2)} €`;
+                        if (hasDiscount) {
+                            priceHtml += ` <span style="font-size:14px;color:#2c5282;font-weight:600;">| Promo : ${prixFinal.toFixed(2)} €</span>`;
+                        }
+                    }
 
                     return `
                         <div class="space-card ${tierClasses[p.tier] || ''} ${isUnlocked ? '' : 'locked-card'}" data-id="${p.id}" data-tier="${p.tier}">
@@ -1319,7 +1429,9 @@
                 });
             }
 
-            // ---- Panier ----
+            // ============================================================
+            //  PANIER
+            // ============================================================
             function updateCartUI() {
                 const cart = getCart();
                 cartBadge.textContent = cart.length;
@@ -1330,33 +1442,41 @@
                 const cart = getCart();
                 const packs = getPacks();
                 let total = 0;
-                const itemsHtml = cart.map(id => {
-                    const p = packs.find(pk => pk.id === id);
-                    if (!p) return '';
-                    const { discountedPrice } = getDiscountedPrice(p.price, p.tier);
-                    total += discountedPrice;
-                    return `<div class="cart-item"><span class="item-name">${p.title}</span><span class="item-price">${discountedPrice.toFixed(2)} €</span></div>`;
-                }).join('');
+                let itemsHtml = '';
 
                 if (cart.length === 0) {
                     cartItems.innerHTML = '<div class="empty-cart">Votre panier est vide.</div>';
                 } else {
+                    itemsHtml = cart.map(id => {
+                        const p = packs.find(pk => pk.id === id);
+                        if (!p) return '';
+                        const prixReel = p.prix_reel || p.price || 0;
+                        const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
+                        total += discountedPrice;
+                        return `<div class="cart-item"><span class="item-name">${p.title}</span><span class="item-price">${discountedPrice.toFixed(2)} €</span></div>`;
+                    }).join('');
                     cartItems.innerHTML = itemsHtml;
                 }
                 cartTotal.textContent = `Total : ${total.toFixed(2)} €`;
                 btnStripeCheckout.disabled = (cart.length === 0);
             }
 
-            // ---- Stripe ----
+            // ============================================================
+            //  STRIPE (simulé)
+            // ============================================================
             function simulateStripePayment() {
                 const cart = getCart();
                 if (cart.length === 0) return;
                 const packs = getPacks();
-                const total = cart.reduce((sum, id) => {
+                let total = 0;
+                cart.forEach(id => {
                     const p = packs.find(pk => pk.id === id);
-                    const { discountedPrice } = getDiscountedPrice(p ? p.price : 0, p ? p.tier : '');
-                    return sum + discountedPrice;
-                }, 0);
+                    if (p) {
+                        const prixReel = p.prix_reel || p.price || 0;
+                        const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
+                        total += discountedPrice;
+                    }
+                });
 
                 if (confirm(`💳 Simulation Stripe : paiement de ${total.toFixed(2)} € ?`)) {
                     const unlocked = getUnlockedPacks();
@@ -1390,7 +1510,9 @@
                 }
             }
 
-            // ---- Auth ----
+            // ============================================================
+            //  AUTH
+            // ============================================================
             let currentUser = null;
             let isLoginMode = true;
 
@@ -1552,7 +1674,9 @@
                 updateCartUI();
             }
 
-            // ---- Modal Panier ----
+            // ============================================================
+            //  MODAL PANIER
+            // ============================================================
             const cartModal = document.getElementById('cartModal');
             const closeCart = document.getElementById('closeCart');
 
@@ -1582,6 +1706,7 @@
                 if (!cartCodeArea.classList.contains('hidden')) cartCodeInput.focus();
             });
 
+            // ===== CODE PROMO : APPLICATION RÉELLE =====
             cartCodeApply.addEventListener('click', function() {
                 const code = cartCodeInput.value.trim().toUpperCase();
                 const promos = getPromos();
@@ -1592,14 +1717,40 @@
                     (!p.startDate || p.startDate <= now) &&
                     (!p.endDate || p.endDate >= now)
                 );
+                
                 if (!promo) {
                     cartMessage.textContent = '❌ Code promo invalide ou expiré.';
                     cartMessage.className = 'checkout-message error';
                     return;
                 }
-                cartMessage.textContent = `✅ Code ${code} appliqué ! (${promo.type === 'percentage' ? promo.value + '%' : promo.value + '€'})`;
-                cartMessage.className = 'checkout-message success';
+                
+                // Stocker le code promo en session
+                sessionStorage.setItem('code_promo_actif', code);
+                
+                // Recalculer les prix du panier avec le code promo
+                let cart = getCart();
+                const packs = getPacks();
+                let total = 0;
+                
+                // Recalculer chaque pack avec le code promo
+                cart = cart.map(id => {
+                    const p = packs.find(pk => pk.id === id);
+                    if (!p) return null;
+                    const prixReel = p.prix_reel || p.price || 0;
+                    const { discountedPrice } = getDiscountedPrice(prixReel, p.tier, code);
+                    total += discountedPrice;
+                    return { ...p, prix_avec_promo: discountedPrice };
+                }).filter(item => item !== null);
+                
+                // Mettre à jour le panier avec les nouveaux prix
+                // On stocke le panier avec les prix promos
+                localStorage.setItem('loyaltyCartWithPromo', JSON.stringify(cart));
+                
+                // Mettre à jour l'affichage
                 renderCartModal();
+                
+                cartMessage.textContent = `✅ Code ${code} appliqué ! Réduction de ${promo.value}${promo.type === 'percentage' ? '%' : '€'}`;
+                cartMessage.className = 'checkout-message success';
                 cartCodeInput.value = '';
             });
 
@@ -1607,16 +1758,31 @@
                 if (getCart().length === 0) return;
                 if (confirm('Vider le panier ?')) {
                     saveCart([]);
+                    sessionStorage.removeItem('code_promo_actif');
+                    localStorage.removeItem('loyaltyCartWithPromo');
                     renderPacks();
                     updateCartUI();
                 }
             });
 
-            // ---- Init ----
+            // ============================================================
+            //  INIT
+            // ============================================================
+            // Initialiser les données par défaut (pour navigateur privé)
+            initDefaultData();
+            
             applyUserState();
             renderPacks();
             updateCartUI();
 
+            // Vérifier si un code promo est actif en session
+            const codeActif = sessionStorage.getItem('code_promo_actif');
+            if (codeActif) {
+                cartCodeInput.value = codeActif;
+                setTimeout(() => cartCodeApply.click(), 300);
+            }
+
+            // Vérifier retour Stripe
             const params = new URLSearchParams(window.location.search);
             if (params.get('success') === 'true') {
                 alert('🎉 Paiement Stripe confirmé ! Vos packs sont débloqués.');
@@ -1632,6 +1798,8 @@
                 });
                 saveUnlockedPacks(unlocked);
                 saveCart([]);
+                sessionStorage.removeItem('code_promo_actif');
+                localStorage.removeItem('loyaltyCartWithPromo');
                 renderPacks();
                 updateCartUI();
                 window.history.replaceState({}, document.title, window.location.pathname);
