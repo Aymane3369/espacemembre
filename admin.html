@@ -3,176 +3,171 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin · Packs · Promos · Codes</title>
+    <title>Admin · Packs & Promos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== TOUT LE STYLE EXISTANT ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f0f2f6; min-height: 100vh; display: flex; }
-        .sidebar { width: 260px; background: #0f1a2e; color: #e8edf2; padding: 28px 20px; display: flex; flex-direction: column; min-height: 100vh; position: sticky; top: 0; height: 100vh; overflow-y: auto; flex-shrink: 0; }
-        .sidebar .logo { display: flex; align-items: center; gap: 12px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 24px; }
-        .sidebar .logo .icon { width: 42px; height: 42px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #0f1a2e; }
-        .sidebar .logo h1 { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #c9a84c, #f0dfb0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .sidebar .logo span { font-size: 11px; opacity: 0.5; display: block; -webkit-text-fill-color: #8896ab; font-weight: 400; }
-        .sidebar .nav { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-        .sidebar .nav a { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px; color: #9aa8b9; text-decoration: none; font-weight: 500; font-size: 14px; transition: 0.25s; cursor: pointer; }
-        .sidebar .nav a:hover { background: rgba(255,255,255,0.06); color: #fff; }
-        .sidebar .nav a.active { background: rgba(201,168,76,0.15); color: #f0dfb0; }
-        .sidebar .nav a i { width: 20px; font-size: 15px; text-align: center; }
-        .sidebar .nav a .badge-nav { margin-left: auto; background: rgba(255,255,255,0.08); padding: 1px 10px; border-radius: 40px; font-size: 11px; font-weight: 600; color: #9aa8b9; }
-        .sidebar .nav a.active .badge-nav { background: rgba(201,168,76,0.2); color: #f0dfb0; }
-        .sidebar .footer-nav { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 8px; }
-        .sidebar .footer-nav a { color: #6a7a8d; font-size: 13px; }
-        .sidebar .footer-nav a:hover { color: #fff; }
-        .sidebar .admin-user { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: rgba(255,255,255,0.04); border-radius: 10px; margin-top: 12px; }
-        .sidebar .admin-user .avatar-admin { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #f0dfb0); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0f1a2e; font-size: 14px; }
-        .sidebar .admin-user .info { font-size: 13px; font-weight: 500; }
-        .sidebar .admin-user .info small { display: block; font-weight: 400; opacity: 0.5; font-size: 11px; }
-        .main { flex: 1; padding: 28px 36px 40px; overflow-y: auto; min-height: 100vh; }
-        .main .topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(15,26,46,0.06); margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
-        .main .topbar h2 { font-size: 24px; font-weight: 700; color: #0f1a2e; }
-        .main .topbar h2 small { font-weight: 400; font-size: 14px; color: #8896ab; margin-left: 10px; }
-        .main .topbar .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-        .main .topbar .actions .btn-outline { background: transparent; border: 1.5px solid #e2e8f0; padding: 6px 18px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #4a5568; cursor: pointer; transition: 0.3s; }
-        .main .topbar .actions .btn-outline:hover { background: #f4f6fb; border-color: #c9a84c; }
-        .main .topbar .actions .btn-primary { background: #0f1a2e; border: none; padding: 6px 20px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #fff; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; }
-        .main .topbar .actions .btn-primary:hover { background: #1a2c4a; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 18px; margin-bottom: 28px; }
-        .stats-grid .stat-card { background: #fff; border-radius: 14px; padding: 18px 22px; box-shadow: 0 2px 10px rgba(15,26,46,0.04); border: 1px solid rgba(15,26,46,0.05); display: flex; align-items: center; gap: 14px; }
-        .stats-grid .stat-card .stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-        .stats-grid .stat-card .stat-icon.gold { background: #f7f0df; color: #b8942b; }
-        .stats-grid .stat-card .stat-icon.blue { background: #e8edf5; color: #2c5282; }
-        .stats-grid .stat-card .stat-icon.green { background: #e6f7ee; color: #0b6e3f; }
-        .stats-grid .stat-card .stat-icon.purple { background: #ede7f7; color: #6b3fa0; }
-        .stats-grid .stat-card .stat-icon.orange { background: #fef7e6; color: #a67c1a; }
-        .stats-grid .stat-card .stat-info .stat-number { font-size: 22px; font-weight: 700; color: #0f1a2e; line-height: 1.2; }
-        .stats-grid .stat-card .stat-info .stat-label { font-size: 12px; font-weight: 500; color: #8896ab; }
-        .tab-content { display: none; animation: fadeUp 0.35s ease forwards; }
-        .tab-content.active { display: block; }
-        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(12px); } 100% { opacity: 1; transform: translateY(0); } }
-        .section-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
-        .section-toolbar .search-box { display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #e2e8f0; border-radius: 40px; padding: 4px 16px 4px 18px; transition: 0.3s; }
-        .section-toolbar .search-box:focus-within { border-color: #c9a84c; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
-        .section-toolbar .search-box input { border: none; background: transparent; padding: 6px 0; font-size: 13px; outline: none; min-width: 180px; font-weight: 500; color: #0f1a2e; }
-        .section-toolbar .search-box i { color: #8896ab; font-size: 14px; }
-        .section-toolbar .btn-add { background: #0f1a2e; border: none; padding: 8px 22px; border-radius: 40px; font-weight: 600; font-size: 13px; color: #fff; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .section-toolbar .btn-add:hover { background: #1a2c4a; transform: scale(1.02); }
-        .table-wrap { background: #fff; border-radius: 14px; border: 1px solid rgba(15,26,46,0.05); overflow: hidden; box-shadow: 0 2px 8px rgba(15,26,46,0.02); }
-        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .table-wrap table thead { background: #f8fafc; }
-        .table-wrap table th { text-align: left; padding: 12px 18px; font-weight: 600; color: #4a5568; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 1px solid #eef2f6; }
-        .table-wrap table td { padding: 12px 18px; border-bottom: 1px solid #f0f2f6; color: #2d3748; vertical-align: middle; }
-        .table-wrap table tr:last-child td { border-bottom: none; }
-        .table-wrap table tr:hover td { background: #fafbfc; }
-        .table-wrap .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 12px; border-radius: 40px; font-size: 11px; font-weight: 600; }
-        .table-wrap .status-badge.paid { background: #e6f7ee; color: #0b6e3f; }
-        .table-wrap .status-badge.pending { background: #fef7e6; color: #a67c1a; }
-        .table-wrap .status-badge.cancelled { background: #f7f0f0; color: #a04444; }
-        .table-wrap .actions-cell { display: flex; gap: 6px; }
-        .table-wrap .actions-cell button { background: transparent; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: 0.2s; color: #8896ab; }
-        .table-wrap .actions-cell button:hover { background: #f4f6fb; color: #0f1a2e; }
-        .table-wrap .actions-cell button.danger:hover { background: #fde8e8; color: #a04444; }
-        .table-wrap .actions-cell button.success:hover { background: #e6f7ee; color: #0b6e3f; }
-        .empty-state { text-align: center; padding: 40px 20px; color: #8896ab; }
-        .empty-state i { font-size: 40px; opacity: 0.3; margin-bottom: 12px; display: block; }
-        .empty-state p { font-weight: 500; }
-        .packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
-        .pack-card { background: #fff; border-radius: 14px; border: 1px solid rgba(15,26,46,0.06); padding: 18px 20px 20px; transition: 0.3s; box-shadow: 0 2px 8px rgba(15,26,46,0.02); display: flex; flex-direction: column; }
-        .pack-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(15,26,46,0.07); border-color: rgba(201,168,76,0.2); }
-        .pack-card .pc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-        .pack-card .pc-header .pc-title { font-weight: 700; font-size: 17px; color: #0f1a2e; }
-        .pack-card .pc-header .pc-tier { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 2px 14px; border-radius: 40px; background: #f4f6fb; color: #4a5568; }
-        .pack-card .pc-tier.bronze { background: #ece7dc; color: #7a653b; }
-        .pack-card .pc-tier.silver { background: #e8edf2; color: #3d4e62; }
-        .pack-card .pc-tier.gold { background: #f7f0df; color: #8a6d1b; }
-        .pack-card .pc-desc { font-size: 13px; color: #4a5568; margin: 6px 0 10px; line-height: 1.4; flex: 1; }
-        .pack-card .pc-price { font-weight: 700; font-size: 16px; color: #0f1a2e; margin-bottom: 8px; }
-        .pack-card .pc-price i { color: #c9a84c; margin-right: 4px; }
-        .pack-card .pc-price .price-barre { text-decoration: line-through; color: #8896ab; font-weight: 400; }
-        .pack-card .pc-price .price-reduit { color: #0b6e3f; font-weight: 700; }
-        .pack-card .pc-price .price-reel { color: #2c5282; font-weight: 700; }
-        .pack-card .pc-price .discount-badge { background: #e6f7ee; color: #0b6e3f; padding: 1px 10px; border-radius: 40px; font-size: 12px; font-weight: 600; }
-        .pack-card .pc-access-code { font-size: 12px; background: #f4f6fb; padding: 2px 10px; border-radius: 40px; display: inline-block; margin-bottom: 8px; color: #4a5568; }
-        .pack-card .pc-access-code i { margin-right: 4px; color: #c9a84c; }
-        .pack-card .pc-content-list { margin: 6px 0 12px; border-top: 1px solid rgba(15,26,46,0.04); padding-top: 10px; }
-        .pack-card .pc-content-list .content-item { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 4px 0; color: #2d3748; }
-        .pack-card .pc-content-list .content-item i { width: 18px; color: #8896ab; font-size: 13px; }
-        .pack-card .pc-content-list .content-item .file-link { color: #2c5282; text-decoration: none; font-weight: 500; word-break: break-all; }
-        .pack-card .pc-content-list .content-item .file-link:hover { text-decoration: underline; }
-        .pack-card .pc-actions { display: flex; gap: 8px; border-top: 1px solid rgba(15,26,46,0.04); padding-top: 12px; margin-top: 4px; }
-        .pack-card .pc-actions button { flex: 1; padding: 6px; border: none; border-radius: 8px; font-weight: 600; font-size: 12px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
-        .pack-card .pc-actions .btn-edit { background: #f4f6fb; color: #4a5568; }
-        .pack-card .pc-actions .btn-edit:hover { background: #e8edf5; color: #0f1a2e; }
-        .pack-card .pc-actions .btn-delete { background: #fde8e8; color: #a04444; }
-        .pack-card .pc-actions .btn-delete:hover { background: #fcd5d5; }
-        .modal-overlay { position: fixed; inset: 0; background: rgba(15,26,46,0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .modal-overlay.open { opacity: 1; visibility: visible; }
-        .modal-overlay .modal { background: #fff; max-width: 720px; width: 100%; border-radius: 24px; padding: 32px 28px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); transform: scale(0.95); transition: 0.3s; max-height: 90vh; overflow-y: auto; position: relative; }
-        .modal-overlay.open .modal { transform: scale(1); }
-        .modal .close-modal { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 22px; color: #8896ab; cursor: pointer; }
-        .modal .close-modal:hover { color: #0f1a2e; }
-        .modal h2 { font-size: 22px; margin-bottom: 4px; }
-        .modal .subtitle { color: #8896ab; font-size: 13px; margin-bottom: 20px; }
-        .modal .form-group { margin-bottom: 14px; }
-        .modal .form-group label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; color: #4a5568; }
-        .modal .form-group input, .modal .form-group select, .modal .form-group textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; background: #f8fafc; transition: 0.3s; font-family: inherit; }
-        .modal .form-group textarea { min-height: 60px; resize: vertical; }
-        .modal .form-group input:focus, .modal .form-group select:focus, .modal .form-group textarea:focus { outline: none; border-color: #c9a84c; background: #fff; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
-        .modal .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .modal .btn-submit { width: 100%; padding: 12px; border: none; border-radius: 60px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); font-weight: 700; font-size: 16px; color: #0f1a2e; cursor: pointer; transition: 0.3s; margin-top: 6px; }
-        .modal .btn-submit:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
-        .modal .btn-submit.danger { background: #e2d4d4; color: #7a4a4a; }
-        .modal .btn-submit.danger:hover { background: #d4bdbd; box-shadow: 0 6px 20px rgba(160,68,68,0.2); }
-        .modal .error-msg { background: #fde8e8; color: #a04444; padding: 8px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 12px; display: none; }
-        .modal .error-msg.show { display: block; }
-        .modal .content-fields { background: #f8fafc; border-radius: 12px; padding: 14px 16px; margin: 8px 0 12px; border: 1px dashed #e2e8f0; }
-        .modal .content-fields .cf-row { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
-        .modal .content-fields .cf-row:last-child { margin-bottom: 0; }
-        .modal .content-fields .cf-row input, .modal .content-fields .cf-row select { padding: 8px 12px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: #fff; flex: 1; min-width: 100px; }
-        .modal .content-fields .cf-row input:focus, .modal .content-fields .cf-row select:focus { border-color: #c9a84c; outline: none; }
-        .modal .content-fields .cf-row .btn-remove-content { background: #fde8e8; border: none; border-radius: 6px; padding: 4px 10px; color: #a04444; cursor: pointer; font-size: 13px; }
-        .modal .content-fields .cf-row .btn-remove-content:hover { background: #fcd5d5; }
-        .modal .btn-add-content { background: #f4f6fb; border: 1px dashed #c9a84c; border-radius: 8px; padding: 8px 14px; font-weight: 600; font-size: 13px; color: #4a5568; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
-        .modal .btn-add-content:hover { background: #e8edf5; border-color: #b8942b; }
-        .price-fields { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; background: #f8fafc; padding: 12px 14px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 14px; }
-        .price-fields .pf-group label { font-size: 11px; font-weight: 600; color: #4a5568; display: block; margin-bottom: 2px; }
-        .price-fields .pf-group input { width: 100%; padding: 6px 10px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-weight: 600; background: #fff; transition: 0.3s; }
-        .price-fields .pf-group input:focus { border-color: #c9a84c; outline: none; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
-        .price-fields .pf-group input.prix-initial { color: #8896ab; text-decoration: line-through; }
-        .price-fields .pf-group input.prix-reduit { color: #0b6e3f; }
-        .price-fields .pf-group input.prix-reel { color: #2c5282; font-weight: 700; }
-        .price-fields .pf-group input[readonly] { background: #f0f2f6; cursor: not-allowed; }
-        .price-fields .pf-group .pf-badge { font-size: 10px; font-weight: 600; color: #fff; padding: 1px 8px; border-radius: 40px; display: inline-block; margin-top: 2px; }
-        .price-fields .pf-group .pf-badge.badge-barre { background: #8896ab; }
-        .price-fields .pf-group .pf-badge.badge-reduit { background: #0b6e3f; }
-        .price-fields .pf-group .pf-badge.badge-reel { background: #2c5282; }
-        .admin-login-overlay { position: fixed; inset: 0; background: rgba(15,26,46,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 3000; padding: 20px; opacity: 0; visibility: hidden; transition: 0.4s; }
-        .admin-login-overlay.open { opacity: 1; visibility: visible; }
-        .admin-login-overlay .login-box { background: #fff; max-width: 400px; width: 100%; border-radius: 24px; padding: 36px 30px 32px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); transform: scale(0.95); transition: 0.3s; }
-        .admin-login-overlay.open .login-box { transform: scale(1); }
-        .admin-login-overlay .login-box .logo { text-align: center; margin-bottom: 20px; }
-        .admin-login-overlay .login-box .logo .icon { width: 56px; height: 56px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 26px; color: #0f1a2e; }
-        .admin-login-overlay .login-box h2 { text-align: center; font-size: 22px; margin-top: 4px; }
-        .admin-login-overlay .login-box .sub { text-align: center; color: #8896ab; font-size: 13px; margin-bottom: 20px; }
-        .admin-login-overlay .login-box .form-group { margin-bottom: 14px; }
-        .admin-login-overlay .login-box .form-group label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; color: #4a5568; }
-        .admin-login-overlay .login-box .form-group input { width: 100%; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 14px; background: #f8fafc; transition: 0.3s; }
-        .admin-login-overlay .login-box .form-group input:focus { outline: none; border-color: #c9a84c; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
-        .admin-login-overlay .login-box .btn-login { width: 100%; padding: 12px; border: none; border-radius: 60px; background: linear-gradient(135deg, #c9a84c, #f0dfb0); font-weight: 700; font-size: 16px; color: #0f1a2e; cursor: pointer; transition: 0.3s; margin-top: 4px; }
-        .admin-login-overlay .login-box .btn-login:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
-        .admin-login-overlay .login-box .error-msg { background: #fde8e8; color: #a04444; padding: 8px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 12px; display: none; }
-        .admin-login-overlay .login-box .error-msg.show { display: block; }
-        .admin-login-overlay .login-box .back-link { display: block; text-align: center; margin-top: 14px; color: #8896ab; font-size: 13px; cursor: pointer; text-decoration: underline; }
-        .admin-login-overlay .login-box .back-link:hover { color: #0f1a2e; }
-        
-        /* Nouveau style pour le récapitulatif des promos */
-        .promo-usage-card { background: #fff; border-radius: 14px; border: 1px solid rgba(15,26,46,0.05); padding: 18px 22px; }
-        .promo-usage-card .pu-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f2f6; font-size: 13px; }
-        .promo-usage-card .pu-row:last-child { border-bottom: none; }
-        .promo-usage-card .pu-code { font-weight: 700; color: #0f1a2e; }
-        .promo-usage-card .pu-count { background: #e8edf5; padding: 2px 12px; border-radius: 40px; font-weight: 600; font-size: 12px; color: #2c5282; }
-        .promo-usage-card .pu-total { font-weight: 700; color: #0b6e3f; }
-        
+        /* ===== TOUT LE STYLE EXISTANT (je le reprends en condensé) ===== */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:#f0f2f6; min-height:100vh; display:flex; }
+        .sidebar { width:260px; background:#0f1a2e; color:#e8edf2; padding:28px 20px; display:flex; flex-direction:column; min-height:100vh; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
+        .sidebar .logo { display:flex; align-items:center; gap:12px; padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:24px; }
+        .sidebar .logo .icon { width:42px; height:42px; background:linear-gradient(135deg,#c9a84c,#f0dfb0); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#0f1a2e; }
+        .sidebar .logo h1 { font-size:20px; font-weight:700; background:linear-gradient(135deg,#c9a84c,#f0dfb0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .sidebar .logo span { font-size:11px; opacity:0.5; display:block; -webkit-text-fill-color:#8896ab; font-weight:400; }
+        .sidebar .nav { flex:1; display:flex; flex-direction:column; gap:4px; }
+        .sidebar .nav a { display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:10px; color:#9aa8b9; text-decoration:none; font-weight:500; font-size:14px; transition:0.25s; cursor:pointer; }
+        .sidebar .nav a:hover { background:rgba(255,255,255,0.06); color:#fff; }
+        .sidebar .nav a.active { background:rgba(201,168,76,0.15); color:#f0dfb0; }
+        .sidebar .nav a i { width:20px; font-size:15px; text-align:center; }
+        .sidebar .nav a .badge-nav { margin-left:auto; background:rgba(255,255,255,0.08); padding:1px 10px; border-radius:40px; font-size:11px; font-weight:600; color:#9aa8b9; }
+        .sidebar .nav a.active .badge-nav { background:rgba(201,168,76,0.2); color:#f0dfb0; }
+        .sidebar .footer-nav { border-top:1px solid rgba(255,255,255,0.06); padding-top:16px; margin-top:8px; }
+        .sidebar .footer-nav a { color:#6a7a8d; font-size:13px; cursor:pointer; }
+        .sidebar .footer-nav a:hover { color:#fff; }
+        .sidebar .admin-user { display:flex; align-items:center; gap:12px; padding:12px 14px; background:rgba(255,255,255,0.04); border-radius:10px; margin-top:12px; }
+        .sidebar .admin-user .avatar-admin { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#c9a84c,#f0dfb0); display:flex; align-items:center; justify-content:center; font-weight:700; color:#0f1a2e; font-size:14px; }
+        .sidebar .admin-user .info { font-size:13px; font-weight:500; }
+        .sidebar .admin-user .info small { display:block; font-weight:400; opacity:0.5; font-size:11px; }
+        .main { flex:1; padding:28px 36px 40px; overflow-y:auto; min-height:100vh; }
+        .main .topbar { display:flex; align-items:center; justify-content:space-between; padding-bottom:20px; border-bottom:1px solid rgba(15,26,46,0.06); margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+        .main .topbar h2 { font-size:24px; font-weight:700; color:#0f1a2e; }
+        .main .topbar h2 small { font-weight:400; font-size:14px; color:#8896ab; margin-left:10px; }
+        .main .topbar .actions { display:flex; gap:10px; flex-wrap:wrap; }
+        .main .topbar .actions .btn-outline { background:transparent; border:1.5px solid #e2e8f0; padding:6px 18px; border-radius:40px; font-weight:600; font-size:13px; color:#4a5568; cursor:pointer; transition:0.3s; }
+        .main .topbar .actions .btn-outline:hover { background:#f4f6fb; border-color:#c9a84c; }
+        .main .topbar .actions .btn-primary { background:#0f1a2e; border:none; padding:6px 20px; border-radius:40px; font-weight:600; font-size:13px; color:#fff; cursor:pointer; transition:0.3s; display:inline-flex; align-items:center; gap:6px; }
+        .main .topbar .actions .btn-primary:hover { background:#1a2c4a; }
+        .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:18px; margin-bottom:28px; }
+        .stats-grid .stat-card { background:#fff; border-radius:14px; padding:18px 22px; box-shadow:0 2px 10px rgba(15,26,46,0.04); border:1px solid rgba(15,26,46,0.05); display:flex; align-items:center; gap:14px; }
+        .stats-grid .stat-card .stat-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+        .stats-grid .stat-card .stat-icon.gold { background:#f7f0df; color:#b8942b; }
+        .stats-grid .stat-card .stat-icon.blue { background:#e8edf5; color:#2c5282; }
+        .stats-grid .stat-card .stat-icon.green { background:#e6f7ee; color:#0b6e3f; }
+        .stats-grid .stat-card .stat-icon.purple { background:#ede7f7; color:#6b3fa0; }
+        .stats-grid .stat-card .stat-icon.orange { background:#fef7e6; color:#a67c1a; }
+        .stats-grid .stat-card .stat-info .stat-number { font-size:22px; font-weight:700; color:#0f1a2e; line-height:1.2; }
+        .stats-grid .stat-card .stat-info .stat-label { font-size:12px; font-weight:500; color:#8896ab; }
+        .tab-content { display:none; animation:fadeUp 0.35s ease forwards; }
+        .tab-content.active { display:block; }
+        @keyframes fadeUp { 0%{opacity:0;transform:translateY(12px);}100%{opacity:1;transform:translateY(0);} }
+        .section-toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+        .section-toolbar .search-box { display:flex; align-items:center; gap:8px; background:#fff; border:1.5px solid #e2e8f0; border-radius:40px; padding:4px 16px 4px 18px; transition:0.3s; }
+        .section-toolbar .search-box:focus-within { border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
+        .section-toolbar .search-box input { border:none; background:transparent; padding:6px 0; font-size:13px; outline:none; min-width:180px; font-weight:500; color:#0f1a2e; }
+        .section-toolbar .search-box i { color:#8896ab; font-size:14px; }
+        .section-toolbar .btn-add { background:#0f1a2e; border:none; padding:8px 22px; border-radius:40px; font-weight:600; font-size:13px; color:#fff; cursor:pointer; transition:0.3s; display:inline-flex; align-items:center; gap:8px; }
+        .section-toolbar .btn-add:hover { background:#1a2c4a; transform:scale(1.02); }
+        .table-wrap { background:#fff; border-radius:14px; border:1px solid rgba(15,26,46,0.05); overflow:hidden; box-shadow:0 2px 8px rgba(15,26,46,0.02); }
+        .table-wrap table { width:100%; border-collapse:collapse; font-size:13px; }
+        .table-wrap table thead { background:#f8fafc; }
+        .table-wrap table th { text-align:left; padding:12px 18px; font-weight:600; color:#4a5568; font-size:11px; text-transform:uppercase; letter-spacing:0.4px; border-bottom:1px solid #eef2f6; }
+        .table-wrap table td { padding:12px 18px; border-bottom:1px solid #f0f2f6; color:#2d3748; vertical-align:middle; }
+        .table-wrap table tr:last-child td { border-bottom:none; }
+        .table-wrap table tr:hover td { background:#fafbfc; }
+        .table-wrap .status-badge { display:inline-flex; align-items:center; gap:4px; padding:2px 12px; border-radius:40px; font-size:11px; font-weight:600; }
+        .table-wrap .status-badge.paid { background:#e6f7ee; color:#0b6e3f; }
+        .table-wrap .status-badge.pending { background:#fef7e6; color:#a67c1a; }
+        .table-wrap .status-badge.cancelled { background:#f7f0f0; color:#a04444; }
+        .table-wrap .actions-cell { display:flex; gap:6px; }
+        .table-wrap .actions-cell button { background:transparent; border:none; padding:4px 8px; border-radius:6px; cursor:pointer; font-size:13px; transition:0.2s; color:#8896ab; }
+        .table-wrap .actions-cell button:hover { background:#f4f6fb; color:#0f1a2e; }
+        .table-wrap .actions-cell button.danger:hover { background:#fde8e8; color:#a04444; }
+        .table-wrap .actions-cell button.success:hover { background:#e6f7ee; color:#0b6e3f; }
+        .empty-state { text-align:center; padding:40px 20px; color:#8896ab; }
+        .empty-state i { font-size:40px; opacity:0.3; margin-bottom:12px; display:block; }
+        .empty-state p { font-weight:500; }
+        .packs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+        .pack-card { background:#fff; border-radius:14px; border:1px solid rgba(15,26,46,0.06); padding:18px 20px 20px; transition:0.3s; box-shadow:0 2px 8px rgba(15,26,46,0.02); display:flex; flex-direction:column; }
+        .pack-card:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(15,26,46,0.07); border-color:rgba(201,168,76,0.2); }
+        .pack-card .pc-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+        .pack-card .pc-header .pc-title { font-weight:700; font-size:17px; color:#0f1a2e; }
+        .pack-card .pc-header .pc-tier { font-size:10px; font-weight:700; text-transform:uppercase; padding:2px 14px; border-radius:40px; background:#f4f6fb; color:#4a5568; }
+        .pack-card .pc-header .pc-tier.bronze { background:#ece7dc; color:#7a653b; }
+        .pack-card .pc-header .pc-tier.silver { background:#e8edf2; color:#3d4e62; }
+        .pack-card .pc-header .pc-tier.gold { background:#f7f0df; color:#8a6d1b; }
+        .pack-card .pc-desc { font-size:13px; color:#4a5568; margin:6px 0 10px; line-height:1.4; flex:1; }
+        .pack-card .pc-price { font-weight:700; font-size:16px; color:#0f1a2e; margin-bottom:8px; }
+        .pack-card .pc-price i { color:#c9a84c; margin-right:4px; }
+        .pack-card .pc-price .price-barre { text-decoration:line-through; color:#8896ab; font-weight:400; }
+        .pack-card .pc-price .price-reduit { color:#0b6e3f; font-weight:700; }
+        .pack-card .pc-price .price-reel { color:#2c5282; font-weight:700; }
+        .pack-card .pc-price .discount-badge { background:#e6f7ee; color:#0b6e3f; padding:1px 10px; border-radius:40px; font-size:12px; font-weight:600; }
+        .pack-card .pc-access-code { font-size:12px; background:#f4f6fb; padding:2px 10px; border-radius:40px; display:inline-block; margin-bottom:8px; color:#4a5568; }
+        .pack-card .pc-access-code i { margin-right:4px; color:#c9a84c; }
+        .pack-card .pc-content-list { margin:6px 0 12px; border-top:1px solid rgba(15,26,46,0.04); padding-top:10px; }
+        .pack-card .pc-content-list .content-item { display:flex; align-items:center; gap:8px; font-size:13px; padding:4px 0; color:#2d3748; }
+        .pack-card .pc-content-list .content-item i { width:18px; color:#8896ab; font-size:13px; }
+        .pack-card .pc-actions { display:flex; gap:8px; border-top:1px solid rgba(15,26,46,0.04); padding-top:12px; margin-top:4px; }
+        .pack-card .pc-actions button { flex:1; padding:6px; border:none; border-radius:8px; font-weight:600; font-size:12px; cursor:pointer; transition:0.3s; display:inline-flex; align-items:center; justify-content:center; gap:4px; }
+        .pack-card .pc-actions .btn-edit { background:#f4f6fb; color:#4a5568; }
+        .pack-card .pc-actions .btn-edit:hover { background:#e8edf5; color:#0f1a2e; }
+        .pack-card .pc-actions .btn-delete { background:#fde8e8; color:#a04444; }
+        .pack-card .pc-actions .btn-delete:hover { background:#fcd5d5; }
+        .modal-overlay { position:fixed; inset:0; background:rgba(15,26,46,0.5); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; z-index:2000; padding:20px; opacity:0; visibility:hidden; transition:0.3s; }
+        .modal-overlay.open { opacity:1; visibility:visible; }
+        .modal-overlay .modal { background:#fff; max-width:720px; width:100%; border-radius:24px; padding:32px 28px; box-shadow:0 40px 80px rgba(0,0,0,0.15); transform:scale(0.95); transition:0.3s; max-height:90vh; overflow-y:auto; position:relative; }
+        .modal-overlay.open .modal { transform:scale(1); }
+        .modal .close-modal { position:absolute; top:14px; right:18px; background:none; border:none; font-size:22px; color:#8896ab; cursor:pointer; }
+        .modal .close-modal:hover { color:#0f1a2e; }
+        .modal h2 { font-size:22px; margin-bottom:4px; }
+        .modal .subtitle { color:#8896ab; font-size:13px; margin-bottom:20px; }
+        .modal .form-group { margin-bottom:14px; }
+        .modal .form-group label { display:block; font-weight:600; font-size:13px; margin-bottom:4px; color:#4a5568; }
+        .modal .form-group input, .modal .form-group select, .modal .form-group textarea { width:100%; padding:10px 14px; border:1.5px solid #e2e8f0; border-radius:12px; font-size:14px; background:#f8fafc; transition:0.3s; font-family:inherit; }
+        .modal .form-group textarea { min-height:60px; resize:vertical; }
+        .modal .form-group input:focus, .modal .form-group select:focus, .modal .form-group textarea:focus { outline:none; border-color:#c9a84c; background:#fff; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
+        .modal .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        .modal .btn-submit { width:100%; padding:12px; border:none; border-radius:60px; background:linear-gradient(135deg,#c9a84c,#f0dfb0); font-weight:700; font-size:16px; color:#0f1a2e; cursor:pointer; transition:0.3s; margin-top:6px; }
+        .modal .btn-submit:hover { transform:scale(1.02); box-shadow:0 6px 20px rgba(201,168,76,0.25); }
+        .modal .btn-submit.danger { background:#e2d4d4; color:#7a4a4a; }
+        .modal .btn-submit.danger:hover { background:#d4bdbd; box-shadow:0 6px 20px rgba(160,68,68,0.2); }
+        .modal .error-msg { background:#fde8e8; color:#a04444; padding:8px 14px; border-radius:10px; font-size:13px; margin-bottom:12px; display:none; }
+        .modal .error-msg.show { display:block; }
+        .modal .content-fields { background:#f8fafc; border-radius:12px; padding:14px 16px; margin:8px 0 12px; border:1px dashed #e2e8f0; }
+        .modal .content-fields .cf-row { display:flex; gap:10px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
+        .modal .content-fields .cf-row:last-child { margin-bottom:0; }
+        .modal .content-fields .cf-row input, .modal .content-fields .cf-row select { padding:8px 12px; border:1.5px solid #e2e8f0; border-radius:8px; font-size:13px; background:#fff; flex:1; min-width:100px; }
+        .modal .content-fields .cf-row input:focus, .modal .content-fields .cf-row select:focus { border-color:#c9a84c; outline:none; }
+        .modal .content-fields .cf-row .btn-remove-content { background:#fde8e8; border:none; border-radius:6px; padding:4px 10px; color:#a04444; cursor:pointer; font-size:13px; }
+        .modal .content-fields .cf-row .btn-remove-content:hover { background:#fcd5d5; }
+        .modal .btn-add-content { background:#f4f6fb; border:1px dashed #c9a84c; border-radius:8px; padding:8px 14px; font-weight:600; font-size:13px; color:#4a5568; cursor:pointer; transition:0.3s; display:inline-flex; align-items:center; gap:6px; margin-top:4px; }
+        .modal .btn-add-content:hover { background:#e8edf5; border-color:#b8942b; }
+        .price-fields { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; background:#f8fafc; padding:12px 14px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:14px; }
+        .price-fields .pf-group label { font-size:11px; font-weight:600; color:#4a5568; display:block; margin-bottom:2px; }
+        .price-fields .pf-group input { width:100%; padding:6px 10px; border:1.5px solid #e2e8f0; border-radius:8px; font-size:14px; font-weight:600; background:#fff; transition:0.3s; }
+        .price-fields .pf-group input:focus { border-color:#c9a84c; outline:none; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
+        .price-fields .pf-group input.prix-initial { color:#8896ab; text-decoration:line-through; }
+        .price-fields .pf-group input.prix-reduit { color:#0b6e3f; }
+        .price-fields .pf-group input.prix-reel { color:#2c5282; font-weight:700; }
+        .price-fields .pf-group input[readonly] { background:#f0f2f6; cursor:not-allowed; }
+        .price-fields .pf-group .pf-badge { font-size:10px; font-weight:600; color:#fff; padding:1px 8px; border-radius:40px; display:inline-block; margin-top:2px; }
+        .price-fields .pf-group .pf-badge.badge-barre { background:#8896ab; }
+        .price-fields .pf-group .pf-badge.badge-reduit { background:#0b6e3f; }
+        .price-fields .pf-group .pf-badge.badge-reel { background:#2c5282; }
+        .admin-login-overlay { position:fixed; inset:0; background:rgba(15,26,46,0.7); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; z-index:3000; padding:20px; opacity:0; visibility:hidden; transition:0.4s; }
+        .admin-login-overlay.open { opacity:1; visibility:visible; }
+        .admin-login-overlay .login-box { background:#fff; max-width:400px; width:100%; border-radius:24px; padding:36px 30px 32px; box-shadow:0 40px 80px rgba(0,0,0,0.2); transform:scale(0.95); transition:0.3s; }
+        .admin-login-overlay.open .login-box { transform:scale(1); }
+        .admin-login-overlay .login-box .logo { text-align:center; margin-bottom:20px; }
+        .admin-login-overlay .login-box .logo .icon { width:56px; height:56px; background:linear-gradient(135deg,#c9a84c,#f0dfb0); border-radius:16px; display:inline-flex; align-items:center; justify-content:center; font-size:26px; color:#0f1a2e; }
+        .admin-login-overlay .login-box h2 { text-align:center; font-size:22px; margin-top:4px; }
+        .admin-login-overlay .login-box .sub { text-align:center; color:#8896ab; font-size:13px; margin-bottom:20px; }
+        .admin-login-overlay .login-box .form-group { margin-bottom:14px; }
+        .admin-login-overlay .login-box .form-group label { display:block; font-weight:600; font-size:13px; margin-bottom:4px; color:#4a5568; }
+        .admin-login-overlay .login-box .form-group input { width:100%; padding:10px 14px; border:1.5px solid #e2e8f0; border-radius:12px; font-size:14px; background:#f8fafc; transition:0.3s; }
+        .admin-login-overlay .login-box .form-group input:focus { outline:none; border-color:#c9a84c; box-shadow:0 0 0 3px rgba(201,168,76,0.12); }
+        .admin-login-overlay .login-box .btn-login { width:100%; padding:12px; border:none; border-radius:60px; background:linear-gradient(135deg,#c9a84c,#f0dfb0); font-weight:700; font-size:16px; color:#0f1a2e; cursor:pointer; transition:0.3s; margin-top:4px; }
+        .admin-login-overlay .login-box .btn-login:hover { transform:scale(1.02); box-shadow:0 6px 20px rgba(201,168,76,0.25); }
+        .admin-login-overlay .login-box .error-msg { background:#fde8e8; color:#a04444; padding:8px 14px; border-radius:10px; font-size:13px; margin-bottom:12px; display:none; }
+        .admin-login-overlay .login-box .error-msg.show { display:block; }
+        .admin-login-overlay .login-box .back-link { display:block; text-align:center; margin-top:14px; color:#8896ab; font-size:13px; cursor:pointer; text-decoration:underline; }
+        .admin-login-overlay .login-box .back-link:hover { color:#0f1a2e; }
+        .promo-usage-card { background:#fff; border-radius:14px; border:1px solid rgba(15,26,46,0.05); padding:18px 22px; }
+        .promo-usage-card .pu-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f0f2f6; font-size:13px; }
+        .promo-usage-card .pu-row:last-child { border-bottom:none; }
+        .promo-usage-card .pu-code { font-weight:700; color:#0f1a2e; }
+        .promo-usage-card .pu-count { background:#e8edf5; padding:2px 12px; border-radius:40px; font-weight:600; font-size:12px; color:#2c5282; }
+        .promo-usage-card .pu-total { font-weight:700; color:#0b6e3f; }
         @media (max-width:1024px) { .sidebar { width:72px; padding:16px 10px; } .sidebar .logo h1, .sidebar .logo span, .sidebar .nav a span, .sidebar .nav a .badge-nav, .sidebar .admin-user .info, .sidebar .footer-nav a span { display:none; } .sidebar .logo .icon { width:36px; height:36px; font-size:16px; } .sidebar .nav a { justify-content:center; padding:12px; font-size:18px; } .sidebar .nav a i { width:auto; font-size:18px; } .sidebar .admin-user { justify-content:center; padding:8px; } .sidebar .admin-user .avatar-admin { width:32px; height:32px; font-size:12px; } .main { padding:20px 18px 32px; } .main .topbar h2 { font-size:20px; } .stats-grid { grid-template-columns:repeat(2,1fr); } .packs-grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); } .modal .form-row { grid-template-columns:1fr; } }
         @media (max-width:640px) { .sidebar { width:56px; padding:12px 6px; } .sidebar .logo .icon { width:30px; height:30px; font-size:13px; } .sidebar .nav a { padding:8px; font-size:15px; } .main { padding:14px 12px 28px; } .stats-grid { grid-template-columns:1fr 1fr; gap:10px; } .stats-grid .stat-card { padding:12px 14px; flex-direction:column; align-items:flex-start; gap:6px; } .stats-grid .stat-card .stat-icon { width:36px; height:36px; font-size:14px; } .stats-grid .stat-card .stat-info .stat-number { font-size:18px; } .section-toolbar { flex-direction:column; align-items:stretch; } .section-toolbar .search-box input { min-width:unset; width:100%; } .table-wrap { overflow-x:auto; } .table-wrap table { font-size:12px; } .table-wrap table th, .table-wrap table td { padding:8px 12px; white-space:nowrap; } .packs-grid { grid-template-columns:1fr; } .modal .modal { padding:24px 16px; } .modal .form-row { grid-template-columns:1fr; } .main .topbar h2 small { display:block; margin-left:0; margin-top:2px; } }
         ::-webkit-scrollbar { width:6px; height:6px; }
@@ -182,7 +177,7 @@
     </style>
 </head>
 <body>
-    <!-- ===== SIDEBAR ===== -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="logo">
             <div class="icon"><i class="fas fa-crown"></i></div>
@@ -205,7 +200,7 @@
         </div>
     </aside>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- MAIN -->
     <div class="main" id="mainContent">
         <div class="topbar">
             <h2 id="pageTitle">Tableau de bord <small>vue d'ensemble</small></h2>
@@ -225,20 +220,14 @@
                 <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-euro-sign"></i></div><div class="stat-info"><div class="stat-number" id="statRevenue">0 €</div><div class="stat-label">CA</div></div></div>
                 <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-tags"></i></div><div class="stat-info"><div class="stat-number" id="statPromoUsage">0</div><div class="stat-label">Promos utilisées</div></div></div>
             </div>
-            
-            <!-- RÉCAPITULATIF DES PROMOS UTILISÉES -->
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-top:8px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px;">
                 <div class="promo-usage-card">
                     <h4 style="font-size:14px;font-weight:600;margin-bottom:10px;"><i class="fas fa-tag" style="color:#c9a84c;"></i> Promotions actives</h4>
-                    <div id="promoUsageList">
-                        <div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucune promotion utilisée</div>
-                    </div>
+                    <div id="promoUsageList"><div style="color:#8896ab;font-size:13px;padding:10px 0;">Chargement...</div></div>
                 </div>
                 <div style="background:#fff;border-radius:14px;border:1px solid rgba(15,26,46,0.05);padding:18px 22px;">
                     <h4 style="font-size:14px;font-weight:600;margin-bottom:10px;"><i class="fas fa-info-circle" style="color:#c9a84c;"></i> Résumé des prix</h4>
-                    <div id="priceSummary">
-                        <div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucun pack disponible</div>
-                    </div>
+                    <div id="priceSummary"><div style="color:#8896ab;font-size:13px;padding:10px 0;">Chargement...</div></div>
                 </div>
             </div>
         </div>
@@ -249,7 +238,7 @@
                 <div class="search-box"><i class="fas fa-search"></i><input type="text" id="packSearch" placeholder="Rechercher un pack..." /></div>
                 <button class="btn-add" id="btnAddPack2"><i class="fas fa-plus"></i> Nouveau pack</button>
             </div>
-            <div class="packs-grid" id="packsGrid"><div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-boxes"></i><p>Aucun pack</p></div></div>
+            <div class="packs-grid" id="packsGrid"><div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-boxes"></i><p>Chargement...</p></div></div>
         </div>
 
         <!-- TAB: PROMOTIONS -->
@@ -261,7 +250,7 @@
             <div class="table-wrap">
                 <table>
                     <thead><tr><th>Code</th><th>Type</th><th>Valeur</th><th>Appliqué à</th><th>Date début</th><th>Date fin</th><th>Statut</th><th>Utilisations</th><th>Actions</th></tr></thead>
-                    <tbody id="promosTableBody"><tr><td colspan="9" class="empty-state"><i class="fas fa-tags"></i><p>Aucune promotion</p></td></tr></tbody>
+                    <tbody id="promosTableBody"><tr><td colspan="9" class="empty-state"><i class="fas fa-tags"></i><p>Chargement...</p></td></tr></tbody>
                 </table>
             </div>
         </div>
@@ -288,14 +277,14 @@
             </div>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>#</th><th>Client</th><th>Articles</th><th>Total</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead>
-                    <tbody id="ordersTableBody"><tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr></tbody>
+                    <thead><tr><th>#</th><th>Client</th><th>Articles</th><th>Total</th><th>Promo</th><th>Date/Heure</th><th>Statut</th><th>Actions</th></tr></thead>
+                    <tbody id="ordersTableBody"><tr><td colspan="8" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr></tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- ===== ADMIN LOGIN OVERLAY ===== -->
+    <!-- ADMIN LOGIN -->
     <div class="admin-login-overlay" id="adminLoginOverlay">
         <div class="login-box">
             <div class="logo"><div class="icon"><i class="fas fa-shield-alt"></i></div><h2>Accès administrateur</h2><div class="sub">Mot de passe requis</div></div>
@@ -306,7 +295,7 @@
         </div>
     </div>
 
-    <!-- ===== MODAL ===== -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="genericModal">
             <button class="close-modal" id="closeModal">&times;</button>
@@ -320,24 +309,24 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script>
         (function() {
             'use strict';
 
-            const ADMIN_PASSWORD = 'admin123';
-            const STORAGE_KEYS = {
-                users: 'loyaltyUsers',
-                unlocked: 'loyaltyUnlockedPacks',
-                cart: 'loyaltyCart',
-                orders: 'loyaltyOrders',
-                packs: 'loyaltyPacks',
-                promos: 'loyaltyPromos',
-                session: 'loyaltySession',
-                adminLogged: 'loyaltyAdminLogged',
-                promoUsage: 'loyaltyPromoUsage'  // Nouvelle clé pour le suivi des promos
-            };
+            // ===== CONFIGURATION JSONBIN =====
+            const BIN_ID = CONFIG.BIN_ID;
+            const API_KEY = CONFIG.API_KEY;
+            const BASE_URL = CONFIG.BASE_URL;
 
-            // ---- DOM refs ----
+            // ===== ÉTAT LOCAL =====
+            let currentData = { packs: [], promos: [], commandes: [], promoUsage: {} };
+            let isAdminLogged = false;
+            let editingId = null;
+            let modalMode = 'create';
+            let modalEntity = 'pack';
+
+            // ===== DOM REFS =====
             const sidebar = document.getElementById('sidebar');
             const navLinks = sidebar.querySelectorAll('.nav a[data-tab]');
             const tabContents = {
@@ -397,131 +386,122 @@
             const refreshBtn = document.getElementById('refreshData');
             const goToSiteBtn = document.getElementById('goToSite');
 
-            let currentTab = 'dashboard';
-            let isAdminLogged = false;
-            let editingId = null;
-            let modalMode = 'create';
-            let modalEntity = 'pack';
-
-            // ---- Helpers ----
-            function getUsers() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.users)) || {}; } catch { return {}; } }
-            function getOrders() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || []; } catch { return []; } }
-            function getPacks() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.packs)) || []; } catch { return []; } }
-            function getPromos() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promos)) || []; } catch { return []; } }
-            function getPromoUsage() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.promoUsage)) || {}; } catch { return {}; } }
-            function getAdminLogged() { return localStorage.getItem(STORAGE_KEYS.adminLogged) === 'true'; }
-            function setAdminLogged(v) { localStorage.setItem(STORAGE_KEYS.adminLogged, v ? 'true' : 'false'); }
-
-            function savePacks(p) { localStorage.setItem(STORAGE_KEYS.packs, JSON.stringify(p)); }
-            function savePromos(p) { localStorage.setItem(STORAGE_KEYS.promos, JSON.stringify(p)); }
-            function savePromoUsage(u) { localStorage.setItem(STORAGE_KEYS.promoUsage, JSON.stringify(u)); }
-
-            // ---- Default data ----
-            function getDefaultPacks() {
-                return [{
-                    id: 'pack_bronze',
-                    tier: 'bronze',
-                    title: 'Découverte',
-                    niveau: 'Débutant',
-                    description: 'Idéal pour débuter, accédez aux fondamentaux.',
-                    price: 149.00,
-                    prix_barre: 149.00,
-                    prix_reduit: 119.00,
-                    reduction_pct: 20,
-                    prix_reel: 119.00,
-                    accessCode: 'BRONZE123',
-                    content: [
-                        { type: 'video', label: 'Introduction', url: 'https://youtu.be/example1' },
-                        { type: 'pdf', label: 'Guide du débutant', url: '/files/guide-debutant.pdf' }
-                    ]
-                }, {
-                    id: 'pack_silver',
-                    tier: 'silver',
-                    title: 'Professionnel',
-                    niveau: 'Intermédiaire',
-                    description: 'Stratégies avancées et études de cas.',
-                    price: 199.00,
-                    prix_barre: 199.00,
-                    prix_reduit: 159.00,
-                    reduction_pct: 20,
-                    prix_reel: 159.00,
-                    accessCode: 'SILVER456',
-                    content: [
-                        { type: 'video', label: 'Stratégie digitale', url: 'https://youtu.be/example2' },
-                        { type: 'pdf', label: 'Rapport annuel', url: '/files/rapport-annuel.pdf' }
-                    ]
-                }, {
-                    id: 'pack_gold',
-                    tier: 'gold',
-                    title: 'Expert',
-                    niveau: 'Expert',
-                    description: 'Contenus exclusifs et mentorat de haut niveau.',
-                    price: 299.00,
-                    prix_barre: 299.00,
-                    prix_reduit: 239.00,
-                    reduction_pct: 20,
-                    prix_reel: 239.00,
-                    accessCode: 'GOLD789',
-                    content: [
-                        { type: 'video', label: 'IA & transformation', url: 'https://youtu.be/example3' },
-                        { type: 'pdf', label: 'Livre blanc IA', url: '/files/livre-blanc-ia.pdf' }
-                    ]
-                }];
-            }
-
-            function getDefaultPromos() {
-                return [
-                    { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01', endDate: '2026-12-31', active: true },
-                    { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01', endDate: '2026-07-01', active: true }
-                ];
-            }
-
-            function initData() {
-                if (getPacks().length === 0) savePacks(getDefaultPacks());
-                if (getPromos().length === 0) savePromos(getDefaultPromos());
-                if (Object.keys(getPromoUsage()).length === 0) {
-                    savePromoUsage({});
-                }
-                if (getOrders().length === 0) {
-                    const users = getUsers();
-                    const emails = Object.keys(users);
-                    if (emails.length > 0) {
-                        const sampleOrders = [];
-                        for (let i = 0; i < Math.min(3, emails.length); i++) {
-                            const email = emails[i];
-                            const items = ['bronze'];
-                            if (i % 2 === 0) items.push('silver');
-                            if (i % 3 === 0) items.push('gold');
-                            const total = items.reduce((sum, t) => sum + (t === 'bronze' ? 119 : t === 'silver' ? 159 : 239), 0);
-                            sampleOrders.push({
-                                id: 'ord_' + Date.now() + '_' + i,
-                                email: email,
-                                items: items,
-                                total: total,
-                                date: new Date(Date.now() - i * 86400000).toISOString().split('T')[0],
-                                status: i === 0 ? 'paid' : i === 1 ? 'pending' : 'paid',
-                                promoCode: i === 0 ? 'PROMO10' : null
-                            });
-                        }
-                        localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(sampleOrders));
-                    }
+            // ===== API JSONBIN =====
+            async function loadData() {
+                try {
+                    const response = await fetch(BASE_URL + BIN_ID + '/latest', {
+                        headers: { 'X-Master-Key': API_KEY }
+                    });
+                    if (!response.ok) throw new Error('Erreur chargement');
+                    const json = await response.json();
+                    const record = json.record || { packs: [], promos: [], commandes: [], promoUsage: {} };
+                    // Si certaines clés manquent, on les initialise
+                    if (!record.packs) record.packs = [];
+                    if (!record.promos) record.promos = [];
+                    if (!record.commandes) record.commandes = [];
+                    if (!record.promoUsage) record.promoUsage = {};
+                    currentData = record;
+                    return record;
+                } catch (e) {
+                    console.warn('Chargement depuis JSONBin échoué, on utilise des données par défaut.');
+                    const defaultData = getDefaultData();
+                    currentData = defaultData;
+                    // On tente de sauvegarder pour la première fois
+                    await saveData(defaultData);
+                    return defaultData;
                 }
             }
 
-            // ---- Calcul du prix avec promo ----
+            async function saveData(data) {
+                try {
+                    const response = await fetch(BASE_URL + BIN_ID, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': API_KEY
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    if (!response.ok) throw new Error('Erreur sauvegarde');
+                    return await response.json();
+                } catch (e) {
+                    console.error('Erreur sauvegarde:', e);
+                    alert('Erreur de sauvegarde. Vérifie ta connexion et les clés JSONBin.');
+                }
+            }
+
+            function getDefaultData() {
+                return {
+                    packs: [{
+                        id: 'pack_bronze',
+                        tier: 'bronze',
+                        title: 'Découverte',
+                        niveau: 'Débutant',
+                        description: 'Idéal pour débuter, accédez aux fondamentaux.',
+                        price: 149.00,
+                        prix_barre: 149.00,
+                        prix_reduit: 119.00,
+                        reduction_pct: 20,
+                        prix_reel: 119.00,
+                        accessCode: 'BRONZE123',
+                        content: [
+                            { type: 'video', label: 'Introduction', url: 'https://youtu.be/example1' },
+                            { type: 'pdf', label: 'Guide du débutant', url: '/files/guide-debutant.pdf' }
+                        ]
+                    }, {
+                        id: 'pack_silver',
+                        tier: 'silver',
+                        title: 'Professionnel',
+                        niveau: 'Intermédiaire',
+                        description: 'Stratégies avancées et études de cas.',
+                        price: 199.00,
+                        prix_barre: 199.00,
+                        prix_reduit: 159.00,
+                        reduction_pct: 20,
+                        prix_reel: 159.00,
+                        accessCode: 'SILVER456',
+                        content: [
+                            { type: 'video', label: 'Stratégie digitale', url: 'https://youtu.be/example2' },
+                            { type: 'pdf', label: 'Rapport annuel', url: '/files/rapport-annuel.pdf' }
+                        ]
+                    }, {
+                        id: 'pack_gold',
+                        tier: 'gold',
+                        title: 'Expert',
+                        niveau: 'Expert',
+                        description: 'Contenus exclusifs et mentorat de haut niveau.',
+                        price: 299.00,
+                        prix_barre: 299.00,
+                        prix_reduit: 239.00,
+                        reduction_pct: 20,
+                        prix_reel: 239.00,
+                        accessCode: 'GOLD789',
+                        content: [
+                            { type: 'video', label: 'IA & transformation', url: 'https://youtu.be/example3' },
+                            { type: 'pdf', label: 'Livre blanc IA', url: '/files/livre-blanc-ia.pdf' }
+                        ]
+                    }],
+                    promos: [
+                        { id: 'promo1', code: 'PROMO10', type: 'percentage', value: 10, packTier: 'all', startDate: '2026-01-01', endDate: '2026-12-31', active: true },
+                        { id: 'promo2', code: 'GOLD5', type: 'fixed', value: 5, packTier: 'gold', startDate: '2026-06-01', endDate: '2026-07-01', active: true }
+                    ],
+                    commandes: [],
+                    promoUsage: {}
+                };
+            }
+
+            // ===== FONCTIONS DE CALCUL =====
             function getDiscountedPrice(price, tier, promoCode = null) {
-                const promos = getPromos();
+                const promos = currentData.promos || [];
                 const now = new Date().toISOString().split('T')[0];
                 let bestDiscount = 0;
                 let promoAppliquee = null;
-                
                 promos.forEach(p => {
                     if (!p.active) return;
                     if (p.startDate && p.startDate > now) return;
                     if (p.endDate && p.endDate < now) return;
                     if (p.packTier !== 'all' && p.packTier !== tier) return;
                     if (promoCode && p.code !== promoCode) return;
-                    
                     let discount = 0;
                     if (p.type === 'percentage') {
                         discount = price * (p.value / 100);
@@ -533,81 +513,45 @@
                         promoAppliquee = p.code;
                     }
                 });
-                
-                return { 
-                    discountedPrice: Math.max(0, price - bestDiscount), 
+                return {
+                    discountedPrice: Math.max(0, price - bestDiscount),
                     discount: bestDiscount,
                     promoCode: promoAppliquee
                 };
             }
 
-            // ---- Render ----
+            // ===== RENDU =====
+            function renderAll() {
+                renderStats();
+                renderPacks(packSearch.value);
+                renderPromos(promoSearch.value);
+                renderUsers(userSearch.value);
+                renderOrders(orderSearch.value);
+                renderPromoUsage();
+                renderPriceSummary();
+            }
+
             function renderStats() {
-                const packs = getPacks();
-                const users = getUsers();
-                const orders = getOrders();
-                const promos = getPromos();
-                const promoUsage = getPromoUsage();
-                const revenue = orders.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.total || 0), 0);
+                const packs = currentData.packs || [];
+                const promos = currentData.promos || [];
+                const commandes = currentData.commandes || [];
+                const usage = currentData.promoUsage || {};
+                const revenue = commandes.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.total || 0), 0);
                 statPacks.textContent = packs.length;
-                statUsers.textContent = Object.keys(users).length;
-                statOrders.textContent = orders.length;
+                statUsers.textContent = 0; // À implémenter si besoin
+                statOrders.textContent = commandes.length;
                 statRevenue.textContent = revenue.toFixed(2) + ' €';
-                statPromoUsage.textContent = Object.keys(promoUsage).filter(k => promoUsage[k] > 0).length;
+                statPromoUsage.textContent = Object.keys(usage).filter(k => usage[k] > 0).length;
                 packCountBadge.textContent = packs.length;
                 promoCountBadge.textContent = promos.length;
-                userCountBadge.textContent = Object.keys(users).length;
-                orderCountBadge.textContent = orders.length;
-                userCountLabel.textContent = Object.keys(users).length + ' utilisateur' + (Object.keys(users).length > 1 ? 's' : '');
-                orderCountLabel.textContent = orders.length + ' commande' + (orders.length > 1 ? 's' : '');
-            }
-
-            function renderPromoUsage() {
-                const promoUsage = getPromoUsage();
-                const promos = getPromos();
-                const usageArray = Object.keys(promoUsage).filter(k => promoUsage[k] > 0);
-                
-                if (usageArray.length === 0) {
-                    promoUsageList.innerHTML = '<div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucune promotion utilisée</div>';
-                } else {
-                    promoUsageList.innerHTML = usageArray.map(code => {
-                        const promo = promos.find(p => p.code === code);
-                        return `
-                            <div class="pu-row">
-                                <span class="pu-code">${code}</span>
-                                <span class="pu-count">${promoUsage[code]} utilisation${promoUsage[code] > 1 ? 's' : ''}</span>
-                                <span style="color:#4a5568;font-size:12px;">${promo ? (promo.type === 'percentage' ? promo.value + '%' : promo.value + '€') : 'N/A'}</span>
-                            </div>
-                        `;
-                    }).join('');
-                }
-            }
-
-            function renderPriceSummary() {
-                const packs = getPacks();
-                if (packs.length === 0) {
-                    priceSummary.innerHTML = '<div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucun pack disponible</div>';
-                    return;
-                }
-                priceSummary.innerHTML = packs.map(p => {
-                    const prixBarre = p.prix_barre || p.price || 0;
-                    const prixReel = p.prix_reel || p.price || 0;
-                    const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
-                    return `
-                        <div class="pu-row">
-                            <span><strong>${p.title}</strong></span>
-                            <span>
-                                <span style="text-decoration:line-through;color:#8896ab;font-size:12px;">${prixBarre.toFixed(2)}€</span>
-                                <span style="color:#0b6e3f;font-weight:700;">${prixReel.toFixed(2)}€</span>
-                                ${discountedPrice < prixReel ? `<span style="color:#2c5282;font-weight:700;"> → ${discountedPrice.toFixed(2)}€</span>` : ''}
-                            </span>
-                        </div>
-                    `;
-                }).join('');
+                userCountBadge.textContent = 0;
+                orderCountBadge.textContent = commandes.length;
+                userCountLabel.textContent = '0 utilisateur';
+                orderCountLabel.textContent = commandes.length + ' commande' + (commandes.length > 1 ? 's' : '');
             }
 
             function renderPacks(filter = '') {
-                const packs = getPacks();
+                const packs = currentData.packs || [];
                 const filtered = packs.filter(p =>
                     p.title.toLowerCase().includes(filter.toLowerCase()) ||
                     p.tier.toLowerCase().includes(filter.toLowerCase()) ||
@@ -665,18 +609,17 @@
                     `;
                 }).join('');
                 window.adminEditPack = function(id) { openModal('pack', 'edit', id); };
-                window.adminDeletePack = function(id) {
+                window.adminDeletePack = async function(id) {
                     if (!confirm('Supprimer ce pack ?')) return;
-                    let packs = getPacks();
-                    packs = packs.filter(p => p.id !== id);
-                    savePacks(packs);
+                    currentData.packs = currentData.packs.filter(p => p.id !== id);
+                    await saveData(currentData);
                     renderAll();
                 };
             }
 
             function renderPromos(filter = '') {
-                const promos = getPromos();
-                const promoUsage = getPromoUsage();
+                const promos = currentData.promos || [];
+                const usage = currentData.promoUsage || {};
                 const filtered = promos.filter(p =>
                     p.code.toLowerCase().includes(filter.toLowerCase()) ||
                     p.packTier.toLowerCase().includes(filter.toLowerCase()) ||
@@ -691,7 +634,7 @@
                     const isActive = p.active && p.startDate <= now && p.endDate >= now;
                     const typeLabel = p.type === 'percentage' ? '%' : '€';
                     const tierLabel = p.packTier === 'all' ? 'Tous' : p.packTier.charAt(0).toUpperCase() + p.packTier.slice(1);
-                    const usageCount = promoUsage[p.code] || 0;
+                    const usageCount = usage[p.code] || 0;
                     return `
                         <tr>
                             <td><strong>${p.code}</strong></td>
@@ -710,76 +653,43 @@
                     `;
                 }).join('');
                 window.adminEditPromo = function(id) { openModal('promo', 'edit', id); };
-                window.adminDeletePromo = function(id) {
+                window.adminDeletePromo = async function(id) {
                     if (!confirm('Supprimer cette promotion ?')) return;
-                    let promos = getPromos();
-                    promos = promos.filter(p => p.id !== id);
-                    savePromos(promos);
+                    currentData.promos = currentData.promos.filter(p => p.id !== id);
+                    await saveData(currentData);
                     renderAll();
                 };
             }
 
             function renderUsers(filter = '') {
-                const users = getUsers();
-                const entries = Object.entries(users);
-                const filtered = entries.filter(([email, data]) =>
-                    email.toLowerCase().includes(filter.toLowerCase()) ||
-                    (data.name || '').toLowerCase().includes(filter.toLowerCase())
-                );
-                if (filtered.length === 0) {
-                    usersTableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fas fa-users"></i><p>Aucun utilisateur</p></td></tr>`;
-                    return;
-                }
-                usersTableBody.innerHTML = filtered.map(([email, data]) => {
-                    const name = data.name || email.split('@')[0];
-                    return `
-                        <tr><td><strong>${name}</strong></td><td>${email}</td><td>—</td>
-                        <td class="actions-cell">
-                            <button class="success" onclick="window.adminViewUser('${email}')"><i class="fas fa-eye"></i></button>
-                            <button class="danger" onclick="window.adminDeleteUser('${email}')"><i class="fas fa-trash"></i></button>
-                        </td></tr>
-                    `;
-                }).join('');
-                window.adminViewUser = function(email) {
-                    const users = getUsers();
-                    const user = users[email];
-                    if (!user) return alert('Introuvable.');
-                    alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}`);
-                };
-                window.adminDeleteUser = function(email) {
-                    if (!confirm(`Supprimer ${email} ?`)) return;
-                    const users = getUsers();
-                    delete users[email];
-                    localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
-                    renderAll();
-                };
+                // Pour l'instant, pas de gestion utilisateur, on laisse vide.
+                usersTableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fas fa-users"></i><p>Gestion des utilisateurs à venir</p></td></tr>`;
             }
 
             function renderOrders(filter = '') {
-                const orders = getOrders();
-                const users = getUsers();
-                const filtered = orders.filter(o =>
+                const commandes = currentData.commandes || [];
+                const filtered = commandes.filter(o =>
                     o.email.toLowerCase().includes(filter.toLowerCase()) ||
                     o.id.toLowerCase().includes(filter.toLowerCase()) ||
                     (o.items || []).join(' ').toLowerCase().includes(filter.toLowerCase())
                 );
                 if (filtered.length === 0) {
-                    ordersTableBody.innerHTML = `<tr><td colspan="7" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr>`;
+                    ordersTableBody.innerHTML = `<tr><td colspan="8" class="empty-state"><i class="fas fa-shopping-bag"></i><p>Aucune commande</p></td></tr>`;
                     return;
                 }
                 ordersTableBody.innerHTML = filtered.map(o => {
-                    const userName = users[o.email]?.name || o.email.split('@')[0];
                     const itemsStr = (o.items || []).map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(', ');
                     const statusClass = o.status === 'paid' ? 'paid' : o.status === 'pending' ? 'pending' : 'cancelled';
                     const statusLabel = o.status === 'paid' ? 'Payée' : o.status === 'pending' ? 'En attente' : 'Annulée';
-                    const promoStr = o.promoCode ? `<span style="font-size:10px;background:#fef7e6;padding:1px 8px;border-radius:40px;color:#a67c1a;">${o.promoCode}</span>` : '';
+                    const promoStr = o.code_promo ? `<span style="font-size:10px;background:#fef7e6;padding:1px 8px;border-radius:40px;color:#a67c1a;">${o.code_promo}</span>` : '—';
                     return `
                         <tr>
                             <td><strong>#${o.id.slice(-6)}</strong></td>
-                            <td>${userName}<br><small style="color:#8896ab;">${o.email}</small></td>
+                            <td>${o.email || 'inconnu'}</td>
                             <td>${itemsStr}</td>
-                            <td><strong>${(o.total || 0).toFixed(2)} €</strong> ${promoStr}</td>
-                            <td>${o.date || '—'}</td>
+                            <td><strong>${(o.total || 0).toFixed(2)} €</strong></td>
+                            <td>${promoStr}</td>
+                            <td>${o.date_heure || o.date || '—'}</td>
                             <td><span class="status-badge ${statusClass}"><i class="fas ${o.status === 'paid' ? 'fa-check-circle' : o.status === 'pending' ? 'fa-clock' : 'fa-times-circle'}"></i> ${statusLabel}</span></td>
                             <td class="actions-cell">
                                 <button class="success" onclick="window.adminToggleOrderStatus('${o.id}')"><i class="fas fa-sync-alt"></i></button>
@@ -789,38 +699,68 @@
                     `;
                 }).join('');
                 window.adminToggleOrderStatus = function(id) {
-                    const orders = getOrders();
-                    const idx = orders.findIndex(o => o.id === id);
+                    const idx = currentData.commandes.findIndex(o => o.id === id);
                     if (idx === -1) return;
                     const statuses = ['pending', 'paid', 'cancelled'];
-                    const current = orders[idx].status || 'pending';
+                    const current = currentData.commandes[idx].status || 'pending';
                     const nextIdx = (statuses.indexOf(current) + 1) % statuses.length;
-                    orders[idx].status = statuses[nextIdx];
-                    localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
+                    currentData.commandes[idx].status = statuses[nextIdx];
+                    saveData(currentData);
                     renderAll();
                 };
                 window.adminDeleteOrder = function(id) {
                     if (!confirm('Supprimer cette commande ?')) return;
-                    let orders = getOrders();
-                    orders = orders.filter(o => o.id !== id);
-                    localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
+                    currentData.commandes = currentData.commandes.filter(o => o.id !== id);
+                    saveData(currentData);
                     renderAll();
                 };
             }
 
-            function renderAll() {
-                renderStats();
-                renderPacks(packSearch ? packSearch.value : '');
-                renderPromos(promoSearch ? promoSearch.value : '');
-                renderUsers(userSearch ? userSearch.value : '');
-                renderOrders(orderSearch ? orderSearch.value : '');
-                renderPromoUsage();
-                renderPriceSummary();
+            function renderPromoUsage() {
+                const usage = currentData.promoUsage || {};
+                const promos = currentData.promos || [];
+                const usageArray = Object.keys(usage).filter(k => usage[k] > 0);
+                if (usageArray.length === 0) {
+                    promoUsageList.innerHTML = '<div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucune promotion utilisée</div>';
+                } else {
+                    promoUsageList.innerHTML = usageArray.map(code => {
+                        const promo = promos.find(p => p.code === code);
+                        return `
+                            <div class="pu-row">
+                                <span class="pu-code">${code}</span>
+                                <span class="pu-count">${usage[code]} utilisation${usage[code] > 1 ? 's' : ''}</span>
+                                <span style="color:#4a5568;font-size:12px;">${promo ? (promo.type === 'percentage' ? promo.value + '%' : promo.value + '€') : 'N/A'}</span>
+                            </div>
+                        `;
+                    }).join('');
+                }
             }
 
-            // ---- Tab switching ----
+            function renderPriceSummary() {
+                const packs = currentData.packs || [];
+                if (packs.length === 0) {
+                    priceSummary.innerHTML = '<div style="color:#8896ab;font-size:13px;padding:10px 0;">Aucun pack disponible</div>';
+                    return;
+                }
+                priceSummary.innerHTML = packs.map(p => {
+                    const prixBarre = p.prix_barre || p.price || 0;
+                    const prixReel = p.prix_reel || p.price || 0;
+                    const { discountedPrice } = getDiscountedPrice(prixReel, p.tier);
+                    return `
+                        <div class="pu-row">
+                            <span><strong>${p.title}</strong></span>
+                            <span>
+                                <span style="text-decoration:line-through;color:#8896ab;font-size:12px;">${prixBarre.toFixed(2)}€</span>
+                                <span style="color:#0b6e3f;font-weight:700;">${prixReel.toFixed(2)}€</span>
+                                ${discountedPrice < prixReel ? `<span style="color:#2c5282;font-weight:700;"> → ${discountedPrice.toFixed(2)}€</span>` : ''}
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // ===== TAB SWITCHING =====
             function switchTab(tabId) {
-                currentTab = tabId;
                 Object.keys(tabContents).forEach(key => {
                     tabContents[key].classList.toggle('active', key === tabId);
                 });
@@ -835,7 +775,15 @@
                 renderAll();
             }
 
-            // ---- Modal ----
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tab = this.dataset.tab;
+                    if (tab) switchTab(tab);
+                });
+            });
+
+            // ===== MODAL =====
             function openModal(entity, mode, id = null) {
                 modalEntity = entity;
                 modalMode = mode;
@@ -851,22 +799,21 @@
             }
 
             function openPackModal(mode, id = null) {
-                const packs = getPacks();
-                let data = { 
-                    tier: 'bronze', 
-                    title: '', 
-                    niveau: 'Débutant', 
-                    description: '', 
+                let data = {
+                    tier: 'bronze',
+                    title: '',
+                    niveau: 'Débutant',
+                    description: '',
                     price: 149.00,
                     prix_barre: 149.00,
                     prix_reduit: 119.00,
                     reduction_pct: 20,
                     prix_reel: 119.00,
-                    accessCode: '', 
-                    content: [] 
+                    accessCode: '',
+                    content: []
                 };
                 if (mode === 'edit' && id) {
-                    const found = packs.find(p => p.id === id);
+                    const found = currentData.packs.find(p => p.id === id);
                     if (found) data = JSON.parse(JSON.stringify(found));
                 }
 
@@ -882,13 +829,12 @@
                         </p>
                         <input type="hidden" id="form_delete_id" value="${data.id}" />
                     `;
-                    modalSubmitBtn.onclick = function(e) {
+                    modalSubmitBtn.onclick = async function(e) {
                         e.preventDefault();
                         const id = document.getElementById('form_delete_id')?.value;
                         if (!id) return;
-                        let packs = getPacks();
-                        packs = packs.filter(p => p.id !== id);
-                        savePacks(packs);
+                        currentData.packs = currentData.packs.filter(p => p.id !== id);
+                        await saveData(currentData);
                         closeModalHandler();
                         renderAll();
                     };
@@ -1019,7 +965,7 @@
 
                 setTimeout(calculerPrixAuto, 50);
 
-                modalSubmitBtn.onclick = function(e) {
+                modalSubmitBtn.onclick = async function(e) {
                     e.preventDefault();
                     const id = document.getElementById('form_edit_id')?.value || null;
                     const title = document.getElementById('form_title')?.value.trim();
@@ -1047,36 +993,27 @@
                         if (label && url) content.push({ type, label, url });
                     });
 
-                    let packs = getPacks();
+                    const packData = {
+                        id: id || 'pack_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                        title, tier, niveau, description,
+                        prix_barre: prixBarre,
+                        reduction_pct: reductionPct,
+                        prix_reduit: prixReduit,
+                        prix_reel: prixReel,
+                        price: prixReel,
+                        accessCode,
+                        content
+                    };
+
                     if (id) {
-                        const idx = packs.findIndex(p => p.id === id);
-                        if (idx !== -1) {
-                            packs[idx] = { 
-                                ...packs[idx], 
-                                title, tier, niveau, description, 
-                                prix_barre: prixBarre,
-                                reduction_pct: reductionPct,
-                                prix_reduit: prixReduit,
-                                prix_reel: prixReel,
-                                price: prixReel,
-                                accessCode, 
-                                content 
-                            };
-                        }
+                        const idx = currentData.packs.findIndex(p => p.id === id);
+                        if (idx !== -1) currentData.packs[idx] = packData;
+                        else currentData.packs.push(packData);
                     } else {
-                        const newId = 'pack_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
-                        packs.push({ 
-                            id: newId, title, tier, niveau, description, 
-                            prix_barre: prixBarre,
-                            reduction_pct: reductionPct,
-                            prix_reduit: prixReduit,
-                            prix_reel: prixReel,
-                            price: prixReel,
-                            accessCode, 
-                            content 
-                        });
+                        currentData.packs.push(packData);
                     }
-                    savePacks(packs);
+
+                    await saveData(currentData);
                     closeModalHandler();
                     renderAll();
                 };
@@ -1084,10 +1021,9 @@
             }
 
             function openPromoModal(mode, id = null) {
-                const promos = getPromos();
                 let data = { code: '', type: 'percentage', value: 10, packTier: 'all', startDate: '', endDate: '', active: true };
                 if (mode === 'edit' && id) {
-                    const found = promos.find(p => p.id === id);
+                    const found = currentData.promos.find(p => p.id === id);
                     if (found) data = JSON.parse(JSON.stringify(found));
                 }
 
@@ -1100,13 +1036,12 @@
                         <p style="color:#4a5568;font-size:14px;padding:8px 0;">Supprimer le code <strong>${data.code}</strong> ?</p>
                         <input type="hidden" id="form_delete_id" value="${data.id}" />
                     `;
-                    modalSubmitBtn.onclick = function(e) {
+                    modalSubmitBtn.onclick = async function(e) {
                         e.preventDefault();
                         const id = document.getElementById('form_delete_id')?.value;
                         if (!id) return;
-                        let promos = getPromos();
-                        promos = promos.filter(p => p.id !== id);
-                        savePromos(promos);
+                        currentData.promos = currentData.promos.filter(p => p.id !== id);
+                        await saveData(currentData);
                         closeModalHandler();
                         renderAll();
                     };
@@ -1137,7 +1072,7 @@
                     <div class="form-group"><label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="form_promo_active" ${data.active ? 'checked' : ''} /> Actif</label></div>
                 `;
 
-                modalSubmitBtn.onclick = function(e) {
+                modalSubmitBtn.onclick = async function(e) {
                     e.preventDefault();
                     const id = document.getElementById('form_edit_id')?.value || null;
                     const code = document.getElementById('form_promo_code')?.value.trim().toUpperCase();
@@ -1151,15 +1086,20 @@
                     if (!code) { modalError.textContent = 'Le code est requis.'; modalError.classList.add('show'); return; }
                     if (value <= 0) { modalError.textContent = 'La valeur doit être positive.'; modalError.classList.add('show'); return; }
 
-                    let promos = getPromos();
+                    const promoData = {
+                        id: id || 'promo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                        code, type, value, packTier, startDate, endDate, active
+                    };
+
                     if (id) {
-                        const idx = promos.findIndex(p => p.id === id);
-                        if (idx !== -1) promos[idx] = { ...promos[idx], code, type, value, packTier, startDate, endDate, active };
+                        const idx = currentData.promos.findIndex(p => p.id === id);
+                        if (idx !== -1) currentData.promos[idx] = promoData;
+                        else currentData.promos.push(promoData);
                     } else {
-                        const newId = 'promo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
-                        promos.push({ id: newId, code, type, value, packTier, startDate, endDate, active });
+                        currentData.promos.push(promoData);
                     }
-                    savePromos(promos);
+
+                    await saveData(currentData);
                     closeModalHandler();
                     renderAll();
                 };
@@ -1172,12 +1112,17 @@
                 modalError.textContent = '';
             }
 
-            // ---- Admin Login ----
+            closeModal.addEventListener('click', closeModalHandler);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) closeModalHandler();
+            });
+
+            // ===== ADMIN LOGIN =====
             function checkAdminAuth() {
-                if (getAdminLogged()) {
+                const logged = localStorage.getItem('adminLogged') === 'true';
+                if (logged) {
                     isAdminLogged = true;
                     adminLoginOverlay.classList.remove('open');
-                    renderAll();
                     return true;
                 } else {
                     isAdminLogged = false;
@@ -1191,8 +1136,8 @@
 
             function adminLogin() {
                 const pwd = adminPasswordInput.value.trim();
-                if (pwd === ADMIN_PASSWORD) {
-                    setAdminLogged(true);
+                if (pwd === 'admin123') {
+                    localStorage.setItem('adminLogged', 'true');
                     isAdminLogged = true;
                     adminLoginOverlay.classList.remove('open');
                     loginError.classList.remove('show');
@@ -1206,7 +1151,7 @@
             }
 
             function adminLogout() {
-                setAdminLogged(false);
+                localStorage.removeItem('adminLogged');
                 isAdminLogged = false;
                 adminLoginOverlay.classList.add('open');
                 adminPasswordInput.value = '';
@@ -1219,113 +1164,77 @@
                 btnAddPromo.style.display = 'none';
             }
 
-            // ---- Event listeners ----
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const tab = this.dataset.tab;
-                    if (tab) switchTab(tab);
-                });
-            });
-
             adminLoginBtn.addEventListener('click', adminLogin);
             adminPasswordInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') adminLogin();
             });
-            adminBackToSite.addEventListener('click', function() {
-                window.location.href = window.location.pathname + '?view=site';
-            });
             adminLogoutBtn.addEventListener('click', adminLogout);
+            adminBackToSite.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
             goToSiteBtn.addEventListener('click', function() {
-                window.location.href = window.location.pathname + '?view=site';
+                window.location.href = 'index.html';
             });
 
-            refreshBtn.addEventListener('click', renderAll);
-            btnAddPack.addEventListener('click', () => openModal('pack', 'create'));
-            btnAddPack2.addEventListener('click', () => openModal('pack', 'create'));
-            btnAddPromo.addEventListener('click', () => openModal('promo', 'create'));
-            btnAddPromo2.addEventListener('click', () => openModal('promo', 'create'));
-
-            closeModal.addEventListener('click', closeModalHandler);
-            modalOverlay.addEventListener('click', function(e) {
-                if (e.target === modalOverlay) closeModalHandler();
-            });
-
+            // ===== RECHERCHE =====
             packSearch.addEventListener('input', function() { renderPacks(this.value); });
             promoSearch.addEventListener('input', function() { renderPromos(this.value); });
             userSearch.addEventListener('input', function() { renderUsers(this.value); });
             orderSearch.addEventListener('input', function() { renderOrders(this.value); });
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModalHandler();
+            // ===== BOUTONS AJOUT =====
+            btnAddPack.addEventListener('click', () => openModal('pack', 'create'));
+            btnAddPack2.addEventListener('click', () => openModal('pack', 'create'));
+            btnAddPromo.addEventListener('click', () => openModal('promo', 'create'));
+            btnAddPromo2.addEventListener('click', () => openModal('promo', 'create'));
+
+            refreshBtn.addEventListener('click', async function() {
+                await loadData();
+                renderAll();
             });
 
-            // ---- Init ----
-            initData();
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('view') === 'site') {
-                window.location.href = window.location.pathname;
-                return;
-            }
+            // ===== INIT =====
+            (async function init() {
+                await loadData();
+                if (checkAdminAuth()) {
+                    renderAll();
+                    switchTab('dashboard');
+                } else {
+                    // Afficher le login
+                    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                    document.querySelector('.tab-content#tabDashboard')?.classList.add('active');
+                }
+            })();
 
-            if (getAdminLogged()) {
-                isAdminLogged = true;
-                adminLoginOverlay.classList.remove('open');
-                renderAll();
-                switchTab('dashboard');
-            } else {
-                adminLoginOverlay.classList.add('open');
-                adminPasswordInput.focus();
-                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-                document.querySelector('.tab-content#tabDashboard')?.classList.add('active');
-            }
-
-            // expose globals
+            // Exposer les fonctions pour les boutons inline
             window.adminEditPack = function(id) { openModal('pack', 'edit', id); };
-            window.adminDeletePack = function(id) {
-                if (!confirm('Supprimer ce pack ?')) return;
-                let packs = getPacks();
-                packs = packs.filter(p => p.id !== id);
-                savePacks(packs);
-                renderAll();
-            };
             window.adminEditPromo = function(id) { openModal('promo', 'edit', id); };
-            window.adminDeletePromo = function(id) {
-                if (!confirm('Supprimer cette promo ?')) return;
-                let promos = getPromos();
-                promos = promos.filter(p => p.id !== id);
-                savePromos(promos);
+            window.adminDeletePack = async function(id) {
+                if (!confirm('Supprimer ce pack ?')) return;
+                currentData.packs = currentData.packs.filter(p => p.id !== id);
+                await saveData(currentData);
                 renderAll();
             };
-            window.adminViewUser = function(email) {
-                const users = getUsers();
-                const user = users[email];
-                if (!user) return alert('Introuvable.');
-                alert(`👤 ${user.name || 'Sans nom'}\n📧 ${email}`);
-            };
-            window.adminDeleteUser = function(email) {
-                if (!confirm(`Supprimer ${email} ?`)) return;
-                const users = getUsers();
-                delete users[email];
-                localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
+            window.adminDeletePromo = async function(id) {
+                if (!confirm('Supprimer cette promotion ?')) return;
+                currentData.promos = currentData.promos.filter(p => p.id !== id);
+                await saveData(currentData);
                 renderAll();
             };
             window.adminToggleOrderStatus = function(id) {
-                const orders = getOrders();
-                const idx = orders.findIndex(o => o.id === id);
+                const idx = currentData.commandes.findIndex(o => o.id === id);
                 if (idx === -1) return;
                 const statuses = ['pending', 'paid', 'cancelled'];
-                const current = orders[idx].status || 'pending';
+                const current = currentData.commandes[idx].status || 'pending';
                 const nextIdx = (statuses.indexOf(current) + 1) % statuses.length;
-                orders[idx].status = statuses[nextIdx];
-                localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
+                currentData.commandes[idx].status = statuses[nextIdx];
+                saveData(currentData);
                 renderAll();
             };
             window.adminDeleteOrder = function(id) {
                 if (!confirm('Supprimer cette commande ?')) return;
-                let orders = getOrders();
-                orders = orders.filter(o => o.id !== id);
-                localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
+                currentData.commandes = currentData.commandes.filter(o => o.id !== id);
+                saveData(currentData);
                 renderAll();
             };
 
